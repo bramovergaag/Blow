@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-04-15T09:00:00+02:00",
+  "task": "blow-bestel-vrijdag",
+  "levering_vanaf": "2026-04-20",
+  "bestelperiode": {
+    "from": "2026-04-20",
+    "to": "2026-04-22",
+    "days": 3
+  },
+  "dagen": [
+    {
+      "ds": "2026-04-20",
+      "dag": "Maandag",
+      "datum_nl": "20 april",
+      "weer": { "temp": 8.8, "zon": "zonnig", "neerslag": "licht" },
+      "flags": { "nl_holiday": false, "nrw_holiday": false, "nl_school": false, "nrw_school": false },
+      "multipliers": { "base": 31, "sm": 0.55, "dm": 0.60, "nm": 0.82, "zm": 1.15, "hm": 1.00, "schm": 1.00 },
+      "pred": 10,
+      "pred_buffer": 11
+    },
+    {
+      "ds": "2026-04-21",
+      "dag": "Dinsdag",
+      "datum_nl": "21 april",
+      "weer": { "temp": 9.2, "zon": "zonnig", "neerslag": "geen" },
+      "flags": { "nl_holiday": false, "nrw_holiday": false, "nl_school": false, "nrw_school": false },
+      "multipliers": { "base": 31, "sm": 0.55, "dm": 0.55, "nm": 1.00, "zm": 1.15, "hm": 1.00, "schm": 1.00 },
+      "pred": 11,
+      "pred_buffer": 12
+    },
+    {
+      "ds": "2026-04-22",
+      "dag": "Woensdag",
+      "datum_nl": "22 april",
+      "weer": { "temp": 9.4, "zon": "zonnig", "neerslag": "geen" },
+      "flags": { "nl_holiday": false, "nrw_holiday": false, "nl_school": false, "nrw_school": false },
+      "multipliers": { "base": 31, "sm": 0.55, "dm": 0.65, "nm": 1.00, "zm": 1.15, "hm": 1.00, "schm": 1.00 },
+      "pred": 13,
+      "pred_buffer": 14
+    }
+  ],
+  "totaal": 34,
+  "totaal_buffer": 37,
+  "waarschuwingen": [
+    "Taak uitgevoerd op woensdag 2026-04-15 (gepland op vrijdag). Bestelperiode maandag 20 t/m woensdag 22 april is correct."
+  ]
+}
