@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BLOW — Pizzabollen Voorspelling</title>
+<link rel="stylesheet" href="css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+<header class="header">
+  <div class="logo">BLOW</div>
+  <div>
+    <h1>Beach House</h1>
+    <div class="subtitle">het best bewaarde geheim van het Haagse strand</div>
+  </div>
+  <div class="weather-badge" id="weather-badge">— °C</div>
+</header>
+
+<!-- VOORSPELLING SECTIE -->
+<section class="section">
+  <div class="section-head">
+    <h2 class="section-title">Bestelling</h2>
+    <span class="section-sub" id="periode-sub">volgende leverperiode</span>
+    <span class="status" id="data-status">laden…</span>
+  </div>
+  <span class="brush"></span>
+
+  <div class="orders-grid" id="orders-grid">
+    <div class="loading">pizzabollen worden gebakken…</div>
+  </div>
+
+  <div class="totaal-banner" id="totaal-banner" style="display:none">
+    <div>
+      <div class="totaal-label">Totaal bestelling</div>
+      <div class="totaal-value" id="totaal-value">—</div>
+    </div>
+    <div class="totaal-note">incl. 10% buffer voor verlies</div>
+  </div>
+</section>
+
+<!-- HISTORIE SECTIE -->
+<section class="section">
+  <div class="section-head">
+    <h2 class="section-title">Historie</h2>
+    <span class="section-sub" id="historie-sub">—</span>
+  </div>
+  <span class="brush"></span>
+
+  <div class="kpi-row" id="kpi-row"></div>
+
+  <div class="chart-card">
+    <canvas id="chart-history"></canvas>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="big">BLOW Beach House · Kijkduin · Den Haag</div>
+  <div>when you know, you know</div>
+  <div style="margin-top:8px;font-family:var(--font-body);font-size:10px;">
+    weerdata: <span id="weer-bron">—</span> · voorspelling: <span id="pred-bron">—</span>
+  </div>
+</footer>
+
+<script type="module">
+import { predict, predictPeriode, classifyZon, classifyNeerslag,
+         formatDatumNL, getDagnaamNL, DAGNAMEN_NL, MAANDEN_NL } from './js/predict.js';
+
+// Cache busting voor data-bestanden
+const nonce = Date.now();
+
+async function fetchJSON(path) {
+  const r = await fetch(`${path}?v=${nonce}`, { cache: 'no-store' });
+  if (!r.ok) throw new Error(`${path}: ${r.status}`);
+  return r.json();
+}
+
+function zonIcon(zon) {
+  return ({ 'zonnig':'☀️', 'halfbewolkt':'⛅', 'bewolkt':'☁️' })[zon] || '🌤️';
+}
+function neerslagIcon(n) {
+  return ({ 'zwaar':'⛈️','matig':'🌧️','licht':'🌦️','geen':'' })[n] || '';
+}
+
+// -----------------------------------------------------------------------------
+// Bereken huidige bestelperiode (vandaag → eerstvolgende ma of vr)
+// -----------------------------------------------------------------------------
+function berekenPeriode() {
+  const today = new Date();
+  const dow = today.getDay(); // 0=zo
+  // Leveringsmodel: maandag taak → do-zo (4d); vrijdag taak → ma-wo (3d)
+  // Dashboard toont: eerstvolgende leverperiode
+  let startOffset, length, label;
+  if (dow >= 2 && dow <= 4) {          // di/wo/do — volgende is maandag-levering (3d)
+    startOffset = (8 - dow) % 7 || 7;   // dagen tot volgende maandag
+    length = 3;  // ma, di, wo
+    label = "levering maandag";
+  } else {                              // vr/za/zo/ma — volgende is donderdag-levering (4d)
+    startOffset = (11 - dow) % 7 || 7;  // dagen tot volgende donderdag
+    if (dow === 1) startOffset = 3;     // maandag → donderdag
+    length = 4;  // do, vr, za, zo
+    label = "levering donderdag";
+  }
+  const start = new Date(today);
+  start.setDate(today.getDate() + startOffset);
+  const periode = [];
+  for (let i = 0; i < length; i++) {
+    const d = new Date(start);
+    d.setDate(start.getDate() + i);
+    periode.push(d.toISOString().slice(0,10));
+  }
+  return { periode, label };
+}
+
+function renderOrderCard(day) {
+  const r = day.result;
+  const ds = day.ds;
+  const dagNaam = getDagnaamNL(ds);
+  const datum = formatDatumNL(ds);
+  const zIcon = zonIcon(r.zon);
+  const nIcon = neerslagIcon(r.neerslag);
+  const classes = ['order-card'];
+  if (r.isNLh || r.isNRWh) classes.push('holiday');
+  else if (r.dow === 0 || r.dow === 6) classes.push('weekend');
+
+  const pills = [];
+  if (r.isNLh)  pills.push(`<span class="pill pill-nl">NL feest</span>`);
+  if (r.isNRWh) pills.push(`<span class="pill pill-nrw">NRW feest</span>`);
+  if (r.isNLs || r.isNRWs) pills.push(`<span class="pill pill-school">vakantie</span>`);
+  if (!r.isNLh && !r.isNRWh && (r.dow === 0 || r.dow === 6)) pills.push(`<span class="pill pill-we">weekend</span>`);
+
+  return `
+    <div class="${classes.join(' ')}">
+      <div class="order-head">
+        <div class="order-day">${dagNaam}</div>
+        <div class="order-date">${datum}</div>
+      </div>
+      <div class="order-weer">
+        <span class="big-icon">${zIcon}</span>
+        <span>${Math.round(r.temp)}°C ${nIcon}</span>
+      </div>
+      <div>
+        <div class="order-count">${r.pred_buffer}</div>
+        <div class="order-count-unit">pizzabollen (incl. buffer)</div>
+      </div>
+      <div class="order-flags">${pills.join('')}</div>
+    </div>`;
+}
+
+function renderHistoryKPIs(verkoop) {
+  const records = verkoop.records.filter(r => r.total_pizzas > 0);
+  const totaal = records.reduce((s,r) => s + r.total_pizzas, 0);
+  const gem = (totaal / records.length).toFixed(1);
+  const topDag = records.reduce((a,b) => a.total_pizzas > b.total_pizzas ? a : b);
+
+  // Omzet
+  const omzetRecords = records.filter(r => r.sales_eur);
+  const omzet = omzetRecords.reduce((s,r) => s + r.sales_eur, 0);
+
+  // Items = breder dan pizza's (sales data)
+  const itemRecords = records.filter(r => r.items_total);
+  const totItems = itemRecords.reduce((s,r) => s + r.items_total, 0);
+
+  const kpis = [
+    { lbl: 'Dagen geregistreerd', val: records.length, sub: `${verkoop.period.from} t/m ${verkoop.period.to}` },
+    { lbl: 'Totaal pizzabollen',  val: totaal.toLocaleString('nl-NL'), sub: `gem ${gem} per dag` },
+    { lbl: 'Piekdag',             val: topDag.total_pizzas, sub: `${formatDatumNL(topDag.date)} ${topDag.date.slice(0,4)}` },
+    { lbl: 'Totaal items',        val: totItems.toLocaleString('nl-NL'), sub: `alle verkoop` },
+    { lbl: 'Totaal omzet',        val: '€ ' + Math.round(omzet).toLocaleString('nl-NL'), sub: `${omzetRecords.length} dagen` }
+  ];
+  document.getElementById('kpi-row').innerHTML = kpis.map(k => `
+    <div class="kpi">
+      <div class="kpi-lbl">${k.lbl}</div>
+      <div class="kpi-val">${k.val}</div>
+      <div class="kpi-sub">${k.sub}</div>
+    </div>`).join('');
+}
+
+function renderHistoryChart(verkoop) {
+  const records = verkoop.records.filter(r => r.total_pizzas > 0);
+  // Groeperen per maand voor overzicht
+  const perMonth = {};
+  records.forEach(r => {
+    const key = r.date.slice(0,7);
+    (perMonth[key] = perMonth[key] || []).push(r.total_pizzas);
+  });
+  const labels = Object.keys(perMonth).sort();
+  const vals   = labels.map(k => perMonth[k].reduce((s,v) => s+v, 0));
+  const avgs   = labels.map(k => Math.round(perMonth[k].reduce((s,v) => s+v, 0) / perMonth[k].length));
+
+  const ctx = document.getElementById('chart-history').getContext('2d');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [
+        { label: 'Totaal per maand', data: vals, backgroundColor: '#C66A1F', borderRadius: 4, yAxisID: 'y' },
+        { label: 'Gemiddeld per dag',  data: avgs, type: 'line', borderColor: '#1E3DE5', backgroundColor: '#1E3DE5',
+          tension: 0.3, borderWidth: 2.5, pointRadius: 3, yAxisID: 'y1' }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { labels: { color: '#1A1A1A', font: { family: 'Oswald', size: 12 } } } },
+      scales: {
+        x:  { ticks: { color: '#666', font: { family: 'Oswald' }}, grid: { color: '#eee' } },
+        y:  { position: 'left',  ticks: { color: '#C66A1F', font: { family: 'Oswald' } }, grid: { color: '#eee' }, title: { display: true, text: 'Totaal', color: '#C66A1F' } },
+        y1: { position: 'right', ticks: { color: '#1E3DE5', font: { family: 'Oswald' } }, grid: { display: false }, title: { display: true, text: 'Gem/dag', color: '#1E3DE5' } }
+      }
+    }
+  });
+}
+
+// -----------------------------------------------------------------------------
+// Main
+// -----------------------------------------------------------------------------
+async function main() {
+  try {
+    const [config, weer, verkoop] = await Promise.all([
+      fetchJSON('data/config.json'),
+      fetchJSON('data/weer.json'),
+      fetchJSON('data/verkoop.json')
+    ]);
+
+    // Weer-badge: vandaag
+    const vandaag = new Date().toISOString().slice(0,10);
+    const vandaagWeer = weer.forecast.find(w => w.ds === vandaag) || weer.forecast[0];
+    if (vandaagWeer) {
+      const z = classifyZon(vandaagWeer.sunshine_hrs, config);
+      document.getElementById('weather-badge').innerHTML =
+        `${zonIcon(z)} ${Math.round(vandaagWeer.temp_mean)}°C`;
+    }
+    document.getElementById('weer-bron').textContent = weer.source || '—';
+    document.getElementById('pred-bron').textContent = verkoop.source || '—';
+
+    // Voorspel komende leverperiode
+    const { periode, label } = berekenPeriode();
+    const days = periode.map(ds => {
+      const w = weer.forecast.find(x => x.ds === ds);
+      if (!w) return { ds, temp: 16, sunshine_hrs: 3, rainfall_mm: 0, missing: true };
+      return { ds, temp: w.temp_mean, sunshine_hrs: w.sunshine_hrs, rainfall_mm: w.rainfall_mm };
+    });
+    const result = predictPeriode(days, config);
+
+    // Render cards
+    document.getElementById('orders-grid').innerHTML =
+      result.days.map(renderOrderCard).join('');
+    document.getElementById('totaal-banner').style.display = 'flex';
+    document.getElementById('totaal-value').textContent = result.totaal_buffer;
+
+    // Periode subtitle
+    const start = formatDatumNL(periode[0]);
+    const end   = formatDatumNL(periode[periode.length-1]);
+    document.getElementById('periode-sub').textContent = `${label} · ${start} t/m ${end}`;
+
+    // Data status
+    const generated = new Date(weer.generated_at);
+    const ageHours = (Date.now() - generated.getTime()) / 3600000;
+    const statusEl = document.getElementById('data-status');
+    if (ageHours < 12) {
+      statusEl.className = 'status status-ok';
+      statusEl.textContent = 'actueel';
+    } else if (ageHours < 48) {
+      statusEl.className = 'status status-warn';
+      statusEl.textContent = `${Math.round(ageHours)}u oud`;
+    } else {
+      statusEl.className = 'status status-error';
+      statusEl.textContent = 'verouderd';
+    }
+
+    // Historie
+    renderHistoryKPIs(verkoop);
+    renderHistoryChart(verkoop);
+    document.getElementById('historie-sub').textContent =
+      `${verkoop.period.from} t/m ${verkoop.period.to}`;
+
+  } catch (err) {
+    console.error(err);
+    document.getElementById('orders-grid').innerHTML =
+      `<div class="loading" style="color:#c62828">fout bij laden: ${err.message}</div>`;
+    document.getElementById('data-status').className = 'status status-error';
+    document.getElementById('data-status').textContent = 'fout';
+  }
+}
+main();
+</script>
+
+</body>
+</html>

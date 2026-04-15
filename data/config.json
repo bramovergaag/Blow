@@ -1,0 +1,113 @@
+{
+  "schema_version": "1.0",
+  "last_updated": "2026-04-15",
+  "description": "BLOW pizzabollen voorspelling model — multipliers, basis-cijfers en kalender",
+
+  "temp_base": {
+    "_comment": "Verwachte pizzabollen per dag bij gegeven dag-gemiddelde temperatuur (°C). Bron: 723 dagen 2022-2025.",
+    "2":  59, "3":  27, "4":  11, "5":  20, "6":  21, "7":  17,
+    "8":  28, "9":  31, "10": 43, "11": 40, "12": 43, "13": 35,
+    "14": 42, "15": 48, "16": 56, "17": 56, "18": 66, "19": 57,
+    "20": 78, "21": 87, "22": 81, "23": 95, "24":122, "25":158,
+    "26":120, "27": 85
+  },
+
+  "dow_mult": {
+    "_comment": "Multiplier per dag van de week. Volgorde: zo, ma, di, wo, do, vr, za (JS getDay()).",
+    "0": 1.35, "1": 0.60, "2": 0.55, "3": 0.65, "4": 0.85, "5": 1.05, "6": 1.55
+  },
+
+  "season_mult": {
+    "_comment": "Multiplier per kalendermaand (1=jan, 12=dec).",
+    "1":  0.30, "2":  0.30, "3":  0.45, "4":  0.55, "5":  0.75, "6":  0.90,
+    "7":  1.20, "8":  1.25, "9":  0.60, "10": 0.35, "11": 0.30, "12": 0.30
+  },
+
+  "neerslag_mult": {
+    "geen":  1.00,
+    "licht": 0.82,
+    "matig": 0.62,
+    "zwaar": 0.40
+  },
+
+  "zon_mult": {
+    "bewolkt":     0.80,
+    "halfbewolkt": 0.95,
+    "zonnig":      1.15
+  },
+
+  "holiday_mult": {
+    "_comment": "Extra multiplier op feestdagen (bovenop dow/season).",
+    "nl":  1.45,
+    "nrw": 1.30,
+    "none": 1.00
+  },
+
+  "school_mult": {
+    "_comment": "Extra multiplier bij NL of NRW schoolvakantie.",
+    "active":   1.25,
+    "inactive": 1.00
+  },
+
+  "buffer_pct": {
+    "_comment": "Percentage extra te bestellen bovenop de voorspelling (verlies/uitval).",
+    "value": 0.10
+  },
+
+  "classifiers": {
+    "_comment": "Drempelwaarden om ruwe metingen om te zetten naar categorieën.",
+    "zon": {
+      "zonnig":      { "min_sunshine_hrs": 7.0 },
+      "halfbewolkt": { "min_sunshine_hrs": 3.0 },
+      "bewolkt":     { "min_sunshine_hrs": 0.0 }
+    },
+    "neerslag": {
+      "zwaar": { "min_mm": 10.0 },
+      "matig": { "min_mm": 3.0 },
+      "licht": { "min_mm": 0.5 },
+      "geen":  { "min_mm": 0.0 }
+    }
+  },
+
+  "nl_holidays_2026": {
+    "2026-04-03": "Goede Vrijdag",
+    "2026-04-05": "Eerste Paasdag",
+    "2026-04-06": "Tweede Paasdag",
+    "2026-04-27": "Koningsdag",
+    "2026-05-05": "Bevrijdingsdag",
+    "2026-05-14": "Hemelvaartsdag",
+    "2026-05-24": "Eerste Pinksterdag",
+    "2026-05-25": "Tweede Pinksterdag"
+  },
+
+  "nrw_holidays_2026": {
+    "2026-04-03": "Karfreitag",
+    "2026-04-05": "Ostersonntag",
+    "2026-04-06": "Ostermontag",
+    "2026-05-01": "Tag der Arbeit",
+    "2026-05-14": "Christi Himmelfahrt",
+    "2026-05-24": "Pfingstsonntag",
+    "2026-05-25": "Pfingstmontag",
+    "2026-06-04": "Fronleichnam"
+  },
+
+  "nl_school_holidays_2026": [
+    { "name": "Meivakantie",  "from": "2026-04-25", "to": "2026-05-10" },
+    { "name": "Zomervakantie","from": "2026-06-27", "to": "2026-08-30" }
+  ],
+
+  "nrw_school_holidays_2026": [
+    { "name": "Osterferien",        "from": "2026-04-06", "to": "2026-04-18" },
+    { "name": "Pfingstferien",      "from": "2026-05-26", "to": "2026-06-06" },
+    { "name": "Sommerferien",       "from": "2026-07-02", "to": "2026-08-14" }
+  ],
+
+  "locatie": {
+    "naam":      "BLOW Beach House",
+    "plaats":    "Kijkduin, Den Haag",
+    "lat":       52.065,
+    "lon":       4.247,
+    "knmi_stn":  330,
+    "knmi_naam": "Hoek van Holland"
+  }
+}

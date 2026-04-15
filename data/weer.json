@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-04-15T21:00:00",
+  "source": "placeholder — wordt vervangen door Make scenario BLOW-01",
+  "location": { "lat": 52.065, "lon": 4.247, "naam": "Kijkduin" },
+  "forecast": [
+    { "ds": "2026-04-16", "temp_mean": 14.5, "temp_max": 17.0, "sunshine_hrs": 5.2, "rainfall_mm": 0.0, "wind_mean_ms": 4.1 },
+    { "ds": "2026-04-17", "temp_mean": 15.0, "temp_max": 18.0, "sunshine_hrs": 7.8, "rainfall_mm": 0.0, "wind_mean_ms": 3.5 },
+    { "ds": "2026-04-18", "temp_mean": 16.5, "temp_max": 20.0, "sunshine_hrs": 8.2, "rainfall_mm": 0.0, "wind_mean_ms": 3.0 },
+    { "ds": "2026-04-19", "temp_mean": 17.0, "temp_max": 21.0, "sunshine_hrs": 9.0, "rainfall_mm": 0.0, "wind_mean_ms": 2.8 },
+    { "ds": "2026-04-20", "temp_mean": 15.5, "temp_max": 18.0, "sunshine_hrs": 4.0, "rainfall_mm": 1.2, "wind_mean_ms": 4.5 },
+    { "ds": "2026-04-21", "temp_mean": 13.5, "temp_max": 16.0, "sunshine_hrs": 2.0, "rainfall_mm": 3.5, "wind_mean_ms": 5.0 },
+    { "ds": "2026-04-22", "temp_mean": 14.0, "temp_max": 17.0, "sunshine_hrs": 5.5, "rainfall_mm": 0.2, "wind_mean_ms": 3.8 },
+    { "ds": "2026-04-23", "temp_mean": 15.5, "temp_max": 19.0, "sunshine_hrs": 7.0, "rainfall_mm": 0.0, "wind_mean_ms": 3.2 },
+    { "ds": "2026-04-24", "temp_mean": 16.0, "temp_max": 20.0, "sunshine_hrs": 6.5, "rainfall_mm": 0.0, "wind_mean_ms": 3.5 },
+    { "ds": "2026-04-25", "temp_mean": 17.5, "temp_max": 22.0, "sunshine_hrs": 8.0, "rainfall_mm": 0.0, "wind_mean_ms": 2.5 },
+    { "ds": "2026-04-26", "temp_mean": 18.0, "temp_max": 23.0, "sunshine_hrs": 8.5, "rainfall_mm": 0.0, "wind_mean_ms": 2.8 },
+    { "ds": "2026-04-27", "temp_mean": 16.5, "temp_max": 20.0, "sunshine_hrs": 6.0, "rainfall_mm": 0.5, "wind_mean_ms": 4.0 },
+    { "ds": "2026-04-28", "temp_mean": 15.0, "temp_max": 18.0, "sunshine_hrs": 4.5, "rainfall_mm": 1.8, "wind_mean_ms": 4.5 },
+    { "ds": "2026-04-29", "temp_mean": 14.5, "temp_max": 17.0, "sunshine_hrs": 5.0, "rainfall_mm": 0.3, "wind_mean_ms": 4.0 }
+  ]
+}
