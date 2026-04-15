@@ -2,7 +2,8 @@
 
 Dashboard + data + voorspellingsmodel voor de wekelijkse pizzabollen-bestelling bij BLOW Beach House (Kijkduin, Den Haag).
 
-**Live dashboard:** https://bramovergaag.github.io/blow-dashboard/
+**Repository:** https://github.com/bramovergaag/Blow
+**Live dashboard:** https://bramovergaag.github.io/Blow/ *(na Pages activatie)*
 
 ---
 
