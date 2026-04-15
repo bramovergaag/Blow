@@ -1,48 +1,44 @@
 {
   "schema_version": "1.0",
   "generated_at": "2026-04-15T09:00:00+02:00",
-  "task": "blow-bestel-vrijdag",
-  "levering_vanaf": "2026-04-20",
+  "task": "blow-bestel-maandag",
+  "levering_vanaf": "2026-04-18",
   "bestelperiode": {
-    "from": "2026-04-20",
-    "to": "2026-04-22",
-    "days": 3
+    "from": "2026-04-18",
+    "to":   "2026-04-21",
+    "days": 4
   },
   "dagen": [
     {
-      "ds": "2026-04-20",
-      "dag": "Maandag",
-      "datum_nl": "20 april",
-      "weer": { "temp": 8.8, "zon": "zonnig", "neerslag": "licht" },
-      "flags": { "nl_holiday": false, "nrw_holiday": false, "nl_school": false, "nrw_school": false },
-      "multipliers": { "base": 31, "sm": 0.55, "dm": 0.60, "nm": 0.82, "zm": 1.15, "hm": 1.00, "schm": 1.00 },
-      "pred": 10,
-      "pred_buffer": 11
+      "ds": "2026-04-18", "dag": "Donderdag", "datum_nl": "18 april",
+      "weer": {"temp": 11.1, "zon": "zonnig", "neerslag": "licht"},
+      "flags": {"nl_holiday": false, "nrw_holiday": false, "nl_school": false, "nrw_school": true},
+      "multipliers": {"base": 40, "sm": 0.55, "dm": 0.85, "nm": 0.82, "zm": 1.15, "hm": 1.0, "schm": 1.25},
+      "pred": 22, "pred_buffer": 24
     },
     {
-      "ds": "2026-04-21",
-      "dag": "Dinsdag",
-      "datum_nl": "21 april",
-      "weer": { "temp": 9.2, "zon": "zonnig", "neerslag": "geen" },
-      "flags": { "nl_holiday": false, "nrw_holiday": false, "nl_school": false, "nrw_school": false },
-      "multipliers": { "base": 31, "sm": 0.55, "dm": 0.55, "nm": 1.00, "zm": 1.15, "hm": 1.00, "schm": 1.00 },
-      "pred": 11,
-      "pred_buffer": 12
+      "ds": "2026-04-19", "dag": "Vrijdag", "datum_nl": "19 april",
+      "weer": {"temp": 10.1, "zon": "zonnig", "neerslag": "geen"},
+      "flags": {"nl_holiday": false, "nrw_holiday": false, "nl_school": false, "nrw_school": false},
+      "multipliers": {"base": 43, "sm": 0.55, "dm": 1.05, "nm": 1.0, "zm": 1.15, "hm": 1.0, "schm": 1.0},
+      "pred": 29, "pred_buffer": 32
     },
     {
-      "ds": "2026-04-22",
-      "dag": "Woensdag",
-      "datum_nl": "22 april",
-      "weer": { "temp": 9.4, "zon": "zonnig", "neerslag": "geen" },
-      "flags": { "nl_holiday": false, "nrw_holiday": false, "nl_school": false, "nrw_school": false },
-      "multipliers": { "base": 31, "sm": 0.55, "dm": 0.65, "nm": 1.00, "zm": 1.15, "hm": 1.00, "schm": 1.00 },
-      "pred": 13,
-      "pred_buffer": 14
+      "ds": "2026-04-20", "dag": "Zaterdag", "datum_nl": "20 april",
+      "weer": {"temp": 8.8, "zon": "zonnig", "neerslag": "licht"},
+      "flags": {"nl_holiday": false, "nrw_holiday": false, "nl_school": false, "nrw_school": false},
+      "multipliers": {"base": 31, "sm": 0.55, "dm": 1.55, "nm": 0.82, "zm": 1.15, "hm": 1.0, "schm": 1.0},
+      "pred": 25, "pred_buffer": 28
+    },
+    {
+      "ds": "2026-04-21", "dag": "Zondag", "datum_nl": "21 april",
+      "weer": {"temp": 9.2, "zon": "zonnig", "neerslag": "geen"},
+      "flags": {"nl_holiday": false, "nrw_holiday": false, "nl_school": false, "nrw_school": false},
+      "multipliers": {"base": 31, "sm": 0.55, "dm": 1.35, "nm": 1.0, "zm": 1.15, "hm": 1.0, "schm": 1.0},
+      "pred": 26, "pred_buffer": 29
     }
   ],
-  "totaal": 34,
-  "totaal_buffer": 37,
-  "waarschuwingen": [
-    "Taak uitgevoerd op woensdag 2026-04-15 (gepland op vrijdag). Bestelperiode maandag 20 t/m woensdag 22 april is correct."
-  ]
+  "totaal": 102,
+  "totaal_buffer": 112,
+  "waarschuwingen": []
 }
