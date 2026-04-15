@@ -104,9 +104,9 @@
 
   "locatie": {
     "naam":      "BLOW Beach House",
-    "plaats":    "Kijkduin, Den Haag",
-    "lat":       52.065,
-    "lon":       4.247,
+    "plaats":    "Kijkduin strand, Den Haag (Zandmotorpad)",
+    "lat":       52.060,
+    "lon":       4.196,
     "knmi_stn":  330,
     "knmi_naam": "Hoek van Holland"
   }

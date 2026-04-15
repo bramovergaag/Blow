@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "generated_at": "2026-04-15T21:00:00",
   "source": "placeholder — wordt vervangen door Make scenario BLOW-01",
-  "location": { "lat": 52.065, "lon": 4.247, "naam": "Kijkduin" },
+  "location": { "lat": 52.060, "lon": 4.196, "naam": "Kijkduin strand (Zandmotorpad)" },
   "forecast": [
     { "ds": "2026-04-16", "temp_mean": 14.5, "temp_max": 17.0, "sunshine_hrs": 5.2, "rainfall_mm": 0.0, "wind_mean_ms": 4.1 },
     { "ds": "2026-04-17", "temp_mean": 15.0, "temp_max": 18.0, "sunshine_hrs": 7.8, "rainfall_mm": 0.0, "wind_mean_ms": 3.5 },
