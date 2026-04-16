@@ -9,8 +9,8 @@ import {
 } from "./lib.mjs";
 
 const TASKS = {
-  maandag: { offset: 3, days: 4, levering_dagnaam: "Donderdag" },
-  vrijdag: { offset: 3, days: 3, levering_dagnaam: "Maandag" },
+  maandag: { offset: 3, days: 4 },   // Ma -> levering Do t/m Zo (4 dagen)
+  vrijdag: { offset: 3, days: 3 },   // Vr -> levering Ma t/m Wo (3 dagen)
 };
 
 async function main() {
@@ -36,6 +36,16 @@ async function main() {
 
   const today = todayNL();
   const startDs = addDays(today, def.offset);
+
+  // Sanity-check: vandaag moet Ma (1) resp. Vr (5) zijn in NL tijd.
+  const expectedDow = task === "maandag" ? 1 : 5;
+  const actualDow = dowFromDs(today);
+  if (actualDow !== expectedDow) {
+    waarschuwingen.push(
+      `[DAGFOUT: taak '${task}' verwacht ${expectedDow === 1 ? "Maandag" : "Vrijdag"}, ` +
+      `maar vandaag is ${dagNaam(today)}]`,
+    );
+  }
 
   // Bouw dagen-array.
   const dagen = [];
@@ -94,8 +104,10 @@ async function main() {
 
   await writeFile("data/voorspelling.json", JSON.stringify(voorspelling, null, 2) + "\n", "utf8");
 
-  // Bouw WhatsApp-bericht.
-  const leveringFrom = `${def.levering_dagnaam} ${datumNL(startDs)}`;
+  // Bouw WhatsApp-bericht. Dag-namen zijn afgeleid van de werkelijke
+  // datum, niet van de taak — zo klopt het bericht ook bij handmatige
+  // runs (workflow_dispatch) op een afwijkende weekdag.
+  const leveringFrom = `${dagNaam(startDs)} ${datumNL(startDs)}`;
   const leveringTo = `${dagNaam(eindDs)} ${datumNL(eindDs)}`;
   const perDag = dagen
     .map((d) => `• ${d.dag} ${d.datum_nl}: ${d.weer.zon}, ${d.weer.temp}°C → ca. ${d.pred_buffer}`)
