@@ -1,0 +1,57 @@
+name: BLOW — weer update (06:30 NL)
+
+on:
+  schedule:
+    # GitHub cron is UTC. Twee entries om DST te overbruggen; runtime-guard
+    # filtert zodat er per dag maar één daadwerkelijke run is.
+    - cron: "30 4 * * *"   # 06:30 NL (CEST, zomer)
+    - cron: "30 5 * * *"   # 06:30 NL (CET, winter)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: blow-weer-update
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Tijd-guard (alleen draaien als het 06:XX NL is)
+        id: guard
+        run: |
+          nl_hour=$(TZ=Europe/Amsterdam date +%H)
+          echo "NL hour = $nl_hour"
+          if [ "${{ github.event_name }}" = "schedule" ] && [ "$nl_hour" != "06" ]; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            echo "Skip: niet 06:XX NL."
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: actions/checkout@v4
+        if: steps.guard.outputs.skip == 'false'
+
+      - uses: actions/setup-node@v4
+        if: steps.guard.outputs.skip == 'false'
+        with:
+          node-version: "20"
+
+      - name: Run weer-update
+        if: steps.guard.outputs.skip == 'false'
+        run: node scripts/weer-update.mjs
+
+      - name: Commit & push
+        if: steps.guard.outputs.skip == 'false'
+        run: |
+          git config user.name  "bram overgaag"
+          git config user.email "bramovergaag@gmail.com"
+          if git diff --quiet -- data/weer.json; then
+            echo "Geen wijzigingen in weer.json."
+          else
+            git add data/weer.json
+            git commit -m "weer update $(TZ=Europe/Amsterdam date +%Y-%m-%d)"
+            git push origin main
+          fi

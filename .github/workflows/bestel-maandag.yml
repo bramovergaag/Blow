@@ -1,0 +1,58 @@
+name: BLOW — bestel maandag (08:00 NL)
+
+on:
+  schedule:
+    - cron: "0 6 * * 1"   # 08:00 NL (CEST, zomer)
+    - cron: "0 7 * * 1"   # 08:00 NL (CET, winter)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: blow-bestel-maandag
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Tijd-guard (alleen draaien als het 08:XX NL Maandag is)
+        id: guard
+        run: |
+          nl_hour=$(TZ=Europe/Amsterdam date +%H)
+          nl_dow=$(TZ=Europe/Amsterdam date +%u)   # 1=ma..7=zo
+          echo "NL hour=$nl_hour dow=$nl_dow"
+          if [ "${{ github.event_name }}" = "schedule" ] && { [ "$nl_hour" != "08" ] || [ "$nl_dow" != "1" ]; }; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            echo "Skip: niet Maandag 08:XX NL."
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: actions/checkout@v4
+        if: steps.guard.outputs.skip == 'false'
+
+      - uses: actions/setup-node@v4
+        if: steps.guard.outputs.skip == 'false'
+        with:
+          node-version: "20"
+
+      - name: Run bestel maandag
+        if: steps.guard.outputs.skip == 'false'
+        env:
+          MAKE_WEBHOOK_URL: ${{ secrets.MAKE_WEBHOOK_URL }}
+        run: node scripts/bestel.mjs maandag
+
+      - name: Commit & push
+        if: steps.guard.outputs.skip == 'false'
+        run: |
+          git config user.name  "bram overgaag"
+          git config user.email "bramovergaag@gmail.com"
+          if git diff --quiet -- data/voorspelling.json; then
+            echo "Geen wijzigingen in voorspelling.json."
+          else
+            git add data/voorspelling.json
+            git commit -m "voorspelling maandag $(TZ=Europe/Amsterdam date -d '+3 days' +%Y-%m-%d)"
+            git push origin main
+          fi
