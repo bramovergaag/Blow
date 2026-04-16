@@ -1,12 +1,12 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-04-16T09:24:58+02:00",
-  "task": "blow-bestel-vrijdag",
+  "generated_at": "2026-04-16T09:26:17+02:00",
+  "task": "blow-bestel-maandag",
   "levering_vanaf": "2026-04-19",
   "bestelperiode": {
     "from": "2026-04-19",
-    "to": "2026-04-21",
-    "days": 3
+    "to": "2026-04-22",
+    "days": 4
   },
   "dagen": [
     {
@@ -89,9 +89,36 @@
       },
       "pred": 11,
       "pred_buffer": 12
+    },
+    {
+      "ds": "2026-04-22",
+      "dag": "Woensdag",
+      "datum_nl": "22 april",
+      "weer": {
+        "temp": 10.8,
+        "zon": "zonnig",
+        "neerslag": "geen"
+      },
+      "flags": {
+        "nl_holiday": false,
+        "nrw_holiday": false,
+        "nl_school": false,
+        "nrw_school": false
+      },
+      "multipliers": {
+        "base": 40,
+        "sm": 0.55,
+        "dm": 0.65,
+        "nm": 1,
+        "zm": 1.15,
+        "hm": 1,
+        "schm": 1
+      },
+      "pred": 16,
+      "pred_buffer": 18
     }
   ],
-  "totaal": 51,
-  "totaal_buffer": 56,
+  "totaal": 67,
+  "totaal_buffer": 74,
   "waarschuwingen": []
 }
