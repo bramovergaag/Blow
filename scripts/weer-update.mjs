@@ -1,8 +1,8 @@
 // BLOW: fetch Open-Meteo 14-daagse forecast en schrijf data/weer.json.
 // Cloud-equivalent van skill blow-weer-update.
 
-import { writeFile } from "node:fs/promises";
-import { isoNowNL } from "./lib.mjs";
+import { readFile, writeFile } from "node:fs/promises";
+import { isoNowNL, todayNL } from "./lib.mjs";
 
 const URL =
   "https://api.open-meteo.com/v1/forecast" +
@@ -13,6 +13,19 @@ const URL =
 const round1 = (x) => Math.round(x * 10) / 10;
 
 async function main() {
+  // Idempotentie: bij scheduled trigger skip als weer al vandaag opgehaald is.
+  // Voorkomt dubbel werk van de 2 DST-cron entries.
+  const isSchedule = process.env.GITHUB_EVENT_NAME === "schedule";
+  if (isSchedule) {
+    try {
+      const existing = JSON.parse(await readFile("data/weer.json", "utf8"));
+      if (existing.generated_at && existing.generated_at.slice(0, 10) === todayNL()) {
+        console.log(`⏭  weer.json is al vandaag (${todayNL()}) opgehaald — skip.`);
+        return;
+      }
+    } catch { /* geen bestaand bestand → door */ }
+  }
+
   const res = await fetch(URL);
   if (!res.ok) throw new Error(`Open-Meteo HTTP ${res.status}`);
   const data = await res.json();

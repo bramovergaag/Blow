@@ -21,6 +21,23 @@ async function main() {
   }
   const def = TASKS[task];
 
+  // Idempotentie: bij scheduled trigger skip als voorspelling voor deze taak
+  // al vandaag gemaakt is. Voorkomt dubbele WhatsApp van de 2 DST-crons.
+  const isSchedule = process.env.GITHUB_EVENT_NAME === "schedule";
+  if (isSchedule) {
+    try {
+      const existing = JSON.parse(await readFile("data/voorspelling.json", "utf8"));
+      if (
+        existing.task === `blow-bestel-${task}` &&
+        existing.generated_at &&
+        existing.generated_at.slice(0, 10) === todayNL()
+      ) {
+        console.log(`⏭  Voorspelling '${task}' is al vandaag (${todayNL()}) gegenereerd — skip.`);
+        return;
+      }
+    } catch { /* geen bestaand bestand / andere taak → door */ }
+  }
+
   const [weer, config] = await Promise.all([
     readFile("data/weer.json", "utf8").then(JSON.parse),
     readFile("data/config.json", "utf8").then(JSON.parse),

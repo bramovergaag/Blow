@@ -2,6 +2,9 @@ name: BLOW — bestel vrijdag (08:00 NL)
 
 on:
   schedule:
+    # Twee cron-entries voor DST; `* * 5` beperkt tot Vrijdag UTC (= Vrijdag NL).
+    # Script doet idempotentie-check zodat beide fires OK zijn, ook bij
+    # de grote GitHub Actions cron-vertraging.
     - cron: "0 6 * * 5"   # 08:00 NL (CEST, zomer)
     - cron: "0 7 * * 5"   # 08:00 NL (CET, winter)
   workflow_dispatch:
@@ -17,35 +20,19 @@ jobs:
   run:
     runs-on: ubuntu-latest
     steps:
-      - name: Tijd-guard (alleen draaien als het 08:XX NL Vrijdag is)
-        id: guard
-        run: |
-          nl_hour=$(TZ=Europe/Amsterdam date +%H)
-          nl_dow=$(TZ=Europe/Amsterdam date +%u)   # 1=ma..7=zo
-          echo "NL hour=$nl_hour dow=$nl_dow"
-          if [ "${{ github.event_name }}" = "schedule" ] && { [ "$nl_hour" != "08" ] || [ "$nl_dow" != "5" ]; }; then
-            echo "skip=true" >> "$GITHUB_OUTPUT"
-            echo "Skip: niet Vrijdag 08:XX NL."
-          else
-            echo "skip=false" >> "$GITHUB_OUTPUT"
-          fi
-
       - uses: actions/checkout@v4
-        if: steps.guard.outputs.skip == 'false'
 
       - uses: actions/setup-node@v4
-        if: steps.guard.outputs.skip == 'false'
         with:
           node-version: "20"
 
       - name: Run bestel vrijdag
-        if: steps.guard.outputs.skip == 'false'
         env:
+          GITHUB_EVENT_NAME: ${{ github.event_name }}
           MAKE_WEBHOOK_URL: ${{ secrets.MAKE_WEBHOOK_URL }}
         run: node scripts/bestel.mjs vrijdag
 
       - name: Commit & push
-        if: steps.guard.outputs.skip == 'false'
         run: |
           git config user.name  "bram overgaag"
           git config user.email "bramovergaag@gmail.com"

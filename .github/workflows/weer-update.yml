@@ -2,8 +2,9 @@ name: BLOW — weer update (06:30 NL)
 
 on:
   schedule:
-    # GitHub cron is UTC. Twee entries om DST te overbruggen; runtime-guard
-    # filtert zodat er per dag maar één daadwerkelijke run is.
+    # Twee cron-entries voor DST. Het script doet zelf idempotentie-check
+    # (skip als weer.json al vandaag is opgehaald) zodat beide fires OK zijn,
+    # ook met de grote GitHub Actions cron-vertraging.
     - cron: "30 4 * * *"   # 06:30 NL (CEST, zomer)
     - cron: "30 5 * * *"   # 06:30 NL (CET, winter)
   workflow_dispatch:
@@ -19,32 +20,18 @@ jobs:
   update:
     runs-on: ubuntu-latest
     steps:
-      - name: Tijd-guard (alleen draaien als het 06:XX NL is)
-        id: guard
-        run: |
-          nl_hour=$(TZ=Europe/Amsterdam date +%H)
-          echo "NL hour = $nl_hour"
-          if [ "${{ github.event_name }}" = "schedule" ] && [ "$nl_hour" != "06" ]; then
-            echo "skip=true" >> "$GITHUB_OUTPUT"
-            echo "Skip: niet 06:XX NL."
-          else
-            echo "skip=false" >> "$GITHUB_OUTPUT"
-          fi
-
       - uses: actions/checkout@v4
-        if: steps.guard.outputs.skip == 'false'
 
       - uses: actions/setup-node@v4
-        if: steps.guard.outputs.skip == 'false'
         with:
           node-version: "20"
 
       - name: Run weer-update
-        if: steps.guard.outputs.skip == 'false'
+        env:
+          GITHUB_EVENT_NAME: ${{ github.event_name }}
         run: node scripts/weer-update.mjs
 
       - name: Commit & push
-        if: steps.guard.outputs.skip == 'false'
         run: |
           git config user.name  "bram overgaag"
           git config user.email "bramovergaag@gmail.com"
