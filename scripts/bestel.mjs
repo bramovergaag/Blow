@@ -139,10 +139,22 @@ async function main() {
   const webhookUrl = process.env.MAKE_WEBHOOK_URL;
   let webhookStatus = "skipped (geen MAKE_WEBHOOK_URL)";
   if (webhookUrl) {
+    // Per-dag regels zonder bullet, geschikt als losse template-variabele
+    // in WhatsApp Business Cloud (Meta accepteert line breaks in runtime
+    // values, alleen niet in de sample waarden).
+    const perDagPlain = dagen
+      .map((d) => `${d.dag} ${d.datum_nl}: ${d.weer.zon}, ${d.weer.temp}°C ca. ${d.pred_buffer}`)
+      .join("\n");
+
     const payload = {
       task: `blow-bestel-${task}`,
+      // Losse velden voor WA-template mapping ({{1}}..{{4}}):
+      levering_van: leveringFrom,            // "Maandag 20 april"
+      levering_tot: leveringTo,              // "Woensdag 22 april"
+      totaal: totaal_buffer,                 // 61
+      per_dag: perDagPlain,                  // meerdere regels, geen bullets
+      // Backwards-compat velden:
       levering_vanaf: leveringFrom.toLowerCase(),
-      totaal: totaal_buffer,
       message,
     };
     try {
