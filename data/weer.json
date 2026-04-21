@@ -1,22 +1,22 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-04-20T08:30:24+02:00",
+  "generated_at": "2026-04-21T08:18:10+02:00",
   "source": "open-meteo.com (Kijkduin strand)",
   "location": {"lat":52.06,"lon":4.196,"naam":"Kijkduin strand (Zandmotorpad)"},
   "forecast": [
-    {"ds":"2026-04-20","temp_mean":9.2,"temp_max":11.1,"sunshine_hrs":12.7,"rainfall_mm":0.4,"wind_mean_ms":4.8},
-    {"ds":"2026-04-21","temp_mean":10.5,"temp_max":14.7,"sunshine_hrs":13.1,"rainfall_mm":0.1,"wind_mean_ms":5.1},
-    {"ds":"2026-04-22","temp_mean":10.3,"temp_max":14.4,"sunshine_hrs":13.8,"rainfall_mm":0,"wind_mean_ms":4.5},
-    {"ds":"2026-04-23","temp_mean":8.7,"temp_max":11.9,"sunshine_hrs":13,"rainfall_mm":0,"wind_mean_ms":3.4},
-    {"ds":"2026-04-24","temp_mean":7.9,"temp_max":9.4,"sunshine_hrs":11.9,"rainfall_mm":0,"wind_mean_ms":4},
-    {"ds":"2026-04-25","temp_mean":8.5,"temp_max":9.9,"sunshine_hrs":4.4,"rainfall_mm":0.9,"wind_mean_ms":4.6},
-    {"ds":"2026-04-26","temp_mean":7.6,"temp_max":8.4,"sunshine_hrs":1,"rainfall_mm":0.6,"wind_mean_ms":3.9},
-    {"ds":"2026-04-27","temp_mean":7.4,"temp_max":8.6,"sunshine_hrs":7.2,"rainfall_mm":0,"wind_mean_ms":3.5},
-    {"ds":"2026-04-28","temp_mean":7.6,"temp_max":9.9,"sunshine_hrs":10.7,"rainfall_mm":0,"wind_mean_ms":2.7},
-    {"ds":"2026-04-29","temp_mean":7.9,"temp_max":10.6,"sunshine_hrs":4.7,"rainfall_mm":1.2,"wind_mean_ms":3.3},
-    {"ds":"2026-04-30","temp_mean":8.2,"temp_max":11.6,"sunshine_hrs":14.6,"rainfall_mm":1.2,"wind_mean_ms":6.2},
-    {"ds":"2026-05-01","temp_mean":6.4,"temp_max":8.2,"sunshine_hrs":11.8,"rainfall_mm":0,"wind_mean_ms":5.8},
-    {"ds":"2026-05-02","temp_mean":7.1,"temp_max":9.9,"sunshine_hrs":14.4,"rainfall_mm":1.2,"wind_mean_ms":5.7},
-    {"ds":"2026-05-03","temp_mean":6.5,"temp_max":7.7,"sunshine_hrs":11.4,"rainfall_mm":3,"wind_mean_ms":2.8}
+    {"ds":"2026-04-21","temp_mean":10.5,"temp_max":14.7,"sunshine_hrs":13.1,"rainfall_mm":0,"wind_mean_ms":5.1},
+    {"ds":"2026-04-22","temp_mean":11.8,"temp_max":16.9,"sunshine_hrs":13.2,"rainfall_mm":0,"wind_mean_ms":4.7},
+    {"ds":"2026-04-23","temp_mean":10.4,"temp_max":12.9,"sunshine_hrs":13.8,"rainfall_mm":0,"wind_mean_ms":3.9},
+    {"ds":"2026-04-24","temp_mean":9.3,"temp_max":12.2,"sunshine_hrs":13.8,"rainfall_mm":0,"wind_mean_ms":3.3},
+    {"ds":"2026-04-25","temp_mean":9.1,"temp_max":11.1,"sunshine_hrs":14.2,"rainfall_mm":0,"wind_mean_ms":4.1},
+    {"ds":"2026-04-26","temp_mean":8.7,"temp_max":10.1,"sunshine_hrs":11.7,"rainfall_mm":0,"wind_mean_ms":4.6},
+    {"ds":"2026-04-27","temp_mean":8,"temp_max":11.4,"sunshine_hrs":14.4,"rainfall_mm":0,"wind_mean_ms":4},
+    {"ds":"2026-04-28","temp_mean":8.3,"temp_max":11.4,"sunshine_hrs":14.5,"rainfall_mm":0,"wind_mean_ms":3.6},
+    {"ds":"2026-04-29","temp_mean":9.6,"temp_max":11.9,"sunshine_hrs":9.4,"rainfall_mm":1.8,"wind_mean_ms":4.6},
+    {"ds":"2026-04-30","temp_mean":9.4,"temp_max":11.8,"sunshine_hrs":14.6,"rainfall_mm":0,"wind_mean_ms":3.9},
+    {"ds":"2026-05-01","temp_mean":10,"temp_max":13.6,"sunshine_hrs":14.7,"rainfall_mm":0,"wind_mean_ms":3.6},
+    {"ds":"2026-05-02","temp_mean":9.8,"temp_max":13.6,"sunshine_hrs":14.7,"rainfall_mm":0,"wind_mean_ms":3.9},
+    {"ds":"2026-05-03","temp_mean":8.3,"temp_max":11.1,"sunshine_hrs":14.7,"rainfall_mm":1.2,"wind_mean_ms":2.4},
+    {"ds":"2026-05-04","temp_mean":7.9,"temp_max":10.6,"sunshine_hrs":12.1,"rainfall_mm":9,"wind_mean_ms":2.9}
   ]
 }
