@@ -88,19 +88,27 @@ function neerslagIcon(n) {
 // -----------------------------------------------------------------------------
 function berekenPeriode() {
   const today = new Date();
-  const dow = today.getDay(); // 0=zo
-  // Leveringsmodel: maandag taak → do-zo (4d); vrijdag taak → ma-wo (3d)
-  // Dashboard toont: eerstvolgende leverperiode
+  const dow = today.getDay(); // 0=zo, 1=ma, ..., 5=vr, 6=za
+  // Leveringsmodel:
+  //   Ma-bestel → levering Do-Zo (4d), lead 3 dagen
+  //   Vr-bestel → levering Ma-Wo (3d), lead 3 dagen
+  //
+  // Dashboard toont de NOG-AANKOMENDE levering. Bereken afstand
+  // in dagen tot eerstvolgende Donderdag (start Ma-bestel-levering)
+  // en eerstvolgende Maandag (start Vr-bestel-levering), pak de dichtstbijzijnde.
+  // Als dow == Do of Ma (leverdag zelf), beschouw die als "al bezig" en
+  // ga door naar volgende week (7 i.p.v. 0).
+  const daysToMa = (8 - dow) % 7 || 7;    // Ma→7, Di→6, Wo→5, Do→4, Vr→3, Za→2, Zo→1
+  const daysToDo = (11 - dow) % 7 || 7;   // Ma→3, Di→2, Wo→1, Do→7, Vr→6, Za→5, Zo→4
   let startOffset, length, label;
-  if (dow >= 2 && dow <= 4) {          // di/wo/do — volgende is maandag-levering (3d)
-    startOffset = (8 - dow) % 7 || 7;   // dagen tot volgende maandag
-    length = 3;  // ma, di, wo
-    label = "levering maandag";
-  } else {                              // vr/za/zo/ma — volgende is donderdag-levering (4d)
-    startOffset = (11 - dow) % 7 || 7;  // dagen tot volgende donderdag
-    if (dow === 1) startOffset = 3;     // maandag → donderdag
-    length = 4;  // do, vr, za, zo
+  if (daysToDo <= daysToMa) {
+    startOffset = daysToDo;
+    length = 4;
     label = "levering donderdag";
+  } else {
+    startOffset = daysToMa;
+    length = 3;
+    label = "levering maandag";
   }
   const start = new Date(today);
   start.setDate(today.getDate() + startOffset);
