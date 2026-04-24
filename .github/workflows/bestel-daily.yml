@@ -1,0 +1,64 @@
+name: BLOW — bestel daily (08:00 NL, werkt Ma+Vr)
+
+# Runt elke dag om 08:00 NL. Het script detecteert zelf of vandaag
+# Maandag of Vrijdag is en verwerkt alleen dan een bestel. Op andere
+# dagen wordt de job in 2-3 seconden geskipt.
+#
+# Doel: GitHub's cron-scheduler ziet hierdoor elke dag activity en zal
+# de workflow niet deprioriteren. Dat voorkomt het probleem dat scheduled
+# workflows na een paar weken stilletjes stoppen met vuren (bekend GH-issue).
+
+on:
+  schedule:
+    - cron: "0 6 * * *"   # 08:00 NL (CEST, zomer)
+    - cron: "0 7 * * *"   # 08:00 NL (CET, winter)
+  workflow_dispatch:
+    inputs:
+      force_task:
+        description: "Forceer taak (maandag / vrijdag). Leeg = auto op basis van vandaag."
+        required: false
+        default: ""
+        type: choice
+        options:
+          - ""
+          - "maandag"
+          - "vrijdag"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: blow-bestel-daily
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Run bestel
+        env:
+          GITHUB_EVENT_NAME: ${{ github.event_name }}
+          MAKE_WEBHOOK_URL: ${{ secrets.MAKE_WEBHOOK_URL }}
+        run: |
+          forced="${{ inputs.force_task }}"
+          arg="${forced:-auto}"
+          echo "Running with argument: $arg"
+          node scripts/bestel.mjs "$arg"
+
+      - name: Commit & push
+        run: |
+          git config user.name  "bram overgaag"
+          git config user.email "bramovergaag@gmail.com"
+          if git diff --quiet -- data/voorspelling.json; then
+            echo "Geen wijzigingen in voorspelling.json."
+          else
+            git add data/voorspelling.json
+            git commit -m "voorspelling $(TZ=Europe/Amsterdam date +%Y-%m-%d)"
+            git push origin main
+          fi

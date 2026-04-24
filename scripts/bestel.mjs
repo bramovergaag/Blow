@@ -1,5 +1,8 @@
 // BLOW: bereken voorspelling en post naar Make webhook.
-// Aan te roepen met één argument: "maandag" of "vrijdag".
+// Aan te roepen met één argument: "maandag" | "vrijdag" | "auto".
+// "auto" detecteert aan de hand van de huidige NL-weekdag: Ma -> maandag,
+// Vr -> vrijdag, anders skip. Gebruikt door de dagelijkse GH Actions
+// workflow om de scheduler "warm" te houden (anders pauzeert GH de cron).
 // Cloud-equivalent van skills blow-bestel-maandag / blow-bestel-vrijdag.
 
 import { readFile, writeFile } from "node:fs/promises";
@@ -14,9 +17,22 @@ const TASKS = {
 };
 
 async function main() {
-  const task = process.argv[2];
+  let task = process.argv[2];
+
+  // "auto" (of geen argument): bepaal aan de hand van vandaag in NL-tijd.
+  if (!task || task === "auto" || task === "") {
+    const dow = dowFromDs(todayNL());   // 0=Zo..6=Za
+    if (dow === 1) task = "maandag";
+    else if (dow === 5) task = "vrijdag";
+    else {
+      console.log(`⏭  Vandaag is ${dagNaam(todayNL())} — geen bestel-dag, skip.`);
+      return;
+    }
+    console.log(`→ Auto-detected taak: ${task} (vandaag is ${dagNaam(todayNL())})`);
+  }
+
   if (!TASKS[task]) {
-    console.error("Usage: node scripts/bestel.mjs <maandag|vrijdag>");
+    console.error("Usage: node scripts/bestel.mjs <maandag|vrijdag|auto>");
     process.exit(2);
   }
   const def = TASKS[task];
