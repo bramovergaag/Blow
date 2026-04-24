@@ -149,6 +149,7 @@ async function main() {
     `Hoi! Herinnering pizzabollen bestelling voor levering ${leveringFrom} t/m ${leveringTo}.\n\n` +
     `Totaal aanbevolen: ca. ${totaal_buffer} stuks (incl. 10% buffer)\n\n` +
     `Per dag:\n${perDag}\n\n` +
+    `Dashboard: https://bramovergaag.github.io/Blow/\n\n` +
     `Graag voor vanavond bevestigen. 🍕`;
 
   // POST naar Make webhook.
