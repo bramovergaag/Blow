@@ -26,9 +26,9 @@ async function main() {
     } catch { /* geen bestaand bestand → door */ }
   }
 
-  const res = await fetch(URL);
-  if (!res.ok) throw new Error(`Open-Meteo HTTP ${res.status}`);
-  const data = await res.json();
+  // Open-Meteo geeft soms 429 (rate limit) of 5xx bij piekuren. Retry met
+  // exponential backoff: 5s, 15s, 45s. Voorkomt false-positive workflow fails.
+  const data = await fetchWithRetry(URL, [5000, 15000, 45000]);
   const d = data.daily;
   if (!d || !Array.isArray(d.time)) throw new Error("Unexpected Open-Meteo response (no daily.time)");
 
@@ -56,6 +56,29 @@ async function main() {
   const temps = forecast.map((f) => f.temp_mean);
   console.log(`✓ ${forecast.length} dagen opgehaald: ${forecast[0].ds} t/m ${forecast.at(-1).ds}`);
   console.log(`  temp_mean range: ${Math.min(...temps)}°C..${Math.max(...temps)}°C`);
+}
+
+async function fetchWithRetry(url, delaysMs) {
+  let lastErr;
+  for (let attempt = 0; attempt <= delaysMs.length; attempt++) {
+    try {
+      const res = await fetch(url);
+      if (res.ok) return await res.json();
+      // Retry op 429 en 5xx; andere statuscodes meteen falen.
+      if (res.status !== 429 && res.status < 500) {
+        throw new Error(`Open-Meteo HTTP ${res.status}`);
+      }
+      lastErr = new Error(`Open-Meteo HTTP ${res.status}`);
+    } catch (e) {
+      lastErr = e;
+    }
+    if (attempt < delaysMs.length) {
+      const wait = delaysMs[attempt];
+      console.warn(`fetch ${attempt + 1} faalde (${lastErr.message}), retry over ${wait}ms`);
+      await new Promise((r) => setTimeout(r, wait));
+    }
+  }
+  throw lastErr;
 }
 
 function formatWeerJson(obj) {
