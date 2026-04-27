@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Post A · Zandmotor — strategie + post</title>
+<style>
+  :root {
+    --sand: #f4ecd8;
+    --sand-light: #faf5e6;
+    --sea: #1e6091;
+    --sea-light: #4a90b8;
+    --foam: #ffffff;
+    --deep: #0b2e4a;
+    --accent: #e85d04;
+    --accent-soft: #f8ddc7;
+    --green: #2d8659;
+    --green-soft: #d1e8d8;
+    --red: #b63b3b;
+    --red-soft: #f0d4d4;
+    --amber: #d97706;
+    --amber-soft: #fde7c7;
+    --text: #1a2a3a;
+    --muted: #5c6b7a;
+    --border: rgba(30, 96, 145, 0.15);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: linear-gradient(180deg, var(--sand) 0%, #ffffff 24%);
+    color: var(--text);
+    line-height: 1.55;
+    min-height: 100vh;
+  }
+
+  /* Brand bar */
+  .brand-bar {
+    background: #C66A1F;
+    color: #F4EFE2;
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    border-bottom: 4px solid #1A1A1A;
+    font-family: "Oswald", "Bebas Neue", sans-serif;
+  }
+  .brand-bar .logo {
+    width: 38px; height: 38px;
+    border: 2px solid #F4EFE2;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    flex-shrink: 0;
+  }
+  .brand-bar .brand-name {
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .brand-tabs { margin-left: auto; display: flex; gap: 4px; }
+  .brand-tabs a {
+    font-family: inherit;
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 10px 18px;
+    color: rgba(244, 239, 226, 0.7);
+    border-bottom: 3px solid transparent;
+    text-decoration: none;
+    margin-bottom: -14px;
+  }
+  .brand-tabs a:hover { color: #F4EFE2; }
+  .brand-tabs a.active { color: #F4EFE2; border-bottom-color: #F4EFE2; }
+  @media (max-width: 600px) {
+    .brand-bar { padding: 12px 16px; gap: 12px; }
+    .brand-bar .brand-name { font-size: 15px; }
+    .brand-tabs a { padding: 10px 12px; font-size: 12px; letter-spacing: 1.5px; }
+  }
+
+  /* Sub-nav */
+  .sub-nav {
+    background: var(--foam);
+    border-bottom: 1px solid var(--border);
+    padding: 0 16px;
+  }
+  .sub-nav .row {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 12px 0;
+    flex-wrap: wrap;
+  }
+  .sub-nav .back {
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+  }
+  .sub-nav .back:hover { text-decoration: underline; }
+  .sub-nav .crumbs {
+    color: var(--muted);
+    font-size: 0.82rem;
+  }
+  .sub-nav .crumbs strong { color: var(--deep); }
+
+  .container { max-width: 1100px; margin: 0 auto; padding: 28px 24px 80px; }
+
+  /* ---------- Strategy banner ---------- */
+  .strategy {
+    background: linear-gradient(135deg, var(--deep) 0%, var(--sea) 100%);
+    color: white;
+    border-radius: 16px;
+    padding: 26px 28px;
+    margin-bottom: 14px;
+    box-shadow: 0 4px 18px rgba(11, 46, 74, 0.18);
+  }
+  .strategy .eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent-soft);
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .strategy h2 {
+    font-size: 1.4rem;
+    color: white;
+    margin-bottom: 14px;
+    font-weight: 800;
+  }
+  .strategy-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin-top: 18px;
+  }
+  @media (max-width: 780px) { .strategy-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 480px) { .strategy-grid { grid-template-columns: 1fr; } }
+  .strat-cell {
+    background: rgba(255,255,255,0.08);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .strat-cell .lbl {
+    font-size: 0.66rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    opacity: 0.7;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .strat-cell .val {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: white;
+    line-height: 1.3;
+  }
+  .strat-cell .val.big {
+    font-size: 1.6rem;
+  }
+  .strat-cell .sub {
+    display: block;
+    font-size: 0.74rem;
+    opacity: 0.75;
+    margin-top: 4px;
+    font-weight: 400;
+  }
+
+  /* SERP move arrow */
+  .serp-move {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.92rem;
+    margin-top: 8px;
+  }
+  .serp-move .pos {
+    background: rgba(255,255,255,0.12);
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-weight: 700;
+    font-family: ui-monospace, monospace;
+  }
+  .serp-move .pos.now { background: var(--red-soft); color: var(--red); }
+  .serp-move .pos.target { background: var(--green-soft); color: var(--green); }
+  .serp-move .arrow { font-size: 1.2rem; opacity: 0.6; }
+
+  /* ---------- Audit alignment cards ---------- */
+  .alignment {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-bottom: 36px;
+  }
+  @media (max-width: 700px) { .alignment { grid-template-columns: 1fr; } }
+  .align-card {
+    background: var(--foam);
+    border-radius: 10px;
+    padding: 14px 18px;
+    box-shadow: 0 2px 8px rgba(11, 46, 74, 0.05);
+    border-left: 3px solid var(--green);
+  }
+  .align-card .audit-ref {
+    font-size: 0.66rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--green);
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .align-card .text {
+    font-size: 0.86rem;
+    color: var(--text);
+  }
+  .align-card .text strong { color: var(--deep); }
+
+  /* ---------- Article ---------- */
+  article.post {
+    background: var(--foam);
+    border-radius: 16px;
+    padding: 44px 50px;
+    box-shadow: 0 4px 18px rgba(11, 46, 74, 0.06);
+    margin-bottom: 36px;
+  }
+  @media (max-width: 700px) { article.post { padding: 28px 24px; } }
+  article.post .meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.78rem;
+  }
+  article.post .meta-row span {
+    background: var(--sand-light);
+    padding: 3px 10px;
+    border-radius: 999px;
+    color: var(--muted);
+  }
+  article.post .meta-row span.kw {
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-weight: 700;
+  }
+  article.post h1 {
+    font-size: clamp(1.7rem, 3.4vw, 2.2rem);
+    color: var(--deep);
+    margin-bottom: 12px;
+    line-height: 1.2;
+    font-weight: 800;
+  }
+  article.post h2 {
+    font-size: 1.3rem;
+    color: var(--deep);
+    margin-top: 28px;
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
+  article.post h3 {
+    font-size: 1.05rem;
+    color: var(--deep);
+    margin-top: 18px;
+    margin-bottom: 8px;
+  }
+  article.post p {
+    margin-bottom: 14px;
+    font-size: 1rem;
+    color: var(--text);
+  }
+  article.post .tldr {
+    background: var(--sand-light);
+    border-left: 4px solid var(--accent);
+    padding: 16px 20px;
+    margin: 18px 0;
+    border-radius: 8px;
+    font-size: 0.97rem;
+  }
+  article.post blockquote {
+    border-left: 4px solid var(--sea);
+    padding: 6px 16px;
+    margin: 16px 0;
+    color: var(--deep);
+    background: var(--sand-light);
+    border-radius: 6px;
+    font-style: italic;
+  }
+  article.post a {
+    color: var(--sea);
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-color: rgba(30, 96, 145, 0.3);
+    text-underline-offset: 3px;
+  }
+  article.post a:hover { color: var(--accent); }
+  article.post ul {
+    margin: 10px 0 16px 22px;
+  }
+  article.post ul li {
+    margin-bottom: 4px;
+    font-size: 0.96rem;
+  }
+  article.post ul li strong { color: var(--deep); }
+  article.post table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 0.88rem;
+  }
+  article.post th, article.post td {
+    padding: 8px 10px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  article.post th { background: var(--sand-light); color: var(--deep); font-weight: 700; }
+  article.post .faq-q {
+    font-weight: 700;
+    color: var(--deep);
+    margin-top: 14px;
+  }
+  article.post .faq-a { margin-bottom: 10px; font-size: 0.93rem; }
+  article.post hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 24px 0;
+  }
+  article.post .check { color: var(--green); font-weight: 700; }
+  article.post .cross { color: var(--red); font-weight: 700; }
+  article.post .warn { color: var(--accent); font-weight: 700; }
+
+  /* ---------- Internal link diagram ---------- */
+  .link-flow {
+    background: var(--foam);
+    border-radius: 14px;
+    padding: 28px 32px;
+    box-shadow: 0 2px 10px rgba(11, 46, 74, 0.06);
+    margin-bottom: 28px;
+  }
+  .link-flow h3 {
+    color: var(--deep);
+    font-size: 1.15rem;
+    margin-bottom: 6px;
+  }
+  .link-flow .sub {
+    color: var(--muted);
+    font-size: 0.88rem;
+    margin-bottom: 22px;
+  }
+  .flow-grid {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 18px;
+    align-items: center;
+  }
+  @media (max-width: 700px) { .flow-grid { grid-template-columns: 1fr; } }
+  .flow-node {
+    background: var(--sand-light);
+    border-radius: 10px;
+    padding: 16px;
+    border: 2px dashed var(--border);
+  }
+  .flow-node.commercial {
+    background: var(--accent-soft);
+    border-color: var(--accent);
+    border-style: solid;
+  }
+  .flow-node.editorial {
+    background: var(--green-soft);
+    border-color: var(--green);
+    border-style: solid;
+  }
+  .flow-node .role {
+    font-size: 0.66rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .flow-node.commercial .role { color: var(--accent); }
+  .flow-node.editorial .role { color: var(--green); }
+  .flow-node .url {
+    font-family: ui-monospace, monospace;
+    font-size: 0.82rem;
+    color: var(--deep);
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .flow-node .desc {
+    font-size: 0.82rem;
+    color: var(--muted);
+  }
+  .flow-arrow {
+    text-align: center;
+    color: var(--sea);
+    font-size: 1.6rem;
+    font-weight: 700;
+  }
+  .flow-arrow .label {
+    display: block;
+    font-size: 0.7rem;
+    color: var(--muted);
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+  @media (max-width: 700px) {
+    .flow-arrow { transform: rotate(90deg); }
+  }
+
+  /* ---------- Distribution mini ---------- */
+  .dist-row {
+    background: var(--foam);
+    border-radius: 14px;
+    padding: 24px 28px;
+    box-shadow: 0 2px 10px rgba(11, 46, 74, 0.06);
+    margin-bottom: 24px;
+  }
+  .dist-row h3 {
+    color: var(--deep);
+    font-size: 1.05rem;
+    margin-bottom: 12px;
+  }
+  .dist-channels {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 8px;
+  }
+  @media (max-width: 700px) { .dist-channels { grid-template-columns: repeat(3, 1fr); } }
+  .dist-ch {
+    background: var(--sand-light);
+    padding: 10px 6px;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 0.74rem;
+    color: var(--deep);
+    font-weight: 600;
+    border: 1px solid var(--border);
+  }
+  .dist-ch .icon { display: block; font-size: 1.2rem; margin-bottom: 2px; }
+
+  /* ---------- Footer ---------- */
+  footer {
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+  footer a { color: var(--sea); text-decoration: none; font-weight: 600; }
+  footer a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<!-- Brand bar -->
+<header class="brand-bar">
+  <div class="logo">BLOW</div>
+  <div class="brand-name">Beach House</div>
+  <nav class="brand-tabs" aria-label="Hoofdmenu">
+    <a href="../../">Bestelling</a>
+    <a href="../" class="active" aria-current="page">SEO</a>
+  </nav>
+</header>
+
+<!-- Sub-nav -->
+<nav class="sub-nav">
+  <div class="row">
+    <a href="../" class="back">← Pilot-overzicht</a>
+    <span class="crumbs">Pilot · Pilot-bewijs · <strong>Post A — Zandmotor</strong></span>
+  </div>
+</nav>
+
+<div class="container">
+
+<!-- ============ STRATEGY BANNER ============ -->
+<section class="strategy" id="strategy">
+  <div class="eyebrow">Strategische case · op basis van audit 27 apr</div>
+  <h2>Waarom deze post — niet zomaar content, gericht op een gat in de SERP</h2>
+
+  <div class="strategy-grid">
+    <div class="strat-cell">
+      <div class="lbl">Primary keyword</div>
+      <div class="val">kitesurfen zandmotor</div>
+      <span class="sub">+ 4 secundair</span>
+    </div>
+    <div class="strat-cell">
+      <div class="lbl">SERP-positie</div>
+      <div class="val">
+        <span style="color:var(--accent-soft);">#10</span> ▸ <span style="color:white;">#4–5</span>
+      </div>
+      <span class="sub">huidig grenswaarde · doel halverwege pagina 1</span>
+    </div>
+    <div class="strat-cell">
+      <div class="lbl">Departement</div>
+      <div class="val">Kitesurfschool</div>
+      <span class="sub">14 / 15 huidige posts (oké)</span>
+    </div>
+    <div class="strat-cell">
+      <div class="lbl">Effort</div>
+      <div class="val big">2u</div>
+      <span class="sub">publicatie-klaar in markdown</span>
+    </div>
+  </div>
+
+  <div class="serp-move">
+    <span style="opacity:0.8;">Concurrent boven BLOW nu:</span>
+    <span class="pos">kitesurfschool.nl</span>
+    <span class="pos">kitesurfles.com</span>
+    <span class="pos">kiteboardschool.nl</span>
+    <span style="opacity:0.6;">+ 6 spot-info-aggregators</span>
+  </div>
+</section>
+
+<!-- ============ AUDIT ALIGNMENT ============ -->
+<h3 style="font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); font-weight: 700; margin: 20px 0 12px;">
+  Hoe deze post audit-bevindingen direct adresseert
+</h3>
+<div class="alignment">
+  <div class="align-card">
+    <div class="audit-ref">Audit-bevinding 1 · vendor-fingerprint</div>
+    <div class="text"><strong>Counter:</strong> persoonlijke stem ("wij zitten hier sinds 2013"), specifieke jaren, eigen civiele-techniek-kennis. Niet meer batch-vendor-output, wel BLOW-eigen autoriteit.</div>
+  </div>
+  <div class="align-card">
+    <div class="audit-ref">Audit-bevinding 2 · /over-blow E-E-A-T gat</div>
+    <div class="text"><strong>Vult:</strong> TU Delft Master Civiele Techniek wordt hier ingezet als content-anker. IKO-certificering expliciet vermeld. Founder bij naam genoemd ([Toine de Klerk](/over-blow)).</div>
+  </div>
+  <div class="align-card">
+    <div class="audit-ref">Audit-bevinding 3 · /kitesurfles-zandmotor-claim</div>
+    <div class="text"><strong>Versterkt:</strong> bestaande commerciële landing claimt "veiligste". Deze post bewijst en verklaart het — engineering, lagune-fysica, IKO-methodiek. Geen duplicaat, wel autoriteit.</div>
+  </div>
+  <div class="align-card">
+    <div class="audit-ref">Audit-bevinding 4 · concurrent volume</div>
+    <div class="text"><strong>Differentieert:</strong> kiteboardschool.nl wint op volume, niet op uniek perspectief. BLOW heeft TU Delft + 15 jaar + civiele-techniek-uitleg. Defensible niche.</div>
+  </div>
+</div>
+
+<!-- ============ INTERNAL LINK DIAGRAM ============ -->
+<section class="link-flow">
+  <h3>Internal-link strategie</h3>
+  <p class="sub">Deze post vormt het editoriale pijler naast de bestaande commerciële landing. Beide ondersteunen elkaar: zoekers vinden eerst diepte, klikken dan door naar boekingen.</p>
+  <div class="flow-grid">
+    <div class="flow-node commercial">
+      <div class="role">Commercieel (bestaand)</div>
+      <div class="url">/kitesurfles-zandmotor/</div>
+      <div class="desc">Lestijden, prijzen, "boek direct". Claim: veiligste spot van NL.</div>
+    </div>
+    <div class="flow-arrow">⇄<span class="label">internal links</span></div>
+    <div class="flow-node editorial">
+      <div class="role">Editoriaal (nieuw)</div>
+      <div class="url">/blog/kitesurfen-zandmotor-kijkduin</div>
+      <div class="desc">Bewijst en verklaart waarom. Engineering + 15 jaar + IKO + lagune-fysica.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ARTICLE ============ -->
+<article class="post">
+  <div class="meta-row">
+    <span class="kw">primary: kitesurfen zandmotor</span>
+    <span>📍 spots</span>
+    <span>🏷 kitesurfschool</span>
+    <span>📝 ~1.050 woorden</span>
+    <span>📅 publicatie: 28 apr 2026</span>
+    <span>👤 Team BLOW</span>
+  </div>
+
+  <h1>Kitesurfen op de Zandmotor — de veiligste kitespot van Nederland</h1>
+
+  <div class="tldr">
+    <strong>Korte versie:</strong> De Zandmotor is in 2011 door Rijkswaterstaat aangelegd: 21,5 miljoen kuub zand voor de kust van Kijkduin. Door die aanleg ontstond een ondiepe lagune met vlak water naast een breed open strand. Voor beginnende kitesurfers is dat de perfecte combinatie — nergens anders in Nederland vind je zoveel ruimte en zo weinig obstakels.
+  </div>
+
+  <p>Wij zitten hier sinds <strong>2013</strong>, geven al <strong>15 jaar</strong> kitesurfles aan deze kust, en zijn IKO-gecertificeerd. We waren er nog vóór het zand zijn definitieve vorm aannam. Dit artikel legt uit — niet alleen vanuit instructeurs-perspectief maar ook vanuit civiele techniek — waarom dit de veiligste kitesurfspot van Nederland is.</p>
+
+  <blockquote>
+    <strong>Op zoek naar lestijden of cursusprijzen?</strong> Onze <a href="https://blow.surf/kitesurfles-zandmotor/">kitesurfles-Zandmotor-pagina</a> geeft het commerciële overzicht. Dit blog gaat dieper: waarom de spot werkt zoals hij werkt.
+  </blockquote>
+
+  <h2>Waarom wij dit met gezag kunnen vertellen</h2>
+  <p>Eerlijk gezegd zou elke kitesurfschool kunnen claimen "wij zitten op de beste spot". De Zandmotor is alleen niet <em>gevoelig</em> veiliger — hij is <em>aantoonbaar</em> veiliger door zijn engineering. Dat onderscheid zit in:</p>
+  <ul>
+    <li><strong>15 jaar lesgegeven</strong> op deze kust — we hebben de spot zien ontstaan, evolueren, en lessen aangepast aan elke verandering</li>
+    <li><strong>IKO-certificering</strong> (International Kiteboarding Organization) — internationale lesstandaard, jaarlijkse hercertificering</li>
+    <li><strong>Civiele techniek-achtergrond</strong>: onze oprichter <a href="https://blow.surf/over-blow">Toine de Klerk</a> volgde een Master Civiele Techniek aan de TU Delft. Hij las het Rijkswaterstaat-ontwerp toen het werd aangekondigd en wist meteen waarom dit voor kitesurfers ging werken</li>
+    <li><strong>Sinds 2013</strong> op deze locatie — vóór het zand uitvlakte</li>
+  </ul>
+  <p>Niet om indruk te maken. Maar omdat de uitleg hieronder rust op deze achtergrond.</p>
+
+  <h2>Wat is de Zandmotor — civiele techniek voor leken</h2>
+  <p>Rijkswaterstaat heeft in 2011 een haakvormig zandplateau van <strong>21,5 miljoen kubieke meter</strong> voor de kust van Ter Heijde tot Kijkduin gestort. Het idee:</p>
+  <blockquote>Laat stromingen en wind dat zand vanzelf over de hele Zuid-Hollandse kust verdelen, in plaats van elke paar jaar lokaal suppleren.</blockquote>
+  <p>Een kustbeschermings-experiment van internationale schaal — wetenschappers uit tientallen landen komen hier nog altijd kijken. Het is geen toeristische attractie, het is een levensgroot testveld voor coastal engineering.</p>
+  <p>Voor kitesurfers bleek het een geschenk:</p>
+  <ul>
+    <li>Een <strong>ondiepe lagune</strong> beschut tegen aflandige wind — gevolg van de haakvorm</li>
+    <li><strong>Honderden meters strand</strong> om kites te starten zonder obstakels</li>
+    <li><strong>Vlak water dichtbij, golven verder op zee</strong> — natuurlijke gradient ideaal voor leren</li>
+    <li><strong>Geen pieren of strandhoofden</strong> die kite-lijnen kunnen vangen</li>
+  </ul>
+  <p>Waar Scheveningen drukte, strandtenten en pieren heeft, heeft de Zandmotor ruimte. Stilte. En voor een kitesurfer: voorspelbare veiligheid.</p>
+
+  <h2>Drie redenen waarom dit de veiligste spot van Nederland is</h2>
+
+  <h3>1. Side-onshore zuidwestenwind</h3>
+  <p>De dominante wind in Nederland komt uit het zuidwesten. Op de Zandmotor blaast die wind <em>schuin vanaf zee richting strand</em>. Raakt een cursist in paniek of verliest hij de controle? Hij of zij wordt vanzelf richting strand geblazen. Geen risico van wegdrijven de zee op.</p>
+  <p>Dit is niet toevallig. De Zandmotor steekt iets uit de kustlijn, waardoor de oriëntatie ten opzichte van de overheersende wind net iets anders is dan op een rechte kustlijn als Scheveningen. Gunstig.</p>
+
+  <h3>2. De lagune om op te staan</h3>
+  <p>De lagune is op veel plekken maar <strong>1 tot 1,5 meter diep</strong>. Je kunt er stáán. Vallen is hier geen straf — je zet je voeten neer, haalt adem, en begint opnieuw. Voor een beginner is dat het verschil tussen <em>leren</em> en <em>opgeven</em>.</p>
+  <p>In civiele-techniek-termen: de lagune is een gevolg van het haakvormige ontwerp dat een rustige binnenzijde creëerde. Toen het zand begon te migreren bleef die lagune bestaan — en is hij nu zelfs uitgesproken stabiel.</p>
+
+  <h3>3. Ruimte — veel ruimte</h3>
+  <p>Geen strandhuisjes, geen pieren, geen drukte. We spreiden lessen over honderden meters strand zonder dat cursisten elkaars kite-lijnen raken. Op Scheveningen sta je als sardientjes in juli; bij ons heb je de luxe van afstand.</p>
+
+  <h2>Beste wind voor de Zandmotor</h2>
+  <table>
+    <thead>
+      <tr><th>Richting</th><th>Bft</th><th>Beginner</th><th>Gevorderd</th><th>Opmerking</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Zuidwest</td><td>4–5</td><td class="check">✓</td><td class="check">✓</td><td>De gouden standaard</td></tr>
+      <tr><td>Zuidwest</td><td>6+</td><td class="warn">⚠</td><td class="check">✓</td><td>Grotere kite, meer ruimte nodig</td></tr>
+      <tr><td>West</td><td>4–6</td><td class="check">✓</td><td class="check">✓</td><td>Schone wind, mooi leerbaar</td></tr>
+      <tr><td>Noordwest</td><td>4–6</td><td class="check">✓</td><td class="check">✓</td><td>Koeler maar betrouwbaar</td></tr>
+      <tr><td>Noord</td><td>4–6</td><td class="cross">✗</td><td class="warn">⚠</td><td>Side-offshore tendens</td></tr>
+      <tr><td>Oost</td><td>alle</td><td class="cross">✗</td><td class="cross">✗</td><td>Pure offshore — niet veilig</td></tr>
+    </tbody>
+  </table>
+  <p>Onze instructeurs checken dagelijks om 07:30 de wind en bellen cursisten als het de moeite niet is. Niemand rijdt voor niets naar Kijkduin — dat is onderdeel van wat IKO-certificering voor jou betekent.</p>
+
+  <h2>Hoe de spot verandert met het tij — en met de tijd</h2>
+  <p>De Zandmotor leeft. Zand verschuift nog elk jaar — Rijkswaterstaat houdt dit gedetailleerd bij. Bij <strong>laagtij</strong> ontstaat de volledige lagune met droog strand van honderden meters. Bij <strong>hoogtij</strong> is de lagune kleiner maar nog steeds bruikbaar. Wij geven lessen op alle tij-standen, maar voor een <strong>allereerste kennismaking</strong> adviseren we afgaand of laag tij — dan heb je de meeste ruimte om te oefenen.</p>
+  <p>Op langere termijn: het oorspronkelijke plan was dat het zand in circa 20 jaar zou uitvlakken. Tot nu toe gaat dat trager dan voorspeld. De spot is zeker nog <strong>10–15 jaar bruikbaar</strong> in zijn huidige vorm, en Rijkswaterstaat onderzoekt opvolging.</p>
+
+  <h2>Wat je meeneemt voor een dag op de Zandmotor</h2>
+  <ul>
+    <li><strong>Wetsuit</strong> — jaarrond, 4/3mm in zomer, 5/4mm in winter (kunnen we lenen)</li>
+    <li><strong>Lunch of geld</strong> — onze <a href="https://blow.surf/restaurant">Beach House restaurant</a> is 100% elektrisch en gebruikt een houtoven; bedenk vooraf of je blijft eten</li>
+    <li><strong>Gehoorbescherming voor kinderen</strong> — bij sterke wind helpt het echt</li>
+    <li><strong>Reserveonderbroek en handdoek</strong> — zand kruipt overal</li>
+    <li><strong>Geen verwachtingen over Instagram-weer</strong> — de mooiste lessen zijn vaak bij grijs, winderig Nederlands weer</li>
+  </ul>
+
+  <h2>Veelgestelde vragen</h2>
+  <div class="faq-q">Is de Zandmotor geschikt voor absolute beginners?</div>
+  <div class="faq-a">Ja — juist daarom komen wij hier. De combinatie van vlak water, breed strand en side-onshore wind is in Nederland uniek. Een week leren op de Zandmotor is veiliger dan een jaar oefenen op Scheveningen.</div>
+
+  <div class="faq-q">Is BLOW IKO-gecertificeerd?</div>
+  <div class="faq-a">Ja. Onze instructeurs zijn opgeleid en jaarlijks gehercertificeerd door de International Kiteboarding Organization. Dat betekent: internationaal erkende lesmethodiek, vaste veiligheidsprocedures, en gedocumenteerde voortgang per cursist.</div>
+
+  <div class="faq-q">Kan ik vanaf de parkeerplaats direct het water op?</div>
+  <div class="faq-a">Vanaf de BLOW-locatie aan de Westmadeweg 66 (2553 EM Den Haag) sta je binnen 2 minuten met je kite op het zand. Parkeren bij ons.</div>
+
+  <div class="faq-q">Wat als er geen wind staat de dag dat ik boek?</div>
+  <div class="faq-a">We verplaatsen of geven een theorie-sessie. Onze weersinschatting doen we elke ochtend om 07:30 — als de les niet doorgaat hoor je dat ruim voor je naar ons toe rijdt.</div>
+
+  <div class="faq-q">Blijft de Zandmotor wel bestaan?</div>
+  <div class="faq-a">Voorlopig 10–15 jaar zeker. Het zand-uitvlakken loopt achter op de oorspronkelijke prognose en Rijkswaterstaat onderzoekt verlengingsopties.</div>
+
+  <div class="faq-q">Is het geschikt voor kinderen?</div>
+  <div class="faq-a">Vanaf ongeveer 10 jaar — afhankelijk van lichaamsgewicht en motoriek. Bel voor je boekt; we zijn eerlijk over of het veilig is voor jouw kind.</div>
+
+  <div class="faq-q">Kan ik hier ook windsurfen of SUP-en?</div>
+  <div class="faq-a">Wij focussen alleen op kitesurfen. Voor andere watersporten verwijzen we graag door naar collega-scholen in de buurt.</div>
+
+  <h2>Tot slot</h2>
+  <p>De Zandmotor is geen toeristische attractie en geen Instagrammable hotspot. Het is een stuk kust waar <strong>wetenschap, natuur en sport</strong> elkaar raken. Door Rijkswaterstaat ontworpen voor kustbescherming, door 15 jaar BLOW-ervaring bevestigd als leeromgeving, door IKO-certificering geborgd in instructie-kwaliteit.</p>
+  <p>Wie hier leert kitesurfen, krijgt het veiligste begin dat Nederland te bieden heeft.</p>
+
+  <hr>
+  <p><strong>Volgende stap?</strong></p>
+  <ul>
+    <li>Praktisch: bekijk <a href="https://blow.surf/kitesurfles-zandmotor/">cursusprijzen + tijden op /kitesurfles-zandmotor/</a></li>
+    <li>Algemeen: <a href="https://blow.surf/kitesurfles">boek een kitesurfles</a></li>
+    <li>Eerst kijken: <a href="https://blow.surf/restaurant">bezoek het Beach House</a> — eén blik op de lagune en je snapt waarom we hier zitten</li>
+    <li>Achtergrond: <a href="https://blow.surf/over-blow">over BLOW en onze oprichters</a></li>
+  </ul>
+</article>
+
+<!-- ============ DISTRIBUTION ============ -->
+<section class="dist-row">
+  <h3>Distributie na publicatie · 1 post → 6 kanalen</h3>
+  <div class="dist-channels">
+    <div class="dist-ch"><span class="icon">🌐</span>blow.surf/blog</div>
+    <div class="dist-ch"><span class="icon">📸</span>Instagram</div>
+    <div class="dist-ch"><span class="icon">👥</span>Facebook</div>
+    <div class="dist-ch"><span class="icon">💬</span>WhatsApp (2chat)</div>
+    <div class="dist-ch"><span class="icon">📧</span>Nieuwsbrief</div>
+    <div class="dist-ch"><span class="icon">📍</span>Google Business</div>
+  </div>
+  <p style="margin-top: 12px; font-size: 0.82rem; color: var(--muted);">Templates per kanaal voorbereid in <a href="../distributie/templates.md" style="color: var(--sea); font-weight: 600;">distributie/templates.md</a> — handmatig nu, geautomatiseerd in stap 2 van het pilot-traject.</p>
+</section>
+
+<footer>
+  <p><strong>Post A · Zandmotor</strong> · onderdeel van pilot v2.0</p>
+  <p>
+    <a href="01-zandmotor-veiligheid.md">Markdown-bron</a> ·
+    <a href="../audit-2026-04-27.html">Audit-context</a> ·
+    <a href="../">Pilot-overzicht</a>
+  </p>
+</footer>
+
+</div>
+
+</body>
+</html>
