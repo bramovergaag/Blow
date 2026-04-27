@@ -1079,6 +1079,9 @@
   <h2 class="section-title"><span class="badge">06</span>Kostenvergelijking — 3 jaar TCO</h2>
   <p class="section-sub">Realistisch, inclusief mijn uren à €60. Hypothese: 100 uur per jaar voor onderhoud + content + optimalisatie na de build-fase.</p>
 
+  <h3 style="color: var(--deep); margin-bottom: 4px; font-size: 1.05rem;">A · Cash uit de deur</h3>
+  <p class="section-sub" style="margin-bottom: 12px; font-size: 0.88rem;">Alleen externe kosten — wat BLOW daadwerkelijk factureert/betaalt. Bram-uren = € 0 in jaar 1.</p>
+
   <table class="data">
     <thead>
       <tr>
@@ -1098,35 +1101,83 @@
         <td class="num">€26.800</td>
       </tr>
       <tr class="highlight">
-        <td>Alleen eigen systeem (met mij, 100u/jr)</td>
-        <td class="num">€8.445</td>
+        <td>Pilot — eigen systeem (Bram € 0 jaar 1)</td>
+        <td class="num">€2.445</td>
         <td class="num">€5.445</td>
         <td class="num">€5.445</td>
-        <td class="num">€19.335</td>
+        <td class="num">€13.335</td>
       </tr>
       <tr>
-        <td>Hybride (vendor jaar 1 + ik parallel)</td>
-        <td class="num">€19.540</td>
+        <td>Hybride (vendor jaar 1 + pilot parallel)</td>
+        <td class="num">€13.885</td>
         <td class="num">€5.445</td>
         <td class="num">€5.445</td>
-        <td class="num">€30.430</td>
+        <td class="num">€24.775</td>
       </tr>
     </tbody>
   </table>
 
-  <div class="grid-2" style="margin-top: 20px;">
+  <h3 style="color: var(--deep); margin-top: 28px; margin-bottom: 4px; font-size: 1.05rem;">B · Inclusief BLOW team-tijd (à € 60/u)</h3>
+  <p class="section-sub" style="margin-bottom: 12px; font-size: 0.88rem;">Eerlijke vergelijking: review + coaching kost ook tijd, ongeacht welke route. Ook bij vendor moet iemand drafts beoordelen.</p>
+
+  <table class="data">
+    <thead>
+      <tr>
+        <th>Scenario</th>
+        <th>BLOW-uren / jaar</th>
+        <th>Tijd-kosten</th>
+        <th>+ Cash</th>
+        <th>= Totaal jaar 1</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Vendor + interne review (ca. 120u)</td>
+        <td class="num">~120</td>
+        <td class="num">€7.200</td>
+        <td class="num">€11.440</td>
+        <td class="num">€18.640</td>
+      </tr>
+      <tr class="highlight">
+        <td>Pilot — strategie + ops + marketing (490u)</td>
+        <td class="num">~490</td>
+        <td class="num">€29.400</td>
+        <td class="num">€2.445</td>
+        <td class="num">€31.845</td>
+      </tr>
+      <tr>
+        <td>Hybride</td>
+        <td class="num">~610</td>
+        <td class="num">€36.600</td>
+        <td class="num">€13.885</td>
+        <td class="num">€50.485</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p style="margin-top: 10px; font-size: 0.82rem; color: var(--muted); font-style: italic;">
+    Pilot-uren-verdeling: Strategie ≈ 65u (2,5u / 2wk) · Operations ≈ 125u (2,5u / wk) · Marketing ≈ 300u (6u / wk avg).
+    Vendor-uren ≈ 10u review per maand × 12.
+  </p>
+
+  <div class="grid-2" style="margin-top: 22px;">
     <div class="card green">
-      <h3>💡 Besparing eigen systeem vs vendor</h3>
-      <p><strong>€7.465 over 3 jaar.</strong> Na jaar 1 wordt het verschil groter omdat vendor jaarlijks €7.680 blijft kosten, ons systeem alleen onderhouds-uren.</p>
+      <h3>💡 Cash-besparing pilot vs vendor</h3>
+      <p><strong>€8.995 jaar 1, €13.465 over 3 jaar.</strong> Geen vendor-licentie, alleen tools-stack die jij toch al deels gebruikt.</p>
     </div>
     <div class="card accent">
-      <h3>⚠️ Waarom hybride duur lijkt</h3>
-      <p><strong>€3.630 extra in jaar 1.</strong> Alleen zinvol als vendor je échte leer-tijd en risico-buffer is, én je stopt zeker vóór maand 12.</p>
+      <h3>⚠️ Pilot kost meer team-tijd</h3>
+      <p><strong>+€13.205 in tijd jaar 1</strong> tegenover vendor. <em>Maar:</em> die tijd bouwt blijvende capability + content-eigendom + 3 review-rollen ontwikkelen kennis. Vendor-uren zijn pure review (passief).</p>
     </div>
   </div>
 
-  <p style="margin-top: 14px; font-size: 0.85rem; color: var(--muted);">
-    <em>Eigen stack jaar 1: MAKE Pro €240 + Claude Max 5× €1.080 + 2chat €300 + GitHub Enterprise 2 seats €465 + OpenAI (licht gebruik) €360 = €2.445 tools + 100u × €60 = €8.445.</em>
+  <div class="callout" style="margin-top: 18px;">
+    <h3>Hoe deze cijfers te lezen</h3>
+    <p>Tabel A laat zien dat de pilot <strong>€8.995 minder cash kost</strong> in jaar 1. Tabel B laat zien dat het <strong>~€13.000 méér interne tijd kost</strong> — dat is de prijs van zelf-bouwen i.p.v. uitbesteden. Kies de route die past bij wat BLOW wil: extern gekochte content (vendor) of in-huis ontwikkelde capability (pilot). De €60/u rekenwaarde maakt het transparant; in werkelijkheid is dit geen factuur maar opportunity-tijd.</p>
+  </div>
+
+  <p style="margin-top: 14px; font-size: 0.82rem; color: var(--muted);">
+    <em>Eigen stack jaar 1: MAKE Pro €240 + Claude Max 5× €1.080 + 2chat €300 + GitHub Enterprise 2 seats €465 + OpenAI (licht gebruik) €360 = €2.445 tools.</em>
   </p>
 </section>
 
@@ -1149,17 +1200,18 @@
     </div>
     <div class="prop-card take">
       <div class="label">BLOW brengt in</div>
-      <h3>Tools + team-coaching</h3>
+      <h3>Tools + team-tijd</h3>
       <ul>
-        <li>MAKE Pro · €240 <span style="color:var(--muted); font-size:0.78rem;">(account op naam Bram, BLOW-data toegankelijk)</span></li>
-        <li>Claude Max 5× · €1.080</li>
-        <li>2chat · €300</li>
-        <li>GitHub Enterprise (2 seats) · €465</li>
-        <li>OpenAI / image API buffer · €360</li>
-        <li><strong>Coaching 2–3 uur per twee weken</strong>, verdeeld over 3 BLOW-rollen</li>
-        <li>Drie perspectieven = redundantie + kruisbestuiving</li>
+        <li><strong>Tools (cash):</strong> ≈ € 2.445 / jaar</li>
+        <li style="padding-left: 32px; font-size: 0.84rem; color: var(--muted);">MAKE Pro €240 · Claude Max 5× €1.080 · 2chat €300 · GitHub Ent (2 seats) €465 · image API €360 <em>(MAKE-account op naam Bram, BLOW-data toegankelijk)</em></li>
+        <li><strong>Team-tijd (intern, à € 60/u):</strong> ≈ € 29.400 / jaar</li>
+        <li style="padding-left: 32px; font-size: 0.84rem; color: var(--muted);">Strategie ~2,5u / 2 weken · Operations ~2,5u / week · Marketing ~6u / week — drie review-rollen voor kruisbestuiving + continuïteit</li>
       </ul>
-      <div class="total">≈ € 2.445 / jaar tools + team-tijd</div>
+      <div class="total" style="display:grid; grid-template-columns: 1fr auto; gap:6px; text-align:left; font-weight:600;">
+        <span style="color: var(--muted);">Cash-investering:</span><span style="color: var(--deep);">≈ € 2.445</span>
+        <span style="color: var(--muted);">Team-tijd (opportunity):</span><span style="color: var(--deep);">≈ € 29.400</span>
+        <span style="color: var(--accent); font-weight:700;">Totaal jaar 1:</span><span style="color: var(--accent); font-weight:800; font-size: 1.1rem;">≈ € 31.845</span>
+      </div>
     </div>
   </div>
 
