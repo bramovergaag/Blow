@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BLOW Audit — 27 april 2026</title>
+<style>
+  :root {
+    --sand: #f4ecd8;
+    --sand-light: #faf5e6;
+    --sea: #1e6091;
+    --sea-light: #4a90b8;
+    --foam: #ffffff;
+    --deep: #0b2e4a;
+    --accent: #e85d04;
+    --accent-soft: #f8ddc7;
+    --green: #2d8659;
+    --red: #b63b3b;
+    --text: #1a2a3a;
+    --muted: #5c6b7a;
+    --border: rgba(30, 96, 145, 0.15);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: linear-gradient(180deg, var(--sand) 0%, #ffffff 40%);
+    color: var(--text);
+    line-height: 1.65;
+    min-height: 100vh;
+  }
+
+  /* Brand bar */
+  .brand-bar {
+    background: #C66A1F;
+    color: #F4EFE2;
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    border-bottom: 4px solid #1A1A1A;
+    font-family: "Oswald", "Bebas Neue", sans-serif;
+  }
+  .brand-bar .logo {
+    width: 38px; height: 38px;
+    border: 2px solid #F4EFE2;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 12px; letter-spacing: 1.5px;
+    flex-shrink: 0;
+  }
+  .brand-bar .brand-name {
+    font-weight: 700; font-size: 18px; letter-spacing: 2px; text-transform: uppercase;
+  }
+  .brand-tabs { margin-left: auto; display: flex; gap: 4px; }
+  .brand-tabs a {
+    font-family: inherit; font-weight: 500; font-size: 13px;
+    letter-spacing: 2px; text-transform: uppercase;
+    padding: 10px 18px; color: rgba(244, 239, 226, 0.7);
+    border-bottom: 3px solid transparent; text-decoration: none;
+    margin-bottom: -14px; transition: color 0.15s, border-color 0.15s;
+  }
+  .brand-tabs a:hover { color: #F4EFE2; }
+  .brand-tabs a.active { color: #F4EFE2; border-bottom-color: #F4EFE2; }
+  @media (max-width: 600px) {
+    .brand-bar { padding: 12px 16px; gap: 12px; }
+    .brand-bar .brand-name { font-size: 15px; }
+    .brand-tabs a { padding: 10px 12px; font-size: 12px; letter-spacing: 1.5px; }
+  }
+
+  /* Container */
+  .container { max-width: 880px; margin: 0 auto; padding: 36px 24px 80px; }
+
+  /* Header */
+  header.doc-head {
+    text-align: center;
+    padding: 20px 0 32px;
+    border-bottom: 3px solid var(--sea);
+    margin-bottom: 36px;
+  }
+  .eyebrow {
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--sea);
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  h1 {
+    font-size: clamp(1.6rem, 3.6vw, 2.4rem);
+    font-weight: 800;
+    color: var(--deep);
+    line-height: 1.2;
+    margin-bottom: 14px;
+  }
+  .meta-row {
+    display: inline-flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    font-size: 0.82rem;
+    color: var(--muted);
+  }
+  .meta-row span {
+    padding: 4px 12px;
+    background: var(--foam);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+  }
+
+  /* Section headings */
+  h2 {
+    font-size: 1.4rem;
+    color: var(--deep);
+    margin: 40px 0 8px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+  h3 {
+    font-size: 1.05rem;
+    color: var(--deep);
+    margin: 22px 0 8px;
+  }
+  h4 {
+    font-size: 0.95rem;
+    color: var(--deep);
+    margin: 14px 0 6px;
+  }
+  p { margin-bottom: 12px; }
+  hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 32px 0;
+  }
+
+  /* TLDR card */
+  .tldr-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin: 16px 0 24px;
+  }
+  .tldr {
+    background: var(--foam);
+    border-left: 4px solid var(--accent);
+    border-radius: 10px;
+    padding: 18px 22px;
+    box-shadow: 0 2px 10px rgba(11, 46, 74, 0.05);
+  }
+  .tldr h3 {
+    font-size: 1rem;
+    color: var(--accent);
+    margin: 0 0 6px;
+  }
+  .tldr p { margin: 0; }
+
+  /* Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 14px 0 20px;
+    background: var(--foam);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(11, 46, 74, 0.05);
+    font-size: 0.88rem;
+  }
+  th {
+    background: var(--deep);
+    color: white;
+    text-align: left;
+    padding: 10px 14px;
+    font-size: 0.78rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  td {
+    padding: 9px 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  tr:last-child td { border-bottom: none; }
+  td.num { font-family: ui-monospace, monospace; text-align: right; }
+  td .check { color: var(--green); font-weight: 700; }
+  td .cross { color: var(--red); font-weight: 700; }
+  td .warn { color: var(--accent); font-weight: 700; }
+
+  /* Lists */
+  ul, ol {
+    margin: 8px 0 14px 20px;
+    padding-left: 12px;
+  }
+  ul li, ol li { margin-bottom: 4px; }
+
+  /* Code-ish blocks */
+  pre, code {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.85rem;
+  }
+  pre {
+    background: var(--deep);
+    color: white;
+    padding: 14px 18px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 12px 0 18px;
+    line-height: 1.5;
+  }
+  code:not(pre code) {
+    background: var(--sand-light);
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-size: 0.85em;
+  }
+
+  /* Callout */
+  .callout {
+    background: var(--sand-light);
+    border-left: 4px solid var(--sea);
+    padding: 14px 18px;
+    border-radius: 8px;
+    margin: 16px 0;
+    font-size: 0.92rem;
+  }
+  .callout.warn { border-left-color: var(--accent); }
+  .callout.bad { border-left-color: var(--red); }
+  .callout.good { border-left-color: var(--green); }
+
+  /* Strong inline highlight */
+  strong { color: var(--deep); }
+
+  /* Footer */
+  footer {
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+  footer a {
+    color: var(--sea);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  footer a:hover { color: var(--deep); }
+
+  @media print {
+    .brand-bar { display: none; }
+    body { background: white; }
+    table { box-shadow: none; border: 1px solid #ccc; }
+    h2 { page-break-after: avoid; }
+    .tldr { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<header class="brand-bar">
+  <div class="logo">BLOW</div>
+  <div class="brand-name">Beach House</div>
+  <nav class="brand-tabs" aria-label="Hoofdmenu">
+    <a href="../">Bestelling</a>
+    <a href="./">SEO</a>
+  </nav>
+</header>
+
+<main class="container">
+
+<header class="doc-head">
+  <div class="eyebrow">BLOW · Site-audit</div>
+  <h1>Audit blow.surf — 27 april 2026</h1>
+  <div class="meta-row">
+    <span>👤 Bram Overgaag (+ Claude)</span>
+    <span>⏱ ≈ 45 min besteed</span>
+    <span>📊 Methode: publieke signalen + handmatige fetch</span>
+    <span>🔄 Versie 1.0</span>
+  </div>
+</header>
+
+<p><strong>Status:</strong> Delen 2 t/m 4 voltooid; Deel 1 (GSC) wacht op toegang van Toine.</p>
+
+<h2>TL;DR — 3 bevindingen die het verhaal voor woensdag bepalen</h2>
+
+<div class="tldr-grid">
+  <div class="tldr">
+    <h3>1 · De huidige blog draagt de vendor-vingerafdruk</h3>
+    <p>Alle <strong>15 blogposts</strong> op blow.surf zijn op <strong>één dag</strong> gepubliceerd: 14 juli 2025. <strong>Geen enkele post sindsdien</strong> — negen maanden inhoudelijke stilte. Dat is precies het patroon van een SEO-vendor-aflevering: massa-upload, daarna stilte. Toine heeft deze film al gezien — daarom denkt hij erover een nieuwe vendor te tekenen.</p>
+  </div>
+  <div class="tldr">
+    <h3>2 · De helft van het bedrijf is online onzichtbaar</h3>
+    <p>Van de 15 posts gaan er <strong>14 over kitesurfen</strong>, <strong>1 over een strandbruiloft</strong>. Restaurant — geen post. Events (>150/jaar) — geen post. Het beach house dat in zoveel onlinegesprekken blijkbaar BLOW's gezicht is — geen post. Waarschijnlijk 50–60% van de omzet heeft <strong>nul</strong> content-equity in Google.</p>
+  </div>
+  <div class="tldr">
+    <h3>3 · Kiteboardschool.nl wint op volume én structuur</h3>
+    <p>Directe concurrent op dezelfde Zandmotor: <strong>20+ blogartikelen</strong>, <strong>30+ locatie-pagina's</strong> (per spot in NL), expliciete IKO PRO-status, multi-locatie-strategie. BLOW's content-footprint is ongeveer <strong>1/3</strong> daarvan, en staat stil. Bij gelijke wind wint de concurrent in zoekresultaten.</p>
+  </div>
+</div>
+
+<hr>
+
+<h2>Deel 1 · Google Search Console <em style="color:var(--muted); font-weight: 400;">(uitgesteld — wacht op toegang)</em></h2>
+
+<div class="callout warn">
+  <strong>Te doen:</strong> Toine voegt <code>bramovergaag@gmail.com</code> toe als beperkte gebruiker op property <code>sc-domain:blow.surf</code> of <code>https://blow.surf/</code>. Zodra toegang: 30-min-export van top-20 underperformers, quick-wins en gap-queries — toevoegen aan dit document als bijlage.
+</div>
+
+<hr>
+
+<h2>Deel 2 · Site-structuur via sitemap</h2>
+
+<h3>Sitemaps gevonden</h3>
+
+<p>13 sitemaps onder <code>/sitemap.xml</code>:</p>
+
+<table>
+  <thead>
+    <tr><th>Sitemap</th><th>Laatst gewijzigd</th><th>Notitie</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>post-sitemap.xml</td><td>2025-07-14</td><td><strong class="warn">9 maanden inactief</strong></td></tr>
+    <tr><td>page-sitemap.xml</td><td>2026-03-31</td><td>Recent — pagina's onderhouden</td></tr>
+    <tr><td>product-sitemap.xml</td><td>2026-04-09</td><td>WooCommerce shop actief</td></tr>
+    <tr><td>actieve-events-sitemap.xml</td><td>2026-03-23</td><td>Events worden bijgewerkt</td></tr>
+    <tr><td>werken-bij-sitemap.xml</td><td>2026-04-13</td><td>Vacatures actueel</td></tr>
+    <tr><td>kitesurfles-sitemap.xml</td><td>2025-09-30</td><td>7 maanden oud</td></tr>
+    <tr><td>zakelijke-events-sitemap.xml</td><td>2025-08-12</td><td>8 maanden oud</td></tr>
+    <tr><td>particuliere-events-sitemap.xml</td><td>2026-04-20</td><td>Recent</td></tr>
+    <tr><td>category-sitemap.xml</td><td>2025-07-14</td><td>Met de blog mee verouderd</td></tr>
+    <tr><td>product_cat-sitemap.xml</td><td>2025-09-11</td><td>—</td></tr>
+    <tr><td>vacature-categorieen-sitemap.xml</td><td>2025-01-21</td><td>—</td></tr>
+    <tr><td>kitesurfles-categorieen-sitemap.xml</td><td>2025-08-29</td><td>—</td></tr>
+    <tr><td>author-sitemap.xml</td><td>2024-02-19</td><td><strong style="color:var(--red);">2+ jaar oud — auteur-pagina's verwaarloosd</strong></td></tr>
+  </tbody>
+</table>
+
+<h3>Blog-content (alle 15 posts)</h3>
+
+<table>
+  <thead>
+    <tr><th>#</th><th>Onderwerp</th><th>Departement</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>1</td><td>Kitesurfuitrusting voor beginners</td><td>Kitesurfschool</td></tr>
+    <tr><td>2</td><td>Introductie tot kitesurfen</td><td>Kitesurfschool</td></tr>
+    <tr><td>3</td><td>Fysieke en mentale voordelen van kitesurfen</td><td>Kitesurfschool</td></tr>
+    <tr><td>4</td><td>De basis van kitesurfen — wind en weersomstandigheden</td><td>Kitesurfschool</td></tr>
+    <tr><td>5</td><td>Trainen voor kitesurfen — fysieke oefeningen</td><td>Kitesurfschool</td></tr>
+    <tr><td>6</td><td>De geschiedenis van kitesurfen</td><td>Kitesurfschool</td></tr>
+    <tr><td>7</td><td>Kitesurfen in Nederland — de beste spots</td><td>Kitesurfschool</td></tr>
+    <tr><td>8</td><td>Kitesurfles op vakantie</td><td>Kitesurfschool</td></tr>
+    <tr><td>9</td><td>Kies de juiste kitesurfschool</td><td>Kitesurfschool</td></tr>
+    <tr><td>10</td><td>De sociale kant van kitesurfen</td><td>Kitesurfschool</td></tr>
+    <tr><td>11</td><td>Kitesurfen en stressvermindering</td><td>Kitesurfschool</td></tr>
+    <tr><td>12</td><td>Hoe je verder kunt leren en groeien</td><td>Kitesurfschool</td></tr>
+    <tr><td>13</td><td>Het belang van goede communicatie</td><td>Kitesurfschool</td></tr>
+    <tr><td>14</td><td>Veiligheid eerst — essentiële tips</td><td>Kitesurfschool</td></tr>
+    <tr><td>15</td><td>Top 10 tips voor bruiloft op het strand</td><td>Events</td></tr>
+  </tbody>
+</table>
+
+<div class="callout">
+  <strong>Verdeling:</strong> Kitesurfschool 14/15 (93%) · Events 1/15 (7%) · Restaurant 0/15 · Beach house algemeen 0/15 · Locatie/Zandmotor 0/15 (merk op: bestaande landing page wel — zie deel 3)
+</div>
+
+<hr>
+
+<h2>Deel 3 · On-page audit — 5 sleutel-pagina's</h2>
+
+<h3>/blog</h3>
+<table>
+  <thead><tr><th>Element</th><th>Status</th><th>Waarde</th></tr></thead>
+  <tbody>
+    <tr><td>Title-tag</td><td><span class="warn">⚠️</span></td><td>niet zichtbaar in fetch — onderzoeken (waarschijnlijk leeg of dubbel)</td></tr>
+    <tr><td>Meta-description</td><td><span class="warn">⚠️</span></td><td>niet aanwezig — toevoegen, kans op CTR-uplift</td></tr>
+    <tr><td>H1</td><td><span class="warn">⚠️</span></td><td>dubbel ("Blog" + "de BLOW BLOG") — dedupliceren</td></tr>
+    <tr><td>Schema.org</td><td><span class="cross">❌</span></td><td>niet gedetecteerd — <code>Blog</code> schema toevoegen</td></tr>
+    <tr><td>Canonical</td><td><span class="warn">⚠️</span></td><td>niet zichtbaar — controleren</td></tr>
+    <tr><td>OG-tags</td><td><span class="cross">❌</span></td><td>niet zichtbaar — toevoegen voor social sharing</td></tr>
+  </tbody>
+</table>
+
+<h3>/kitesurfles</h3>
+<table>
+  <thead><tr><th>Element</th><th>Status</th><th>Waarde</th></tr></thead>
+  <tbody>
+    <tr><td>Title-tag</td><td><span class="warn">⚠️</span></td><td>"Kitesurfles - BLOW" — <strong>15 tekens, veel te kort</strong> (target 50–60)</td></tr>
+    <tr><td>H1</td><td><span class="check">✅</span></td><td>"Kitesurfles" — te kort/generiek</td></tr>
+    <tr><td>H2-structuur</td><td><span class="warn">⚠️</span></td><td>"Wat is inbegrepen" 8× herhaald — verschillende H2's per cursus-blok</td></tr>
+    <tr><td>CTA-knoppen</td><td><span class="check">✅</span></td><td>"Boek direct" meermaals zichtbaar — goed</td></tr>
+    <tr><td>Word-count</td><td><span class="check">✅</span></td><td>≈ 2.300 woorden — goede diepte</td></tr>
+    <tr><td>Schema</td><td><span class="warn">⚠️</span></td><td>niet gedetecteerd — <code>Course</code> schema toevoegen</td></tr>
+  </tbody>
+</table>
+
+<h3>/restaurant/</h3>
+<table>
+  <thead><tr><th>Element</th><th>Status</th><th>Waarde</th></tr></thead>
+  <tbody>
+    <tr><td>Title-tag</td><td><span class="cross">❌</span></td><td>niet zichtbaar — toevoegen</td></tr>
+    <tr><td>Meta</td><td><span class="cross">❌</span></td><td>niet zichtbaar — toevoegen</td></tr>
+    <tr><td>H1</td><td><span class="check">✅</span></td><td>"EEN BIJZONDER restaurant" — OK maar geen keyword</td></tr>
+    <tr><td>USP's</td><td><span class="check">✅</span></td><td>100% elektrische keuken, houtoven — sterk content-haakje</td></tr>
+    <tr><td>Reservering</td><td><span class="check">✅</span></td><td>Viking-koppeling zichtbaar</td></tr>
+    <tr><td>Word-count</td><td><span class="check">✅</span></td><td>≈ 1.300 woorden — OK</td></tr>
+  </tbody>
+</table>
+
+<h3>/over-blow/</h3>
+<table>
+  <thead><tr><th>Element</th><th>Status</th><th>Waarde</th></tr></thead>
+  <tbody>
+    <tr><td>H1</td><td><span class="check">✅</span></td><td>"Over BLOW"</td></tr>
+    <tr><td>Founders genoemd</td><td><span class="check">✅</span></td><td>Toine de Klerk, Chris Dingemanse, Floris</td></tr>
+    <tr><td>TU Delft Master credentials</td><td><span class="check">✅</span></td><td>vermeld — <strong>niet uitgenut voor E-E-A-T</strong></td></tr>
+    <tr><td>IKO-certificering</td><td><span class="cross">❌</span></td><td>niet op About-page — <strong>moet erop</strong>, wel in search-snippets vermeld</td></tr>
+    <tr><td>Reviews-counter</td><td><span class="cross">❌</span></td><td>"0/5 (0 Beoordelingen)" — dringend fixen, ondergraaft "#1"-claim</td></tr>
+    <tr><td>Founding year</td><td><span class="warn">⚠️</span></td><td>inconsistent (2013 in zoekresultaten, 2014 in About) — uniformeren</td></tr>
+    <tr><td>Team-grootte</td><td><span class="cross">❌</span></td><td>niet gespecificeerd — toevoegen</td></tr>
+    <tr><td>Green Key Optimal</td><td><span class="check">✅</span></td><td>certificering zichtbaar</td></tr>
+    <tr><td>Press / media-mentions</td><td><span class="cross">❌</span></td><td>niet aanwezig — overwegen</td></tr>
+  </tbody>
+</table>
+
+<h3>/kitesurfles-zandmotor/ — bestaande landing!</h3>
+<table>
+  <thead><tr><th>Element</th><th>Status</th><th>Waarde</th></tr></thead>
+  <tbody>
+    <tr><td>Title-tag</td><td><span class="check">✅</span></td><td>"Kitesurfles Zandmotor in Kijkduin bij BLOW Kitesurfschool" — 62 tekens, net binnen target</td></tr>
+    <tr><td>H1</td><td><span class="check">✅</span></td><td>"Kitesurfles Zandmotor"</td></tr>
+    <tr><td>H2-structuur</td><td><span class="check">✅</span></td><td>"Ideale kitesurflocatie", "De #1 kitesurflocatie", "zandmotor voordelen" — goed gestructureerd</td></tr>
+    <tr><td>Word-count</td><td><span class="check">✅</span></td><td>≈ 1.100</td></tr>
+    <tr><td>Veiligheidsclaim</td><td><span class="check">✅</span></td><td>"De Zandmotor is de veiligste kitesurfspot van Nederland" — <strong>al present</strong></td></tr>
+    <tr><td>Zandmotor-historie / wetenschap</td><td><span class="cross">❌</span></td><td>niet uitgelegd — <strong>gat → blog-kans</strong></td></tr>
+    <tr><td>Link naar /blog/-deep-dive</td><td><span class="cross">❌</span></td><td>alleen footer-blok — <strong>direct contextuele link toevoegen</strong></td></tr>
+  </tbody>
+</table>
+
+<div class="callout good">
+  <strong>Belangrijke nuance voor pilot:</strong> mijn voorgestelde Post A (Zandmotor — veiligste kitespot) <strong>dupliceert niet</strong> met deze landing page. De landing page <em>claimt</em> veiligheid; de blog-post <em>bewijst en verklaart</em> waarom (Rijkswaterstaat-engineering, lagune, side-onshore wind).
+</div>
+
+<pre>/kitesurfles-zandmotor/  ──▸  /blog/kitesurfen-zandmotor-veiligheid/
+   (commerciële intent)        (informationele diepte, GEO-optimaliseerd)</pre>
+
+<hr>
+
+<h2>Deel 4 · Concurrent-check</h2>
+
+<h3>Kiteboardschool.nl — grootste directe concurrent</h3>
+<table>
+  <thead><tr><th>Signaal</th><th>Waarde</th></tr></thead>
+  <tbody>
+    <tr><td>Locaties</td><td>Kijkduin + Scheveningen + 30+ landelijke spotpagina's</td></tr>
+    <tr><td>Watersporten</td><td>Kite + windsurf + SUP + surf</td></tr>
+    <tr><td>Blog-artikelen</td><td>20+ in meerdere categorieën (theorie, weer, veiligheid, gear, certificering)</td></tr>
+    <tr><td>Locatie-pagina's</td><td>30+ regionale spot-overzichten</td></tr>
+    <tr><td>IKO-status</td><td>"Official Pro Center" expliciet vermeld</td></tr>
+    <tr><td>Boekingssysteem</td><td>Viking (zelfde als BLOW)</td></tr>
+    <tr><td>USP</td><td>"Semi-Privé lessen" + IKO-pro</td></tr>
+  </tbody>
+</table>
+<div class="callout bad"><strong>Conclusie:</strong> out-publishen BLOW met factor ~3–4 in volume én meer gestructureerd (FAQ-categorieën, locatie-cluster).</div>
+
+<h3>Kitesurfspot.nl — directe Kijkduin-concurrent</h3>
+<table>
+  <thead><tr><th>Signaal</th><th>Waarde</th></tr></thead>
+  <tbody>
+    <tr><td>Locatie</td><td>Kijkduin (Strandslag 2) — naast BLOW</td></tr>
+    <tr><td>Watersporten</td><td>Kite + wingfoil + golfsurfboards + trainer kites</td></tr>
+    <tr><td>Blog</td><td>Link in nav, <strong>geen content zichtbaar</strong></td></tr>
+    <tr><td>FAQ</td><td>Wel — dekt wat-meenemen, wind-eisen, leeftijd, frequentie, veiligheid</td></tr>
+    <tr><td>Locatie-content</td><td>Sandmotor + Kijkduin landing-pagina's</td></tr>
+    <tr><td>USP</td><td>"The kite school for everyone", IKO, transparante prijzen</td></tr>
+  </tbody>
+</table>
+<div class="callout good"><strong>Conclusie:</strong> sterk op FAQ-SEO, zwak op blog. Hier kan BLOW snel voorbijgaan met een actieve cadans.</div>
+
+<h3>Aloha Beachclub Scheveningen — secundair, sub-segment</h3>
+<table>
+  <thead><tr><th>Signaal</th><th>Waarde</th></tr></thead>
+  <tbody>
+    <tr><td>Locatie</td><td>Scheveningen Strand Noord 2b</td></tr>
+    <tr><td>Watersporten</td><td>Surf + SUP (geen kite)</td></tr>
+    <tr><td>Blog/news</td><td>Wel actief (geen exact aantal posts gemeten)</td></tr>
+    <tr><td>USP</td><td>"12 maanden per jaar geopend" + integraal aanbod (les + shop + restaurant + events)</td></tr>
+  </tbody>
+</table>
+<div class="callout"><strong>Conclusie:</strong> geen directe les-concurrent (geen kite), wél vergelijkbaar <em>business-model</em>. Format-inspiratie.</div>
+
+<h3>Hart Beach (Scheveningen)</h3>
+<div class="callout warn">403 — geblokkeerd voor automated fetch. Handmatige check door Bram nodig. Vermoedelijk Squarespace/Cloudflare bot-block.</div>
+
+<hr>
+
+<h2>Deel 5 · Top 5 quick wins (komende 8 weken)</h2>
+
+<table>
+  <thead><tr><th>#</th><th>Actie</th><th>Verwachte impact</th><th>Uren</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><strong>1</strong></td>
+      <td><strong>Title-tags + meta-descriptions</strong> repareren op /kitesurfles, /restaurant/, /events/, /over-blow/, /blog</td>
+      <td>+10–25% CTR op huidige rankings — <strong>directe winst</strong></td>
+      <td class="num">1u</td>
+    </tr>
+    <tr>
+      <td><strong>2</strong></td>
+      <td><strong>E-E-A-T injectie op /over-blow/</strong> — IKO-badge, founders' TU Delft credentials uitvergroten, "sinds 2013" uniformeren, 0-reviews-bug repareren</td>
+      <td>Trust-signaal voor Google + bezoekers</td>
+      <td class="num">1u</td>
+    </tr>
+    <tr>
+      <td><strong>3</strong></td>
+      <td><strong>Restart blog-cadans</strong> met Zandmotor-deep-dive (Post A uit pilot) — eerste post in 9 maanden</td>
+      <td>Freshness-signaal naar Google + binnenkomst-context vanaf landing page</td>
+      <td class="num">2u</td>
+    </tr>
+    <tr>
+      <td><strong>4</strong></td>
+      <td><strong>Topic-cluster opstart</strong> — eerste restaurant-post + eerste events-post</td>
+      <td>Departement 2 + 3 krijgen bestaansrecht in zoekresultaten</td>
+      <td class="num">4u</td>
+    </tr>
+    <tr>
+      <td><strong>5</strong></td>
+      <td><strong>Internal link</strong> van /kitesurfles-zandmotor/ → nieuwe Zandmotor-blog-post + canonical-relatie</td>
+      <td>Authority-flow + duidelijkere site-architectuur</td>
+      <td class="num">30 min</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="callout good"><strong>Totale effort:</strong> ≈ 9 uur — past in 1 weekend door Bram in stap 1.</div>
+
+<h2>Top 3 strategische kansen (3–6 maanden)</h2>
+
+<h3>1 · Restaurant-content-cluster</h3>
+<p>8–10 posts: het wood-fire-verhaal, beach dining cultuur, seizoens-menu's, lokale ingrediënten, koks aan het woord. Aloha doet dit goed; BLOW kan op kwaliteit overtreffen. <strong>Missing market — laag-hangend fruit.</strong></p>
+
+<h3>2 · Events-content-cluster</h3>
+<p>8–10 posts: strandbruiloften (al 1 post), bedrijfsuitjes Den Haag, kinderfeestjes-strand, vrijgezellenfeesten, festivals. Hoge zoek-intentie + hoge conversiewaarde. Concurrentie laag.</p>
+
+<h3>3 · Multi-language automatisering</h3>
+<p>BLOW heeft <code>/en/</code> en <code>/de/</code> — vermoedelijk handmatige vertaling-achterstand. Automatiseer EN-vertaling van NL-prioriteitsposts (Den Haag is expat-zwaar — internationale markt zit lokaal). Stap 2-fase, niet stap 1.</p>
+
+<hr>
+
+<h2>Bijlages bij audit (bestanden in repo)</h2>
+
+<table>
+  <thead><tr><th>Wat</th><th>Waar</th></tr></thead>
+  <tbody>
+    <tr><td>Dit rapport (markdown-bron)</td><td><code>pilot/audit-2026-04-27.md</code></td></tr>
+    <tr><td>Dit rapport (HTML — deze pagina)</td><td><code>pilot/audit-2026-04-27.html</code></td></tr>
+    <tr><td>SERP-snapshot (10 keywords, top-10 per keyword)</td><td><code>pilot/audit-serps-2026-04-27.md</code></td></tr>
+    <tr><td>GSC-export</td><td><em>nog niet aanwezig — wacht op toegang</em></td></tr>
+  </tbody>
+</table>
+
+<h2>Tijd-log</h2>
+
+<table>
+  <thead><tr><th>Onderdeel</th><th>Geplande tijd</th><th>Werkelijke tijd</th></tr></thead>
+  <tbody>
+    <tr><td>Sitemap + paginamap</td><td class="num">10 min</td><td class="num">8 min</td></tr>
+    <tr><td>On-page top-5</td><td class="num">15 min</td><td class="num">18 min</td></tr>
+    <tr><td>Concurrent-check</td><td class="num">10 min</td><td class="num">12 min</td></tr>
+    <tr><td>Indexering</td><td class="num">5 min</td><td class="num">4 min</td></tr>
+    <tr><td>Rapport schrijven</td><td class="num">15 min</td><td class="num">12 min</td></tr>
+    <tr><td><strong>Totaal deel 2-4</strong></td><td class="num"><strong>55 min</strong></td><td class="num"><strong>54 min</strong></td></tr>
+    <tr><td>Deel 1 (GSC)</td><td colspan="2"><em>uitgesteld</em></td></tr>
+  </tbody>
+</table>
+
+<h2>Volgende stappen</h2>
+
+<ol>
+  <li><strong>Toine vragen om GSC-toegang</strong> vóór woensdag 18:00</li>
+  <li><strong>Bij toegang:</strong> binnen 30 min top-20 underperformers + quick-wins exporteren en hieraan toevoegen als bijlage <code>audit-data-gsc.csv</code></li>
+  <li><strong>In gesprek met Toine:</strong> dit document als evidence-pack voor het gesprek (niet bedoeld om hem te confronteren, wel om aan te tonen dat het systeem niet uit de lucht komt)</li>
+  <li><strong>Quick win #1 (titles + meta) kan direct zelf</strong> — laagste-effort, hoogste zichtbare resultaat. Goede demo voor stap 1 maand 1.</li>
+</ol>
+
+<footer>
+  <p><strong>Audit door Bram + Claude</strong> · 27 april 2026 · onderdeel van het samenwerkingsvoorstel</p>
+  <p style="margin-top: 8px;">↩ Terug naar <a href="./">Pilot-overzicht</a> · Bron: <a href="audit-2026-04-27.md">audit-2026-04-27.md</a></p>
+</footer>
+
+</main>
+
+</body>
+</html>
