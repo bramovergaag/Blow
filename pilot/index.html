@@ -557,6 +557,208 @@
   .decision-opt h5 { color: white; font-size: 0.98rem; margin: 6px 0 8px; }
   .decision-opt p { font-size: 0.84rem; opacity: 0.85; }
 
+  /* ---------- Proposal blocks ---------- */
+  .proposal-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin-bottom: 20px;
+  }
+  @media (max-width: 780px) { .proposal-grid { grid-template-columns: 1fr; } }
+  .prop-card {
+    background: var(--foam);
+    border-radius: 12px;
+    padding: 22px 24px;
+    box-shadow: 0 2px 10px rgba(11, 46, 74, 0.06);
+  }
+  .prop-card.give { border-top: 4px solid var(--sea); }
+  .prop-card.take { border-top: 4px solid var(--accent); }
+  .prop-card .label {
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .prop-card.give .label { color: var(--sea); }
+  .prop-card.take .label { color: var(--accent); }
+  .prop-card h3 { color: var(--deep); font-size: 1.05rem; margin-bottom: 12px; }
+  .prop-card ul { list-style: none; padding: 0; margin: 0; }
+  .prop-card ul li {
+    padding: 6px 0 6px 22px;
+    font-size: 0.9rem;
+    position: relative;
+    border-bottom: 1px solid var(--border);
+  }
+  .prop-card ul li:last-child { border-bottom: none; }
+  .prop-card ul li::before {
+    content: "▸";
+    position: absolute;
+    left: 4px;
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .prop-card ul li strong { color: var(--deep); }
+  .prop-card .total {
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 2px solid var(--border);
+    font-weight: 700;
+    color: var(--deep);
+    text-align: right;
+  }
+
+  /* ---------- KPI categories ---------- */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    margin: 16px 0;
+  }
+  @media (max-width: 900px) { .kpi-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 480px) { .kpi-grid { grid-template-columns: 1fr; } }
+  .kpi-cat {
+    background: var(--foam);
+    padding: 14px 14px 12px;
+    border-radius: 10px;
+    border-left: 3px solid var(--sea);
+    box-shadow: 0 1px 6px rgba(11, 46, 74, 0.05);
+  }
+  .kpi-cat .lbl {
+    font-size: 0.66rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--sea);
+    font-weight: 700;
+  }
+  .kpi-cat h4 { color: var(--deep); font-size: 0.92rem; margin: 4px 0 8px; }
+  .kpi-cat ul { list-style: none; padding: 0; margin: 0; }
+  .kpi-cat ul li {
+    font-size: 0.78rem;
+    color: var(--text);
+    padding: 3px 0 3px 14px;
+    position: relative;
+    line-height: 1.4;
+  }
+  .kpi-cat ul li::before {
+    content: "□";
+    position: absolute;
+    left: 0;
+    color: var(--muted);
+  }
+
+  /* ---------- Open punten ---------- */
+  .open-points {
+    background: var(--sand-light);
+    border-radius: 10px;
+    padding: 18px 22px;
+    margin: 16px 0;
+  }
+  .open-points h4 { color: var(--deep); margin-bottom: 8px; font-size: 0.95rem; }
+  .open-points ul { list-style: none; padding: 0; margin: 0; }
+  .open-points ul li {
+    padding: 6px 0 6px 26px;
+    position: relative;
+    font-size: 0.9rem;
+    border-bottom: 1px dashed rgba(30, 96, 145, 0.2);
+  }
+  .open-points ul li:last-child { border-bottom: none; }
+  .open-points ul li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--green);
+    font-weight: 700;
+  }
+  .open-points ul li.todo::before { content: "○"; color: var(--accent); }
+
+  /* ---------- Gantt ---------- */
+  .gantt-wrap {
+    background: var(--foam);
+    border-radius: 12px;
+    padding: 18px;
+    box-shadow: 0 2px 10px rgba(11, 46, 74, 0.06);
+    overflow-x: auto;
+  }
+  .gantt {
+    display: grid;
+    grid-template-columns: 180px repeat(16, minmax(36px, 1fr));
+    gap: 4px;
+    align-items: center;
+    min-width: 760px;
+  }
+  .gantt .gh-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 700;
+    padding: 4px 6px;
+  }
+  .gantt .gh-month {
+    text-align: center;
+    font-size: 0.68rem;
+    color: var(--muted);
+    font-weight: 600;
+    padding: 4px 0;
+  }
+  .gantt .gh-quarter {
+    background: var(--sand-light);
+    color: var(--deep);
+    text-align: center;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 6px 0;
+    border-radius: 4px;
+  }
+  .gantt .row-label {
+    font-size: 0.82rem;
+    color: var(--deep);
+    font-weight: 600;
+    padding: 6px 10px 6px 0;
+  }
+  .gantt .row-label .sub {
+    display: block;
+    font-size: 0.72rem;
+    color: var(--muted);
+    font-weight: 400;
+    margin-top: 1px;
+  }
+  .gantt .bar {
+    color: white;
+    padding: 8px 10px;
+    border-radius: 5px;
+    font-weight: 700;
+    font-size: 0.74rem;
+    text-align: center;
+    line-height: 1.2;
+  }
+  .gantt .bar.p1 { background: var(--sea); }
+  .gantt .bar.p2 { background: var(--green); }
+  .gantt .bar.p3 { background: var(--accent); }
+  .gantt .bar.p4 { background: var(--deep); }
+  .gantt .tool {
+    background: rgba(30, 96, 145, 0.18);
+    border-radius: 3px;
+    height: 14px;
+  }
+  .gantt .tool.late { background: rgba(232, 93, 4, 0.22); }
+  .gantt-divider {
+    grid-column: 2 / -1;
+    height: 1px;
+    background: var(--border);
+    margin: 4px 0;
+  }
+  .gantt-section-head {
+    grid-column: 1 / -1;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 700;
+    margin: 8px 0 2px;
+  }
+
   /* ---------- Footer ---------- */
   footer {
     margin-top: 60px;
@@ -669,8 +871,8 @@
     <li><a href="#distributie" class="nav-link">Distributie</a></li>
     <li><a href="#kosten" class="nav-link">Kosten</a></li>
     <li><a href="#samenwerking" class="nav-link">Samenwerking</a></li>
+    <li><a href="#fasering" class="nav-link">Fasering</a></li>
     <li><a href="#risico" class="nav-link">Risico</a></li>
-    <li><a href="#roadmap" class="nav-link">Roadmap</a></li>
     <li><a href="#beslissing" class="nav-link">Beslissing</a></li>
   </ul>
 </nav>
@@ -681,11 +883,11 @@
 <header class="hero" id="start">
   <div class="eyebrow">BLOW · Pilot & Samenwerkingsvoorstel</div>
   <h1>Een eigen <span class="accent">content-motor</span> voor BLOW<br>zonder afhankelijkheid van een vendor</h1>
-  <p class="lead">Dit document toont wat ik in één weekend voor BLOW heb gebouwd als proeve, hoe dat zich vertaalt in een systeem voor 12 maanden, en welke samenwerkingsvorm ik voorstel.</p>
+  <p class="lead">Dit document toont wat ik in één weekend voor BLOW heb gebouwd als proeve, een 16-maanden plan in 4 stappen, en mijn samenwerkingsvoorstel: jij draagt de tools en coacht — ik factureer geen uren in jaar 1.</p>
   <div class="meta">
     <span>📅 Gesprek: woensdag 18:00, Beach House</span>
-    <span>⏱ Leestijd: ~12 min</span>
-    <span>🔄 Versie 1.0</span>
+    <span>⏱ Leestijd: ~14 min</span>
+    <span>🔄 Versie 2.0</span>
   </div>
 </header>
 
@@ -929,110 +1131,211 @@
 
 <!-- ============ SAMENWERKING ============ -->
 <section id="samenwerking">
-  <h2 class="section-title"><span class="badge">07</span>Samenwerking — 5 vormen, mijn voorkeur</h2>
-  <p class="section-sub">Ik wil niet puur op uurbasis werken. Dit zijn de vormen die ik met je wil bespreken.</p>
+  <h2 class="section-title"><span class="badge">07</span>Samenwerkingsvoorstel</h2>
+  <p class="section-sub">Ik factureer geen uren in jaar 1. Jij draagt de infrastructuur. We coachen elkaar. KPI's stellen we samen op.</p>
 
-  <div class="partner-grid">
-    <div class="partner">
-      <div class="letter">A</div>
-      <h4>Revenue-share</h4>
-      <p>% op SEO-toegerekende omzet (lessen/events). Vereist GA4 + UTM-attributie.</p>
+  <div class="proposal-grid">
+    <div class="prop-card give">
+      <div class="label">Ik breng in</div>
+      <h3>Werk + systeem</h3>
+      <ul>
+        <li><strong>4–8 uur per week</strong> — bouw, content, distributie, optimalisatie</li>
+        <li><strong>Geen factuur</strong> voor mijn tijd in jaar 1</li>
+        <li>Versiebeheer + documentatie in GitHub</li>
+        <li>Eigendom van alle output blijft bij BLOW</li>
+        <li>Boven 8u/week → €60/u (alleen op verzoek Toine)</li>
+      </ul>
     </div>
-    <div class="partner">
-      <div class="letter">B</div>
-      <h4>Productisering</h4>
-      <p>BLOW als klant #1, systeem verkoopbaar aan andere horeca. Royalty per klant.</p>
-    </div>
-    <div class="partner recommended">
-      <div class="letter">C</div>
-      <h4>Retainer + bonus</h4>
-      <p>Vast maandbedrag (€500–750) + succes-bonus bij KPI-hit. Zekerheid + upside.</p>
-    </div>
-    <div class="partner">
-      <div class="letter">D</div>
-      <h4>Equity</h4>
-      <p>Aandeel in BLOW of nieuwe BV "BLOW-digital". Lange termijn, illiquide.</p>
-    </div>
-    <div class="partner">
-      <div class="letter">E</div>
-      <h4>Barter / stage</h4>
-      <p>Bouw tegen kostprijs tools, tegen portfolio-rechten + jouw netwerk.</p>
+    <div class="prop-card take">
+      <div class="label">Jij brengt in</div>
+      <h3>Tools + coaching</h3>
+      <ul>
+        <li>MAKE Pro · €240</li>
+        <li>Claude Max 5× · €1.080</li>
+        <li>2chat · €300</li>
+        <li>GitHub Enterprise (2 seats) · €465</li>
+        <li>OpenAI / image API buffer · €360</li>
+        <li><strong>Coaching 2–3 uur per twee weken</strong> — business model + product-review</li>
+        <li>Coaching mag door derde uit jouw netwerk worden ingevuld</li>
+      </ul>
+      <div class="total">≈ € 2.445 / jaar tools + coaching-tijd</div>
     </div>
   </div>
 
-  <div class="callout" style="margin-top: 24px;">
-    <h3>Wat ik voorstel</h3>
-    <p><strong>Model C + vleugje B.</strong> Retainer van €550/mnd voor 8–12u werk + bonus €500 bij elk van 3 meetbare KPI's (bv. 50+ gepubliceerde posts, +30% organisch verkeer, 10+ leads met attributie). En: de rechten om het systeem (anoniem gemaakt) te gebruiken als template voor andere klanten — jij profiteert mee via revenue-share op die template-inkomsten.</p>
+  <h3 style="color:var(--deep); margin-top: 28px; margin-bottom: 6px;">KPI's — samen formuleren</h3>
+  <p class="section-sub" style="margin-bottom: 14px;">Ik prefer niet vooraf vast. Tijdens kick-off kiezen we 4–6 KPI's verdeeld over deze 5 categorieën. Je vinkt aan wat past.</p>
+
+  <div class="kpi-grid">
+    <div class="kpi-cat">
+      <div class="lbl">A · Volume</div>
+      <h4>Output</h4>
+      <ul>
+        <li>Gepubliceerde posts</li>
+        <li>Onderwerpen gedekt</li>
+        <li>Distributie-touchpoints</li>
+      </ul>
+    </div>
+    <div class="kpi-cat">
+      <div class="lbl">B · Vindbaar</div>
+      <h4>SEO + GEO</h4>
+      <ul>
+        <li>Organisch verkeer</li>
+        <li>Top-10 rankings</li>
+        <li>AI-overview citaties</li>
+        <li>Click-through rate</li>
+      </ul>
+    </div>
+    <div class="kpi-cat">
+      <div class="lbl">C · Business</div>
+      <h4>Resultaat</h4>
+      <ul>
+        <li>Leads met attributie</li>
+        <li>Boekingen via online</li>
+        <li>Omzet via online kanaal</li>
+      </ul>
+    </div>
+    <div class="kpi-cat">
+      <div class="lbl">D · Operatie</div>
+      <h4>Efficiëntie</h4>
+      <ul>
+        <li>Tijd per post</li>
+        <li>Reviewbelasting Toine</li>
+        <li>Foutmarge / herstelwerk</li>
+      </ul>
+    </div>
+    <div class="kpi-cat">
+      <div class="lbl">E · Lange termijn</div>
+      <h4>Strategisch</h4>
+      <ul>
+        <li>Documentatie compleet</li>
+        <li>Aantal scenario's productief</li>
+        <li>Replicabel voor 2e klant</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="open-points">
+    <h4>Spelregels</h4>
+    <ul>
+      <li><strong>Boven 8u/week werk</strong> = € 60/u, alleen op verzoek Toine</li>
+      <li><strong>Coaching mag verspreid worden</strong> over Toine + iemand uit zijn netwerk</li>
+      <li><strong>Eigendomsstructuur</strong> wordt besloten na evaluatie van stap 1 (≈ maand 4)</li>
+      <li>Tot eigendomsbesluit: <strong>alle informatie vrij beschikbaar</strong> tussen partijen</li>
+      <li class="todo">Bij stoppen door één van de partijen: <strong>bereikte informatie wordt gedeeld</strong> — geen lock-out</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ FASERING ============ -->
+<section id="fasering">
+  <h2 class="section-title"><span class="badge">08</span>Fasering — 4 stappen × 4 maanden</h2>
+  <p class="section-sub">16 maanden totaal. Elke stap heeft eigen doel en eigen toolset. Aan het eind van stap 1 (≈ maand 4) bespreken we eigendomsstructuur en go/no-go voor stap 2.</p>
+
+  <div class="gantt-wrap">
+    <div class="gantt">
+      <!-- Header row: kwartaal-labels -->
+      <div class="gh-label">Periode</div>
+      <div class="gh-quarter" style="grid-column: 2 / 6">Stap 1 · m1–4</div>
+      <div class="gh-quarter" style="grid-column: 6 / 10">Stap 2 · m5–8</div>
+      <div class="gh-quarter" style="grid-column: 10 / 14">Stap 3 · m9–12</div>
+      <div class="gh-quarter" style="grid-column: 14 / 18">Stap 4 · m13–16</div>
+
+      <!-- Maand-headers -->
+      <div class="gh-label"></div>
+      <div class="gh-month">1</div><div class="gh-month">2</div><div class="gh-month">3</div><div class="gh-month">4</div>
+      <div class="gh-month">5</div><div class="gh-month">6</div><div class="gh-month">7</div><div class="gh-month">8</div>
+      <div class="gh-month">9</div><div class="gh-month">10</div><div class="gh-month">11</div><div class="gh-month">12</div>
+      <div class="gh-month">13</div><div class="gh-month">14</div><div class="gh-month">15</div><div class="gh-month">16</div>
+
+      <div class="gantt-section-head">Stappen</div>
+
+      <!-- Phase bars -->
+      <div class="row-label">1 · Bouw + bewijs<span class="sub">infrastructuur, eerste 12–15 posts, baseline-meting</span></div>
+      <div class="bar p1" style="grid-column: 2 / 6">Stap 1</div>
+
+      <div class="row-label">2 · Schaal + automatisering<span class="sub">distributie-automation, alle 5 scenario's productief</span></div>
+      <div class="bar p2" style="grid-column: 6 / 10">Stap 2</div>
+
+      <div class="row-label">3 · Optimalisatie + attributie<span class="sub">GA4-attributie, refresh-flow, ROI-bewijs</span></div>
+      <div class="bar p3" style="grid-column: 10 / 14">Stap 3</div>
+
+      <div class="row-label">4 · Productisering / replicatie<span class="sub">geanonimiseerd template, 2e klant pilot, business-model</span></div>
+      <div class="bar p4" style="grid-column: 14 / 18">Stap 4</div>
+
+      <div class="gantt-section-head">Tools per fase</div>
+
+      <div class="row-label">GitHub Enterprise<span class="sub">repo + Pages + actions</span></div>
+      <div class="tool" style="grid-column: 2 / 18"></div>
+
+      <div class="row-label">MAKE Pro<span class="sub">scenario-orchestratie</span></div>
+      <div class="tool" style="grid-column: 2 / 18"></div>
+
+      <div class="row-label">Claude Max 5× + Sheet<span class="sub">content-generatie, command center</span></div>
+      <div class="tool" style="grid-column: 2 / 18"></div>
+
+      <div class="row-label">WordPress + GSC + GA4<span class="sub">publicatie + meting</span></div>
+      <div class="tool" style="grid-column: 2 / 18"></div>
+
+      <div class="row-label">Image API (OpenAI/Pexels)<span class="sub">hero-images vanaf m3</span></div>
+      <div class="tool" style="grid-column: 4 / 18"></div>
+
+      <div class="row-label">2chat (WhatsApp)<span class="sub">distributie vanaf stap 2</span></div>
+      <div class="tool late" style="grid-column: 6 / 18"></div>
+
+      <div class="row-label">Mailchimp / nieuwsbrief<span class="sub">distributie vanaf stap 2</span></div>
+      <div class="tool late" style="grid-column: 6 / 18"></div>
+
+      <div class="row-label">Attribution + dashboard<span class="sub">UTM, conversies, ROI vanaf stap 3</span></div>
+      <div class="tool late" style="grid-column: 10 / 18"></div>
+
+      <div class="row-label">Demo-stack 2e klant<span class="sub">replicatie + sales tooling stap 4</span></div>
+      <div class="tool late" style="grid-column: 14 / 18"></div>
+    </div>
+  </div>
+
+  <div class="grid-2" style="margin-top: 22px;">
+    <div class="card">
+      <h3>🎯 Doel per stap</h3>
+      <p><strong>Stap 1:</strong> systeem werkt + eerste meetbare output<br>
+      <strong>Stap 2:</strong> volume opbouwen, distributie geautomatiseerd<br>
+      <strong>Stap 3:</strong> ROI aantoonbaar, KPI's gehaald<br>
+      <strong>Stap 4:</strong> replicatie bewijst business-model</p>
+    </div>
+    <div class="card accent">
+      <h3>🤝 Beslismomenten</h3>
+      <p><strong>Eind stap 1 (≈ m4):</strong> eigendomsstructuur + go/no-go stap 2<br>
+      <strong>Eind stap 2 (m8):</strong> KPI-review<br>
+      <strong>Eind stap 3 (m12):</strong> jaar 1 evaluatie + jaar 2 afspraak<br>
+      <strong>Eind stap 4 (m16):</strong> commerciële roll-out wel/niet</p>
+    </div>
   </div>
 </section>
 
 <!-- ============ RISICO ============ -->
 <section id="risico">
-  <h2 class="section-title"><span class="badge">08</span>Risico's en ontsnappingsroutes</h2>
+  <h2 class="section-title"><span class="badge">09</span>Risico's en ontsnappingsroutes</h2>
   <p class="section-sub">Geen verstopte risico's. Dit is wat er mis kan gaan en wat we dan doen.</p>
 
   <div class="risk-list">
     <div class="risk-item">
-      <h4>Het systeem levert geen meetbare SEO-resultaten in 6 maanden</h4>
-      <p>Contract kan per maand worden stopgezet na maand 3. Alle content en automation-blueprints blijven jouw eigendom.</p>
-      <div class="mitigation"><strong>Ontsnapping:</strong> je hebt de posts, de sheet, de structuur. Niets is proprietary aan mij.</div>
+      <h4>Geen meetbare resultaten in stap 1 (4 maanden)</h4>
+      <p>Geen verplichting om door te gaan. Geen factuur voor mijn tijd in jaar 1, dus jij verliest alleen tools-investering en coaching-uren.</p>
+      <div class="mitigation"><strong>Ontsnapping:</strong> alle bereikte info wordt gedeeld. Posts, sheet, blueprints — alles bij jou.</div>
+    </div>
+    <div class="risk-item">
+      <h4>Coaching valt weg (Toine of derde haakt af)</h4>
+      <p>Coaching mag van Toine OF iemand uit zijn netwerk komen. Twee opties = redundantie ingebouwd.</p>
+      <div class="mitigation"><strong>Ontsnapping:</strong> herafspraak; bij definitief geen coaching schaalt mijn werk-inzet evenredig terug.</div>
     </div>
     <div class="risk-item">
       <h4>Ik val uit / stop</h4>
-      <p>Alle documentatie in GitHub Enterprise, volledig overdraagbaar. MAKE-scenario's zijn standaard-bouwstenen, elke ontwikkelaar kan doordraaien.</p>
-      <div class="mitigation"><strong>Ontsnapping:</strong> jij bezit de repo, de MAKE account, de sheet en de WP-toegang.</div>
+      <p>Alle documentatie in GitHub. MAKE-scenario's zijn standaard-bouwstenen. Elke ontwikkelaar kan overnemen.</p>
+      <div class="mitigation"><strong>Ontsnapping:</strong> jij bezit repo, MAKE-account, sheet, WP-toegang. Bereikte info gedeeld.</div>
     </div>
     <div class="risk-item">
-      <h4>Google stopt met organisch verkeer voor LLM's (GEO-risico)</h4>
-      <p>Dit systeem is juist gebouwd met GEO in gedachten — TL;DR, FAQ, structured data worden door AI-overviews opgepakt.</p>
-      <div class="mitigation"><strong>Ontsnapping:</strong> de aanpak werkt in beide werelden; we kijken elk kwartaal welke bronnen traffic leveren.</div>
-    </div>
-    <div class="risk-item">
-      <h4>Viking Bookings of WP geven problemen</h4>
-      <p>Beide zijn standaard SaaS. Migratie-risico laag. Content is onafhankelijk van platform.</p>
-      <div class="mitigation"><strong>Ontsnapping:</strong> alle content in markdown (platform-onafhankelijk). Publicatie-target is wisselbaar.</div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ ROADMAP ============ -->
-<section id="roadmap">
-  <h2 class="section-title"><span class="badge">09</span>Roadmap — eerste 90 dagen</h2>
-  <p class="section-sub">Geen 12-maanden-plan. Eerste 90 dagen concreet, daarna review en aanpassen.</p>
-
-  <div class="roadmap">
-    <div class="phase">
-      <div class="when">Maand 1 · Bouw</div>
-      <h4>Fundament staat</h4>
-      <ul>
-        <li>Scenario 1 (GSC → Sheets) live</li>
-        <li>Scenario 2 (Content Generator) live</li>
-        <li>Scenario 3 (WordPress Publisher) live</li>
-        <li>ContentQueue sheet ingevuld met 30 keywords</li>
-        <li>4 posts gepubliceerd (2 uit pilot + 2 nieuw)</li>
-        <li>GA4 + UTM-tracking ingericht</li>
-      </ul>
-    </div>
-    <div class="phase">
-      <div class="when">Maand 2 · Ritme</div>
-      <h4>Wekelijkse cadans</h4>
-      <ul>
-        <li>Scenario 4 (Competitor Monitor) live</li>
-        <li>Scenario 5 (Reviews) live</li>
-        <li>8–12 nieuwe posts</li>
-        <li>Distributie handmatig (IG/FB/WA/nieuwsbrief)</li>
-        <li>Eerste GSC-data terug over pilot-posts</li>
-      </ul>
-    </div>
-    <div class="phase">
-      <div class="when">Maand 3 · Optimalisatie</div>
-      <h4>Meten + doorschalen</h4>
-      <ul>
-        <li>Scenario 6 (Distribution) toevoegen — auto IG/FB/GBP</li>
-        <li>Refresh-flow voor onderpresterende oude posts</li>
-        <li>KPI-review met Toine</li>
-        <li>Go/no-go voor maand 4–12</li>
-      </ul>
+      <h4>Google verschuift naar LLM-zoekverkeer</h4>
+      <p>Dit systeem is gebouwd met GEO in gedachten — TL;DR, FAQ, structured data worden door AI-overviews opgepakt.</p>
+      <div class="mitigation"><strong>Ontsnapping:</strong> aanpak werkt in beide werelden; per kwartaal kijken we welke bronnen verkeer leveren.</div>
     </div>
   </div>
 </section>
@@ -1042,31 +1345,31 @@
   <h2 class="section-title"><span class="badge">10</span>Beslissing — wat zou ik graag vandaag horen</h2>
 
   <div class="decision">
-    <h3>Drie keuzes voor woensdag</h3>
-    <p>Ik hoef geen definitief antwoord — wel richting. Deze drie gesprekspunten leggen het fundament voor een schriftelijke afspraak later deze maand.</p>
+    <h3>Drie gespreksvragen voor woensdag</h3>
+    <p>Geen definitief antwoord nodig — wel richting. Deze drie zaken vormen het fundament voor een schriftelijke afspraak later deze maand.</p>
 
     <div class="decision-options">
       <div class="decision-opt">
         <div class="num">1</div>
-        <h5>Vendor: wel of niet tekenen?</h5>
-        <p>Mijn advies: <strong>niet tekenen.</strong> Start met mij 3 maanden pilot. Vendor blijft optie na maand 3 als resultaten tegenvallen.</p>
+        <h5>Akkoord op de structuur?</h5>
+        <p>4–8u/week werk, geen factuur jaar 1, jij draagt tools (≈ €2.450/jr) + 2–3u coaching per 2 weken. Vendor wordt niet getekend.</p>
       </div>
       <div class="decision-opt">
         <div class="num">2</div>
-        <h5>Pilot starten?</h5>
-        <p>Mijn aanbod: <strong>eerste maand vrijblijvend.</strong> Scenario 1–3 live, 4 posts gepubliceerd, audit afgerond. Na maand 1 beslissen we samen.</p>
+        <h5>KPI-sessie inplannen?</h5>
+        <p>In week 1 plannen we 1u om samen 4–6 KPI's te formuleren uit de 5 categorieën (volume / SEO / business / operatie / strategisch).</p>
       </div>
       <div class="decision-opt">
         <div class="num">3</div>
-        <h5>Samenwerkingsvorm?</h5>
-        <p>Mijn voorkeur: <strong>Model C</strong> (retainer + succes-bonus) met <strong>B</strong> als lange-termijn perspectief (productisering).</p>
+        <h5>Stap 1 starten — coach erbij?</h5>
+        <p>Coaching jij zelf óf iemand uit jouw netwerk. Eigendomsstructuur besluiten we eind stap 1 (≈ maand 4). Tot dan: open en gedeeld.</p>
       </div>
     </div>
   </div>
 </section>
 
 <footer>
-  <p><strong>BLOW Pilot v1.0</strong> · opgesteld door Bram Overgaag · april 2026</p>
+  <p><strong>BLOW Pilot v2.0</strong> · opgesteld door Bram Overgaag · april 2026</p>
   <p>Bestanden: <span class="mono">posts/</span>, <span class="mono">audit-template.md</span>, <span class="mono">distributie/</span>, <span class="mono">content-queue-seed.csv</span></p>
   <p style="margin-top: 8px; font-style: italic;">Dit document live te hosten via GitHub Pages / Cloudflare Pages.</p>
 </footer>
