@@ -100,6 +100,39 @@ a:hover { color: var(--orange-dark); }
   display: flex; align-items: center; gap: 8px;
 }
 
+/* ---------- Tabs (hoofdmenu) ---------- */
+.tabs {
+  display: flex;
+  gap: 4px;
+  padding: 0 32px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  overflow-x: auto;
+}
+.tab {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  padding: 16px 22px 14px;
+  color: var(--text-dim);
+  border-bottom: 3px solid transparent;
+  margin-bottom: -1px;
+  transition: color 0.15s, border-color 0.15s;
+  white-space: nowrap;
+  text-decoration: none;
+}
+.tab:hover { color: var(--charcoal); }
+.tab.active {
+  color: var(--orange);
+  border-bottom-color: var(--orange);
+}
+@media (max-width: 600px) {
+  .tabs { padding: 0 16px; }
+  .tab { padding: 14px 14px 12px; font-size: 13px; letter-spacing: 1.5px; }
+}
+
 /* ---------- Sectie koppen ---------- */
 .section {
   padding: 28px 32px 0;

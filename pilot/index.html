@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BLOW — Pilot & Samenwerkingsvoorstel</title>
+<style>
+  :root {
+    --sand: #f4ecd8;
+    --sand-light: #faf5e6;
+    --sea: #1e6091;
+    --sea-light: #4a90b8;
+    --foam: #ffffff;
+    --deep: #0b2e4a;
+    --accent: #e85d04;
+    --accent-soft: #f8ddc7;
+    --green: #2d8659;
+    --red: #b63b3b;
+    --text: #1a2a3a;
+    --muted: #5c6b7a;
+    --border: rgba(30, 96, 145, 0.15);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: linear-gradient(180deg, var(--sand) 0%, #ffffff 40%);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+  .container { max-width: 1100px; margin: 0 auto; padding: 32px 24px 80px; }
+
+  /* ---------- Sticky side nav ---------- */
+  nav.side {
+    position: fixed;
+    top: 50%;
+    left: 16px;
+    transform: translateY(-50%);
+    background: var(--foam);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 14px 12px;
+    box-shadow: 0 4px 18px rgba(11, 46, 74, 0.08);
+    z-index: 100;
+  }
+  nav.side ul { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+  nav.side a {
+    display: block;
+    font-size: 0.78rem;
+    color: var(--muted);
+    text-decoration: none;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-weight: 500;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+  nav.side a:hover { background: var(--sand); color: var(--deep); }
+  nav.side a.active { background: var(--sea); color: white; font-weight: 600; }
+
+  @media (max-width: 1000px) { nav.side { display: none; } }
+
+  /* ---------- Hero ---------- */
+  header.hero {
+    text-align: center;
+    padding: 48px 0 40px;
+    border-bottom: 3px solid var(--sea);
+    margin-bottom: 48px;
+  }
+  .eyebrow {
+    font-size: 0.8rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--sea);
+    font-weight: 700;
+    margin-bottom: 14px;
+  }
+  h1 {
+    font-size: clamp(1.8rem, 4.2vw, 2.9rem);
+    font-weight: 800;
+    color: var(--deep);
+    line-height: 1.15;
+    margin-bottom: 14px;
+  }
+  h1 .accent { color: var(--accent); }
+  .lead {
+    font-size: 1.08rem;
+    color: var(--muted);
+    max-width: 720px;
+    margin: 0 auto 20px;
+  }
+  .meta {
+    display: inline-flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-top: 12px;
+  }
+  .meta span { padding: 4px 12px; background: var(--foam); border-radius: 999px; border: 1px solid var(--border); }
+
+  /* ---------- Sections ---------- */
+  section { margin-bottom: 56px; scroll-margin-top: 24px; }
+  h2.section-title {
+    font-size: 1.5rem;
+    color: var(--deep);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  h2.section-title .badge {
+    background: var(--sea);
+    color: white;
+    font-size: 0.72rem;
+    padding: 4px 10px;
+    border-radius: 10px;
+    letter-spacing: 0.12em;
+    font-weight: 700;
+  }
+  .section-sub {
+    color: var(--muted);
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+  }
+
+  /* ---------- Cards ---------- */
+  .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  @media (max-width: 780px) {
+    .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  }
+
+  .card {
+    background: var(--foam);
+    border-radius: 12px;
+    padding: 22px;
+    box-shadow: 0 2px 10px rgba(11, 46, 74, 0.06);
+    border-left: 4px solid var(--sea);
+  }
+  .card.accent { border-left-color: var(--accent); }
+  .card.green { border-left-color: var(--green); }
+  .card.red { border-left-color: var(--red); }
+  .card h3 { font-size: 1rem; color: var(--deep); margin-bottom: 8px; }
+  .card p { font-size: 0.9rem; color: var(--text); }
+
+  /* ---------- Interactive pipeline ---------- */
+  .pipeline {
+    background: var(--deep);
+    border-radius: 16px;
+    padding: 28px;
+    color: white;
+    margin-bottom: 16px;
+  }
+  .pipeline-steps {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+  @media (max-width: 780px) {
+    .pipeline-steps { grid-template-columns: repeat(2, 1fr); }
+  }
+  .pipe-step {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 10px;
+    padding: 14px 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+  }
+  .pipe-step:hover { background: rgba(255,255,255,0.14); transform: translateY(-2px); }
+  .pipe-step.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    box-shadow: 0 4px 14px rgba(232, 93, 4, 0.4);
+  }
+  .pipe-step .num {
+    font-size: 0.72rem;
+    opacity: 0.7;
+    letter-spacing: 0.15em;
+    margin-bottom: 4px;
+  }
+  .pipe-step .name { font-weight: 700; font-size: 0.95rem; }
+  .pipe-detail {
+    background: rgba(255,255,255,0.06);
+    border-radius: 10px;
+    padding: 22px;
+    min-height: 180px;
+  }
+  .pipe-detail h4 {
+    color: white;
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+  }
+  .pipe-detail p { font-size: 0.92rem; opacity: 0.9; margin-bottom: 12px; }
+  .pipe-detail .io {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-top: 14px;
+  }
+  @media (max-width: 600px) { .pipe-detail .io { grid-template-columns: 1fr; } }
+  .pipe-detail .io-block {
+    background: rgba(0,0,0,0.22);
+    border-radius: 8px;
+    padding: 12px 14px;
+  }
+  .pipe-detail .io-block .lbl {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    opacity: 0.65;
+    margin-bottom: 6px;
+  }
+  .pipe-detail .io-block .val {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.82rem;
+    line-height: 1.5;
+  }
+
+  /* ---------- Proof cards ---------- */
+  .proof-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+  }
+  @media (max-width: 780px) { .proof-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 480px) { .proof-grid { grid-template-columns: 1fr; } }
+  .proof {
+    background: var(--foam);
+    border-radius: 12px;
+    padding: 20px;
+    border-top: 4px solid var(--accent);
+    box-shadow: 0 4px 16px rgba(11, 46, 74, 0.07);
+    cursor: pointer;
+    transition: transform 0.15s;
+  }
+  .proof:hover { transform: translateY(-3px); }
+  .proof .kind {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .proof h4 { color: var(--deep); font-size: 0.98rem; margin-bottom: 8px; }
+  .proof p { font-size: 0.85rem; color: var(--muted); }
+  .proof .cta {
+    margin-top: 10px;
+    font-size: 0.82rem;
+    color: var(--sea);
+    font-weight: 600;
+  }
+
+  /* ---------- Post preview ---------- */
+  .post-preview {
+    background: var(--foam);
+    border-radius: 14px;
+    padding: 36px 40px;
+    box-shadow: 0 4px 18px rgba(11, 46, 74, 0.08);
+    max-height: 520px;
+    overflow-y: auto;
+    position: relative;
+  }
+  .post-preview::after {
+    content: "";
+    position: sticky;
+    bottom: 0;
+    display: block;
+    height: 60px;
+    background: linear-gradient(to bottom, transparent, var(--foam));
+    margin: -60px -40px 0;
+    pointer-events: none;
+  }
+  .post-preview h3 {
+    font-size: 1.5rem;
+    color: var(--deep);
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
+  .post-preview h4 {
+    font-size: 1.1rem;
+    color: var(--deep);
+    margin-top: 20px;
+    margin-bottom: 8px;
+  }
+  .post-preview p { font-size: 0.95rem; margin-bottom: 12px; color: var(--text); }
+  .post-preview .tldr {
+    background: var(--sand-light);
+    border-left: 4px solid var(--accent);
+    padding: 14px 18px;
+    margin: 16px 0;
+    border-radius: 6px;
+    font-size: 0.94rem;
+  }
+  .post-preview ul { margin: 10px 0 14px 20px; }
+  .post-preview ul li { margin-bottom: 4px; font-size: 0.93rem; }
+  .post-preview table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 14px 0;
+    font-size: 0.85rem;
+  }
+  .post-preview th, .post-preview td {
+    padding: 8px 10px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  .post-preview th { background: var(--sand-light); color: var(--deep); font-weight: 700; }
+  .post-preview .faq-q { font-weight: 700; color: var(--deep); margin-top: 10px; }
+  .post-preview .faq-a { margin-bottom: 8px; font-size: 0.9rem; }
+  .post-preview .post-meta {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* ---------- Tables ---------- */
+  table.data {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--foam);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(11, 46, 74, 0.06);
+  }
+  table.data th, table.data td {
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.92rem;
+  }
+  table.data th {
+    background: var(--deep);
+    color: white;
+    font-weight: 700;
+    font-size: 0.82rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  table.data tr:last-child td { border-bottom: none; }
+  table.data td.num { font-family: ui-monospace, monospace; text-align: right; }
+  table.data .highlight { background: var(--accent-soft); font-weight: 700; }
+
+  /* ---------- Distribution visual ---------- */
+  .dist-hub {
+    background: var(--foam);
+    border-radius: 14px;
+    padding: 28px;
+    box-shadow: 0 2px 10px rgba(11, 46, 74, 0.06);
+    position: relative;
+  }
+  .dist-center {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .dist-center .bubble {
+    display: inline-block;
+    background: var(--accent);
+    color: white;
+    font-weight: 700;
+    padding: 10px 22px;
+    border-radius: 999px;
+    font-size: 0.95rem;
+  }
+  .dist-channels {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 10px;
+  }
+  @media (max-width: 780px) {
+    .dist-channels { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 480px) {
+    .dist-channels { grid-template-columns: repeat(2, 1fr); }
+  }
+  .dist-ch {
+    background: var(--sand-light);
+    padding: 12px 8px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 0.82rem;
+    color: var(--deep);
+    font-weight: 600;
+    border: 1px solid var(--border);
+  }
+  .dist-ch .icon { font-size: 1.4rem; display: block; margin-bottom: 4px; }
+
+  /* ---------- Partnership options ---------- */
+  .partner-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+  }
+  @media (max-width: 900px) { .partner-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 480px) { .partner-grid { grid-template-columns: 1fr; } }
+  .partner {
+    background: var(--foam);
+    border-radius: 12px;
+    padding: 18px;
+    box-shadow: 0 2px 8px rgba(11, 46, 74, 0.06);
+    position: relative;
+    transition: all 0.2s;
+  }
+  .partner.recommended {
+    border: 2px solid var(--accent);
+    box-shadow: 0 6px 20px rgba(232, 93, 4, 0.18);
+  }
+  .partner.recommended::before {
+    content: "VOORKEUR";
+    position: absolute;
+    top: -10px;
+    left: 14px;
+    background: var(--accent);
+    color: white;
+    font-size: 0.68rem;
+    padding: 3px 8px;
+    border-radius: 6px;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+  }
+  .partner .letter {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--sea);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .partner h4 { font-size: 0.95rem; color: var(--deep); margin-bottom: 8px; }
+  .partner p { font-size: 0.82rem; color: var(--muted); line-height: 1.45; }
+
+  /* ---------- Callout ---------- */
+  .callout {
+    background: linear-gradient(135deg, var(--sea) 0%, var(--deep) 100%);
+    color: white;
+    border-radius: 14px;
+    padding: 28px 32px;
+    margin: 20px 0;
+  }
+  .callout h3 { color: white; margin-bottom: 10px; font-size: 1.2rem; }
+  .callout p { font-size: 0.95rem; opacity: 0.95; }
+
+  /* ---------- Risk list ---------- */
+  .risk-list { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 780px) { .risk-list { grid-template-columns: 1fr; } }
+  .risk-item {
+    background: var(--foam);
+    padding: 18px;
+    border-radius: 10px;
+    border-left: 4px solid var(--red);
+  }
+  .risk-item h4 { font-size: 0.92rem; color: var(--deep); margin-bottom: 6px; }
+  .risk-item .mitigation {
+    background: var(--sand-light);
+    padding: 10px 12px;
+    border-radius: 6px;
+    margin-top: 8px;
+    font-size: 0.85rem;
+    border-left: 3px solid var(--green);
+  }
+  .risk-item .mitigation strong { color: var(--green); }
+
+  /* ---------- Roadmap ---------- */
+  .roadmap {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    position: relative;
+  }
+  @media (max-width: 780px) { .roadmap { grid-template-columns: 1fr; } }
+  .phase {
+    background: var(--foam);
+    padding: 22px;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(11, 46, 74, 0.06);
+    border-top: 4px solid var(--sea);
+  }
+  .phase .when {
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--sea);
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .phase h4 { color: var(--deep); margin-bottom: 12px; }
+  .phase ul { list-style: none; padding: 0; }
+  .phase ul li {
+    padding: 6px 0;
+    font-size: 0.88rem;
+    padding-left: 20px;
+    position: relative;
+  }
+  .phase ul li::before {
+    content: "▸";
+    color: var(--accent);
+    position: absolute;
+    left: 0;
+    font-weight: 700;
+  }
+
+  /* ---------- Decision block ---------- */
+  .decision {
+    background: var(--deep);
+    color: white;
+    border-radius: 16px;
+    padding: 36px;
+    text-align: center;
+  }
+  .decision h3 {
+    color: white;
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+  }
+  .decision p { opacity: 0.9; margin-bottom: 24px; font-size: 0.98rem; }
+  .decision-options {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-top: 20px;
+  }
+  @media (max-width: 780px) { .decision-options { grid-template-columns: 1fr; } }
+  .decision-opt {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 18px;
+    border-radius: 10px;
+    text-align: left;
+  }
+  .decision-opt .num {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--accent);
+  }
+  .decision-opt h5 { color: white; font-size: 0.98rem; margin: 6px 0 8px; }
+  .decision-opt p { font-size: 0.84rem; opacity: 0.85; }
+
+  /* ---------- Footer ---------- */
+  footer {
+    margin-top: 60px;
+    padding-top: 28px;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+  footer strong { color: var(--deep); }
+
+  /* ---------- Utility ---------- */
+  .check { color: var(--green); font-weight: 700; }
+  .cross { color: var(--red); font-weight: 700; }
+  .warn { color: var(--accent); font-weight: 700; }
+  .mono { font-family: ui-monospace, monospace; font-size: 0.9em; }
+
+  .print-hint {
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-top: 20px;
+    font-style: italic;
+  }
+
+  @media print {
+    nav.side { display: none; }
+    body { background: white; }
+    .card, .proof, .partner, .phase, table.data { box-shadow: none; border: 1px solid #ccc; }
+    section { page-break-inside: avoid; }
+  }
+
+  /* ---------- Brand tab bar (matcht hoofd-dashboard) ---------- */
+  .brand-bar {
+    background: #C66A1F;
+    color: #F4EFE2;
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    border-bottom: 4px solid #1A1A1A;
+    font-family: "Oswald", "Bebas Neue", sans-serif;
+  }
+  .brand-bar .logo {
+    width: 38px; height: 38px;
+    border: 2px solid #F4EFE2;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    flex-shrink: 0;
+  }
+  .brand-bar .brand-name {
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .brand-tabs {
+    margin-left: auto;
+    display: flex;
+    gap: 4px;
+  }
+  .brand-tabs a {
+    font-family: inherit;
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 10px 18px;
+    color: rgba(244, 239, 226, 0.7);
+    border-bottom: 3px solid transparent;
+    text-decoration: none;
+    transition: color 0.15s, border-color 0.15s;
+    margin-bottom: -14px;
+  }
+  .brand-tabs a:hover { color: #F4EFE2; }
+  .brand-tabs a.active {
+    color: #F4EFE2;
+    border-bottom-color: #F4EFE2;
+  }
+  @media (max-width: 600px) {
+    .brand-bar { padding: 12px 16px; gap: 12px; }
+    .brand-bar .brand-name { font-size: 15px; }
+    .brand-tabs a { padding: 10px 12px; font-size: 12px; letter-spacing: 1.5px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Brand tab bar -->
+<header class="brand-bar">
+  <div class="logo">BLOW</div>
+  <div class="brand-name">Beach House</div>
+  <nav class="brand-tabs" aria-label="Hoofdmenu">
+    <a href="../">Bestelling</a>
+    <a href="./" class="active" aria-current="page">SEO</a>
+  </nav>
+</header>
+
+<!-- Sticky navigation -->
+<nav class="side">
+  <ul>
+    <li><a href="#start" class="nav-link">Start</a></li>
+    <li><a href="#aanpak" class="nav-link">Aanpak</a></li>
+    <li><a href="#pijplijn" class="nav-link">Pijplijn</a></li>
+    <li><a href="#bewijs" class="nav-link">Pilot-bewijs</a></li>
+    <li><a href="#blogpost" class="nav-link">Voorbeeld</a></li>
+    <li><a href="#distributie" class="nav-link">Distributie</a></li>
+    <li><a href="#kosten" class="nav-link">Kosten</a></li>
+    <li><a href="#samenwerking" class="nav-link">Samenwerking</a></li>
+    <li><a href="#risico" class="nav-link">Risico</a></li>
+    <li><a href="#roadmap" class="nav-link">Roadmap</a></li>
+    <li><a href="#beslissing" class="nav-link">Beslissing</a></li>
+  </ul>
+</nav>
+
+<div class="container">
+
+<!-- ============ START ============ -->
+<header class="hero" id="start">
+  <div class="eyebrow">BLOW · Pilot & Samenwerkingsvoorstel</div>
+  <h1>Een eigen <span class="accent">content-motor</span> voor BLOW<br>zonder afhankelijkheid van een vendor</h1>
+  <p class="lead">Dit document toont wat ik in één weekend voor BLOW heb gebouwd als proeve, hoe dat zich vertaalt in een systeem voor 12 maanden, en welke samenwerkingsvorm ik voorstel.</p>
+  <div class="meta">
+    <span>📅 Gesprek: woensdag 18:00, Beach House</span>
+    <span>⏱ Leestijd: ~12 min</span>
+    <span>🔄 Versie 1.0</span>
+  </div>
+</header>
+
+<!-- ============ AANPAK ============ -->
+<section id="aanpak">
+  <h2 class="section-title"><span class="badge">01</span>De aanpak in één plaat</h2>
+  <p class="section-sub">Vijf MAKE-scenario's, één Google Sheet als commandocentrum, volledige loop van signaal tot publicatie.</p>
+
+  <div class="grid-3" style="margin-bottom: 20px;">
+    <div class="card">
+      <h3>🔍 Wat komt binnen</h3>
+      <p>GSC-data, Google Business reviews, concurrent-RSS, Toine's input. Elke bron een wekelijkse of dagelijkse trigger.</p>
+    </div>
+    <div class="card accent">
+      <h3>⚙️ Wat gebeurt er</h3>
+      <p>5 scenario's draaien op MAKE: GSC-sync, Content Generator (Claude), WordPress Publisher, Competitor Monitor, Review Aggregator.</p>
+    </div>
+    <div class="card green">
+      <h3>📤 Wat komt eruit</h3>
+      <p>WordPress drafts, distributiepakketten, performance-data, pijnpunten-digest. Toine reviewt; publicatie = klik.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PIJPLIJN INTERACTIEF ============ -->
+<section id="pijplijn">
+  <h2 class="section-title"><span class="badge">02</span>Klik door de pijplijn</h2>
+  <p class="section-sub">Van keyword-signaal tot gepubliceerde post. Klik op een stap voor input, verwerking en output.</p>
+
+  <div class="pipeline">
+    <div class="pipeline-steps" id="pipeSteps">
+      <div class="pipe-step active" data-step="1">
+        <div class="num">STAP 1</div>
+        <div class="name">Audit + signaal</div>
+      </div>
+      <div class="pipe-step" data-step="2">
+        <div class="num">STAP 2</div>
+        <div class="name">Brief</div>
+      </div>
+      <div class="pipe-step" data-step="3">
+        <div class="num">STAP 3</div>
+        <div class="name">Draft</div>
+      </div>
+      <div class="pipe-step" data-step="4">
+        <div class="num">STAP 4</div>
+        <div class="name">Publicatie</div>
+      </div>
+      <div class="pipe-step" data-step="5">
+        <div class="num">STAP 5</div>
+        <div class="name">Distributie</div>
+      </div>
+    </div>
+
+    <div class="pipe-detail" id="pipeDetail">
+      <!-- Filled by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ============ BEWIJS ============ -->
+<section id="bewijs">
+  <h2 class="section-title"><span class="badge">03</span>Pilot-bewijs — wat ik dit weekend heb gebouwd</h2>
+  <p class="section-sub">Geen beloftes. Vier tastbare deliverables die je maandag kunt plaatsen, ongeacht hoe dit gesprek afloopt.</p>
+
+  <div class="proof-grid">
+    <div class="proof" onclick="document.getElementById('blogpost').scrollIntoView()">
+      <div class="kind">01 · Blogpost</div>
+      <h4>Zandmotor — veiligste kitespot van NL</h4>
+      <p>950 woorden, publicatie-klaar. SEO + GEO geoptimaliseerd, met FAQ en interne links naar /kitesurfles en /beach-house.</p>
+      <div class="cta">↓ Bekijk hieronder</div>
+    </div>
+    <div class="proof">
+      <div class="kind">02 · Blogpost</div>
+      <h4>Kijkduin vs Scheveningen</h4>
+      <p>Volledige outline + brief — Bram vult body in. Eerlijke vergelijking als trust-builder. Funnel naar proefles.</p>
+      <div class="cta">posts/02-kijkduin-vs-scheveningen.md</div>
+    </div>
+    <div class="proof">
+      <div class="kind">03 · Audit</div>
+      <h4>GSC + on-page quick-scan</h4>
+      <p>Template-rapport met top-20 underperformers, quick-wins en 5 prioriteiten voor komende 8 weken.</p>
+      <div class="cta">audit-template.md</div>
+    </div>
+    <div class="proof">
+      <div class="kind">04 · Distributie</div>
+      <h4>6 kanalen, 1 post</h4>
+      <p>Templates voor IG, FB, WhatsApp (2chat), nieuwsbrief, Google Business, email-signature. Ingevuld voor post 1.</p>
+      <div class="cta">distributie/templates.md</div>
+    </div>
+  </div>
+
+  <div class="callout" style="margin-top: 24px;">
+    <h3>Wat dit bewijst</h3>
+    <p>Eén blogpost van 950 woorden kost handmatig 3–5 uur. Met deze pijplijn: <strong>review + publish in 30 minuten</strong>. Distributie naar 6 kanalen: <strong>15 minuten extra</strong>. Dat is de schaalfactor die een vendor niet levert — omdat hun model niet is ingericht op jouw afdelings-mix.</p>
+  </div>
+</section>
+
+<!-- ============ BLOGPOST PREVIEW ============ -->
+<section id="blogpost">
+  <h2 class="section-title"><span class="badge">04</span>Voorbeeld — blogpost A volledig</h2>
+  <p class="section-sub">Dit is precies wat er in WordPress komt te staan. Scroll binnen het venster.</p>
+
+  <article class="post-preview">
+    <div class="post-meta">
+      <span>📍 Categorie: spots</span>
+      <span>🏷 kitesurfschool</span>
+      <span>📝 950 woorden</span>
+      <span>🎯 primary: kitesurfen zandmotor</span>
+    </div>
+    <h3>Kitesurfen op de Zandmotor — de veiligste kitespot van Nederland</h3>
+
+    <div class="tldr">
+      <strong>Korte versie:</strong> De Zandmotor is in 2011 aangelegd: 21,5 miljoen kuub zand voor de kust van Kijkduin. Door die aanleg ontstond een enorme, ondiepe lagune met vlak water én een breed strand. Voor beginnende kitesurfers is dat de perfecte combinatie — nergens anders in Nederland vind je zo veel ruimte en zo weinig obstakels.
+    </div>
+
+    <p>Wij van BLOW zitten hier, aan de zuidrand van Kijkduin, precies waar de Zandmotor het strand raakt. Dit artikel legt uit waarom dit de veiligste kitesurfspot van Nederland is en hoe je er het beste gebruik van maakt.</p>
+
+    <h4>Wat is de Zandmotor eigenlijk?</h4>
+    <p>Rijkswaterstaat heeft in 2011 een haakvormig zandplateau voor de kust van Ter Heijde tot Kijkduin gestort. Het idee: laat stromingen en wind dat zand vanzelf over de hele Zuid-Hollandse kust verdelen, in plaats van elke paar jaar lokaal suppleren. Een kustbeschermings-experiment van internationale schaal.</p>
+    <p>Voor kitesurfers bleek het een geschenk:</p>
+    <ul>
+      <li>Een <strong>ondiepe lagune</strong> beschut tegen aflandige wind</li>
+      <li><strong>Honderden meters strand</strong> om kites te starten zonder obstakels</li>
+      <li><strong>Vlak water</strong> vlak bij de kust, golven verder op zee</li>
+      <li><strong>Geen pieren of strandhoofden</strong> die kite-lijnen kunnen vangen</li>
+    </ul>
+
+    <h4>Drie redenen waarom dit de veiligste spot is</h4>
+    <p><strong>1. Side-onshore zuidwestenwind.</strong> De dominante wind blaast schuin richting strand. Paniek? Je wordt vanzelf teruggeblazen.</p>
+    <p><strong>2. De lagune om op te staan.</strong> 1–1,5m diep, je zet je voeten neer en begint opnieuw.</p>
+    <p><strong>3. Ruimte.</strong> Geen pieren, geen drukte. We spreiden lessen over honderden meters strand.</p>
+
+    <h4>Beste wind voor de Zandmotor</h4>
+    <table>
+      <thead>
+        <tr><th>Richting</th><th>Bft</th><th>Beginner</th><th>Gevorderd</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Zuidwest</td><td>4–5</td><td class="check">✅</td><td class="check">✅</td></tr>
+        <tr><td>Zuidwest</td><td>6+</td><td class="warn">⚠️</td><td class="check">✅</td></tr>
+        <tr><td>West</td><td>4–6</td><td class="check">✅</td><td class="check">✅</td></tr>
+        <tr><td>Noordwest</td><td>4–6</td><td class="check">✅</td><td class="check">✅</td></tr>
+        <tr><td>Noord</td><td>4–6</td><td class="cross">❌</td><td class="warn">⚠️</td></tr>
+        <tr><td>Oost</td><td>alle</td><td class="cross">❌</td><td class="cross">❌</td></tr>
+      </tbody>
+    </table>
+
+    <h4>Veelgestelde vragen</h4>
+    <div class="faq-q">Is de Zandmotor geschikt voor absolute beginners?</div>
+    <div class="faq-a">Ja — juist daarom komen wij hier. De combinatie van vlak water, breed strand en side-onshore wind is in Nederland uniek.</div>
+    <div class="faq-q">Kan ik vanaf de parkeerplaats direct het water op?</div>
+    <div class="faq-a">Vanaf de BLOW-locatie aan de Westmadeweg sta je binnen 2 minuten op het zand.</div>
+    <div class="faq-q">Wat als er geen wind staat de dag dat ik boek?</div>
+    <div class="faq-a">We verplaatsen of geven een theorie-sessie. Ons weersoordeel doen we elke ochtend om 07:30.</div>
+
+    <p style="margin-top: 20px; padding-top: 14px; border-top: 1px solid var(--border); font-style: italic; color: var(--muted);">
+      <em>Volledige post + metadata: <span class="mono">posts/01-zandmotor-veiligheid.md</span></em>
+    </p>
+  </article>
+  <p class="print-hint">Zichtbaar in GitHub repo en optioneel te hosten via GitHub Pages.</p>
+</section>
+
+<!-- ============ DISTRIBUTIE ============ -->
+<section id="distributie">
+  <h2 class="section-title"><span class="badge">05</span>Distributie — één post wordt zes touchpoints</h2>
+  <p class="section-sub">De grote zwakte van vendor-oplossingen: zij stoppen na publicatie op de site. Wij niet.</p>
+
+  <div class="dist-hub">
+    <div class="dist-center">
+      <div class="bubble">1 blogpost</div>
+    </div>
+    <div class="dist-channels">
+      <div class="dist-ch"><span class="icon">🌐</span>blow.surf</div>
+      <div class="dist-ch"><span class="icon">📸</span>Instagram</div>
+      <div class="dist-ch"><span class="icon">👥</span>Facebook</div>
+      <div class="dist-ch"><span class="icon">💬</span>WhatsApp</div>
+      <div class="dist-ch"><span class="icon">📧</span>Nieuwsbrief</div>
+      <div class="dist-ch"><span class="icon">📍</span>Google Biz</div>
+    </div>
+    <p style="text-align: center; margin-top: 16px; font-size: 0.88rem; color: var(--muted);">
+      Handmatig nu, MAKE-geautomatiseerd in fase 2 (maand 4–6).
+    </p>
+  </div>
+</section>
+
+<!-- ============ KOSTEN ============ -->
+<section id="kosten">
+  <h2 class="section-title"><span class="badge">06</span>Kostenvergelijking — 3 jaar TCO</h2>
+  <p class="section-sub">Realistisch, inclusief mijn uren à €60. Hypothese: 100 uur per jaar voor onderhoud + content + optimalisatie na de build-fase.</p>
+
+  <table class="data">
+    <thead>
+      <tr>
+        <th>Scenario</th>
+        <th>Jaar 1</th>
+        <th>Jaar 2</th>
+        <th>Jaar 3</th>
+        <th>3-jaar TCO</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Alleen vendor (WP SEO AI Basic)</td>
+        <td class="num">€11.440</td>
+        <td class="num">€7.680</td>
+        <td class="num">€7.680</td>
+        <td class="num">€26.800</td>
+      </tr>
+      <tr class="highlight">
+        <td>Alleen eigen systeem (met mij, 100u/jr)</td>
+        <td class="num">€8.445</td>
+        <td class="num">€5.445</td>
+        <td class="num">€5.445</td>
+        <td class="num">€19.335</td>
+      </tr>
+      <tr>
+        <td>Hybride (vendor jaar 1 + ik parallel)</td>
+        <td class="num">€19.540</td>
+        <td class="num">€5.445</td>
+        <td class="num">€5.445</td>
+        <td class="num">€30.430</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="grid-2" style="margin-top: 20px;">
+    <div class="card green">
+      <h3>💡 Besparing eigen systeem vs vendor</h3>
+      <p><strong>€7.465 over 3 jaar.</strong> Na jaar 1 wordt het verschil groter omdat vendor jaarlijks €7.680 blijft kosten, ons systeem alleen onderhouds-uren.</p>
+    </div>
+    <div class="card accent">
+      <h3>⚠️ Waarom hybride duur lijkt</h3>
+      <p><strong>€3.630 extra in jaar 1.</strong> Alleen zinvol als vendor je échte leer-tijd en risico-buffer is, én je stopt zeker vóór maand 12.</p>
+    </div>
+  </div>
+
+  <p style="margin-top: 14px; font-size: 0.85rem; color: var(--muted);">
+    <em>Eigen stack jaar 1: MAKE Pro €240 + Claude Max 5× €1.080 + 2chat €300 + GitHub Enterprise 2 seats €465 + OpenAI (licht gebruik) €360 = €2.445 tools + 100u × €60 = €8.445.</em>
+  </p>
+</section>
+
+<!-- ============ SAMENWERKING ============ -->
+<section id="samenwerking">
+  <h2 class="section-title"><span class="badge">07</span>Samenwerking — 5 vormen, mijn voorkeur</h2>
+  <p class="section-sub">Ik wil niet puur op uurbasis werken. Dit zijn de vormen die ik met je wil bespreken.</p>
+
+  <div class="partner-grid">
+    <div class="partner">
+      <div class="letter">A</div>
+      <h4>Revenue-share</h4>
+      <p>% op SEO-toegerekende omzet (lessen/events). Vereist GA4 + UTM-attributie.</p>
+    </div>
+    <div class="partner">
+      <div class="letter">B</div>
+      <h4>Productisering</h4>
+      <p>BLOW als klant #1, systeem verkoopbaar aan andere horeca. Royalty per klant.</p>
+    </div>
+    <div class="partner recommended">
+      <div class="letter">C</div>
+      <h4>Retainer + bonus</h4>
+      <p>Vast maandbedrag (€500–750) + succes-bonus bij KPI-hit. Zekerheid + upside.</p>
+    </div>
+    <div class="partner">
+      <div class="letter">D</div>
+      <h4>Equity</h4>
+      <p>Aandeel in BLOW of nieuwe BV "BLOW-digital". Lange termijn, illiquide.</p>
+    </div>
+    <div class="partner">
+      <div class="letter">E</div>
+      <h4>Barter / stage</h4>
+      <p>Bouw tegen kostprijs tools, tegen portfolio-rechten + jouw netwerk.</p>
+    </div>
+  </div>
+
+  <div class="callout" style="margin-top: 24px;">
+    <h3>Wat ik voorstel</h3>
+    <p><strong>Model C + vleugje B.</strong> Retainer van €550/mnd voor 8–12u werk + bonus €500 bij elk van 3 meetbare KPI's (bv. 50+ gepubliceerde posts, +30% organisch verkeer, 10+ leads met attributie). En: de rechten om het systeem (anoniem gemaakt) te gebruiken als template voor andere klanten — jij profiteert mee via revenue-share op die template-inkomsten.</p>
+  </div>
+</section>
+
+<!-- ============ RISICO ============ -->
+<section id="risico">
+  <h2 class="section-title"><span class="badge">08</span>Risico's en ontsnappingsroutes</h2>
+  <p class="section-sub">Geen verstopte risico's. Dit is wat er mis kan gaan en wat we dan doen.</p>
+
+  <div class="risk-list">
+    <div class="risk-item">
+      <h4>Het systeem levert geen meetbare SEO-resultaten in 6 maanden</h4>
+      <p>Contract kan per maand worden stopgezet na maand 3. Alle content en automation-blueprints blijven jouw eigendom.</p>
+      <div class="mitigation"><strong>Ontsnapping:</strong> je hebt de posts, de sheet, de structuur. Niets is proprietary aan mij.</div>
+    </div>
+    <div class="risk-item">
+      <h4>Ik val uit / stop</h4>
+      <p>Alle documentatie in GitHub Enterprise, volledig overdraagbaar. MAKE-scenario's zijn standaard-bouwstenen, elke ontwikkelaar kan doordraaien.</p>
+      <div class="mitigation"><strong>Ontsnapping:</strong> jij bezit de repo, de MAKE account, de sheet en de WP-toegang.</div>
+    </div>
+    <div class="risk-item">
+      <h4>Google stopt met organisch verkeer voor LLM's (GEO-risico)</h4>
+      <p>Dit systeem is juist gebouwd met GEO in gedachten — TL;DR, FAQ, structured data worden door AI-overviews opgepakt.</p>
+      <div class="mitigation"><strong>Ontsnapping:</strong> de aanpak werkt in beide werelden; we kijken elk kwartaal welke bronnen traffic leveren.</div>
+    </div>
+    <div class="risk-item">
+      <h4>Viking Bookings of WP geven problemen</h4>
+      <p>Beide zijn standaard SaaS. Migratie-risico laag. Content is onafhankelijk van platform.</p>
+      <div class="mitigation"><strong>Ontsnapping:</strong> alle content in markdown (platform-onafhankelijk). Publicatie-target is wisselbaar.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ROADMAP ============ -->
+<section id="roadmap">
+  <h2 class="section-title"><span class="badge">09</span>Roadmap — eerste 90 dagen</h2>
+  <p class="section-sub">Geen 12-maanden-plan. Eerste 90 dagen concreet, daarna review en aanpassen.</p>
+
+  <div class="roadmap">
+    <div class="phase">
+      <div class="when">Maand 1 · Bouw</div>
+      <h4>Fundament staat</h4>
+      <ul>
+        <li>Scenario 1 (GSC → Sheets) live</li>
+        <li>Scenario 2 (Content Generator) live</li>
+        <li>Scenario 3 (WordPress Publisher) live</li>
+        <li>ContentQueue sheet ingevuld met 30 keywords</li>
+        <li>4 posts gepubliceerd (2 uit pilot + 2 nieuw)</li>
+        <li>GA4 + UTM-tracking ingericht</li>
+      </ul>
+    </div>
+    <div class="phase">
+      <div class="when">Maand 2 · Ritme</div>
+      <h4>Wekelijkse cadans</h4>
+      <ul>
+        <li>Scenario 4 (Competitor Monitor) live</li>
+        <li>Scenario 5 (Reviews) live</li>
+        <li>8–12 nieuwe posts</li>
+        <li>Distributie handmatig (IG/FB/WA/nieuwsbrief)</li>
+        <li>Eerste GSC-data terug over pilot-posts</li>
+      </ul>
+    </div>
+    <div class="phase">
+      <div class="when">Maand 3 · Optimalisatie</div>
+      <h4>Meten + doorschalen</h4>
+      <ul>
+        <li>Scenario 6 (Distribution) toevoegen — auto IG/FB/GBP</li>
+        <li>Refresh-flow voor onderpresterende oude posts</li>
+        <li>KPI-review met Toine</li>
+        <li>Go/no-go voor maand 4–12</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BESLISSING ============ -->
+<section id="beslissing">
+  <h2 class="section-title"><span class="badge">10</span>Beslissing — wat zou ik graag vandaag horen</h2>
+
+  <div class="decision">
+    <h3>Drie keuzes voor woensdag</h3>
+    <p>Ik hoef geen definitief antwoord — wel richting. Deze drie gesprekspunten leggen het fundament voor een schriftelijke afspraak later deze maand.</p>
+
+    <div class="decision-options">
+      <div class="decision-opt">
+        <div class="num">1</div>
+        <h5>Vendor: wel of niet tekenen?</h5>
+        <p>Mijn advies: <strong>niet tekenen.</strong> Start met mij 3 maanden pilot. Vendor blijft optie na maand 3 als resultaten tegenvallen.</p>
+      </div>
+      <div class="decision-opt">
+        <div class="num">2</div>
+        <h5>Pilot starten?</h5>
+        <p>Mijn aanbod: <strong>eerste maand vrijblijvend.</strong> Scenario 1–3 live, 4 posts gepubliceerd, audit afgerond. Na maand 1 beslissen we samen.</p>
+      </div>
+      <div class="decision-opt">
+        <div class="num">3</div>
+        <h5>Samenwerkingsvorm?</h5>
+        <p>Mijn voorkeur: <strong>Model C</strong> (retainer + succes-bonus) met <strong>B</strong> als lange-termijn perspectief (productisering).</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p><strong>BLOW Pilot v1.0</strong> · opgesteld door Bram Overgaag · april 2026</p>
+  <p>Bestanden: <span class="mono">posts/</span>, <span class="mono">audit-template.md</span>, <span class="mono">distributie/</span>, <span class="mono">content-queue-seed.csv</span></p>
+  <p style="margin-top: 8px; font-style: italic;">Dit document live te hosten via GitHub Pages / Cloudflare Pages.</p>
+</footer>
+
+</div>
+
+<script>
+// ---------- Interactive pipeline ----------
+const pipeSteps = {
+  1: {
+    title: "Audit + signaal",
+    text: "GSC registreert queries waar blow.surf op positie 11–25 staat — bijna pagina 1. Die worden automatisch gesignaleerd als refresh-kandidaten. Daarnaast voegt Toine ideeën handmatig toe.",
+    inLabel: "Input",
+    inVal: "GSC: query 'kitesurfen zandmotor', pos 14, 210 imp/mnd\nToine: 'trouwen op strand — nieuwe content'",
+    outLabel: "Output naar sheet",
+    outVal: "ContentQueue.row: status=ready_for_brief, priority=high"
+  },
+  2: {
+    title: "Brief",
+    text: "Scenario 2 maakt een content-brief van elke nieuwe queue-regel: primary + secondary keywords, doelgroep, lengte, interne links, CTA's. Claude krijgt deze brief als context.",
+    inLabel: "Input uit sheet",
+    inVal: "keyword: kitesurfen zandmotor\naudience: beginners\ntype: spot-guide\ntarget: 950 woorden",
+    outLabel: "Brief naar Claude",
+    outVal: "Schrijf E-E-A-T spot-guide in NL,\nvolg BLOW stijlgids,\nincludeer FAQ + tabel,\ninterne links → /kitesurfles"
+  },
+  3: {
+    title: "Draft",
+    text: "Claude genereert de volledige post als markdown. Draft komt terug in de sheet met status 'draft_ready_for_review'. Toine krijgt een mail met preview-link. Review = 5–10 min per post.",
+    inLabel: "Input",
+    inVal: "brief + BLOW stijlgids + bestaande posts als voorbeeld",
+    outLabel: "Output in sheet",
+    outVal: "title, meta, body_markdown, faq_json\nstatus: draft_ready_for_review"
+  },
+  4: {
+    title: "Publicatie",
+    text: "Zodra Toine de draft goedkeurt (status=approved), pusht scenario 3 naar WordPress via REST API. Hero-image via DALL·E of gekozen uit Pexels. Yoast-meta automatisch ingevuld. Status: wp_draft_created.",
+    inLabel: "Input",
+    inVal: "approved draft uit sheet",
+    outLabel: "Output",
+    outVal: "WP draft met meta, hero, schema.org\npost_id + preview_url terug in sheet"
+  },
+  5: {
+    title: "Distributie",
+    text: "Na publicatie triggert scenario 6 distributie naar 6 kanalen: IG caption, FB post, WhatsApp broadcast via 2chat, nieuwsbrief-digest, Google Business post, email signature update.",
+    inLabel: "Input",
+    inVal: "gepubliceerde post-URL + meta-data",
+    outLabel: "Output",
+    outVal: "6 distributie-URLs terug in sheet\nvoor attributie-meting na 7/30/90 dagen"
+  }
+};
+
+const detailEl = document.getElementById('pipeDetail');
+const stepsEl = document.getElementById('pipeSteps');
+
+function renderStep(n) {
+  const s = pipeSteps[n];
+  detailEl.innerHTML = `
+    <h4>${s.title}</h4>
+    <p>${s.text}</p>
+    <div class="io">
+      <div class="io-block">
+        <div class="lbl">${s.inLabel}</div>
+        <div class="val">${s.inVal.replace(/\n/g, '<br>')}</div>
+      </div>
+      <div class="io-block">
+        <div class="lbl">${s.outLabel}</div>
+        <div class="val">${s.outVal.replace(/\n/g, '<br>')}</div>
+      </div>
+    </div>
+  `;
+  document.querySelectorAll('.pipe-step').forEach(el => el.classList.remove('active'));
+  document.querySelector(`.pipe-step[data-step="${n}"]`).classList.add('active');
+}
+
+stepsEl.addEventListener('click', (e) => {
+  const step = e.target.closest('.pipe-step');
+  if (step) renderStep(step.dataset.step);
+});
+
+renderStep(1);
+
+// ---------- Active nav highlight on scroll ----------
+const sections = document.querySelectorAll('section[id], header[id]');
+const navLinks = document.querySelectorAll('.nav-link');
+
+function updateActiveNav() {
+  let current = '';
+  sections.forEach(sec => {
+    const rect = sec.getBoundingClientRect();
+    if (rect.top < 100) current = sec.id;
+  });
+  navLinks.forEach(link => {
+    link.classList.toggle('active', link.getAttribute('href') === '#' + current);
+  });
+}
+
+window.addEventListener('scroll', updateActiveNav, { passive: true });
+updateActiveNav();
+</script>
+
+</body>
+</html>
