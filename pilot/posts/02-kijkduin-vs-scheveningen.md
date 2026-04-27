@@ -12,8 +12,17 @@ secondary_keywords: [kitesurfschool scheveningen, kitesurfles den haag, kitesurf
 canonical: https://blow.surf/blog/kitesurfen-kijkduin-vs-scheveningen
 internal_links:
   - /kitesurfles
+  - /kitesurfles-zandmotor/
   - /blog/kitesurfen-zandmotor-kijkduin
   - /beach-house
+  - /over-blow
+audit_alignment:
+  - "Audit lesson 3 (concurrentie volume): differentieer op eerlijkheid + uniek perspectief"
+  - "On-page audit /over-blow: IKO-claim hier weer naar voren brengen"
+  - "Vendor-fingerprint counter: persoonlijk + 15 jaar + IKO + concrete schoolnamen"
+e_e_a_t_markers:
+  - "15 jaar lesgegeven aan deze kust"
+  - "IKO-gecertificeerd (BLOW + alle genoemde Scheveningen-scholen)"
 word_count_target: 950
 ---
 
@@ -34,6 +43,8 @@ Eerst de eerlijke kant. Scheveningen heeft dingen die Kijkduin niet heeft, en di
 - **Aantal scholen**: ruime keuze — [Kiteboardschool.nl](https://kiteboardschool.nl/), [Kitesurfles.nl](https://kitesurfles.nl/), [Down Under Beach](https://downunderbeach.nl/), [Kitesurfschool Scheveningen](https://www.kitesurfschoolscheveningen.nl/) en anderen. Allemaal IKO-gecertificeerd, allemaal serieus.
 
 Als je wilt leren kitesurfen ín de stad, met na afloop snel een biertje en een tram terug — dan ga je naar Scheveningen. Niets mis mee.
+
+> **Korte noot over IKO:** zowel BLOW als de bovenstaande Scheveningen-scholen zijn IKO-gecertificeerd (International Kiteboarding Organization). Dat betekent: dezelfde lesmethodiek, dezelfde veiligheidsstandaard, dezelfde voortgangsdocumentatie. Het verschil zit dus *niet* in de instructie-kwaliteit — het zit in **omgeving en ervaring**.
 
 ## Waar Scheveningen het lastiger maakt om te léren
 
@@ -135,6 +146,8 @@ Kom een keer langs op een woensdagmiddag. Geen verkooppraatje, geen druk. Drink 
 
 **Volgende stap?**
 
-- [Boek een proefles op de Zandmotor](/kitesurfles)
-- [Lees de Zandmotor-spotgids](/blog/kitesurfen-zandmotor-kijkduin)
-- [Bezoek het Beach House](/beach-house) en proef de sfeer
+- Praktisch: [bekijk cursusprijzen + tijden op /kitesurfles-zandmotor/](/kitesurfles-zandmotor/)
+- Algemeen: [boek een proefles](/kitesurfles)
+- Diepgang: [waarom de Zandmotor de veiligste kitespot is — civiele techniek-uitleg](/blog/kitesurfen-zandmotor-kijkduin)
+- Eerst voelen: [bezoek het Beach House](/beach-house) en proef de sfeer
+- Achtergrond: [over BLOW en onze oprichters](/over-blow) (15 jaar, sinds 2013, IKO-gecertificeerd)
