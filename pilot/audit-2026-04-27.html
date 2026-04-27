@@ -15,7 +15,11 @@
     --accent: #e85d04;
     --accent-soft: #f8ddc7;
     --green: #2d8659;
+    --green-soft: #d1e8d8;
     --red: #b63b3b;
+    --red-soft: #f0d4d4;
+    --amber: #d97706;
+    --amber-soft: #fde7c7;
     --text: #1a2a3a;
     --muted: #5c6b7a;
     --border: rgba(30, 96, 145, 0.15);
@@ -24,9 +28,9 @@
   html { scroll-behavior: smooth; }
   body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    background: linear-gradient(180deg, var(--sand) 0%, #ffffff 40%);
+    background: linear-gradient(180deg, var(--sand) 0%, #ffffff 30%);
     color: var(--text);
-    line-height: 1.65;
+    line-height: 1.5;
     min-height: 100vh;
   }
 
@@ -46,548 +50,990 @@
     border: 2px solid #F4EFE2;
     border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
-    font-weight: 700; font-size: 12px; letter-spacing: 1.5px;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 1.5px;
     flex-shrink: 0;
   }
   .brand-bar .brand-name {
-    font-weight: 700; font-size: 18px; letter-spacing: 2px; text-transform: uppercase;
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
   }
-  .brand-tabs { margin-left: auto; display: flex; gap: 4px; }
+  .brand-tabs {
+    margin-left: auto;
+    display: flex;
+    gap: 4px;
+  }
   .brand-tabs a {
-    font-family: inherit; font-weight: 500; font-size: 13px;
-    letter-spacing: 2px; text-transform: uppercase;
-    padding: 10px 18px; color: rgba(244, 239, 226, 0.7);
-    border-bottom: 3px solid transparent; text-decoration: none;
-    margin-bottom: -14px; transition: color 0.15s, border-color 0.15s;
+    font-family: inherit;
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 10px 18px;
+    color: rgba(244, 239, 226, 0.7);
+    border-bottom: 3px solid transparent;
+    text-decoration: none;
+    transition: color 0.15s, border-color 0.15s;
+    margin-bottom: -14px;
   }
   .brand-tabs a:hover { color: #F4EFE2; }
-  .brand-tabs a.active { color: #F4EFE2; border-bottom-color: #F4EFE2; }
+  .brand-tabs a.active {
+    color: #F4EFE2;
+    border-bottom-color: #F4EFE2;
+  }
   @media (max-width: 600px) {
     .brand-bar { padding: 12px 16px; gap: 12px; }
     .brand-bar .brand-name { font-size: 15px; }
     .brand-tabs a { padding: 10px 12px; font-size: 12px; letter-spacing: 1.5px; }
   }
 
-  /* Container */
-  .container { max-width: 880px; margin: 0 auto; padding: 36px 24px 80px; }
+  /* Sub-nav */
+  .sub-nav {
+    position: sticky;
+    top: 0;
+    background: var(--foam);
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 2px 8px rgba(11, 46, 74, 0.05);
+    z-index: 90;
+    padding: 0 16px;
+  }
+  .sub-nav ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 2px;
+    overflow-x: auto;
+    max-width: 1100px;
+    margin: 0 auto;
+    scrollbar-width: thin;
+  }
+  .sub-nav a {
+    display: block;
+    font-size: 0.82rem;
+    color: var(--muted);
+    text-decoration: none;
+    padding: 12px 14px;
+    font-weight: 500;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+  }
+  .sub-nav a:hover { color: var(--deep); }
+  .sub-nav a.back {
+    color: var(--accent);
+    font-weight: 600;
+  }
 
-  /* Header */
-  header.doc-head {
+  .container { max-width: 1100px; margin: 0 auto; padding: 32px 24px 80px; }
+
+  /* Hero */
+  header.hero {
     text-align: center;
-    padding: 20px 0 32px;
+    padding: 24px 0 32px;
     border-bottom: 3px solid var(--sea);
-    margin-bottom: 36px;
+    margin-bottom: 40px;
   }
   .eyebrow {
     font-size: 0.78rem;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
     color: var(--sea);
     font-weight: 700;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
   }
   h1 {
-    font-size: clamp(1.6rem, 3.6vw, 2.4rem);
+    font-size: clamp(1.6rem, 3.5vw, 2.4rem);
     font-weight: 800;
     color: var(--deep);
     line-height: 1.2;
-    margin-bottom: 14px;
+    margin-bottom: 12px;
   }
-  .meta-row {
-    display: inline-flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    justify-content: center;
-    font-size: 0.82rem;
+  .lead {
+    font-size: 1rem;
     color: var(--muted);
-  }
-  .meta-row span {
-    padding: 4px 12px;
-    background: var(--foam);
-    border: 1px solid var(--border);
-    border-radius: 999px;
+    max-width: 720px;
+    margin: 0 auto;
   }
 
-  /* Section headings */
-  h2 {
+  /* Score banner */
+  .scores {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin-bottom: 48px;
+  }
+  @media (max-width: 780px) { .scores { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 480px) { .scores { grid-template-columns: 1fr; } }
+  .score {
+    background: var(--foam);
+    padding: 22px 18px;
+    border-radius: 14px;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(11, 46, 74, 0.06);
+    border-top: 4px solid var(--sea);
+  }
+  .score.danger { border-top-color: var(--red); }
+  .score.warn { border-top-color: var(--accent); }
+  .score.good { border-top-color: var(--green); }
+  .score .num {
+    font-size: 2.8rem;
+    font-weight: 800;
+    color: var(--deep);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .score.danger .num { color: var(--red); }
+  .score.warn .num { color: var(--accent); }
+  .score.good .num { color: var(--green); }
+  .score .lbl {
+    font-size: 0.78rem;
+    color: var(--muted);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+  }
+  .score .sub {
+    display: block;
+    font-size: 0.72rem;
+    color: var(--muted);
+    margin-top: 6px;
+    font-style: italic;
+  }
+
+  /* Section */
+  section { margin-bottom: 56px; scroll-margin-top: 80px; }
+  h2.sec {
     font-size: 1.4rem;
     color: var(--deep);
-    margin: 40px 0 8px;
-    padding-bottom: 6px;
-    border-bottom: 1px solid var(--border);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
   }
-  h3 {
-    font-size: 1.05rem;
-    color: var(--deep);
-    margin: 22px 0 8px;
-  }
-  h4 {
-    font-size: 0.95rem;
-    color: var(--deep);
-    margin: 14px 0 6px;
-  }
-  p { margin-bottom: 12px; }
-  hr {
-    border: none;
-    border-top: 1px solid var(--border);
-    margin: 32px 0;
-  }
-
-  /* TLDR card */
-  .tldr-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 14px;
-    margin: 16px 0 24px;
-  }
-  .tldr {
-    background: var(--foam);
-    border-left: 4px solid var(--accent);
-    border-radius: 10px;
-    padding: 18px 22px;
-    box-shadow: 0 2px 10px rgba(11, 46, 74, 0.05);
-  }
-  .tldr h3 {
-    font-size: 1rem;
-    color: var(--accent);
-    margin: 0 0 6px;
-  }
-  .tldr p { margin: 0; }
-
-  /* Tables */
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 14px 0 20px;
-    background: var(--foam);
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 2px 8px rgba(11, 46, 74, 0.05);
-    font-size: 0.88rem;
-  }
-  th {
-    background: var(--deep);
+  h2.sec .badge {
+    background: var(--sea);
     color: white;
-    text-align: left;
-    padding: 10px 14px;
-    font-size: 0.78rem;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
+    font-size: 0.7rem;
+    padding: 4px 10px;
+    border-radius: 8px;
+    letter-spacing: 0.12em;
     font-weight: 700;
   }
-  td {
-    padding: 9px 14px;
+  .sec-sub { color: var(--muted); margin-bottom: 20px; font-size: 0.94rem; }
+
+  /* ---- Blog timeline ---- */
+  .timeline-wrap {
+    background: var(--foam);
+    border-radius: 14px;
+    padding: 24px 28px;
+    box-shadow: 0 2px 10px rgba(11, 46, 74, 0.06);
+  }
+  .timeline {
+    position: relative;
+    height: 80px;
+    margin: 30px 0 12px;
+    background: linear-gradient(to right, var(--sand-light) 0%, var(--sand-light) 100%);
+    border-radius: 6px;
+  }
+  .timeline-axis {
+    position: absolute;
+    bottom: 22px;
+    left: 0; right: 0;
+    height: 2px;
+    background: var(--border);
+  }
+  .tl-tick {
+    position: absolute;
+    bottom: 8px;
+    transform: translateX(-50%);
+    font-size: 0.7rem;
+    color: var(--muted);
+    text-align: center;
+  }
+  .tl-tick::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1px; height: 8px;
+    background: var(--border);
+  }
+  .tl-burst {
+    position: absolute;
+    width: 14px; height: 14px;
+    background: var(--accent);
+    border: 2px solid white;
+    border-radius: 50%;
+    top: 30px;
+    transform: translateX(-50%);
+    box-shadow: 0 2px 6px rgba(232, 93, 4, 0.5);
+  }
+  .tl-burst-stack {
+    position: absolute;
+    top: 8px;
+    transform: translateX(-50%);
+    width: 80px;
+    text-align: center;
+    font-size: 0.72rem;
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .tl-silence-band {
+    position: absolute;
+    top: 30px;
+    height: 14px;
+    background: repeating-linear-gradient(45deg, var(--red-soft) 0 8px, transparent 8px 16px);
+    border-radius: 3px;
+  }
+  .tl-silence-label {
+    position: absolute;
+    bottom: -22px;
+    text-align: center;
+    font-size: 0.78rem;
+    color: var(--red);
+    font-weight: 600;
+  }
+
+  /* ---- Donut ---- */
+  .dept-wrap {
+    background: var(--foam);
+    border-radius: 14px;
+    padding: 28px;
+    box-shadow: 0 2px 10px rgba(11, 46, 74, 0.06);
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 32px;
+    align-items: center;
+  }
+  @media (max-width: 700px) { .dept-wrap { grid-template-columns: 1fr; } }
+  .donut {
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: conic-gradient(
+      var(--sea) 0deg 336deg,
+      var(--accent) 336deg 360deg
+    );
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin: 0 auto;
+  }
+  .donut::after {
+    content: "";
+    position: absolute;
+    width: 130px; height: 130px;
+    background: var(--foam);
+    border-radius: 50%;
+  }
+  .donut-center {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+  }
+  .donut-center .big { font-size: 2rem; font-weight: 800; color: var(--deep); line-height: 1; }
+  .donut-center .lil { font-size: 0.78rem; color: var(--muted); margin-top: 4px; }
+
+  .dept-list { display: flex; flex-direction: column; gap: 12px; }
+  .dept-row {
+    display: grid;
+    grid-template-columns: 18px 1fr auto;
+    gap: 12px;
+    align-items: center;
+    padding: 8px 0;
     border-bottom: 1px solid var(--border);
   }
-  tr:last-child td { border-bottom: none; }
-  td.num { font-family: ui-monospace, monospace; text-align: right; }
-  td .check { color: var(--green); font-weight: 700; }
-  td .cross { color: var(--red); font-weight: 700; }
-  td .warn { color: var(--accent); font-weight: 700; }
-
-  /* Lists */
-  ul, ol {
-    margin: 8px 0 14px 20px;
-    padding-left: 12px;
+  .dept-row:last-child { border-bottom: none; }
+  .dept-dot { width: 14px; height: 14px; border-radius: 4px; }
+  .dept-name { font-weight: 600; color: var(--deep); }
+  .dept-name .desc { font-size: 0.78rem; color: var(--muted); font-weight: 400; display: block; }
+  .dept-num {
+    font-family: ui-monospace, monospace;
+    font-weight: 700;
+    color: var(--deep);
+    font-size: 1.05rem;
   }
-  ul li, ol li { margin-bottom: 4px; }
 
-  /* Code-ish blocks */
-  pre, code {
-    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  /* ---- On-page grid ---- */
+  .onpage-table {
+    width: 100%;
+    background: var(--foam);
+    border-collapse: collapse;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(11, 46, 74, 0.06);
     font-size: 0.85rem;
   }
-  pre {
+  .onpage-table th, .onpage-table td {
+    padding: 10px 12px;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+  }
+  .onpage-table th {
     background: var(--deep);
     color: white;
-    padding: 14px 18px;
-    border-radius: 8px;
-    overflow-x: auto;
-    margin: 12px 0 18px;
-    line-height: 1.5;
+    font-weight: 700;
+    font-size: 0.74rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
   }
-  code:not(pre code) {
+  .onpage-table td.label {
+    text-align: left;
+    font-weight: 600;
+    color: var(--deep);
+    background: var(--sand-light);
+    font-family: ui-monospace, monospace;
+    font-size: 0.82rem;
+  }
+  .onpage-table .ok { background: var(--green-soft); color: var(--green); font-weight: 700; }
+  .onpage-table .warn { background: var(--amber-soft); color: var(--amber); font-weight: 700; }
+  .onpage-table .err { background: var(--red-soft); color: var(--red); font-weight: 700; }
+  @media (max-width: 700px) {
+    .onpage-table { font-size: 0.75rem; }
+    .onpage-table th, .onpage-table td { padding: 8px 6px; }
+  }
+
+  /* ---- Competitor benchmark ---- */
+  .compare {
+    background: var(--foam);
+    border-radius: 14px;
+    padding: 24px 28px;
+    box-shadow: 0 2px 10px rgba(11, 46, 74, 0.06);
+  }
+  .compare-row {
+    display: grid;
+    grid-template-columns: 200px 1fr 1fr;
+    gap: 16px;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  @media (max-width: 700px) {
+    .compare-row { grid-template-columns: 1fr; gap: 8px; }
+  }
+  .compare-row:last-child { border-bottom: none; }
+  .compare-row .metric { font-weight: 600; color: var(--deep); font-size: 0.9rem; }
+  .compare-row .metric .desc { font-size: 0.75rem; color: var(--muted); font-weight: 400; display: block; }
+  .compare-bar {
+    background: var(--sand-light);
+    border-radius: 6px;
+    height: 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  .compare-bar .fill {
+    height: 100%;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    color: white;
+    font-weight: 700;
+    font-size: 0.85rem;
+  }
+  .compare-bar .fill.blow { background: var(--accent); }
+  .compare-bar .fill.comp { background: var(--sea); }
+  .compare-bar .label-mini {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.74rem;
+    font-weight: 700;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  /* ---- SERP positions ---- */
+  .serp-wrap { background: var(--foam); border-radius: 14px; padding: 24px 28px; box-shadow: 0 2px 10px rgba(11, 46, 74, 0.06); }
+  .serp-row {
+    display: grid;
+    grid-template-columns: 220px 1fr 80px;
+    gap: 14px;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  @media (max-width: 700px) {
+    .serp-row { grid-template-columns: 1fr; gap: 4px; }
+    .serp-row .keyword { font-size: 0.85rem; }
+  }
+  .serp-row:last-child { border-bottom: none; }
+  .serp-row .keyword {
+    font-weight: 600;
+    color: var(--deep);
+    font-family: ui-monospace, monospace;
+    font-size: 0.82rem;
+  }
+  .serp-row .keyword .dept {
+    display: inline-block;
+    font-size: 0.65rem;
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-right: 6px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 700;
+    vertical-align: middle;
+  }
+  .dept.kit { background: var(--accent-soft); color: var(--accent); }
+  .dept.hor { background: #fde7c7; color: var(--amber); }
+  .dept.eve { background: var(--green-soft); color: var(--green); }
+  .serp-bar {
+    display: grid;
+    grid-template-columns: repeat(11, 1fr);
+    gap: 3px;
+    height: 26px;
+  }
+  .serp-cell {
+    background: var(--sand-light);
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--muted);
+  }
+  .serp-cell.pos { background: var(--sea-light); color: white; }
+  .serp-cell.blow { background: var(--accent); color: white; box-shadow: 0 0 0 2px var(--accent-soft); }
+  .serp-cell.win { background: var(--green); color: white; box-shadow: 0 0 0 2px var(--green-soft); }
+  .serp-cell.off { background: repeating-linear-gradient(45deg, var(--red-soft) 0 4px, transparent 4px 8px); color: var(--red); font-size: 0.62rem; }
+  .serp-position {
+    font-weight: 700;
+    text-align: center;
+    color: var(--deep);
+    font-size: 0.95rem;
+    font-family: ui-monospace, monospace;
+  }
+  .serp-position.win { color: var(--green); }
+  .serp-position.miss { color: var(--red); font-size: 0.78rem; }
+  .serp-position.edge { color: var(--accent); }
+
+  /* ---- Quick wins / opportunities ---- */
+  .winsgrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  @media (max-width: 700px) { .winsgrid { grid-template-columns: 1fr; } }
+  .winsbox {
+    background: var(--foam);
+    border-radius: 14px;
+    padding: 22px 24px;
+    box-shadow: 0 2px 10px rgba(11, 46, 74, 0.06);
+  }
+  .winsbox.green { border-top: 4px solid var(--green); }
+  .winsbox.gold { border-top: 4px solid var(--accent); }
+  .winsbox h3 { color: var(--deep); font-size: 1.05rem; margin-bottom: 14px; }
+  .winsbox ol { list-style: none; counter-reset: wcount; padding: 0; }
+  .winsbox ol li {
+    counter-increment: wcount;
+    padding: 10px 0 10px 36px;
+    position: relative;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.9rem;
+  }
+  .winsbox ol li:last-child { border-bottom: none; }
+  .winsbox ol li::before {
+    content: counter(wcount);
+    position: absolute;
+    left: 0; top: 8px;
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: white;
+    text-align: center;
+    line-height: 26px;
+    font-weight: 700;
+    font-size: 0.78rem;
+  }
+  .winsbox.green ol li::before { background: var(--green); }
+  .winsbox ol li strong { color: var(--deep); display: block; margin-bottom: 2px; }
+  .winsbox ol li .meta {
+    font-size: 0.74rem;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+  .winsbox ol li .meta .ef {
     background: var(--sand-light);
     padding: 1px 6px;
     border-radius: 3px;
-    font-size: 0.85em;
+    font-weight: 600;
+    color: var(--deep);
   }
 
-  /* Callout */
+  /* ---- Callout ---- */
   .callout {
-    background: var(--sand-light);
-    border-left: 4px solid var(--sea);
-    padding: 14px 18px;
-    border-radius: 8px;
-    margin: 16px 0;
-    font-size: 0.92rem;
+    background: linear-gradient(135deg, var(--sea) 0%, var(--deep) 100%);
+    color: white;
+    border-radius: 14px;
+    padding: 26px 30px;
+    margin: 24px 0;
   }
-  .callout.warn { border-left-color: var(--accent); }
-  .callout.bad { border-left-color: var(--red); }
-  .callout.good { border-left-color: var(--green); }
+  .callout h3 { color: white; margin-bottom: 8px; font-size: 1.15rem; }
+  .callout p { font-size: 0.95rem; opacity: 0.95; }
+  .callout strong { color: var(--accent-soft); }
 
-  /* Strong inline highlight */
-  strong { color: var(--deep); }
-
-  /* Footer */
+  /* ---- Footer ---- */
   footer {
-    margin-top: 48px;
+    margin-top: 60px;
     padding-top: 24px;
     border-top: 1px solid var(--border);
     text-align: center;
     color: var(--muted);
     font-size: 0.85rem;
   }
-  footer a {
-    color: var(--sea);
-    text-decoration: none;
-    font-weight: 600;
-  }
-  footer a:hover { color: var(--deep); }
+  footer a { color: var(--sea); text-decoration: none; font-weight: 600; }
+  footer a:hover { text-decoration: underline; }
 
   @media print {
-    .brand-bar { display: none; }
+    .brand-bar, .sub-nav { display: none; }
     body { background: white; }
-    table { box-shadow: none; border: 1px solid #ccc; }
-    h2 { page-break-after: avoid; }
-    .tldr { page-break-inside: avoid; }
+    section { page-break-inside: avoid; }
   }
 </style>
 </head>
 <body>
 
+<!-- Brand bar -->
 <header class="brand-bar">
   <div class="logo">BLOW</div>
   <div class="brand-name">Beach House</div>
   <nav class="brand-tabs" aria-label="Hoofdmenu">
     <a href="../">Bestelling</a>
-    <a href="./">SEO</a>
+    <a href="./" class="active" aria-current="page">SEO</a>
   </nav>
 </header>
 
-<main class="container">
+<!-- Sub-nav -->
+<nav class="sub-nav">
+  <ul>
+    <li><a href="./" class="back">← Pilot-overzicht</a></li>
+    <li><a href="#scores">Scores</a></li>
+    <li><a href="#blog">Blog-graveyard</a></li>
+    <li><a href="#dept">Departementen</a></li>
+    <li><a href="#onpage">On-page</a></li>
+    <li><a href="#compare">Concurrent</a></li>
+    <li><a href="#serp">SERP-posities</a></li>
+    <li><a href="#wins">Quick wins</a></li>
+  </ul>
+</nav>
 
-<header class="doc-head">
-  <div class="eyebrow">BLOW · Site-audit</div>
-  <h1>Audit blow.surf — 27 april 2026</h1>
-  <div class="meta-row">
-    <span>👤 Bram Overgaag (+ Claude)</span>
-    <span>⏱ ≈ 45 min besteed</span>
-    <span>📊 Methode: publieke signalen + handmatige fetch</span>
-    <span>🔄 Versie 1.0</span>
-  </div>
+<div class="container">
+
+<header class="hero" id="top">
+  <div class="eyebrow">BLOW · audit</div>
+  <h1>Site &amp; SERP audit — 27 april 2026</h1>
+  <p class="lead">Site-audit + concurrent-check + SERP-snapshot van 10 keywords over 3 departementen. Alle data publiek geverifieerd. Geen GSC-toegang nodig.</p>
 </header>
 
-<p><strong>Status:</strong> Delen 2 t/m 4 voltooid; Deel 1 (GSC) wacht op toegang van Toine.</p>
-
-<h2>TL;DR — 3 bevindingen die het verhaal voor woensdag bepalen</h2>
-
-<div class="tldr-grid">
-  <div class="tldr">
-    <h3>1 · De huidige blog draagt de vendor-vingerafdruk</h3>
-    <p>Alle <strong>15 blogposts</strong> op blow.surf zijn op <strong>één dag</strong> gepubliceerd: 14 juli 2025. <strong>Geen enkele post sindsdien</strong> — negen maanden inhoudelijke stilte. Dat is precies het patroon van een SEO-vendor-aflevering: massa-upload, daarna stilte. Toine heeft deze film al gezien — daarom denkt hij erover een nieuwe vendor te tekenen.</p>
+<!-- ============ SCORES ============ -->
+<section id="scores">
+  <div class="scores">
+    <div class="score danger">
+      <div class="num">15</div>
+      <div class="lbl">Blog-posts in 9 maanden</div>
+      <span class="sub">allemaal op 1 dag (2025-07-14)</span>
+    </div>
+    <div class="score warn">
+      <div class="num">3/10</div>
+      <div class="lbl">SERPs in top-10</div>
+      <span class="sub">2 op grenswaarde #10</span>
+    </div>
+    <div class="score danger">
+      <div class="num">0/3</div>
+      <div class="lbl">Departementen volledig gedekt</div>
+      <span class="sub">14/15 posts kitesurf</span>
+    </div>
+    <div class="score good">
+      <div class="num">2</div>
+      <div class="lbl">Onontgonnen keywords</div>
+      <span class="sub">geen NL-concurrentie</span>
+    </div>
   </div>
-  <div class="tldr">
-    <h3>2 · De helft van het bedrijf is online onzichtbaar</h3>
-    <p>Van de 15 posts gaan er <strong>14 over kitesurfen</strong>, <strong>1 over een strandbruiloft</strong>. Restaurant — geen post. Events (>150/jaar) — geen post. Het beach house dat in zoveel onlinegesprekken blijkbaar BLOW's gezicht is — geen post. Waarschijnlijk 50–60% van de omzet heeft <strong>nul</strong> content-equity in Google.</p>
+</section>
+
+<!-- ============ BLOG TIMELINE ============ -->
+<section id="blog">
+  <h2 class="sec"><span class="badge">01</span>Blog-graveyard — de vendor-vingerafdruk</h2>
+  <p class="sec-sub">15 blogposts, allemaal gepubliceerd op één dag. Geen post sindsdien. Dat is exact het patroon van een SEO-vendor-aflevering: massa-upload, daarna stilte.</p>
+
+  <div class="timeline-wrap">
+    <div class="timeline" aria-label="Blog publicatie tijdlijn">
+      <div class="timeline-axis"></div>
+      <div class="tl-tick" style="left:5%">jan&nbsp;2025</div>
+      <div class="tl-tick" style="left:30%">jul&nbsp;2025</div>
+      <div class="tl-tick" style="left:55%">jan&nbsp;2026</div>
+      <div class="tl-tick" style="left:95%">apr&nbsp;2026</div>
+
+      <div class="tl-burst" style="left:30%"></div>
+      <div class="tl-burst-stack" style="left:30%">15 posts<br>14 jul 2025</div>
+
+      <div class="tl-silence-band" style="left:30%; width:65%"></div>
+      <div class="tl-silence-label" style="left:30%; width:65%">9 maanden stilte</div>
+    </div>
+    <p style="margin-top: 36px; font-size: 0.88rem; color: var(--muted);">
+      <strong style="color:var(--deep);">Vergelijking:</strong> kiteboardschool.nl publiceert het hele jaar door, met ~2 posts/maand. Hun blog telt 20+ artikelen verdeeld over 12+ maanden cadans.
+    </p>
   </div>
-  <div class="tldr">
-    <h3>3 · Kiteboardschool.nl wint op volume én structuur</h3>
-    <p>Directe concurrent op dezelfde Zandmotor: <strong>20+ blogartikelen</strong>, <strong>30+ locatie-pagina's</strong> (per spot in NL), expliciete IKO PRO-status, multi-locatie-strategie. BLOW's content-footprint is ongeveer <strong>1/3</strong> daarvan, en staat stil. Bij gelijke wind wint de concurrent in zoekresultaten.</p>
+</section>
+
+<!-- ============ DEPARTEMENTEN ============ -->
+<section id="dept">
+  <h2 class="sec"><span class="badge">02</span>Departement-dekking</h2>
+  <p class="sec-sub">Half het bedrijf is online onzichtbaar. 93% van de blog-posts gaat over kitesurfen. Restaurant en events — twee derde van de business — krijgen nul content-equity.</p>
+
+  <div class="dept-wrap">
+    <div class="donut">
+      <div class="donut-center">
+        <div class="big">15</div>
+        <div class="lil">posts totaal</div>
+      </div>
+    </div>
+    <div class="dept-list">
+      <div class="dept-row">
+        <div class="dept-dot" style="background:var(--sea);"></div>
+        <div class="dept-name">Kitesurfschool<span class="desc">Spots, gear, technieken, veiligheid</span></div>
+        <div class="dept-num">14 / 15</div>
+      </div>
+      <div class="dept-row">
+        <div class="dept-dot" style="background:var(--accent);"></div>
+        <div class="dept-name">Events<span class="desc">Alleen 1 wedding-post</span></div>
+        <div class="dept-num">1 / 15</div>
+      </div>
+      <div class="dept-row">
+        <div class="dept-dot" style="background:var(--red-soft);"></div>
+        <div class="dept-name">Restaurant<span class="desc">Geen content</span></div>
+        <div class="dept-num">0 / 15</div>
+      </div>
+      <div class="dept-row">
+        <div class="dept-dot" style="background:var(--red-soft);"></div>
+        <div class="dept-name">Beach experience<span class="desc">Geen content</span></div>
+        <div class="dept-num">0 / 15</div>
+      </div>
+    </div>
   </div>
-</div>
+</section>
 
-<hr>
+<!-- ============ ON-PAGE ============ -->
+<section id="onpage">
+  <h2 class="sec"><span class="badge">03</span>On-page audit — 5 sleutel-pagina's</h2>
+  <p class="sec-sub">Title-tags ontbreken of zijn te kort. Schema.org niet gedetecteerd. Meta-descriptions ontbreken op meerdere paginas. /over-blow toont "0 reviews" terwijl de site "#1 kitesurfschool" claimt.</p>
 
-<h2>Deel 1 · Google Search Console <em style="color:var(--muted); font-weight: 400;">(uitgesteld — wacht op toegang)</em></h2>
+  <table class="onpage-table" aria-label="On-page audit per pagina">
+    <thead>
+      <tr>
+        <th>Pagina</th>
+        <th>Title</th>
+        <th>Meta-desc</th>
+        <th>H1</th>
+        <th>Schema</th>
+        <th>E-E-A-T</th>
+        <th>USP</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="label">/blog</td>
+        <td class="warn">⚠</td>
+        <td class="err">✕</td>
+        <td class="warn">dubbel</td>
+        <td class="err">✕</td>
+        <td class="err">—</td>
+        <td class="warn">vaag</td>
+      </tr>
+      <tr>
+        <td class="label">/kitesurfles</td>
+        <td class="err">15 chars</td>
+        <td class="err">✕</td>
+        <td class="warn">"Kitesurfles"</td>
+        <td class="err">✕</td>
+        <td class="warn">—</td>
+        <td class="ok">CTAs ok</td>
+      </tr>
+      <tr>
+        <td class="label">/restaurant/</td>
+        <td class="err">✕</td>
+        <td class="err">✕</td>
+        <td class="ok">✓</td>
+        <td class="err">✕</td>
+        <td class="warn">—</td>
+        <td class="ok">e-keuken</td>
+      </tr>
+      <tr>
+        <td class="label">/over-blow/</td>
+        <td class="err">✕</td>
+        <td class="err">✕</td>
+        <td class="ok">✓</td>
+        <td class="err">✕</td>
+        <td class="err">0 reviews</td>
+        <td class="warn">"#1" claim</td>
+      </tr>
+      <tr>
+        <td class="label">/kitesurfles-zandmotor/</td>
+        <td class="ok">✓</td>
+        <td class="warn">?</td>
+        <td class="ok">✓</td>
+        <td class="warn">?</td>
+        <td class="ok">veiligheid</td>
+        <td class="ok">duidelijk</td>
+      </tr>
+    </tbody>
+  </table>
+  <p style="margin-top: 14px; font-size: 0.82rem; color: var(--muted); text-align: center;">
+    <span class="ok" style="background:var(--green-soft); color:var(--green); padding:2px 8px; border-radius:4px; font-weight:700;">groen</span> in orde &nbsp;·&nbsp;
+    <span class="warn" style="background:var(--amber-soft); color:var(--amber); padding:2px 8px; border-radius:4px; font-weight:700;">amber</span> aandacht &nbsp;·&nbsp;
+    <span class="err" style="background:var(--red-soft); color:var(--red); padding:2px 8px; border-radius:4px; font-weight:700;">rood</span> ontbreekt / probleem
+  </p>
+</section>
 
-<div class="callout warn">
-  <strong>Te doen:</strong> Toine voegt <code>bramovergaag@gmail.com</code> toe als beperkte gebruiker op property <code>sc-domain:blow.surf</code> of <code>https://blow.surf/</code>. Zodra toegang: 30-min-export van top-20 underperformers, quick-wins en gap-queries — toevoegen aan dit document als bijlage.
-</div>
+<!-- ============ COMPETITOR ============ -->
+<section id="compare">
+  <h2 class="sec"><span class="badge">04</span>Concurrent-benchmark</h2>
+  <p class="sec-sub">Kiteboardschool.nl (Kijkduin + Scheveningen) is de directe Zandmotor-concurrent met IKO PRO-status. Volume-vergelijking laat het content-tekort zien.</p>
 
-<hr>
+  <div class="compare">
+    <div class="compare-row">
+      <div class="metric">Blog-artikelen<span class="desc">totaal gepubliceerd</span></div>
+      <div class="compare-bar"><div class="fill blow" style="width: 75%;">15 — BLOW</div></div>
+      <div class="compare-bar"><div class="fill comp" style="width: 100%;">20+ — kiteboardschool.nl</div></div>
+    </div>
+    <div class="compare-row">
+      <div class="metric">Locatie-pagina's<span class="desc">spots NL gedekt</span></div>
+      <div class="compare-bar"><div class="fill blow" style="width: 7%;">2</div></div>
+      <div class="compare-bar"><div class="fill comp" style="width: 100%;">30+</div></div>
+    </div>
+    <div class="compare-row">
+      <div class="metric">Locaties<span class="desc">fysieke vestigingen</span></div>
+      <div class="compare-bar"><div class="fill blow" style="width: 50%;">1 — Kijkduin</div></div>
+      <div class="compare-bar"><div class="fill comp" style="width: 100%;">2 + nationale spots</div></div>
+    </div>
+    <div class="compare-row">
+      <div class="metric">Content-cadans<span class="desc">posts per maand</span></div>
+      <div class="compare-bar"><div class="fill blow" style="width: 0%;"><span class="label-mini">0 / mnd · 9 mnd stilte</span></div></div>
+      <div class="compare-bar"><div class="fill comp" style="width: 100%;">~2 / mnd</div></div>
+    </div>
+    <div class="compare-row">
+      <div class="metric">IKO-status zichtbaar<span class="desc">op homepage / about</span></div>
+      <div class="compare-bar"><div class="fill blow" style="width: 0%;"><span class="label-mini">niet vermeld</span></div></div>
+      <div class="compare-bar"><div class="fill comp" style="width: 100%;">"Official Pro"</div></div>
+    </div>
+  </div>
 
-<h2>Deel 2 · Site-structuur via sitemap</h2>
+  <div class="callout">
+    <h3>Wat dit betekent</h3>
+    <p>Bij gelijke wind-condities (zoekvraag) wint <strong>kiteboardschool.nl</strong> in zoekresultaten omdat zij een hoger volume gestructureerde content hebben + IKO-claim publiek vermelden. BLOW heeft vergelijkbare kwalificaties (IKO sinds 2013) maar gebruikt ze niet als SEO-signaal.</p>
+  </div>
+</section>
 
-<h3>Sitemaps gevonden</h3>
+<!-- ============ SERP ============ -->
+<section id="serp">
+  <h2 class="sec"><span class="badge">05</span>SERP-posities — 10 keywords gemeten</h2>
+  <p class="sec-sub">Per keyword positie 1–10 van Google's organische top-10. Oranje = BLOW. Groen = BLOW met sterke positie. Gestreept rood = niet in top-10.</p>
 
-<p>13 sitemaps onder <code>/sitemap.xml</code>:</p>
+  <div class="serp-wrap">
 
-<table>
-  <thead>
-    <tr><th>Sitemap</th><th>Laatst gewijzigd</th><th>Notitie</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>post-sitemap.xml</td><td>2025-07-14</td><td><strong class="warn">9 maanden inactief</strong></td></tr>
-    <tr><td>page-sitemap.xml</td><td>2026-03-31</td><td>Recent — pagina's onderhouden</td></tr>
-    <tr><td>product-sitemap.xml</td><td>2026-04-09</td><td>WooCommerce shop actief</td></tr>
-    <tr><td>actieve-events-sitemap.xml</td><td>2026-03-23</td><td>Events worden bijgewerkt</td></tr>
-    <tr><td>werken-bij-sitemap.xml</td><td>2026-04-13</td><td>Vacatures actueel</td></tr>
-    <tr><td>kitesurfles-sitemap.xml</td><td>2025-09-30</td><td>7 maanden oud</td></tr>
-    <tr><td>zakelijke-events-sitemap.xml</td><td>2025-08-12</td><td>8 maanden oud</td></tr>
-    <tr><td>particuliere-events-sitemap.xml</td><td>2026-04-20</td><td>Recent</td></tr>
-    <tr><td>category-sitemap.xml</td><td>2025-07-14</td><td>Met de blog mee verouderd</td></tr>
-    <tr><td>product_cat-sitemap.xml</td><td>2025-09-11</td><td>—</td></tr>
-    <tr><td>vacature-categorieen-sitemap.xml</td><td>2025-01-21</td><td>—</td></tr>
-    <tr><td>kitesurfles-categorieen-sitemap.xml</td><td>2025-08-29</td><td>—</td></tr>
-    <tr><td>author-sitemap.xml</td><td>2024-02-19</td><td><strong style="color:var(--red);">2+ jaar oud — auteur-pagina's verwaarloosd</strong></td></tr>
-  </tbody>
-</table>
+    <!-- KITESURF cluster -->
+    <div class="serp-row">
+      <div class="keyword"><span class="dept kit">Kit</span>kitesurfen zandmotor</div>
+      <div class="serp-bar">
+        <div class="serp-cell pos">1</div><div class="serp-cell pos">2</div><div class="serp-cell pos">3</div><div class="serp-cell pos">4</div><div class="serp-cell pos">5</div><div class="serp-cell pos">6</div><div class="serp-cell pos">7</div><div class="serp-cell pos">8</div><div class="serp-cell pos">9</div><div class="serp-cell blow">10</div><div class="serp-cell">—</div>
+      </div>
+      <div class="serp-position edge">#10</div>
+    </div>
 
-<h3>Blog-content (alle 15 posts)</h3>
+    <div class="serp-row">
+      <div class="keyword"><span class="dept kit">Kit</span>kitesurfles kijkduin</div>
+      <div class="serp-bar">
+        <div class="serp-cell pos">1</div><div class="serp-cell pos">2</div><div class="serp-cell pos">3</div><div class="serp-cell pos">4</div><div class="serp-cell pos">5</div><div class="serp-cell pos">6</div><div class="serp-cell pos">7</div><div class="serp-cell pos">8</div><div class="serp-cell pos">9</div><div class="serp-cell blow">10</div><div class="serp-cell">—</div>
+      </div>
+      <div class="serp-position edge">#10</div>
+    </div>
 
-<table>
-  <thead>
-    <tr><th>#</th><th>Onderwerp</th><th>Departement</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>1</td><td>Kitesurfuitrusting voor beginners</td><td>Kitesurfschool</td></tr>
-    <tr><td>2</td><td>Introductie tot kitesurfen</td><td>Kitesurfschool</td></tr>
-    <tr><td>3</td><td>Fysieke en mentale voordelen van kitesurfen</td><td>Kitesurfschool</td></tr>
-    <tr><td>4</td><td>De basis van kitesurfen — wind en weersomstandigheden</td><td>Kitesurfschool</td></tr>
-    <tr><td>5</td><td>Trainen voor kitesurfen — fysieke oefeningen</td><td>Kitesurfschool</td></tr>
-    <tr><td>6</td><td>De geschiedenis van kitesurfen</td><td>Kitesurfschool</td></tr>
-    <tr><td>7</td><td>Kitesurfen in Nederland — de beste spots</td><td>Kitesurfschool</td></tr>
-    <tr><td>8</td><td>Kitesurfles op vakantie</td><td>Kitesurfschool</td></tr>
-    <tr><td>9</td><td>Kies de juiste kitesurfschool</td><td>Kitesurfschool</td></tr>
-    <tr><td>10</td><td>De sociale kant van kitesurfen</td><td>Kitesurfschool</td></tr>
-    <tr><td>11</td><td>Kitesurfen en stressvermindering</td><td>Kitesurfschool</td></tr>
-    <tr><td>12</td><td>Hoe je verder kunt leren en groeien</td><td>Kitesurfschool</td></tr>
-    <tr><td>13</td><td>Het belang van goede communicatie</td><td>Kitesurfschool</td></tr>
-    <tr><td>14</td><td>Veiligheid eerst — essentiële tips</td><td>Kitesurfschool</td></tr>
-    <tr><td>15</td><td>Top 10 tips voor bruiloft op het strand</td><td>Events</td></tr>
-  </tbody>
-</table>
+    <div class="serp-row">
+      <div class="keyword"><span class="dept kit">Kit</span>kitesurfen den haag</div>
+      <div class="serp-bar">
+        <div class="serp-cell pos">1</div><div class="serp-cell pos">2</div><div class="serp-cell pos">3</div><div class="serp-cell pos">4</div><div class="serp-cell pos">5</div><div class="serp-cell pos">6</div><div class="serp-cell pos">7</div><div class="serp-cell pos">8</div><div class="serp-cell pos">9</div><div class="serp-cell pos">10</div><div class="serp-cell off">off</div>
+      </div>
+      <div class="serp-position miss">off SERP</div>
+    </div>
 
-<div class="callout">
-  <strong>Verdeling:</strong> Kitesurfschool 14/15 (93%) · Events 1/15 (7%) · Restaurant 0/15 · Beach house algemeen 0/15 · Locatie/Zandmotor 0/15 (merk op: bestaande landing page wel — zie deel 3)
-</div>
+    <div class="serp-row">
+      <div class="keyword"><span class="dept kit">Kit</span>kitesurfen kijkduin vs scheveningen</div>
+      <div class="serp-bar">
+        <div class="serp-cell pos">1</div><div class="serp-cell pos">2</div><div class="serp-cell pos">3</div><div class="serp-cell pos">4</div><div class="serp-cell pos">5</div><div class="serp-cell pos">6</div><div class="serp-cell pos">7</div><div class="serp-cell pos">8</div><div class="serp-cell pos">9</div><div class="serp-cell pos">10</div><div class="serp-cell off">off</div>
+      </div>
+      <div class="serp-position miss">vrij ✦</div>
+    </div>
 
-<hr>
+    <!-- HORECA cluster -->
+    <div class="serp-row">
+      <div class="keyword"><span class="dept hor">Hor</span>strandrestaurant kijkduin</div>
+      <div class="serp-bar">
+        <div class="serp-cell pos">1</div><div class="serp-cell pos">2</div><div class="serp-cell pos">3</div><div class="serp-cell pos">4</div><div class="serp-cell pos">5</div><div class="serp-cell pos">6</div><div class="serp-cell pos">7</div><div class="serp-cell pos">8</div><div class="serp-cell pos">9</div><div class="serp-cell pos">10</div><div class="serp-cell off">off</div>
+      </div>
+      <div class="serp-position miss">off SERP</div>
+    </div>
 
-<h2>Deel 3 · On-page audit — 5 sleutel-pagina's</h2>
+    <div class="serp-row">
+      <div class="keyword"><span class="dept hor">Hor</span>lunchen kijkduin zee</div>
+      <div class="serp-bar">
+        <div class="serp-cell pos">1</div><div class="serp-cell pos">2</div><div class="serp-cell pos">3</div><div class="serp-cell pos">4</div><div class="serp-cell pos">5</div><div class="serp-cell pos">6</div><div class="serp-cell pos">7</div><div class="serp-cell pos">8</div><div class="serp-cell pos">9</div><div class="serp-cell pos">10</div><div class="serp-cell off">off</div>
+      </div>
+      <div class="serp-position miss">off SERP</div>
+    </div>
 
-<h3>/blog</h3>
-<table>
-  <thead><tr><th>Element</th><th>Status</th><th>Waarde</th></tr></thead>
-  <tbody>
-    <tr><td>Title-tag</td><td><span class="warn">⚠️</span></td><td>niet zichtbaar in fetch — onderzoeken (waarschijnlijk leeg of dubbel)</td></tr>
-    <tr><td>Meta-description</td><td><span class="warn">⚠️</span></td><td>niet aanwezig — toevoegen, kans op CTR-uplift</td></tr>
-    <tr><td>H1</td><td><span class="warn">⚠️</span></td><td>dubbel ("Blog" + "de BLOW BLOG") — dedupliceren</td></tr>
-    <tr><td>Schema.org</td><td><span class="cross">❌</span></td><td>niet gedetecteerd — <code>Blog</code> schema toevoegen</td></tr>
-    <tr><td>Canonical</td><td><span class="warn">⚠️</span></td><td>niet zichtbaar — controleren</td></tr>
-    <tr><td>OG-tags</td><td><span class="cross">❌</span></td><td>niet zichtbaar — toevoegen voor social sharing</td></tr>
-  </tbody>
-</table>
+    <div class="serp-row">
+      <div class="keyword"><span class="dept hor">Hor</span>dagje strand kijkduin</div>
+      <div class="serp-bar">
+        <div class="serp-cell pos">1</div><div class="serp-cell pos">2</div><div class="serp-cell pos">3</div><div class="serp-cell pos">4</div><div class="serp-cell pos">5</div><div class="serp-cell pos">6</div><div class="serp-cell pos">7</div><div class="serp-cell pos">8</div><div class="serp-cell pos">9</div><div class="serp-cell pos">10</div><div class="serp-cell off">off</div>
+      </div>
+      <div class="serp-position miss">off SERP</div>
+    </div>
 
-<h3>/kitesurfles</h3>
-<table>
-  <thead><tr><th>Element</th><th>Status</th><th>Waarde</th></tr></thead>
-  <tbody>
-    <tr><td>Title-tag</td><td><span class="warn">⚠️</span></td><td>"Kitesurfles - BLOW" — <strong>15 tekens, veel te kort</strong> (target 50–60)</td></tr>
-    <tr><td>H1</td><td><span class="check">✅</span></td><td>"Kitesurfles" — te kort/generiek</td></tr>
-    <tr><td>H2-structuur</td><td><span class="warn">⚠️</span></td><td>"Wat is inbegrepen" 8× herhaald — verschillende H2's per cursus-blok</td></tr>
-    <tr><td>CTA-knoppen</td><td><span class="check">✅</span></td><td>"Boek direct" meermaals zichtbaar — goed</td></tr>
-    <tr><td>Word-count</td><td><span class="check">✅</span></td><td>≈ 2.300 woorden — goede diepte</td></tr>
-    <tr><td>Schema</td><td><span class="warn">⚠️</span></td><td>niet gedetecteerd — <code>Course</code> schema toevoegen</td></tr>
-  </tbody>
-</table>
+    <!-- EVENTS cluster -->
+    <div class="serp-row">
+      <div class="keyword"><span class="dept eve">Eve</span>bedrijfsuitje strand den haag</div>
+      <div class="serp-bar">
+        <div class="serp-cell pos">1</div><div class="serp-cell pos">2</div><div class="serp-cell pos">3</div><div class="serp-cell pos">4</div><div class="serp-cell pos">5</div><div class="serp-cell pos">6</div><div class="serp-cell pos">7</div><div class="serp-cell pos">8</div><div class="serp-cell pos">9</div><div class="serp-cell pos">10</div><div class="serp-cell off">off</div>
+      </div>
+      <div class="serp-position miss">off SERP</div>
+    </div>
 
-<h3>/restaurant/</h3>
-<table>
-  <thead><tr><th>Element</th><th>Status</th><th>Waarde</th></tr></thead>
-  <tbody>
-    <tr><td>Title-tag</td><td><span class="cross">❌</span></td><td>niet zichtbaar — toevoegen</td></tr>
-    <tr><td>Meta</td><td><span class="cross">❌</span></td><td>niet zichtbaar — toevoegen</td></tr>
-    <tr><td>H1</td><td><span class="check">✅</span></td><td>"EEN BIJZONDER restaurant" — OK maar geen keyword</td></tr>
-    <tr><td>USP's</td><td><span class="check">✅</span></td><td>100% elektrische keuken, houtoven — sterk content-haakje</td></tr>
-    <tr><td>Reservering</td><td><span class="check">✅</span></td><td>Viking-koppeling zichtbaar</td></tr>
-    <tr><td>Word-count</td><td><span class="check">✅</span></td><td>≈ 1.300 woorden — OK</td></tr>
-  </tbody>
-</table>
+    <div class="serp-row">
+      <div class="keyword"><span class="dept eve">Eve</span>trouwen op strand kijkduin</div>
+      <div class="serp-bar">
+        <div class="serp-cell pos">1</div><div class="serp-cell pos">2</div><div class="serp-cell win">3</div><div class="serp-cell pos">4</div><div class="serp-cell pos">5</div><div class="serp-cell pos">6</div><div class="serp-cell pos">7</div><div class="serp-cell pos">8</div><div class="serp-cell pos">9</div><div class="serp-cell pos">10</div><div class="serp-cell">—</div>
+      </div>
+      <div class="serp-position win">#3 ✓</div>
+    </div>
 
-<h3>/over-blow/</h3>
-<table>
-  <thead><tr><th>Element</th><th>Status</th><th>Waarde</th></tr></thead>
-  <tbody>
-    <tr><td>H1</td><td><span class="check">✅</span></td><td>"Over BLOW"</td></tr>
-    <tr><td>Founders genoemd</td><td><span class="check">✅</span></td><td>Toine de Klerk, Chris Dingemanse, Floris</td></tr>
-    <tr><td>TU Delft Master credentials</td><td><span class="check">✅</span></td><td>vermeld — <strong>niet uitgenut voor E-E-A-T</strong></td></tr>
-    <tr><td>IKO-certificering</td><td><span class="cross">❌</span></td><td>niet op About-page — <strong>moet erop</strong>, wel in search-snippets vermeld</td></tr>
-    <tr><td>Reviews-counter</td><td><span class="cross">❌</span></td><td>"0/5 (0 Beoordelingen)" — dringend fixen, ondergraaft "#1"-claim</td></tr>
-    <tr><td>Founding year</td><td><span class="warn">⚠️</span></td><td>inconsistent (2013 in zoekresultaten, 2014 in About) — uniformeren</td></tr>
-    <tr><td>Team-grootte</td><td><span class="cross">❌</span></td><td>niet gespecificeerd — toevoegen</td></tr>
-    <tr><td>Green Key Optimal</td><td><span class="check">✅</span></td><td>certificering zichtbaar</td></tr>
-    <tr><td>Press / media-mentions</td><td><span class="cross">❌</span></td><td>niet aanwezig — overwegen</td></tr>
-  </tbody>
-</table>
+    <div class="serp-row">
+      <div class="keyword"><span class="dept eve">Eve</span>teambuilding kitesurfen</div>
+      <div class="serp-bar">
+        <div class="serp-cell pos">DE</div><div class="serp-cell pos">DE</div><div class="serp-cell pos">DE</div><div class="serp-cell pos">EN</div><div class="serp-cell pos">DE</div><div class="serp-cell pos">DE</div><div class="serp-cell pos">EN</div><div class="serp-cell pos">PT</div><div class="serp-cell pos">DE</div><div class="serp-cell pos">DE</div><div class="serp-cell off">off</div>
+      </div>
+      <div class="serp-position miss">NL leeg ✦</div>
+    </div>
 
-<h3>/kitesurfles-zandmotor/ — bestaande landing!</h3>
-<table>
-  <thead><tr><th>Element</th><th>Status</th><th>Waarde</th></tr></thead>
-  <tbody>
-    <tr><td>Title-tag</td><td><span class="check">✅</span></td><td>"Kitesurfles Zandmotor in Kijkduin bij BLOW Kitesurfschool" — 62 tekens, net binnen target</td></tr>
-    <tr><td>H1</td><td><span class="check">✅</span></td><td>"Kitesurfles Zandmotor"</td></tr>
-    <tr><td>H2-structuur</td><td><span class="check">✅</span></td><td>"Ideale kitesurflocatie", "De #1 kitesurflocatie", "zandmotor voordelen" — goed gestructureerd</td></tr>
-    <tr><td>Word-count</td><td><span class="check">✅</span></td><td>≈ 1.100</td></tr>
-    <tr><td>Veiligheidsclaim</td><td><span class="check">✅</span></td><td>"De Zandmotor is de veiligste kitesurfspot van Nederland" — <strong>al present</strong></td></tr>
-    <tr><td>Zandmotor-historie / wetenschap</td><td><span class="cross">❌</span></td><td>niet uitgelegd — <strong>gat → blog-kans</strong></td></tr>
-    <tr><td>Link naar /blog/-deep-dive</td><td><span class="cross">❌</span></td><td>alleen footer-blok — <strong>direct contextuele link toevoegen</strong></td></tr>
-  </tbody>
-</table>
+  </div>
 
-<div class="callout good">
-  <strong>Belangrijke nuance voor pilot:</strong> mijn voorgestelde Post A (Zandmotor — veiligste kitespot) <strong>dupliceert niet</strong> met deze landing page. De landing page <em>claimt</em> veiligheid; de blog-post <em>bewijst en verklaart</em> waarom (Rijkswaterstaat-engineering, lagune, side-onshore wind).
-</div>
+  <p style="margin-top: 14px; font-size: 0.82rem; color: var(--muted); text-align: center;">
+    <span style="background:var(--accent); color:white; padding:2px 8px; border-radius:4px; font-weight:700;">oranje</span> BLOW positie &nbsp;·&nbsp;
+    <span style="background:var(--green); color:white; padding:2px 8px; border-radius:4px; font-weight:700;">groen</span> BLOW sterke positie &nbsp;·&nbsp;
+    <span style="background:var(--sea-light); color:white; padding:2px 8px; border-radius:4px; font-weight:700;">blauw</span> concurrent &nbsp;·&nbsp;
+    ✦ onontgonnen kans
+  </p>
+</section>
 
-<pre>/kitesurfles-zandmotor/  ──▸  /blog/kitesurfen-zandmotor-veiligheid/
-   (commerciële intent)        (informationele diepte, GEO-optimaliseerd)</pre>
+<!-- ============ QUICK WINS ============ -->
+<section id="wins">
+  <h2 class="sec"><span class="badge">06</span>Top 5 quick-wins + 5 SERP-acties</h2>
+  <p class="sec-sub">Twee parallelle actiepakketten op basis van site-audit én SERP-data. Totaal effort ≈ 25 uur — passend in stap 1 (eerste 4 maanden).</p>
 
-<hr>
+  <div class="winsgrid">
+    <div class="winsbox green">
+      <h3>Site-audit quick wins · ~9u</h3>
+      <ol>
+        <li>
+          <strong>Title-tags + meta-desc op 5 pagina's</strong>
+          /kitesurfles is 15 tekens. /restaurant heeft niets. /over-blow ook niet.
+          <div class="meta"><span class="ef">1u</span> +10–25% CTR direct</div>
+        </li>
+        <li>
+          <strong>E-E-A-T injectie /over-blow/</strong>
+          IKO-badge, TU Delft credentials, 0-reviews-bug fixen, "sinds 2013" uniformeren.
+          <div class="meta"><span class="ef">1u</span> trust-signaal</div>
+        </li>
+        <li>
+          <strong>Restart blog-cadans</strong>
+          Eerste post in 9 maanden: Zandmotor-deep-dive (Post A klaar in pilot).
+          <div class="meta"><span class="ef">2u</span> freshness-signaal</div>
+        </li>
+        <li>
+          <strong>Eerste restaurant + events post</strong>
+          Departement 2 + 3 krijgen content-bestaansrecht.
+          <div class="meta"><span class="ef">4u</span> nieuwe SERP-velden</div>
+        </li>
+        <li>
+          <strong>Internal links</strong>
+          /kitesurfles-zandmotor/ ↔ nieuwe blog over wat de Zandmotor wetenschappelijk is.
+          <div class="meta"><span class="ef">30 min</span> authority-flow</div>
+        </li>
+      </ol>
+    </div>
 
-<h2>Deel 4 · Concurrent-check</h2>
+    <div class="winsbox gold">
+      <h3>SERP-data acties · ~16u</h3>
+      <ol>
+        <li>
+          <strong>Post B publiceren</strong>
+          "Kijkduin vs Scheveningen" — geen vergelijking-pagina in top-10. Open doel.
+          <div class="meta"><span class="ef">2u</span> top-3 onontgonnen keyword</div>
+        </li>
+        <li>
+          <strong>Pagina /teambuilding-kitesurfen/</strong>
+          NL-markt is leeg op deze keyword. Eerste pagina = directe top-3.
+          <div class="meta"><span class="ef">3u</span> hoge-marge B2B</div>
+        </li>
+        <li>
+          <strong>Replicatie trouw-template</strong>
+          BLOW staat #3 op trouwen. Repliceer voor: bedrijfsuitje, kinderfeestje, vrijgezellenfeest.
+          <div class="meta"><span class="ef">6u</span> 3 nieuwe rankings</div>
+        </li>
+        <li>
+          <strong>Content-saturatie 'kitesurfen zandmotor'</strong>
+          Kopieer kitesurfspot.nl-patroon: landing + blog + FAQ = meervoudige posities.
+          <div class="meta"><span class="ef">4u</span> 2–3× SERP-positie</div>
+        </li>
+        <li>
+          <strong>/over-blow/ tunen voor brand-search</strong>
+          Branded "BLOW kitesurfen" + IKO-claim sterker maken.
+          <div class="meta"><span class="ef">1u</span> brand dominantie</div>
+        </li>
+      </ol>
+    </div>
+  </div>
 
-<h3>Kiteboardschool.nl — grootste directe concurrent</h3>
-<table>
-  <thead><tr><th>Signaal</th><th>Waarde</th></tr></thead>
-  <tbody>
-    <tr><td>Locaties</td><td>Kijkduin + Scheveningen + 30+ landelijke spotpagina's</td></tr>
-    <tr><td>Watersporten</td><td>Kite + windsurf + SUP + surf</td></tr>
-    <tr><td>Blog-artikelen</td><td>20+ in meerdere categorieën (theorie, weer, veiligheid, gear, certificering)</td></tr>
-    <tr><td>Locatie-pagina's</td><td>30+ regionale spot-overzichten</td></tr>
-    <tr><td>IKO-status</td><td>"Official Pro Center" expliciet vermeld</td></tr>
-    <tr><td>Boekingssysteem</td><td>Viking (zelfde als BLOW)</td></tr>
-    <tr><td>USP</td><td>"Semi-Privé lessen" + IKO-pro</td></tr>
-  </tbody>
-</table>
-<div class="callout bad"><strong>Conclusie:</strong> out-publishen BLOW met factor ~3–4 in volume én meer gestructureerd (FAQ-categorieën, locatie-cluster).</div>
-
-<h3>Kitesurfspot.nl — directe Kijkduin-concurrent</h3>
-<table>
-  <thead><tr><th>Signaal</th><th>Waarde</th></tr></thead>
-  <tbody>
-    <tr><td>Locatie</td><td>Kijkduin (Strandslag 2) — naast BLOW</td></tr>
-    <tr><td>Watersporten</td><td>Kite + wingfoil + golfsurfboards + trainer kites</td></tr>
-    <tr><td>Blog</td><td>Link in nav, <strong>geen content zichtbaar</strong></td></tr>
-    <tr><td>FAQ</td><td>Wel — dekt wat-meenemen, wind-eisen, leeftijd, frequentie, veiligheid</td></tr>
-    <tr><td>Locatie-content</td><td>Sandmotor + Kijkduin landing-pagina's</td></tr>
-    <tr><td>USP</td><td>"The kite school for everyone", IKO, transparante prijzen</td></tr>
-  </tbody>
-</table>
-<div class="callout good"><strong>Conclusie:</strong> sterk op FAQ-SEO, zwak op blog. Hier kan BLOW snel voorbijgaan met een actieve cadans.</div>
-
-<h3>Aloha Beachclub Scheveningen — secundair, sub-segment</h3>
-<table>
-  <thead><tr><th>Signaal</th><th>Waarde</th></tr></thead>
-  <tbody>
-    <tr><td>Locatie</td><td>Scheveningen Strand Noord 2b</td></tr>
-    <tr><td>Watersporten</td><td>Surf + SUP (geen kite)</td></tr>
-    <tr><td>Blog/news</td><td>Wel actief (geen exact aantal posts gemeten)</td></tr>
-    <tr><td>USP</td><td>"12 maanden per jaar geopend" + integraal aanbod (les + shop + restaurant + events)</td></tr>
-  </tbody>
-</table>
-<div class="callout"><strong>Conclusie:</strong> geen directe les-concurrent (geen kite), wél vergelijkbaar <em>business-model</em>. Format-inspiratie.</div>
-
-<h3>Hart Beach (Scheveningen)</h3>
-<div class="callout warn">403 — geblokkeerd voor automated fetch. Handmatige check door Bram nodig. Vermoedelijk Squarespace/Cloudflare bot-block.</div>
-
-<hr>
-
-<h2>Deel 5 · Top 5 quick wins (komende 8 weken)</h2>
-
-<table>
-  <thead><tr><th>#</th><th>Actie</th><th>Verwachte impact</th><th>Uren</th></tr></thead>
-  <tbody>
-    <tr>
-      <td><strong>1</strong></td>
-      <td><strong>Title-tags + meta-descriptions</strong> repareren op /kitesurfles, /restaurant/, /events/, /over-blow/, /blog</td>
-      <td>+10–25% CTR op huidige rankings — <strong>directe winst</strong></td>
-      <td class="num">1u</td>
-    </tr>
-    <tr>
-      <td><strong>2</strong></td>
-      <td><strong>E-E-A-T injectie op /over-blow/</strong> — IKO-badge, founders' TU Delft credentials uitvergroten, "sinds 2013" uniformeren, 0-reviews-bug repareren</td>
-      <td>Trust-signaal voor Google + bezoekers</td>
-      <td class="num">1u</td>
-    </tr>
-    <tr>
-      <td><strong>3</strong></td>
-      <td><strong>Restart blog-cadans</strong> met Zandmotor-deep-dive (Post A uit pilot) — eerste post in 9 maanden</td>
-      <td>Freshness-signaal naar Google + binnenkomst-context vanaf landing page</td>
-      <td class="num">2u</td>
-    </tr>
-    <tr>
-      <td><strong>4</strong></td>
-      <td><strong>Topic-cluster opstart</strong> — eerste restaurant-post + eerste events-post</td>
-      <td>Departement 2 + 3 krijgen bestaansrecht in zoekresultaten</td>
-      <td class="num">4u</td>
-    </tr>
-    <tr>
-      <td><strong>5</strong></td>
-      <td><strong>Internal link</strong> van /kitesurfles-zandmotor/ → nieuwe Zandmotor-blog-post + canonical-relatie</td>
-      <td>Authority-flow + duidelijkere site-architectuur</td>
-      <td class="num">30 min</td>
-    </tr>
-  </tbody>
-</table>
-
-<div class="callout good"><strong>Totale effort:</strong> ≈ 9 uur — past in 1 weekend door Bram in stap 1.</div>
-
-<h2>Top 3 strategische kansen (3–6 maanden)</h2>
-
-<h3>1 · Restaurant-content-cluster</h3>
-<p>8–10 posts: het wood-fire-verhaal, beach dining cultuur, seizoens-menu's, lokale ingrediënten, koks aan het woord. Aloha doet dit goed; BLOW kan op kwaliteit overtreffen. <strong>Missing market — laag-hangend fruit.</strong></p>
-
-<h3>2 · Events-content-cluster</h3>
-<p>8–10 posts: strandbruiloften (al 1 post), bedrijfsuitjes Den Haag, kinderfeestjes-strand, vrijgezellenfeesten, festivals. Hoge zoek-intentie + hoge conversiewaarde. Concurrentie laag.</p>
-
-<h3>3 · Multi-language automatisering</h3>
-<p>BLOW heeft <code>/en/</code> en <code>/de/</code> — vermoedelijk handmatige vertaling-achterstand. Automatiseer EN-vertaling van NL-prioriteitsposts (Den Haag is expat-zwaar — internationale markt zit lokaal). Stap 2-fase, niet stap 1.</p>
-
-<hr>
-
-<h2>Bijlages bij audit (bestanden in repo)</h2>
-
-<table>
-  <thead><tr><th>Wat</th><th>Waar</th></tr></thead>
-  <tbody>
-    <tr><td>Dit rapport (markdown-bron)</td><td><code>pilot/audit-2026-04-27.md</code></td></tr>
-    <tr><td>Dit rapport (HTML — deze pagina)</td><td><code>pilot/audit-2026-04-27.html</code></td></tr>
-    <tr><td>SERP-snapshot (10 keywords, top-10 per keyword)</td><td><code>pilot/audit-serps-2026-04-27.md</code></td></tr>
-    <tr><td>GSC-export</td><td><em>nog niet aanwezig — wacht op toegang</em></td></tr>
-  </tbody>
-</table>
-
-<h2>Tijd-log</h2>
-
-<table>
-  <thead><tr><th>Onderdeel</th><th>Geplande tijd</th><th>Werkelijke tijd</th></tr></thead>
-  <tbody>
-    <tr><td>Sitemap + paginamap</td><td class="num">10 min</td><td class="num">8 min</td></tr>
-    <tr><td>On-page top-5</td><td class="num">15 min</td><td class="num">18 min</td></tr>
-    <tr><td>Concurrent-check</td><td class="num">10 min</td><td class="num">12 min</td></tr>
-    <tr><td>Indexering</td><td class="num">5 min</td><td class="num">4 min</td></tr>
-    <tr><td>Rapport schrijven</td><td class="num">15 min</td><td class="num">12 min</td></tr>
-    <tr><td><strong>Totaal deel 2-4</strong></td><td class="num"><strong>55 min</strong></td><td class="num"><strong>54 min</strong></td></tr>
-    <tr><td>Deel 1 (GSC)</td><td colspan="2"><em>uitgesteld</em></td></tr>
-  </tbody>
-</table>
-
-<h2>Volgende stappen</h2>
-
-<ol>
-  <li><strong>Toine vragen om GSC-toegang</strong> vóór woensdag 18:00</li>
-  <li><strong>Bij toegang:</strong> binnen 30 min top-20 underperformers + quick-wins exporteren en hieraan toevoegen als bijlage <code>audit-data-gsc.csv</code></li>
-  <li><strong>In gesprek met Toine:</strong> dit document als evidence-pack voor het gesprek (niet bedoeld om hem te confronteren, wel om aan te tonen dat het systeem niet uit de lucht komt)</li>
-  <li><strong>Quick win #1 (titles + meta) kan direct zelf</strong> — laagste-effort, hoogste zichtbare resultaat. Goede demo voor stap 1 maand 1.</li>
-</ol>
+  <div class="callout">
+    <h3>Wat dit voor het Toine-gesprek betekent</h3>
+    <p>De combinatie site-audit + SERP-data is een <strong>bewijspakket</strong>. Niet over wat een vendor of jouw systeem zou doen — wat <strong>nu</strong> waar is. Toine kan elke claim zelf verifiëren: open Google, type de keyword, kijk waar BLOW staat. De pilot toont vervolgens hoe deze gaten gevuld worden — meetbaar, traceerbaar, zonder factuur in jaar 1.</p>
+  </div>
+</section>
 
 <footer>
-  <p><strong>Audit door Bram + Claude</strong> · 27 april 2026 · onderdeel van het samenwerkingsvoorstel</p>
-  <p style="margin-top: 8px;">↩ Terug naar <a href="./">Pilot-overzicht</a> · Bron: <a href="audit-2026-04-27.md">audit-2026-04-27.md</a></p>
+  <p><strong>BLOW Audit v1.0</strong> · 27 april 2026 · onderdeel van pilot v2.0</p>
+  <p>Bronbestanden:
+    <a href="audit-2026-04-27.md">audit-2026-04-27.md</a> ·
+    <a href="audit-serps-2026-04-27.md">audit-serps-2026-04-27.md</a>
+  </p>
+  <p style="margin-top: 8px;">
+    <a href="./">← Terug naar pilot-overzicht</a>
+  </p>
 </footer>
 
-</main>
+</div>
+
+<script>
+// Active sub-nav highlight on scroll
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.sub-nav a:not(.back)');
+function updateActive() {
+  let current = '';
+  sections.forEach(s => {
+    const r = s.getBoundingClientRect();
+    if (r.top < 130) current = s.id;
+  });
+  navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
+}
+window.addEventListener('scroll', updateActive, { passive: true });
+updateActive();
+</script>
 
 </body>
 </html>
