@@ -219,6 +219,21 @@
   footer { margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--border);
     text-align: center; color: var(--muted); font-size: 0.84rem; }
   footer a { color: var(--sea); text-decoration: none; font-weight: 600; }
+
+  /* TOC */
+  .toc-block { margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--border); }
+  .toc { list-style: none; padding: 0; margin: 0; }
+  .toc li { padding: 0; margin: 0; }
+  .toc a { display: block; padding: 4px 10px 4px 12px; font-size: 0.82rem; color: var(--muted);
+    text-decoration: none; border-left: 2px solid transparent;
+    transition: color 0.15s, border-color 0.15s, background 0.15s; line-height: 1.4; }
+  .toc a:hover { color: var(--deep); }
+  .toc a.active { color: var(--sea); border-left-color: var(--sea); background: var(--sand-light); font-weight: 700; }
+  .kbd-hint { margin-top: 14px; padding: 8px 10px; background: var(--sand-light);
+    border-radius: 6px; font-size: 0.72rem; color: var(--muted); text-align: center; }
+  .kbd-hint kbd { background: var(--foam); border: 1px solid var(--border); border-radius: 3px;
+    padding: 1px 5px; font-family: ui-monospace, monospace; font-size: 0.7rem;
+    color: var(--deep); font-weight: 700; }
 </style>
 </head>
 <body>
@@ -233,22 +248,23 @@
   </nav>
 </header>
 
-<nav class="cycle" aria-label="Meeting cycle">
-  <ul>
-    <li><a href="./" class="done"><span class="step-num">✓</span>Agenda M1</a></li>
-    <li class="arrow">→</li>
-    <li><a href="m1-notulen.html" class="done"><span class="step-num">✓</span>Notulen M1</a></li>
-    <li class="arrow">→</li>
-    <li><a href="m1-actielijst.html" class="active" aria-current="page"><span class="step-num">3</span>Actielijst M1</a></li>
-    <li class="arrow">→</li>
-    <li><a href="#" class="future"><span class="step-num">4</span>Agenda M2</a></li>
-  </ul>
-</nav>
 
 <div class="wrap">
 
   <aside class="timeline">
     <h3>Timeline</h3>
+
+    <div class="toc-block">
+      <h3>Op deze pagina</h3>
+      <ul class="toc">
+        <li><a href="#status">Status</a></li>
+        <li><a href="#acties-toine">A · Acties Toine</a></li>
+        <li><a href="#acties-bram">B · Acties Bram</a></li>
+        <li><a href="#acties-shared">C · Gezamenlijk</a></li>
+      </ul>
+    </div>
+
+    <h3 style="font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); font-weight: 700; margin-bottom: 10px;">Timeline · Fase 1</h3>
 
     <div class="tl-meeting current">
       <div class="date">wo 29 apr · 18:00</div>
@@ -282,6 +298,10 @@
     </div>
 
     <div class="add-meeting" style="margin-top: 14px;">Stap 2 plannen</div>
+
+    <div class="kbd-hint">
+      <kbd>←</kbd> notulen · <kbd>→</kbd> agenda M2
+    </div>
   </aside>
 
   <main>
@@ -323,7 +343,7 @@
     </div>
 
     <!-- ============ TOINE ACTIES ============ -->
-    <section>
+    <section id="acties-toine">
       <h2 class="sec"><span class="badge">A</span>Acties voor Toine</h2>
       <p class="sec-sub">Toegang regelen + interne afstemming. Vinkjes zijn lokaal opgeslagen — Toine vinkt op zijn device aan, Bram op het zijne.</p>
 
@@ -385,7 +405,7 @@
     </section>
 
     <!-- ============ BRAM ACTIES ============ -->
-    <section>
+    <section id="acties-bram">
       <h2 class="sec"><span class="badge">B</span>Acties voor Bram</h2>
       <p class="sec-sub">Setup + content-werk in eerste 2 weken stap 1.</p>
 
@@ -469,7 +489,7 @@
     </section>
 
     <!-- ============ GEZAMENLIJK ============ -->
-    <section>
+    <section id="acties-shared">
       <h2 class="sec"><span class="badge">C</span>Gezamenlijk</h2>
       <p class="sec-sub">KPI's + planning — beiden vinken aan zodra besluit gemaakt.</p>
 
@@ -610,6 +630,25 @@ function planM2() {
 }
 
 loadState();
+
+const tocSections = document.querySelectorAll('section[id], header[id]');
+const tocLinks = document.querySelectorAll('.toc a');
+function updateTocActive() {
+  let current = '';
+  tocSections.forEach(s => { if (s.getBoundingClientRect().top < 130) current = s.id; });
+  tocLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
+}
+window.addEventListener('scroll', updateTocActive, { passive: true });
+updateTocActive();
+
+const PREV_PAGE = 'm1-notulen.html';
+const NEXT_PAGE = null;
+document.addEventListener('keydown', (e) => {
+  if (e.target.matches('input, textarea, select')) return;
+  if (e.metaKey || e.ctrlKey || e.altKey) return;
+  if (e.key === 'ArrowLeft' && PREV_PAGE) { e.preventDefault(); window.location.href = PREV_PAGE; }
+  if (e.key === 'ArrowRight' && NEXT_PAGE) { e.preventDefault(); window.location.href = NEXT_PAGE; }
+});
 </script>
 
 </body>

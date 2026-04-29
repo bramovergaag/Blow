@@ -191,6 +191,21 @@
     text-align: center; color: var(--muted); font-size: 0.84rem; }
   footer a { color: var(--sea); text-decoration: none; font-weight: 600; }
 
+  /* TOC */
+  .toc-block { margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--border); }
+  .toc { list-style: none; padding: 0; margin: 0; }
+  .toc li { padding: 0; margin: 0; }
+  .toc a { display: block; padding: 4px 10px 4px 12px; font-size: 0.82rem; color: var(--muted);
+    text-decoration: none; border-left: 2px solid transparent;
+    transition: color 0.15s, border-color 0.15s, background 0.15s; line-height: 1.4; }
+  .toc a:hover { color: var(--deep); }
+  .toc a.active { color: var(--sea); border-left-color: var(--sea); background: var(--sand-light); font-weight: 700; }
+  .kbd-hint { margin-top: 14px; padding: 8px 10px; background: var(--sand-light);
+    border-radius: 6px; font-size: 0.72rem; color: var(--muted); text-align: center; }
+  .kbd-hint kbd { background: var(--foam); border: 1px solid var(--border); border-radius: 3px;
+    padding: 1px 5px; font-family: ui-monospace, monospace; font-size: 0.7rem;
+    color: var(--deep); font-weight: 700; }
+
   /* Lightbox */
   .lightbox {
     display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
@@ -214,22 +229,21 @@
   </nav>
 </header>
 
-<nav class="cycle" aria-label="Meeting cycle">
-  <ul>
-    <li><a href="./" class="done"><span class="step-num">✓</span>Agenda M1</a></li>
-    <li class="arrow">→</li>
-    <li><a href="m1-notulen.html"><span class="step-num">2</span>Notulen M1</a></li>
-    <li class="arrow">→</li>
-    <li><a href="m1-actielijst.html"><span class="step-num">3</span>Actielijst M1</a></li>
-    <li class="arrow">→</li>
-    <li><a href="#" class="future"><span class="step-num">4</span>Agenda M2</a></li>
-  </ul>
-</nav>
-
 <div class="wrap">
 
   <aside class="timeline">
-    <h3>Timeline</h3>
+    <div class="toc-block">
+      <h3>Op deze pagina</h3>
+      <ul class="toc">
+        <li><a href="#photo">01 · Whiteboard-foto</a></li>
+        <li><a href="#whiteboard-text">02 · Whiteboard tekst</a></li>
+        <li><a href="#audio">03 · Audio-transcript</a></li>
+        <li><a href="#extracted">04 · Geëxtraheerde inzichten</a></li>
+        <li><a href="#next">05 · Hoe deze bron doorwerkt</a></li>
+      </ul>
+    </div>
+
+    <h3>Timeline · Fase 1</h3>
 
     <div class="tl-meeting current">
       <div class="date">wo 29 apr · 18:00</div>
@@ -262,6 +276,10 @@
     </div>
 
     <div class="add-meeting" style="margin-top: 14px;">Stap 2 plannen</div>
+
+    <div class="kbd-hint">
+      Gebruik <kbd>↓</kbd>/<kbd>↑</kbd> om te scrollen
+    </div>
   </aside>
 
   <main>
@@ -462,6 +480,16 @@
 document.getElementById('wb-img').addEventListener('click', () => {
   document.getElementById('lightbox').classList.add('open');
 });
+
+const sections = document.querySelectorAll('section[id], header[id]');
+const tocLinks = document.querySelectorAll('.toc a');
+function updateActive() {
+  let current = '';
+  sections.forEach(s => { if (s.getBoundingClientRect().top < 130) current = s.id; });
+  tocLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
+}
+window.addEventListener('scroll', updateActive, { passive: true });
+updateActive();
 </script>
 
 </body>

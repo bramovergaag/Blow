@@ -119,6 +119,14 @@
   }
   .cycle a.active .step-num { background: var(--sea); color: white; }
   .cycle .arrow { color: var(--border); padding: 0 4px; font-size: 0.9rem; }
+  .breadcrumb {
+    background: var(--foam); border-bottom: 1px solid var(--border);
+    padding: 12px 24px; max-width: 1280px; margin: 0 auto;
+    font-size: 0.85rem; color: var(--muted);
+  }
+  .breadcrumb a { color: var(--accent); text-decoration: none; font-weight: 600; }
+  .breadcrumb a:hover { color: var(--deep); }
+  .breadcrumb .sep { padding: 0 6px; color: var(--border); }
 
   /* Hero */
   header.hero {
@@ -620,17 +628,10 @@
   </nav>
 </header>
 
-<!-- Meeting cycle stepper -->
-<nav class="cycle" aria-label="Meeting cycle">
-  <ul>
-    <li><a href="./"><span class="step-num">1</span>Agenda M1</a></li>
-    <li class="arrow">→</li>
-    <li><a href="m1-notulen.html"><span class="step-num">2</span>Notulen M1</a></li>
-    <li class="arrow">→</li>
-    <li><a href="m1-actielijst.html"><span class="step-num">3</span>Actielijst M1</a></li>
-    <li class="arrow">→</li>
-    <li><a href="#" class="future"><span class="step-num">4</span>Agenda M2</a></li>
-  </ul>
+<nav class="breadcrumb" aria-label="Terug naar pilot">
+  <a href="./">← Pilot-overzicht</a>
+  <span class="sep">·</span>
+  <span>MAKE process · referentie</span>
 </nav>
 
 <div class="container">
