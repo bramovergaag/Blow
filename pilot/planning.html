@@ -675,16 +675,21 @@
 
 <script>
 // ====== Meeting data + Google Calendar links ======
+// Address placeholders — Bram's exacte Dordrecht-adres invullen wanneer beschikbaar
+const ADDR_TOINE = 'Westmadeweg 66, 2553 EM Den Haag'; // Beach House Kijkduin
+const ADDR_BRAM = '[Bram thuis · Dordrecht — adres aanvullen]';
+
 const MEETINGS = [
-  { id: 'M1', date: '2026-04-29', dateLabel: 'wo 29 apr', start: '18:00', end: '20:00', modus: 'fysiek', locatie: 'Beach House Kijkduin (Toine)', address: 'Westmadeweg 66, 2553 EM Den Haag', doel: 'Kennismaking + voorstel + commitment fase 1', past: true },
-  { id: 'M2', date: '2026-05-11', dateLabel: 'ma 11 mei', start: '17:00', end: '17:30', modus: 'online', locatie: 'Google Meet', address: '', doel: 'Kick-off review · GSC-toegang · Scenarios 1+2+3 setup', past: false },
-  { id: 'M3', date: '2026-05-25', dateLabel: 'ma 25 mei', start: '17:00', end: '19:00', modus: 'fysiek', locatie: 'Bram thuis (Den Haag)', address: '', doel: 'Status techniek + content review + KPI-conceptlijst', past: false },
-  { id: 'M4', date: '2026-06-08', dateLabel: 'ma 8 jun', start: '17:00', end: '17:30', modus: 'online', locatie: 'Google Meet', address: '', doel: 'Tussenstand · eerste GSC-data over pilot-posts', past: false },
-  { id: 'M5', date: '2026-06-22', dateLabel: 'ma 22 jun', start: '17:00', end: '19:00', modus: 'fysiek', locatie: 'Beach House Kijkduin (Toine)', address: 'Westmadeweg 66, 2553 EM Den Haag', doel: 'Maand-2 review · KPI-baseline · scenarios 4+5 productief', past: false },
-  { id: 'M6', date: '2026-07-06', dateLabel: 'ma 6 jul', start: '17:00', end: '17:30', modus: 'online', locatie: 'Google Meet', address: '', doel: 'Tussenstand · 8-12 nieuwe posts · distributie-pipeline', past: false },
-  { id: 'M7', date: '2026-07-20', dateLabel: 'ma 20 jul', start: '17:00', end: '19:00', modus: 'fysiek', locatie: 'Bram thuis (Den Haag)', address: '', doel: 'Voorbereiding eind-stap-1 evaluatie · KPI-tussenmeting', past: false },
-  { id: 'M8', date: '2026-08-03', dateLabel: 'ma 3 aug', start: '17:00', end: '17:30', modus: 'online', locatie: 'Google Meet', address: '', doel: 'Laatste check vóór eind-stap-1 · open punten', past: false },
-  { id: 'M9', date: '2026-08-17', dateLabel: 'ma 17 aug', start: '17:00', end: '19:00', modus: 'fysiek', locatie: 'Beach House Kijkduin (Toine)', address: 'Westmadeweg 66, 2553 EM Den Haag', doel: '⭐ Eind stap 1 evaluatie · eigendomsbesluit · go/no-go stap 2', past: false }
+  // Fysiek: 17:00-20:00 (3 uur) · Online: 17:00-18:30 (90 min)
+  { id: 'M1', date: '2026-04-29', dateLabel: 'wo 29 apr', start: '18:00', end: '21:00', modus: 'fysiek', locatie: 'Beach House Kijkduin (Toine)', address: ADDR_TOINE, doel: 'Kennismaking + voorstel + commitment fase 1', past: true },
+  { id: 'M2', date: '2026-05-11', dateLabel: 'ma 11 mei', start: '17:00', end: '18:30', modus: 'online', locatie: 'Google Meet', address: '', doel: 'Kick-off review · GSC-toegang · Scenarios 1+2+3 setup', past: false },
+  { id: 'M3', date: '2026-05-25', dateLabel: 'ma 25 mei', start: '17:00', end: '20:00', modus: 'fysiek', locatie: 'Bram thuis (Dordrecht)', address: ADDR_BRAM, doel: 'Status techniek + content review + KPI-conceptlijst', past: false },
+  { id: 'M4', date: '2026-06-08', dateLabel: 'ma 8 jun', start: '17:00', end: '18:30', modus: 'online', locatie: 'Google Meet', address: '', doel: 'Tussenstand · eerste GSC-data over pilot-posts', past: false },
+  { id: 'M5', date: '2026-06-22', dateLabel: 'ma 22 jun', start: '17:00', end: '20:00', modus: 'fysiek', locatie: 'Beach House Kijkduin (Toine)', address: ADDR_TOINE, doel: 'Maand-2 review · KPI-baseline · scenarios 4+5 productief', past: false },
+  { id: 'M6', date: '2026-07-06', dateLabel: 'ma 6 jul', start: '17:00', end: '18:30', modus: 'online', locatie: 'Google Meet', address: '', doel: 'Tussenstand · 8-12 nieuwe posts · distributie-pipeline', past: false },
+  { id: 'M7', date: '2026-07-20', dateLabel: 'ma 20 jul', start: '17:00', end: '20:00', modus: 'fysiek', locatie: 'Bram thuis (Dordrecht)', address: ADDR_BRAM, doel: 'Voorbereiding eind-stap-1 evaluatie · KPI-tussenmeting', past: false },
+  { id: 'M8', date: '2026-08-03', dateLabel: 'ma 3 aug', start: '17:00', end: '18:30', modus: 'online', locatie: 'Google Meet', address: '', doel: 'Laatste check vóór eind-stap-1 · open punten', past: false },
+  { id: 'M9', date: '2026-08-17', dateLabel: 'ma 17 aug', start: '17:00', end: '20:00', modus: 'fysiek', locatie: 'Beach House Kijkduin (Toine)', address: ADDR_TOINE, doel: '⭐ Eind stap 1 evaluatie · eigendomsbesluit · go/no-go stap 2', past: false }
 ];
 
 function gcalUrl(m) {
