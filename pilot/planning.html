@@ -782,7 +782,7 @@ function renderMeetingTable() {
     if (m.id === 'M2') {
       row += `<tr class="m-acties-row"><td colspan="7" style="padding: 0; border: 0;">
         <details class="m-acties">
-          <summary>📋 <strong>Voorwaarde-acties M1</strong> — <span id="m2-actcount">0</span>/15 afgerond <span class="m-acties-hint">(klik om te zien)</span></summary>
+          <summary>📋 <strong>Voorwaarde-acties M1</strong> — <span id="m2-actcount">0</span>/16 afgerond <span class="m-acties-hint">(klik om te zien)</span></summary>
           <div class="m-acties-body" id="m2-actbody"><!-- gevuld door renderActionsStatus --></div>
         </details>
       </td></tr>`;
@@ -800,6 +800,7 @@ const M1_ACTIONS = [
   { id: 't-3', who: 'toine', title: 'Vendor-keuze definitief maken' },
   { id: 't-4', who: 'toine', title: 'Cijfer-claims valideren in Post A (Zandmotor)' },
   { id: 't-5', who: 'toine', title: 'Whiteboard-clusters digitaliseren' },
+  { id: 't-6', who: 'toine', title: 'GitHub-account email aanleveren (voor repo-toegang)' },
   // Bram (7)
   { id: 'b-1', who: 'bram', title: 'MAKE-account + scenarios 1+2+3 inrichten' },
   { id: 'b-2', who: 'bram', title: 'Audit-deel-1 (GSC) afronden zodra toegang er is' },
@@ -858,7 +859,7 @@ function renderActionsStatus() {
 }
 
 function renderProgress() {
-  const TOTAL_ACTIONS = 15;
+  const TOTAL_ACTIONS = 16;
   const done = Object.keys(progState.actions || {}).filter(k => progState.actions[k]).length;
   const pct = Math.round((done / TOTAL_ACTIONS) * 100);
   document.getElementById('prog-actions').textContent = `${done} / ${TOTAL_ACTIONS}`;
@@ -901,7 +902,7 @@ function renderProgress() {
 }
 
 function getStatusText() {
-  const TOTAL = 15;
+  const TOTAL = 16;
   const done = Object.keys(progState.actions || {}).filter(k => progState.actions[k]).length;
   const pct = Math.round((done / TOTAL) * 100);
   return `BLOW pilot · status M2-readiness\n` +
