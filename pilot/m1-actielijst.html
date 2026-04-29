@@ -131,41 +131,61 @@
   }
   .action {
     display: grid;
-    grid-template-columns: 60px 60px 1fr auto;
+    grid-template-columns: auto 1fr auto;
     gap: 14px; align-items: center;
     padding: 14px 18px;
     border-bottom: 1px solid var(--border);
+    transition: background 0.2s;
   }
-  @media (max-width: 700px) {
-    .action { grid-template-columns: 1fr; gap: 8px; }
-    .action .who-cell { display: inline-flex; gap: 14px; }
-  }
+  @media (max-width: 700px) { .action { grid-template-columns: 1fr; gap: 10px; } }
   .action:last-child { border-bottom: none; }
   .action.done { background: var(--green-soft); }
-  .action.partial { background: var(--amber-soft); }
-  .action.done .text { text-decoration: line-through; opacity: 0.7; }
+  .action.done .text-block .text { text-decoration: line-through; opacity: 0.7; }
 
-  .who-cell { display: flex; flex-direction: column; align-items: center; gap: 2px; }
-  @media (max-width: 700px) { .who-cell { flex-direction: row; align-items: center; } }
-  .who-cell .who-lbl {
-    font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase;
-    font-weight: 700;
+  .done-toggle {
+    display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+    background: var(--foam); border: 2px solid var(--border);
+    color: var(--muted); cursor: pointer; padding: 8px 14px;
+    border-radius: 8px; font-weight: 700; font-size: 0.78rem;
+    letter-spacing: 0.05em; transition: all 0.15s;
+    min-width: 96px; font-family: inherit;
   }
-  .who-cell .who-lbl.toine { color: var(--sea); }
-  .who-cell .who-lbl.bram { color: var(--accent); }
-  .check {
-    width: 26px; height: 26px; border-radius: 6px;
-    border: 2px solid var(--border); background: var(--foam);
-    cursor: pointer; appearance: none; -webkit-appearance: none;
-    position: relative; transition: all 0.15s;
+  .done-toggle:hover { border-color: var(--green); color: var(--green); }
+  .done-toggle .dt-icon { font-size: 1.1rem; line-height: 1; }
+  .done-toggle .dt-lbl { text-transform: lowercase; }
+  .action.done .done-toggle {
+    background: var(--green); border-color: var(--green); color: white;
   }
-  .check:hover { border-color: var(--sea); }
-  .check.toine:checked { background: var(--sea); border-color: var(--sea); }
-  .check.bram:checked { background: var(--accent); border-color: var(--accent); }
-  .check:checked::after {
-    content: "✓"; position: absolute; top: 50%; left: 50%;
-    transform: translate(-50%, -50%); color: white; font-weight: 700; font-size: 0.95rem;
+
+  /* Ready-for-meeting buttons */
+  .ready-row {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+    margin: 24px 0 8px;
   }
+  @media (max-width: 600px) { .ready-row { grid-template-columns: 1fr; } }
+  .ready-btn {
+    background: var(--foam); border: 2px dashed var(--border); border-radius: 12px;
+    padding: 18px 22px; cursor: pointer; text-align: left;
+    font-family: inherit; transition: all 0.15s;
+    display: flex; align-items: center; gap: 14px;
+    box-shadow: 0 2px 6px rgba(11, 46, 74, 0.04);
+  }
+  .ready-btn:hover { border-style: solid; transform: translateY(-1px); }
+  .ready-btn.toine:hover { border-color: var(--sea); }
+  .ready-btn.bram:hover { border-color: var(--accent); }
+  .ready-btn .icon { font-size: 1.8rem; line-height: 1; }
+  .ready-btn .label {
+    font-size: 0.66rem; letter-spacing: 0.16em; text-transform: uppercase;
+    font-weight: 700; color: var(--muted); margin-bottom: 2px;
+  }
+  .ready-btn .name { font-size: 1.05rem; font-weight: 700; color: var(--deep); }
+  .ready-btn .sub { font-size: 0.78rem; color: var(--muted); margin-top: 2px; }
+  .ready-btn.ready {
+    background: linear-gradient(135deg, var(--green) 0%, #1e6e44 100%);
+    border-color: var(--green); border-style: solid;
+  }
+  .ready-btn.ready .label, .ready-btn.ready .name, .ready-btn.ready .sub { color: white; }
+  .ready-btn.ready .label, .ready-btn.ready .sub { opacity: 0.9; }
 
   .text-block .text { font-weight: 600; color: var(--deep); font-size: 0.95rem; }
   .text-block .desc { font-size: 0.82rem; color: var(--muted); margin-top: 2px; }
@@ -255,6 +275,16 @@
     <h3>Timeline</h3>
 
     <div class="toc-block">
+      <h3>Pagina's</h3>
+      <ul class="toc">
+        <li><a href="./">Agenda M1</a></li>
+        <li><a href="m1-notulen.html">Notulen M1</a></li>
+        <li><a href="m1-actielijst.html" class="active">Actielijst M1</a></li>
+        <li><a href="planning.html">📅 Planning</a></li>
+      </ul>
+    </div>
+
+    <div class="toc-block">
       <h3>Op deze pagina</h3>
       <ul class="toc">
         <li><a href="#status">Status</a></li>
@@ -327,22 +357,17 @@
 
     <div class="progress-wrap">
       <div class="progress-row">
-        <div class="col">
-          <div class="lbl who-toine">Toine</div>
-          <div class="progress-bar"><div class="progress-fill toine" id="bar-toine" style="width: 0%"></div></div>
-          <div class="val" id="val-toine">0 / 0 afgerond</div>
-        </div>
-        <div class="col">
-          <div class="lbl who-bram">Bram</div>
-          <div class="progress-bar"><div class="progress-fill" id="bar-bram" style="width: 0%"></div></div>
-          <div class="val" id="val-bram">0 / 0 afgerond</div>
+        <div class="col" style="flex: 1;">
+          <div class="lbl">Voortgang</div>
+          <div class="progress-bar"><div class="progress-fill" id="bar-total" style="width: 0%"></div></div>
+          <div class="val" id="val-total">0 / 15 acties afgerond</div>
         </div>
       </div>
     </div>
 
     <div class="controls">
       <button onclick="exportState()">📋 Status exporteren</button>
-      <button onclick="resetState()">↺ Reset alle vinkjes</button>
+      <button onclick="resetState()">↺ Reset</button>
       <button onclick="window.print()">🖨 Print</button>
     </div>
 
@@ -353,8 +378,8 @@
 
       <div class="actions" id="actions-toine">
         <div class="action" data-id="t-1" data-who="toine">
-          <div class="who-cell"><span class="who-lbl toine">Toine</span><input type="checkbox" class="check toine" data-id="t-1"></div>
-          <div class="who-cell"><span class="who-lbl bram">Bram</span><input type="checkbox" class="check bram" data-id="t-1"></div>
+          <button type="button" class="done-toggle" data-id="t-1" aria-label="Markeer als klaar"><span class="dt-icon">○</span><span class="dt-lbl">klaar</span></button>
+          
           <div class="text-block">
             <div class="text">GSC + GA4 + Viking-toegang regelen voor Bram</div>
             <div class="desc">bramovergaag@gmail.com toevoegen als beperkte gebruiker. Voorwaarde voor audit-deel-1.</div>
@@ -364,8 +389,8 @@
         </div>
 
         <div class="action" data-id="t-2" data-who="toine">
-          <div class="who-cell"><span class="who-lbl toine">Toine</span><input type="checkbox" class="check toine" data-id="t-2"></div>
-          <div class="who-cell"><span class="who-lbl bram">Bram</span><input type="checkbox" class="check bram" data-id="t-2"></div>
+          <button type="button" class="done-toggle" data-id="t-2" aria-label="Markeer als klaar"><span class="dt-icon">○</span><span class="dt-lbl">klaar</span></button>
+          
           <div class="text-block">
             <div class="text">2 namen voor coaching-rollen aanleveren</div>
             <div class="desc">Strategie / Operations / Marketing — wie van het team neemt welke rol. Coaching mag verspreid.</div>
@@ -375,8 +400,8 @@
         </div>
 
         <div class="action" data-id="t-3" data-who="toine">
-          <div class="who-cell"><span class="who-lbl toine">Toine</span><input type="checkbox" class="check toine" data-id="t-3"></div>
-          <div class="who-cell"><span class="who-lbl bram">Bram</span><input type="checkbox" class="check bram" data-id="t-3"></div>
+          <button type="button" class="done-toggle" data-id="t-3" aria-label="Markeer als klaar"><span class="dt-icon">○</span><span class="dt-lbl">klaar</span></button>
+          
           <div class="text-block">
             <div class="text">Vendor-keuze definitief maken</div>
             <div class="desc">Wel of niet WP SEO AI tekenen. Bram-advies: niet tekenen, eerst pilot 4 maanden.</div>
@@ -386,8 +411,8 @@
         </div>
 
         <div class="action" data-id="t-4" data-who="toine">
-          <div class="who-cell"><span class="who-lbl toine">Toine</span><input type="checkbox" class="check toine" data-id="t-4"></div>
-          <div class="who-cell"><span class="who-lbl bram">Bram</span><input type="checkbox" class="check bram" data-id="t-4"></div>
+          <button type="button" class="done-toggle" data-id="t-4" aria-label="Markeer als klaar"><span class="dt-icon">○</span><span class="dt-lbl">klaar</span></button>
+          
           <div class="text-block">
             <div class="text">Cijfer-claims valideren in Post A (Zandmotor)</div>
             <div class="desc">"15 jaar lesgegeven" / "lagune 1-1,5m diep" / "07:30 wind-check" — bevestigen of bijstellen.</div>
@@ -397,8 +422,8 @@
         </div>
 
         <div class="action" data-id="t-5" data-who="toine">
-          <div class="who-cell"><span class="who-lbl toine">Toine</span><input type="checkbox" class="check toine" data-id="t-5"></div>
-          <div class="who-cell"><span class="who-lbl bram">Bram</span><input type="checkbox" class="check bram" data-id="t-5"></div>
+          <button type="button" class="done-toggle" data-id="t-5" aria-label="Markeer als klaar"><span class="dt-icon">○</span><span class="dt-lbl">klaar</span></button>
+          
           <div class="text-block">
             <div class="text">Whiteboard-clusters digitaliseren</div>
             <div class="desc">Kiteschool / Rest / Events met sub-categorieën in ContentQueue verwerken.</div>
@@ -415,8 +440,8 @@
 
       <div class="actions" id="actions-bram">
         <div class="action" data-id="b-1" data-who="bram">
-          <div class="who-cell"><span class="who-lbl toine">Toine</span><input type="checkbox" class="check toine" data-id="b-1"></div>
-          <div class="who-cell"><span class="who-lbl bram">Bram</span><input type="checkbox" class="check bram" data-id="b-1"></div>
+          <button type="button" class="done-toggle" data-id="b-1" aria-label="Markeer als klaar"><span class="dt-icon">○</span><span class="dt-lbl">klaar</span></button>
+          
           <div class="text-block">
             <div class="text">MAKE-account + scenarios 1+2+3 inrichten</div>
             <div class="desc">GSC-pull, Content Generator, WordPress Publisher op Bram's MAKE-account.</div>
@@ -426,8 +451,8 @@
         </div>
 
         <div class="action" data-id="b-2" data-who="bram">
-          <div class="who-cell"><span class="who-lbl toine">Toine</span><input type="checkbox" class="check toine" data-id="b-2"></div>
-          <div class="who-cell"><span class="who-lbl bram">Bram</span><input type="checkbox" class="check bram" data-id="b-2"></div>
+          <button type="button" class="done-toggle" data-id="b-2" aria-label="Markeer als klaar"><span class="dt-icon">○</span><span class="dt-lbl">klaar</span></button>
+          
           <div class="text-block">
             <div class="text">Audit-deel-1 (GSC) afronden zodra toegang er is</div>
             <div class="desc">Top 20 underperformers + quick-wins → audit-data-gsc.csv → toevoegen aan audit-rapport.</div>
@@ -437,8 +462,8 @@
         </div>
 
         <div class="action" data-id="b-3" data-who="bram">
-          <div class="who-cell"><span class="who-lbl toine">Toine</span><input type="checkbox" class="check toine" data-id="b-3"></div>
-          <div class="who-cell"><span class="who-lbl bram">Bram</span><input type="checkbox" class="check bram" data-id="b-3"></div>
+          <button type="button" class="done-toggle" data-id="b-3" aria-label="Markeer als klaar"><span class="dt-icon">○</span><span class="dt-lbl">klaar</span></button>
+          
           <div class="text-block">
             <div class="text">Title-tags + meta repareren op 5 sleutel-pagina's</div>
             <div class="desc">/kitesurfles · /restaurant/ · /events/ · /over-blow/ · /blog — quick-win uit audit.</div>
@@ -448,8 +473,8 @@
         </div>
 
         <div class="action" data-id="b-4" data-who="bram">
-          <div class="who-cell"><span class="who-lbl toine">Toine</span><input type="checkbox" class="check toine" data-id="b-4"></div>
-          <div class="who-cell"><span class="who-lbl bram">Bram</span><input type="checkbox" class="check bram" data-id="b-4"></div>
+          <button type="button" class="done-toggle" data-id="b-4" aria-label="Markeer als klaar"><span class="dt-icon">○</span><span class="dt-lbl">klaar</span></button>
+          
           <div class="text-block">
             <div class="text">Post A (Zandmotor) publiceren naar blow.surf</div>
             <div class="desc">Na cijfer-validatie door Toine. Eerste blogpost in 9 maanden = freshness-signaal.</div>
@@ -459,8 +484,8 @@
         </div>
 
         <div class="action" data-id="b-5" data-who="bram">
-          <div class="who-cell"><span class="who-lbl toine">Toine</span><input type="checkbox" class="check toine" data-id="b-5"></div>
-          <div class="who-cell"><span class="who-lbl bram">Bram</span><input type="checkbox" class="check bram" data-id="b-5"></div>
+          <button type="button" class="done-toggle" data-id="b-5" aria-label="Markeer als klaar"><span class="dt-icon">○</span><span class="dt-lbl">klaar</span></button>
+          
           <div class="text-block">
             <div class="text">Post B (Kijkduin vs Scheveningen) afmaken + publiceren</div>
             <div class="desc">SERP-snapshot toonde: geen vergelijking-pagina in top-10. Open kans op #1-3.</div>
@@ -470,8 +495,8 @@
         </div>
 
         <div class="action" data-id="b-6" data-who="bram">
-          <div class="who-cell"><span class="who-lbl toine">Toine</span><input type="checkbox" class="check toine" data-id="b-6"></div>
-          <div class="who-cell"><span class="who-lbl bram">Bram</span><input type="checkbox" class="check bram" data-id="b-6"></div>
+          <button type="button" class="done-toggle" data-id="b-6" aria-label="Markeer als klaar"><span class="dt-icon">○</span><span class="dt-lbl">klaar</span></button>
+          
           <div class="text-block">
             <div class="text">Eerste restaurant-post + eerste events-post draften</div>
             <div class="desc">Departement 2 + 3 krijgen content-bestaansrecht. Restaurant kandidaat: "beste Italiaanse pizza Kijkduin".</div>
@@ -481,8 +506,8 @@
         </div>
 
         <div class="action" data-id="b-7" data-who="bram">
-          <div class="who-cell"><span class="who-lbl toine">Toine</span><input type="checkbox" class="check toine" data-id="b-7"></div>
-          <div class="who-cell"><span class="who-lbl bram">Bram</span><input type="checkbox" class="check bram" data-id="b-7"></div>
+          <button type="button" class="done-toggle" data-id="b-7" aria-label="Markeer als klaar"><span class="dt-icon">○</span><span class="dt-lbl">klaar</span></button>
+          
           <div class="text-block">
             <div class="text">ContentQueue uitbreiden met whiteboard-clusters</div>
             <div class="desc">3-deling Kiteschool / Rest / Events met sub-categorieën verwerken in seed-CSV.</div>
@@ -499,8 +524,8 @@
 
       <div class="actions" id="actions-shared">
         <div class="action" data-id="s-1" data-who="shared">
-          <div class="who-cell"><span class="who-lbl toine">Toine</span><input type="checkbox" class="check toine" data-id="s-1"></div>
-          <div class="who-cell"><span class="who-lbl bram">Bram</span><input type="checkbox" class="check bram" data-id="s-1"></div>
+          <button type="button" class="done-toggle" data-id="s-1" aria-label="Markeer als klaar"><span class="dt-icon">○</span><span class="dt-lbl">klaar</span></button>
+          
           <div class="text-block">
             <div class="text">KPI-sessie inplannen (1 uur)</div>
             <div class="desc">Samen 4-6 KPI's kiezen uit 5 categorieën (volume / SEO / business / operatie / strategisch).</div>
@@ -510,8 +535,8 @@
         </div>
 
         <div class="action" data-id="s-2" data-who="shared">
-          <div class="who-cell"><span class="who-lbl toine">Toine</span><input type="checkbox" class="check toine" data-id="s-2"></div>
-          <div class="who-cell"><span class="who-lbl bram">Bram</span><input type="checkbox" class="check bram" data-id="s-2"></div>
+          <button type="button" class="done-toggle" data-id="s-2" aria-label="Markeer als klaar"><span class="dt-icon">○</span><span class="dt-lbl">klaar</span></button>
+          
           <div class="text-block">
             <div class="text">Schriftelijke afspraak opstellen + ondertekenen</div>
             <div class="desc">Op basis van pilot v2.0 sectie 07 + spelregels + KPI's uit sessie 1.</div>
@@ -521,8 +546,8 @@
         </div>
 
         <div class="action" data-id="s-3" data-who="shared">
-          <div class="who-cell"><span class="who-lbl toine">Toine</span><input type="checkbox" class="check toine" data-id="s-3"></div>
-          <div class="who-cell"><span class="who-lbl bram">Bram</span><input type="checkbox" class="check bram" data-id="s-3"></div>
+          <button type="button" class="done-toggle" data-id="s-3" aria-label="Markeer als klaar"><span class="dt-icon">○</span><span class="dt-lbl">klaar</span></button>
+          
           <div class="text-block">
             <div class="text">Cadans-overleg vastleggen</div>
             <div class="desc">2-wekelijks 30 min review + ad-hoc bij vragen. Tijdslot kiezen.</div>
@@ -532,14 +557,33 @@
       </div>
     </section>
 
+    <!-- ============ READY FOR MEETING ============ -->
+    <h3 style="font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); font-weight: 700; margin-top: 32px;">Klaar voor M2?</h3>
+    <p style="font-size: 0.88rem; color: var(--muted); margin-bottom: 4px;">Klik wanneer je vindt dat jouw acties voldoende zijn afgerond. Toine en Bram drukken elk hun eigen knop.</p>
+
+    <div class="ready-row">
+      <button class="ready-btn toine" id="ready-toine" type="button">
+        <span class="icon">🤝</span>
+        <div>
+          <div class="label">Toine</div>
+          <div class="name">Klaar voor meeting M2</div>
+          <div class="sub">druk hier wanneer ik klaar ben</div>
+        </div>
+      </button>
+      <button class="ready-btn bram" id="ready-bram" type="button">
+        <span class="icon">⚡</span>
+        <div>
+          <div class="label">Bram</div>
+          <div class="name">Klaar voor meeting M2</div>
+          <div class="sub">druk hier wanneer ik klaar ben</div>
+        </div>
+      </button>
+    </div>
+
     <!-- ============ NEXT MEETING ============ -->
-    <div class="next-step">
-      <h3>📅 Volgende meeting plannen</h3>
-      <p>Aan het eind van Meeting 2 doorlopen we deze actielijst, vinken af wat klaar is, en bouwen we de agenda voor M2.</p>
-      <div class="form-row">
-        <input type="date" id="m2-date" />
-        <button onclick="planM2()">Plan Meeting 2</button>
-      </div>
+    <div class="next-step" style="margin-top: 22px;">
+      <h3>📅 Volgende meeting</h3>
+      <p>M2 staat gepland: <strong>maandag 11 mei 2026 · 17:00 · online (Google Meet)</strong>. Aan het einde lopen we de afgevinkte acties door en bouwen we de agenda voor M2.</p>
     </div>
 
   </main>
@@ -558,24 +602,34 @@
 <script>
 const STORAGE_KEY = 'blow-pilot-m1-actielijst';
 
-// Load state from localStorage
+// Single-state per action: done/open. localStorage stores {actionId: true} + ready-button state.
 function loadState() {
-  try {
-    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
-    document.querySelectorAll('input.check').forEach(el => {
-      const key = `${el.dataset.id}-${el.classList.contains('toine') ? 'toine' : 'bram'}`;
-      if (saved[key]) el.checked = true;
-    });
-  } catch (e) { console.warn('localStorage load failed', e); }
+  let saved = {};
+  try { saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); }
+  catch (e) { console.warn('localStorage load failed', e); }
+
+  document.querySelectorAll('button.done-toggle').forEach(btn => {
+    const id = btn.dataset.id;
+    if (saved.actions && saved.actions[id]) {
+      btn.closest('.action').classList.add('done');
+      btn.querySelector('.dt-icon').textContent = '✓';
+    }
+  });
+  if (saved.readyToine) document.getElementById('ready-toine').classList.add('ready');
+  if (saved.readyBram) document.getElementById('ready-bram').classList.add('ready');
   updateProgress();
 }
 
 function saveState() {
-  const state = {};
-  document.querySelectorAll('input.check').forEach(el => {
-    const key = `${el.dataset.id}-${el.classList.contains('toine') ? 'toine' : 'bram'}`;
-    if (el.checked) state[key] = true;
+  const state = { actions: {}, readyToine: false, readyBram: false };
+  document.querySelectorAll('.action').forEach(a => {
+    if (a.classList.contains('done')) {
+      const id = a.querySelector('button.done-toggle').dataset.id;
+      state.actions[id] = true;
+    }
   });
+  state.readyToine = document.getElementById('ready-toine').classList.contains('ready');
+  state.readyBram = document.getElementById('ready-bram').classList.contains('ready');
   try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
   catch (e) { console.warn('localStorage save failed', e); }
   updateProgress();
@@ -583,54 +637,62 @@ function saveState() {
 
 function updateProgress() {
   const allActions = document.querySelectorAll('.action');
-  let toineDone = 0, bramDone = 0;
-  allActions.forEach(a => {
-    const t = a.querySelector('.check.toine').checked;
-    const b = a.querySelector('.check.bram').checked;
-    if (t) toineDone++;
-    if (b) bramDone++;
-    a.classList.remove('done', 'partial');
-    if (t && b) a.classList.add('done');
-    else if (t || b) a.classList.add('partial');
-  });
+  const doneCount = document.querySelectorAll('.action.done').length;
   const total = allActions.length;
-  document.getElementById('bar-toine').style.width = `${(toineDone/total)*100}%`;
-  document.getElementById('bar-bram').style.width = `${(bramDone/total)*100}%`;
-  document.getElementById('val-toine').textContent = `${toineDone} / ${total} afgerond`;
-  document.getElementById('val-bram').textContent = `${bramDone} / ${total} afgerond`;
-  const both = Array.from(allActions).filter(a =>
-    a.querySelector('.check.toine').checked && a.querySelector('.check.bram').checked
-  ).length;
-  document.getElementById('progress-meta').textContent = `${both} / ${total} volledig afgerond`;
+  const pct = total ? (doneCount / total) * 100 : 0;
+  document.getElementById('bar-total').style.width = `${pct}%`;
+  document.getElementById('val-total').textContent = `${doneCount} / ${total} acties afgerond`;
+  document.getElementById('progress-meta').textContent = `${doneCount} / ${total} acties afgerond`;
 }
 
-document.querySelectorAll('input.check').forEach(el => {
-  el.addEventListener('change', saveState);
+document.querySelectorAll('button.done-toggle').forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    const action = btn.closest('.action');
+    action.classList.toggle('done');
+    btn.querySelector('.dt-icon').textContent = action.classList.contains('done') ? '✓' : '○';
+    saveState();
+  });
+});
+
+document.querySelectorAll('.ready-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    btn.classList.toggle('ready');
+    const sub = btn.querySelector('.sub');
+    if (btn.classList.contains('ready')) {
+      sub.textContent = '✓ klaar voor M2 — bedankt!';
+    } else {
+      sub.textContent = 'druk hier wanneer ik klaar ben';
+    }
+    saveState();
+  });
 });
 
 function exportState() {
   const lines = ['ACTIELIJST M1 — STATUS\n'];
   document.querySelectorAll('.action').forEach(a => {
-    const t = a.querySelector('.check.toine').checked ? '☑' : '☐';
-    const b = a.querySelector('.check.bram').checked ? '☑' : '☐';
+    const status = a.classList.contains('done') ? '☑' : '☐';
     const text = a.querySelector('.text').textContent;
-    lines.push(`Toine ${t} | Bram ${b} | ${text}`);
+    lines.push(`${status} ${text}`);
   });
-  const out = lines.join('\n');
-  navigator.clipboard.writeText(out).then(() => alert('Status gekopieerd naar klembord — plak in WhatsApp/mail om te delen.'));
+  const t = document.getElementById('ready-toine').classList.contains('ready') ? '✅ klaar' : '⏳ nog niet';
+  const b = document.getElementById('ready-bram').classList.contains('ready') ? '✅ klaar' : '⏳ nog niet';
+  lines.push('\n--- Klaar voor M2 ---');
+  lines.push(`Toine: ${t}`);
+  lines.push(`Bram: ${b}`);
+  navigator.clipboard.writeText(lines.join('\n')).then(() =>
+    alert('Status gekopieerd naar klembord — plak in WhatsApp/mail om te delen.'));
 }
 
 function resetState() {
   if (!confirm('Weet je zeker dat je alle vinkjes wilt resetten?')) return;
   localStorage.removeItem(STORAGE_KEY);
-  document.querySelectorAll('input.check').forEach(el => el.checked = false);
+  document.querySelectorAll('.action').forEach(a => a.classList.remove('done'));
+  document.querySelectorAll('button.done-toggle .dt-icon').forEach(i => i.textContent = '○');
+  document.querySelectorAll('.ready-btn').forEach(btn => {
+    btn.classList.remove('ready');
+    btn.querySelector('.sub').textContent = 'druk hier wanneer ik klaar ben';
+  });
   updateProgress();
-}
-
-function planM2() {
-  const d = document.getElementById('m2-date').value;
-  if (!d) { alert('Kies een datum.'); return; }
-  alert(`Meeting 2 voorlopig gepland op ${d}.\n\nVolgende stap: Bram + Toine bevestigen via WhatsApp en bouwen samen agenda M2 op basis van afgevinkte actielijst.`);
 }
 
 loadState();
