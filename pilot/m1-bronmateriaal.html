@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bronmateriaal M1 · BLOW SEO pilot</title>
+<style>
+  :root {
+    --sand: #f4ecd8; --sand-light: #faf5e6; --sea: #1e6091; --sea-light: #4a90b8;
+    --foam: #ffffff; --deep: #0b2e4a; --accent: #e85d04; --accent-soft: #f8ddc7;
+    --green: #2d8659; --green-soft: #d1e8d8; --red: #b63b3b; --red-soft: #f0d4d4;
+    --amber: #d97706; --amber-soft: #fde7c7;
+    --text: #1a2a3a; --muted: #5c6b7a; --border: rgba(30, 96, 145, 0.15);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: linear-gradient(180deg, var(--sand) 0%, #ffffff 30%);
+    color: var(--text); line-height: 1.55; min-height: 100vh;
+  }
+
+  .brand-bar {
+    background: #C66A1F; color: #F4EFE2; padding: 14px 24px;
+    display: flex; align-items: center; gap: 18px;
+    border-bottom: 4px solid #1A1A1A;
+    font-family: "Oswald", "Bebas Neue", sans-serif;
+  }
+  .brand-bar .logo { width: 38px; height: 38px; border: 2px solid #F4EFE2; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 12px; letter-spacing: 1.5px; flex-shrink: 0; }
+  .brand-bar .brand-name { font-weight: 700; font-size: 18px; letter-spacing: 2px; text-transform: uppercase; }
+  .brand-tabs { margin-left: auto; display: flex; gap: 4px; }
+  .brand-tabs a { font-family: inherit; font-weight: 500; font-size: 13px; letter-spacing: 2px;
+    text-transform: uppercase; padding: 10px 18px;
+    color: rgba(244, 239, 226, 0.7); border-bottom: 3px solid transparent;
+    text-decoration: none; margin-bottom: -14px; }
+  .brand-tabs a:hover { color: #F4EFE2; }
+  .brand-tabs a.active { color: #F4EFE2; border-bottom-color: #F4EFE2; }
+  @media (max-width: 600px) {
+    .brand-bar { padding: 12px 16px; gap: 12px; }
+    .brand-bar .brand-name { font-size: 15px; }
+    .brand-tabs a { padding: 10px 12px; font-size: 12px; letter-spacing: 1.5px; }
+  }
+
+  .cycle { background: var(--foam); border-bottom: 1px solid var(--border); padding: 0 16px; }
+  .cycle ul { list-style: none; display: flex; max-width: 1280px; margin: 0 auto; overflow-x: auto; gap: 4px; }
+  .cycle li { display: flex; align-items: center; }
+  .cycle a { display: flex; align-items: center; gap: 8px;
+    font-size: 0.85rem; color: var(--muted); text-decoration: none;
+    padding: 14px 14px; font-weight: 500; white-space: nowrap;
+    border-bottom: 2px solid transparent; }
+  .cycle a:hover { color: var(--deep); }
+  .cycle a.active { color: var(--sea); border-bottom-color: var(--sea); font-weight: 700; }
+  .cycle a.done { color: var(--green); }
+  .cycle a.done .step-num { background: var(--green); color: white; }
+  .cycle a.future { opacity: 0.4; pointer-events: none; }
+  .cycle .step-num { width: 22px; height: 22px; border-radius: 50%;
+    background: var(--sand-light); display: inline-flex; align-items: center; justify-content: center;
+    font-size: 0.72rem; font-weight: 700; }
+  .cycle a.active .step-num { background: var(--sea); color: white; }
+  .cycle .arrow { color: var(--border); padding: 0 4px; font-size: 0.9rem; }
+
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 24px 24px 80px;
+    display: grid; grid-template-columns: 220px 1fr; gap: 32px; }
+  @media (max-width: 1000px) { .wrap { grid-template-columns: 1fr; } }
+
+  .timeline {
+    background: var(--foam); border-radius: 12px; padding: 18px;
+    box-shadow: 0 2px 10px rgba(11, 46, 74, 0.06);
+    position: sticky; top: 16px; align-self: start; font-size: 0.85rem;
+  }
+  @media (max-width: 1000px) { .timeline { position: static; } }
+  .timeline h3 { font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--muted); font-weight: 700; margin-bottom: 10px; }
+  .tl-meeting { padding: 8px 0; border-left: 2px solid var(--border); padding-left: 12px;
+    margin-left: 4px; position: relative; }
+  .tl-meeting::before { content: ""; position: absolute; left: -7px; top: 12px;
+    width: 12px; height: 12px; border-radius: 50%;
+    background: var(--foam); border: 2px solid var(--border); }
+  .tl-meeting.current::before { background: var(--accent); border-color: var(--accent); }
+  .tl-meeting.future { opacity: 0.45; }
+  .tl-meeting .date { font-size: 0.72rem; color: var(--muted); font-weight: 600; letter-spacing: 0.05em; }
+  .tl-meeting .title { font-weight: 700; color: var(--deep); margin: 2px 0 6px; font-size: 0.9rem; }
+  .tl-meeting ul { list-style: none; padding: 0; margin: 0; }
+  .tl-meeting li { padding: 3px 0; font-size: 0.8rem; }
+  .tl-meeting a { color: var(--muted); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
+  .tl-meeting a:hover { color: var(--deep); }
+  .tl-meeting a.active { color: var(--sea); font-weight: 700; }
+  .tl-meeting a.done { color: var(--green); }
+  .tl-meeting .src { font-size: 0.74rem; color: var(--muted); font-style: italic; padding-top: 4px; border-top: 1px dashed var(--border); margin-top: 4px; }
+  .tl-meeting .src a { color: var(--accent); }
+  .tl-meeting .add-meeting { border: 1px dashed var(--border); border-radius: 8px;
+    padding: 8px 10px; font-size: 0.78rem; color: var(--muted); text-align: center;
+    cursor: pointer; margin-top: 10px; }
+
+  header.hero { padding: 12px 0 24px; border-bottom: 3px solid var(--sea); margin-bottom: 28px; }
+  .eyebrow { font-size: 0.78rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--sea); font-weight: 700; margin-bottom: 8px; }
+  h1 { font-size: clamp(1.6rem, 3.2vw, 2.2rem); font-weight: 800; color: var(--deep); line-height: 1.2; }
+  .hero-meta { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 12px; font-size: 0.84rem; color: var(--muted); }
+  .hero-meta span { padding: 3px 10px; background: var(--foam); border-radius: 999px; border: 1px solid var(--border); }
+
+  section { margin-bottom: 36px; }
+  h2.sec { font-size: 1.25rem; color: var(--deep); margin-bottom: 6px;
+    display: flex; align-items: center; gap: 10px; }
+  h2.sec .badge { background: var(--sea); color: white; font-size: 0.66rem;
+    padding: 3px 9px; border-radius: 8px; letter-spacing: 0.12em; font-weight: 700; }
+  .sec-sub { color: var(--muted); margin-bottom: 16px; font-size: 0.92rem; }
+
+  /* Whiteboard photo */
+  .photo-wrap {
+    background: var(--foam); border-radius: 14px; padding: 16px;
+    box-shadow: 0 2px 10px rgba(11, 46, 74, 0.06); text-align: center;
+  }
+  .photo-wrap img {
+    max-width: 100%; height: auto; border-radius: 8px;
+    cursor: zoom-in;
+  }
+  .photo-caption { font-size: 0.78rem; color: var(--muted); margin-top: 8px; font-style: italic; }
+
+  /* Whiteboard structured */
+  .wb-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 18px; }
+  @media (max-width: 800px) { .wb-grid { grid-template-columns: 1fr; } }
+  .wb-col {
+    background: var(--foam); border-radius: 12px; padding: 18px 20px;
+    box-shadow: 0 2px 8px rgba(11, 46, 74, 0.05);
+    border-top: 4px solid var(--sea);
+  }
+  .wb-col.rest { border-top-color: var(--accent); }
+  .wb-col.events { border-top-color: var(--green); }
+  .wb-col h3 { color: var(--deep); font-size: 1rem; margin-bottom: 10px; }
+  .wb-col .lbl { font-size: 0.66rem; letter-spacing: 0.16em; text-transform: uppercase;
+    font-weight: 700; color: var(--sea); margin-bottom: 4px; }
+  .wb-col.rest .lbl { color: var(--accent); }
+  .wb-col.events .lbl { color: var(--green); }
+  .wb-col ul { list-style: none; padding: 0; }
+  .wb-col li { padding: 4px 0 4px 14px; font-size: 0.88rem; position: relative; }
+  .wb-col li::before { content: "▸"; position: absolute; left: 0; color: var(--muted); }
+  .wb-col .sub-cluster { margin-top: 12px; padding: 10px 12px; background: var(--sand-light); border-radius: 6px; }
+  .wb-col .sub-cluster .name { font-weight: 700; color: var(--deep); font-size: 0.84rem; margin-bottom: 4px; }
+  .wb-col .sub-cluster ul li { font-size: 0.82rem; padding: 2px 0 2px 12px; }
+  .wb-col .anchor { font-family: ui-monospace, monospace; font-size: 0.78rem;
+    background: var(--sand-light); padding: 4px 8px; border-radius: 4px; margin-top: 10px; display: inline-block; }
+
+  /* Audio transcript */
+  .transcript-wrap {
+    background: var(--foam); border-radius: 12px; padding: 22px 24px;
+    box-shadow: 0 2px 10px rgba(11, 46, 74, 0.06);
+  }
+  .transcript-meta { display: flex; gap: 12px; font-size: 0.78rem; color: var(--muted);
+    margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px solid var(--border);
+    flex-wrap: wrap; }
+  .transcript-meta span { background: var(--sand-light); padding: 3px 10px; border-radius: 999px; }
+  .transcript-meta .status-pending { background: var(--amber-soft); color: var(--amber); font-weight: 700; }
+  .transcript-meta .status-done { background: var(--green-soft); color: var(--green); font-weight: 700; }
+  .transcript-body {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.86rem; line-height: 1.6;
+    max-height: 600px; overflow-y: auto; white-space: pre-wrap;
+    background: var(--sand-light); padding: 16px 18px; border-radius: 8px;
+    color: var(--text);
+  }
+  .transcript-body.placeholder { color: var(--muted); font-style: italic; font-family: inherit; }
+
+  .pending {
+    background: linear-gradient(135deg, var(--amber) 0%, #b35a05 100%);
+    color: white; border-radius: 10px; padding: 18px 22px;
+  }
+  .pending h4 { color: white; font-size: 1rem; margin-bottom: 6px; }
+  .pending p { font-size: 0.9rem; opacity: 0.95; }
+  .pending .progress { margin-top: 10px; font-family: ui-monospace, monospace; font-size: 0.82rem; opacity: 0.9; }
+
+  .extracted-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 16px; }
+  @media (max-width: 700px) { .extracted-grid { grid-template-columns: 1fr; } }
+  .extracted-card {
+    background: var(--foam); border-radius: 10px; padding: 16px 18px;
+    box-shadow: 0 2px 8px rgba(11, 46, 74, 0.05); border-left: 4px solid var(--sea);
+  }
+  .extracted-card.win { border-left-color: var(--green); }
+  .extracted-card.gap { border-left-color: var(--accent); }
+  .extracted-card .lbl { font-size: 0.66rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--sea); font-weight: 700; margin-bottom: 4px; }
+  .extracted-card.win .lbl { color: var(--green); }
+  .extracted-card.gap .lbl { color: var(--accent); }
+  .extracted-card h4 { color: var(--deep); font-size: 0.95rem; margin-bottom: 6px; }
+  .extracted-card p { font-size: 0.86rem; color: var(--text); }
+  .extracted-card code { background: var(--sand-light); padding: 1px 5px; border-radius: 3px; font-size: 0.82rem; }
+
+  footer { margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--border);
+    text-align: center; color: var(--muted); font-size: 0.84rem; }
+  footer a { color: var(--sea); text-decoration: none; font-weight: 600; }
+
+  /* Lightbox */
+  .lightbox {
+    display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.92); z-index: 9999;
+    align-items: center; justify-content: center;
+    cursor: zoom-out;
+  }
+  .lightbox.open { display: flex; }
+  .lightbox img { max-width: 96%; max-height: 96%; }
+</style>
+</head>
+<body>
+
+<header class="brand-bar">
+  <div class="logo">BLOW</div>
+  <div class="brand-name">Beach House</div>
+  <nav class="brand-tabs" aria-label="Hoofdmenu">
+    <a href="../">Bestelling</a>
+    <a href="./" class="active" aria-current="page">SEO</a>
+    <a href="https://bramovergaag.github.io/balistoel.nl/">Balistoel</a>
+  </nav>
+</header>
+
+<nav class="cycle" aria-label="Meeting cycle">
+  <ul>
+    <li><a href="./" class="done"><span class="step-num">✓</span>Agenda M1</a></li>
+    <li class="arrow">→</li>
+    <li><a href="m1-notulen.html"><span class="step-num">2</span>Notulen M1</a></li>
+    <li class="arrow">→</li>
+    <li><a href="m1-actielijst.html"><span class="step-num">3</span>Actielijst M1</a></li>
+    <li class="arrow">→</li>
+    <li><a href="#" class="future"><span class="step-num">4</span>Agenda M2</a></li>
+  </ul>
+</nav>
+
+<div class="wrap">
+
+  <aside class="timeline">
+    <h3>Timeline</h3>
+
+    <div class="tl-meeting current">
+      <div class="date">29 apr 2026</div>
+      <div class="title">Meeting 1 — Beach House</div>
+      <ul>
+        <li><a href="./">○ Agenda</a></li>
+        <li><a href="m1-notulen.html">○ Notulen</a></li>
+        <li><a href="m1-actielijst.html">○ Actielijst</a></li>
+      </ul>
+      <div class="src">
+        Bron-materiaal:<br>
+        <a href="m1-bronmateriaal.html" class="active">▸ Foto + transcript</a>
+      </div>
+    </div>
+
+    <div class="tl-meeting future">
+      <div class="date">datum?</div>
+      <div class="title">Meeting 2</div>
+      <ul>
+        <li>○ Agenda</li>
+        <li>○ Notulen</li>
+        <li>○ Actielijst</li>
+      </ul>
+    </div>
+
+    <div class="add-meeting">+ Plan meeting 2</div>
+  </aside>
+
+  <main>
+
+    <header class="hero">
+      <div class="eyebrow">Bronmateriaal · Meeting 1</div>
+      <h1>Whiteboard, audio-transcript, geëxtraheerde inzichten</h1>
+      <div class="hero-meta">
+        <span>📅 29 april 2026</span>
+        <span>📍 Beach House, Kijkduin</span>
+        <span>📷 Whiteboard-foto</span>
+        <span>🎙️ ~98 min audio</span>
+      </div>
+    </header>
+
+    <!-- ============ WHITEBOARD PHOTO ============ -->
+    <section id="photo">
+      <h2 class="sec"><span class="badge">01</span>Whiteboard-foto</h2>
+      <p class="sec-sub">Tijdens het gesprek geschetste content-clusters per departement. Klik om te vergroten.</p>
+
+      <div class="photo-wrap">
+        <img src="bronmateriaal/whiteboard-2026-04-29.jpeg" alt="Whiteboard met 3 kolommen: Kiteschool, Rest, Events" id="wb-img" loading="lazy">
+        <div class="photo-caption">Whiteboard van het gesprek 29 april 2026 — drie kolommen voor de drie departementen</div>
+      </div>
+    </section>
+
+    <!-- ============ WHITEBOARD STRUCTURED ============ -->
+    <section id="whiteboard-text">
+      <h2 class="sec"><span class="badge">02</span>Whiteboard — gestructureerd</h2>
+      <p class="sec-sub">Foto omgezet naar leesbare tekst. Onzekere stukken (door glare op middenstuk) zijn gemarkeerd.</p>
+
+      <div class="wb-grid">
+
+        <div class="wb-col">
+          <div class="lbl">Cluster A</div>
+          <h3>Kiteschool</h3>
+          <ul>
+            <li>kitesurfles</li>
+            <li>kiteschool</li>
+            <li>kitesurf cursus</li>
+            <li>testen kitesurfen <em>(proefles)</em></li>
+          </ul>
+          <div class="anchor">#1 · 1× per dag</div>
+          <p style="margin-top: 10px; font-size: 0.82rem; color: var(--muted);">Vier zoektermen ingecirkeld als één cluster. Ambitie: top-1 + 1 lead/dag.</p>
+        </div>
+
+        <div class="wb-col rest">
+          <div class="lbl">Cluster B</div>
+          <h3>Rest <span style="font-weight: 400; font-size: 0.78rem; color: var(--muted);">(Restaurant)</span></h3>
+          <ul>
+            <li>kwaliteit eten</li>
+            <li>restaurant good view</li>
+            <li>romantische plek</li>
+            <li>beste Italiaanse pizza</li>
+            <li>workshops</li>
+          </ul>
+          <p style="margin-top: 10px; font-size: 0.82rem; color: var(--muted);">Pijl verbindt items als funnel-route. "Beste Italiaanse pizza" = onontgonnen keyword-kans.</p>
+        </div>
+
+        <div class="wb-col events">
+          <div class="lbl">Cluster C</div>
+          <h3>Events</h3>
+
+          <div class="sub-cluster">
+            <div class="name">🟢 Particulier</div>
+            <ul>
+              <li>Bruiloft (35 p/p)</li>
+              <li>Familie · verjaardag · jubilea</li>
+            </ul>
+          </div>
+
+          <div class="sub-cluster">
+            <div class="name">🟢 Actieve</div>
+            <ul>
+              <li>csp · beach r <em>(onzeker)</em></li>
+              <li>workshop</li>
+            </ul>
+          </div>
+
+          <div class="sub-cluster">
+            <div class="name">🟢 Zakelijk</div>
+            <ul>
+              <li>VEIS · beants <em>(onzeker)</em></li>
+              <li>beach lunch</li>
+              <li>bedrijfsfeest</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============ AUDIO TRANSCRIPT ============ -->
+    <section id="audio">
+      <h2 class="sec"><span class="badge">03</span>Audio-transcript</h2>
+      <p class="sec-sub">Volledige opname (≈98 min) lokaal getranscribeerd via faster-whisper (small int8). Privacy: audio verlaat niet je computer.</p>
+
+      <div class="transcript-wrap">
+        <div class="transcript-meta">
+          <span>🎙️ Duur: 97,7 min</span>
+          <span>🤖 Model: faster-whisper small int8</span>
+          <span>🔒 Volledig lokaal verwerkt</span>
+          <span class="status-pending" id="trans-status">⏳ verwerkt nog…</span>
+        </div>
+
+        <div class="pending" id="pending-block">
+          <h4>⏳ Transcript wordt nog verwerkt</h4>
+          <p>Faster-whisper draait op CPU. Volledig lokaal — geen audio gaat naar de cloud. Verwachte resterende tijd: ~30-40 min.</p>
+          <p class="progress">Voortgang: zie <code>C:\Users\Administrator\Desktop\transcribe.log</code>. Bestand wordt opgeslagen als <code>Blow Beach House.transcript.txt</code>.</p>
+        </div>
+
+        <div class="transcript-body placeholder" id="trans-body" style="margin-top: 14px;">
+          [Het transcript verschijnt hier zodra faster-whisper klaar is. Bram voegt het dan toe via een commit.]
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ EXTRACTED ============ -->
+    <section id="extracted">
+      <h2 class="sec"><span class="badge">04</span>Geëxtraheerde inzichten</h2>
+      <p class="sec-sub">Wat het bronmateriaal toevoegt aan de pilot — direct verwerkt in audit, content-queue en actielijst.</p>
+
+      <div class="extracted-grid">
+
+        <div class="extracted-card win">
+          <div class="lbl">Win · onontgonnen keyword</div>
+          <h4>"Beste Italiaanse pizza Kijkduin"</h4>
+          <p>Whiteboard-cluster Rest noemde dit expliciet. SERP-snapshot toonde geen sterke concurrent op deze long-tail. <strong>Direct kandidaat</strong> voor eerste restaurant-blogpost.</p>
+        </div>
+
+        <div class="extracted-card win">
+          <div class="lbl">Win · ambitie-anker</div>
+          <h4>"#1 + 1× per dag"</h4>
+          <p>Whiteboard-shorthand voor Kiteschool: top-1 op kernkeyword <code>kitesurfles kijkduin</code> + 1 lead per dag. <strong>Concrete KPI</strong> uit de drie BLOW-mensen zelf.</p>
+        </div>
+
+        <div class="extracted-card gap">
+          <div class="lbl">Gap · events-driedeling</div>
+          <h4>Particulier / Actief / Zakelijk</h4>
+          <p>Bestaande content-queue had events als één bucket. Whiteboard splitst het in drie sub-clusters. <strong>Content-queue herstructureren</strong> met deze taxonomie.</p>
+        </div>
+
+        <div class="extracted-card gap">
+          <div class="lbl">Gap · bevestiging audit</div>
+          <h4>Restaurant + Events 0 content</h4>
+          <p>Audit-bevinding (14/15 posts kitesurf) wordt op whiteboard zelf bevestigd: "Rest" en "Events" hebben elk 5+ keyword-ideeën die nog géén content hebben. <strong>Direct werkpakket</strong> voor stap 1.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="next">
+      <h2 class="sec"><span class="badge">05</span>Hoe deze bron doorwerkt</h2>
+      <p class="sec-sub">Wie wil weten waar een actie of beslissing vandaan komt, kan via deze pagina terug naar de bron.</p>
+
+      <div class="extracted-grid">
+        <div class="extracted-card">
+          <div class="lbl">→ Notulen</div>
+          <h4>Whiteboard-discussie verwerkt</h4>
+          <p>Sectie "Wat er besproken is" in <a href="m1-notulen.html">notulen</a> verwijst terug naar deze foto + tekst.</p>
+        </div>
+        <div class="extracted-card">
+          <div class="lbl">→ Actielijst</div>
+          <h4>Whiteboard digitaliseren</h4>
+          <p>Item T-5 in <a href="m1-actielijst.html">actielijst</a>: ContentQueue uitbreiden met whiteboard-driedeling.</p>
+        </div>
+        <div class="extracted-card">
+          <div class="lbl">→ Audit</div>
+          <h4>Restaurant-cluster kans</h4>
+          <p><a href="audit-2026-04-27.html">Audit</a> wordt aangevuld met "beste Italiaanse pizza Kijkduin" als top-target.</p>
+        </div>
+        <div class="extracted-card">
+          <div class="lbl">→ ContentQueue</div>
+          <h4>Seed CSV uitbreiden</h4>
+          <p>30-keyword-seed wordt herstructureerd met whiteboard-clusters en sub-clusters.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+</div>
+
+<div class="lightbox" id="lightbox" onclick="this.classList.remove('open')">
+  <img src="bronmateriaal/whiteboard-2026-04-29.jpeg" alt="Whiteboard groot">
+</div>
+
+<footer>
+  <p><strong>Bronmateriaal Meeting 1</strong> · 29 april 2026 · BLOW × Bram</p>
+  <p>
+    <a href="./">Agenda</a> ·
+    <a href="m1-notulen.html">Notulen</a> ·
+    <a href="m1-actielijst.html">Actielijst</a>
+  </p>
+</footer>
+
+<script>
+document.getElementById('wb-img').addEventListener('click', () => {
+  document.getElementById('lightbox').classList.add('open');
+});
+</script>
+
+</body>
+</html>

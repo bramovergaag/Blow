@@ -846,6 +846,72 @@
     .brand-bar .brand-name { font-size: 15px; }
     .brand-tabs a { padding: 10px 12px; font-size: 12px; letter-spacing: 1.5px; }
   }
+
+  /* ---------- Cycle stepper (meeting flow) ---------- */
+  .cycle {
+    background: var(--foam);
+    border-bottom: 1px solid var(--border);
+    padding: 0 16px;
+  }
+  .cycle ul {
+    list-style: none; display: flex; max-width: 1280px; margin: 0 auto;
+    overflow-x: auto; gap: 4px;
+  }
+  .cycle li { display: flex; align-items: center; }
+  .cycle a {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 0.85rem; color: var(--muted); text-decoration: none;
+    padding: 14px 14px; font-weight: 500; white-space: nowrap;
+    border-bottom: 2px solid transparent;
+  }
+  .cycle a:hover { color: var(--deep); }
+  .cycle a.active { color: var(--sea); border-bottom-color: var(--sea); font-weight: 700; }
+  .cycle a.done { color: var(--green); }
+  .cycle a.done .step-num { background: var(--green); color: white; }
+  .cycle a.future { opacity: 0.4; pointer-events: none; }
+  .cycle .step-num {
+    width: 22px; height: 22px; border-radius: 50%;
+    background: var(--sand-light); display: inline-flex; align-items: center; justify-content: center;
+    font-size: 0.72rem; font-weight: 700;
+  }
+  .cycle a.active .step-num { background: var(--sea); color: white; }
+  .cycle .arrow { color: var(--border); padding: 0 4px; font-size: 0.9rem; }
+
+  /* ---------- Wrap met timeline links ---------- */
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 0 24px;
+    display: grid; grid-template-columns: 220px 1fr; gap: 32px; }
+  @media (max-width: 1100px) { .wrap { grid-template-columns: 1fr; padding: 0 16px; gap: 16px; } }
+  .wrap > .container { max-width: none; padding: 24px 0 80px 0; margin: 0; }
+
+  .timeline-side {
+    background: var(--foam); border-radius: 12px; padding: 18px;
+    box-shadow: 0 2px 10px rgba(11, 46, 74, 0.06);
+    position: sticky; top: 60px; align-self: start; font-size: 0.85rem;
+    margin-top: 24px;
+  }
+  @media (max-width: 1100px) { .timeline-side { position: static; margin-top: 16px; } }
+  .timeline-side h3 {
+    font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--muted); font-weight: 700; margin-bottom: 10px;
+  }
+  .tl-meeting { padding: 8px 0; border-left: 2px solid var(--border);
+    padding-left: 12px; margin-left: 4px; position: relative; }
+  .tl-meeting::before { content: ""; position: absolute; left: -7px; top: 12px;
+    width: 12px; height: 12px; border-radius: 50%;
+    background: var(--foam); border: 2px solid var(--border); }
+  .tl-meeting.current::before { background: var(--accent); border-color: var(--accent); }
+  .tl-meeting.future { opacity: 0.45; }
+  .tl-meeting .date { font-size: 0.72rem; color: var(--muted); font-weight: 600; letter-spacing: 0.05em; }
+  .tl-meeting .title { font-weight: 700; color: var(--deep); margin: 2px 0 6px; font-size: 0.9rem; }
+  .tl-meeting ul { list-style: none; padding: 0; margin: 0; }
+  .tl-meeting li { padding: 3px 0; font-size: 0.8rem; }
+  .tl-meeting a { color: var(--muted); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
+  .tl-meeting a:hover { color: var(--deep); }
+  .tl-meeting a.active { color: var(--sea); font-weight: 700; }
+  .tl-meeting a.done { color: var(--green); }
+  .tl-meeting .add-meeting { border: 1px dashed var(--border); border-radius: 8px;
+    padding: 8px 10px; font-size: 0.78rem; color: var(--muted); text-align: center;
+    cursor: pointer; margin-top: 10px; }
 </style>
 </head>
 <body>
@@ -860,6 +926,19 @@
     <a href="https://bramovergaag.github.io/balistoel.nl/">Balistoel</a>
   </nav>
 </header>
+
+<!-- Meeting cycle stepper -->
+<nav class="cycle" aria-label="Meeting cycle">
+  <ul>
+    <li><a href="./" class="active" aria-current="page"><span class="step-num">1</span>Agenda M1</a></li>
+    <li class="arrow">→</li>
+    <li><a href="m1-notulen.html"><span class="step-num">2</span>Notulen M1</a></li>
+    <li class="arrow">→</li>
+    <li><a href="m1-actielijst.html"><span class="step-num">3</span>Actielijst M1</a></li>
+    <li class="arrow">→</li>
+    <li><a href="#" class="future"><span class="step-num">4</span>Agenda M2</a></li>
+  </ul>
+</nav>
 
 <!-- Sticky navigation -->
 <nav class="side">
@@ -878,6 +957,37 @@
     <li><a href="#beslissing" class="nav-link">Beslissing</a></li>
   </ul>
 </nav>
+
+<div class="wrap">
+
+<aside class="timeline-side">
+  <h3>Timeline</h3>
+
+  <div class="tl-meeting current">
+    <div class="date">29 apr 2026</div>
+    <div class="title">Meeting 1 — Beach House</div>
+    <ul>
+      <li><a href="./" class="active">▸ Agenda</a></li>
+      <li><a href="m1-notulen.html">○ Notulen</a></li>
+      <li><a href="m1-actielijst.html">○ Actielijst</a></li>
+      <li style="padding-top: 6px; margin-top: 4px; border-top: 1px dashed var(--border); font-size: 0.76rem;">
+        <a href="m1-bronmateriaal.html" style="color: var(--accent);">📷 Bronmateriaal</a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="tl-meeting future">
+    <div class="date">datum?</div>
+    <div class="title">Meeting 2</div>
+    <ul>
+      <li>○ Agenda</li>
+      <li>○ Notulen</li>
+      <li>○ Actielijst</li>
+    </ul>
+  </div>
+
+  <div class="add-meeting">+ Plan meeting 2</div>
+</aside>
 
 <div class="container">
 
@@ -1728,7 +1838,8 @@
   <p style="margin-top: 8px; font-style: italic;">Dit document live te hosten via GitHub Pages / Cloudflare Pages.</p>
 </footer>
 
-</div>
+</div><!-- /.container -->
+</div><!-- /.wrap -->
 
 <script>
 // ---------- Interactive pipeline ----------
