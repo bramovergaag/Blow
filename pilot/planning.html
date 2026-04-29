@@ -782,7 +782,7 @@ function renderMeetingTable() {
     if (m.id === 'M2') {
       row += `<tr class="m-acties-row"><td colspan="7" style="padding: 0; border: 0;">
         <details class="m-acties">
-          <summary>📋 <strong>Voorwaarde-acties M1</strong> — <span id="m2-actcount">0</span>/16 afgerond <span class="m-acties-hint">(klik om te zien)</span></summary>
+          <summary>📋 <strong>Voorwaarde-acties M1</strong> — <span id="m2-actcount">0</span>/17 afgerond <span class="m-acties-hint">(klik om te zien)</span></summary>
           <div class="m-acties-body" id="m2-actbody"><!-- gevuld door renderActionsStatus --></div>
         </details>
       </td></tr>`;
@@ -809,6 +809,7 @@ const M1_ACTIONS = [
   { id: 'b-5', who: 'bram', title: 'Post B (Kijkduin vs Scheveningen) afmaken + publiceren' },
   { id: 'b-6', who: 'bram', title: 'Eerste restaurant-post + eerste events-post draften' },
   { id: 'b-7', who: 'bram', title: 'ContentQueue uitbreiden met whiteboard-clusters' },
+  { id: 'b-8', who: 'bram', title: 'Review-WhatsApp-groep aanmaken voor post-feedback' },
   // Shared (3)
   { id: 's-1', who: 'shared', title: 'KPI-sessie inplannen (1 uur)' },
   { id: 's-2', who: 'shared', title: 'Schriftelijke afspraak opstellen + ondertekenen' },
@@ -859,7 +860,9 @@ function renderActionsStatus() {
 }
 
 function renderProgress() {
-  const TOTAL_ACTIONS = 16;
+  // Status M2 dashboard-section is verwijderd — bail als oude elementen niet bestaan
+  if (!document.getElementById('prog-actions')) return;
+  const TOTAL_ACTIONS = 17;
   const done = Object.keys(progState.actions || {}).filter(k => progState.actions[k]).length;
   const pct = Math.round((done / TOTAL_ACTIONS) * 100);
   document.getElementById('prog-actions').textContent = `${done} / ${TOTAL_ACTIONS}`;
@@ -902,7 +905,7 @@ function renderProgress() {
 }
 
 function getStatusText() {
-  const TOTAL = 16;
+  const TOTAL = 17;
   const done = Object.keys(progState.actions || {}).filter(k => progState.actions[k]).length;
   const pct = Math.round((done / TOTAL) * 100);
   return `BLOW pilot · status M2-readiness\n` +
