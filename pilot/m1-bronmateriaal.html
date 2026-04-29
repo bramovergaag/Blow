@@ -191,15 +191,23 @@
     text-align: center; color: var(--muted); font-size: 0.84rem; }
   footer a { color: var(--sea); text-decoration: none; font-weight: 600; }
 
-  /* TOC */
-  .toc-block { margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--border); }
-  .toc { list-style: none; padding: 0; margin: 0; }
-  .toc li { padding: 0; margin: 0; }
-  .toc a { display: block; padding: 4px 10px 4px 12px; font-size: 0.82rem; color: var(--muted);
-    text-decoration: none; border-left: 2px solid transparent;
-    transition: color 0.15s, border-color 0.15s, background 0.15s; line-height: 1.4; }
-  .toc a:hover { color: var(--deep); }
-  .toc a.active { color: var(--sea); border-left-color: var(--sea); background: var(--sand-light); font-weight: 700; }
+  /* Page-TOC */
+  .page-toc {
+    background: var(--foam); border-bottom: 1px solid var(--border);
+    padding: 0 16px; position: sticky; top: 0; z-index: 50;
+    box-shadow: 0 1px 4px rgba(11, 46, 74, 0.04);
+  }
+  .page-toc ul { list-style: none; display: flex; flex-wrap: nowrap; gap: 4px;
+    overflow-x: auto; max-width: 1280px; margin: 0 auto; scrollbar-width: thin; }
+  .page-toc ul::-webkit-scrollbar { height: 4px; }
+  .page-toc a { display: block; font-size: 0.84rem; color: var(--muted);
+    text-decoration: none; padding: 12px 14px; font-weight: 500;
+    white-space: nowrap; border-bottom: 2px solid transparent; }
+  .page-toc a:hover { color: var(--deep); }
+  .page-toc a.active { color: var(--sea); border-bottom-color: var(--sea); font-weight: 700; }
+  .timeline { max-height: calc(100vh - 60px); overflow-y: auto; scrollbar-width: thin; }
+  .timeline::-webkit-scrollbar { width: 4px; }
+  .timeline::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
   .kbd-hint { margin-top: 14px; padding: 8px 10px; background: var(--sand-light);
     border-radius: 6px; font-size: 0.72rem; color: var(--muted); text-align: center; }
   .kbd-hint kbd { background: var(--foam); border: 1px solid var(--border); border-radius: 3px;
@@ -229,29 +237,19 @@
   </nav>
 </header>
 
+<nav class="page-toc" aria-label="Op deze pagina">
+  <ul>
+    <li><a href="#photo">01 · Whiteboard-foto</a></li>
+    <li><a href="#whiteboard-text">02 · Whiteboard tekst</a></li>
+    <li><a href="#audio">03 · Audio-transcript</a></li>
+    <li><a href="#extracted">04 · Geëxtraheerde inzichten</a></li>
+    <li><a href="#next">05 · Hoe deze bron doorwerkt</a></li>
+  </ul>
+</nav>
+
 <div class="wrap">
 
   <aside class="timeline">
-    <div class="toc-block">
-      <h3>Pagina's</h3>
-      <ul class="toc">
-        <li><a href="./">Agenda M1</a></li>
-        <li><a href="m1-notulen.html">Notulen M1</a></li>
-        <li><a href="m1-actielijst.html">Actielijst M1</a></li>
-        <li><a href="planning.html">📅 Planning</a></li>
-      </ul>
-    </div>
-
-    <div class="toc-block">
-      <h3>Op deze pagina</h3>
-      <ul class="toc">
-        <li><a href="#photo">01 · Whiteboard-foto</a></li>
-        <li><a href="#whiteboard-text">02 · Whiteboard tekst</a></li>
-        <li><a href="#audio">03 · Audio-transcript</a></li>
-        <li><a href="#extracted">04 · Geëxtraheerde inzichten</a></li>
-        <li><a href="#next">05 · Hoe deze bron doorwerkt</a></li>
-      </ul>
-    </div>
 
     <h3>Timeline · Fase 1</h3>
 
@@ -508,7 +506,7 @@ fetch('bronmateriaal/audio-transcript-2026-04-29.txt')
   });
 
 const sections = document.querySelectorAll('section[id], header[id]');
-const tocLinks = document.querySelectorAll('.toc a');
+const tocLinks = document.querySelectorAll('.page-toc a');
 function updateActive() {
   let current = '';
   sections.forEach(s => { if (s.getBoundingClientRect().top < 130) current = s.id; });

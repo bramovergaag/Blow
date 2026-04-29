@@ -933,26 +933,37 @@
     padding: 8px 10px; font-size: 0.78rem; color: var(--muted); text-align: center;
     cursor: pointer; margin-top: 10px; }
 
-  /* TOC (sections of current page) */
-  .toc-block { margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--border); }
-  .toc { list-style: none; padding: 0; margin: 0; }
-  .toc li { padding: 0; margin: 0; }
-  .toc a {
-    display: block;
-    padding: 4px 10px; padding-left: 12px;
-    font-size: 0.82rem; color: var(--muted);
-    text-decoration: none;
-    border-left: 2px solid transparent;
-    transition: color 0.15s, border-color 0.15s, background 0.15s;
-    line-height: 1.4;
+  /* Page-TOC (horizontal nav onder brand-bar) */
+  .page-toc {
+    background: var(--foam);
+    border-bottom: 1px solid var(--border);
+    padding: 0 16px;
+    position: sticky; top: 0; z-index: 50;
+    box-shadow: 0 1px 4px rgba(11, 46, 74, 0.04);
   }
-  .toc a:hover { color: var(--deep); }
-  .toc a.active {
-    color: var(--sea);
-    border-left-color: var(--sea);
-    background: var(--sand-light);
-    font-weight: 700;
+  .page-toc ul {
+    list-style: none; display: flex; flex-wrap: nowrap; gap: 4px;
+    overflow-x: auto; max-width: 1280px; margin: 0 auto;
+    scrollbar-width: thin;
   }
+  .page-toc ul::-webkit-scrollbar { height: 4px; }
+  .page-toc a {
+    display: block; font-size: 0.84rem; color: var(--muted);
+    text-decoration: none; padding: 12px 14px; font-weight: 500;
+    white-space: nowrap; border-bottom: 2px solid transparent;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .page-toc a:hover { color: var(--deep); }
+  .page-toc a.active { color: var(--sea); border-bottom-color: var(--sea); font-weight: 700; }
+
+  /* Timeline scroll independently */
+  .timeline-side {
+    max-height: calc(100vh - 60px);
+    overflow-y: auto;
+    scrollbar-width: thin;
+  }
+  .timeline-side::-webkit-scrollbar { width: 4px; }
+  .timeline-side::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
 
   /* Keyboard nav hint */
   .kbd-hint {
@@ -981,37 +992,26 @@
   </nav>
 </header>
 
+<nav class="page-toc" aria-label="Op deze pagina">
+  <ul>
+    <li><a href="#start">Start</a></li>
+    <li><a href="#aanpak">01 · Aanpak</a></li>
+    <li><a href="#pijplijn">02 · Pijplijn</a></li>
+    <li><a href="#bewijs">03 · Bewijs</a></li>
+    <li><a href="#blogpost">04 · Voorbeeld</a></li>
+    <li><a href="#distributie">05 · Distributie</a></li>
+    <li><a href="#kosten">06 · Kosten</a></li>
+    <li><a href="#samenwerking">07 · Samenwerking</a></li>
+    <li><a href="#fasering">08 · Fasering</a></li>
+    <li><a href="#risico">09 · Risico</a></li>
+    <li><a href="#vraagtekens">10 · Vraagtekens</a></li>
+    <li><a href="#beslissing">11 · Beslissing</a></li>
+  </ul>
+</nav>
+
 <div class="wrap">
 
 <aside class="timeline-side">
-  <div class="toc-block">
-    <h3>Pagina's</h3>
-    <ul class="toc">
-      <li><a href="./" class="active">Agenda M1</a></li>
-      <li><a href="m1-notulen.html">Notulen M1</a></li>
-      <li><a href="m1-actielijst.html">Actielijst M1</a></li>
-      <li><a href="planning.html">📅 Planning</a></li>
-    </ul>
-  </div>
-
-  <div class="toc-block">
-    <h3>Op deze pagina</h3>
-    <ul class="toc">
-      <li><a href="#start">Start</a></li>
-      <li><a href="#aanpak">01 · Aanpak</a></li>
-      <li><a href="#pijplijn">02 · Pijplijn</a></li>
-      <li><a href="#bewijs">03 · Pilot-bewijs</a></li>
-      <li><a href="#blogpost">04 · Voorbeeld</a></li>
-      <li><a href="#distributie">05 · Distributie</a></li>
-      <li><a href="#kosten">06 · Kosten</a></li>
-      <li><a href="#samenwerking">07 · Samenwerking</a></li>
-      <li><a href="#fasering">08 · Fasering</a></li>
-      <li><a href="#risico">09 · Risico</a></li>
-      <li><a href="#vraagtekens">10 · Vraagtekens</a></li>
-      <li><a href="#beslissing">11 · Beslissing</a></li>
-    </ul>
-  </div>
-
   <h3>Timeline · Fase 1</h3>
 
   <div class="tl-meeting current">
@@ -2015,7 +2015,7 @@ renderStep(1);
 
 // ---------- Scroll-spy: highlight current section in TOC ----------
 const sections = document.querySelectorAll('section[id], header[id]');
-const tocLinks = document.querySelectorAll('.toc a');
+const tocLinks = document.querySelectorAll('.page-toc a');
 
 function updateActiveNav() {
   let current = '';

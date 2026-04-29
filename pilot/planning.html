@@ -56,14 +56,23 @@
   @media (max-width: 1000px) { .timeline { position: static; } }
   .timeline h3 { font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase;
     color: var(--muted); font-weight: 700; margin-bottom: 10px; }
-  .toc-block { margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--border); }
-  .toc { list-style: none; padding: 0; margin: 0; }
-  .toc li { padding: 0; margin: 0; }
-  .toc a { display: block; padding: 4px 10px 4px 12px; font-size: 0.82rem; color: var(--muted);
-    text-decoration: none; border-left: 2px solid transparent;
-    transition: color 0.15s, border-color 0.15s, background 0.15s; line-height: 1.4; }
-  .toc a:hover { color: var(--deep); }
-  .toc a.active { color: var(--sea); border-left-color: var(--sea); background: var(--sand-light); font-weight: 700; }
+  /* Page-TOC */
+  .page-toc {
+    background: var(--foam); border-bottom: 1px solid var(--border);
+    padding: 0 16px; position: sticky; top: 0; z-index: 50;
+    box-shadow: 0 1px 4px rgba(11, 46, 74, 0.04);
+  }
+  .page-toc ul { list-style: none; display: flex; flex-wrap: nowrap; gap: 4px;
+    overflow-x: auto; max-width: 1280px; margin: 0 auto; scrollbar-width: thin; }
+  .page-toc ul::-webkit-scrollbar { height: 4px; }
+  .page-toc a { display: block; font-size: 0.84rem; color: var(--muted);
+    text-decoration: none; padding: 12px 14px; font-weight: 500;
+    white-space: nowrap; border-bottom: 2px solid transparent; }
+  .page-toc a:hover { color: var(--deep); }
+  .page-toc a.active { color: var(--sea); border-bottom-color: var(--sea); font-weight: 700; }
+  .timeline { max-height: calc(100vh - 60px); overflow-y: auto; scrollbar-width: thin; }
+  .timeline::-webkit-scrollbar { width: 4px; }
+  .timeline::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
 
   .tl-link { display: block; padding: 6px 10px; font-size: 0.82rem;
     color: var(--muted); text-decoration: none; border-left: 2px solid var(--border);
@@ -257,46 +266,69 @@
   </nav>
 </header>
 
-<nav class="breadcrumb">
-  <div class="row">
-    <a href="./">← Pilot-overzicht</a>
-    <span class="sep">·</span>
-    <span>Planning · 16 maanden + Fase 1 detail</span>
-  </div>
+<nav class="page-toc" aria-label="Op deze pagina">
+  <ul>
+    <li><a href="#progress">Status M2</a></li>
+    <li><a href="#year">01 · Jaar-overzicht</a></li>
+    <li><a href="#fase1">02 · Fase 1 — meetings</a></li>
+    <li><a href="#geidentificeerd">03 · Geïdentificeerd</a></li>
+    <li><a href="#naar-fase-2">04 · Geschoven fase 2</a></li>
+    <li><a href="#fase2-4">05 · Fase 2-4</a></li>
+  </ul>
 </nav>
 
 <div class="wrap">
 
 <aside class="timeline">
-  <div class="toc-block">
-    <h3>Pagina's</h3>
-    <ul class="toc">
-      <li><a href="./">Agenda M1</a></li>
-      <li><a href="m1-notulen.html">Notulen M1</a></li>
-      <li><a href="m1-actielijst.html">Actielijst M1</a></li>
-      <li><a href="planning.html" class="active">📅 Planning</a></li>
+  <h3>Timeline · Fase 1</h3>
+
+  <div style="padding: 8px 0; border-left: 2px solid var(--accent); padding-left: 12px; margin-left: 4px; position: relative;">
+    <div style="font-size: 0.72rem; color: var(--muted); font-weight: 600;">wo 29 apr · 18:00</div>
+    <div style="font-weight: 700; color: var(--deep); margin: 2px 0 6px; font-size: 0.9rem;">M1 — Beach House</div>
+    <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.8rem;">
+      <li style="padding: 3px 0;"><a href="./" style="color: var(--muted); text-decoration: none;">Agenda M1</a></li>
+      <li style="padding: 3px 0;"><a href="m1-notulen.html" style="color: var(--muted); text-decoration: none;">Notulen M1</a></li>
+      <li style="padding: 3px 0;"><a href="m1-actielijst.html" style="color: var(--muted); text-decoration: none;">Actielijst M1</a></li>
+      <li style="padding: 3px 0; border-top: 1px dashed var(--border); margin-top: 4px; padding-top: 6px; font-size: 0.76rem;">
+        <a href="m1-bronmateriaal.html" style="color: var(--accent); text-decoration: none;">📷 Bronmateriaal</a>
+      </li>
+      <li style="padding: 3px 0; font-size: 0.76rem;"><a href="m1-make-process.html" style="color: var(--accent); text-decoration: none;">⚙️ MAKE-process</a></li>
+      <li style="padding: 3px 0; font-size: 0.76rem;"><a href="m1-feedback-loop.html" style="color: var(--accent); text-decoration: none;">💬 Feedback-loop</a></li>
     </ul>
   </div>
 
-  <div class="toc-block">
-    <h3>Op deze pagina</h3>
-    <ul class="toc">
-      <li><a href="#progress">Voortgang</a></li>
-      <li><a href="#year">01 · Jaar-overzicht</a></li>
-      <li><a href="#fase1">02 · Fase 1 — meetings</a></li>
-      <li><a href="#geidentificeerd">03 · Geïdentificeerd in M1</a></li>
-      <li><a href="#naar-fase-2">04 · Geschoven naar fase 2</a></li>
-      <li><a href="#fase2-4">05 · Fase 2-4 high-level</a></li>
-    </ul>
+  <div style="padding: 8px 0 8px 12px; border-left: 2px solid var(--border); margin-left: 4px;">
+    <div style="font-size: 0.72rem; color: var(--muted); font-weight: 600;">ma 11 mei · 17:00</div>
+    <div style="font-weight: 700; color: var(--deep); font-size: 0.9rem; opacity: 0.6;">M2 — 💻 online</div>
   </div>
-
-  <h3>Snelnavigatie</h3>
-  <a href="./" class="tl-link">Agenda M1</a>
-  <a href="m1-notulen.html" class="tl-link">Notulen M1</a>
-  <a href="m1-actielijst.html" class="tl-link">Actielijst M1</a>
-  <a href="m1-bronmateriaal.html" class="tl-link">📷 Bronmateriaal</a>
-  <a href="m1-make-process.html" class="tl-link">⚙️ MAKE-process</a>
-  <a href="m1-feedback-loop.html" class="tl-link">💬 Feedback-loop</a>
+  <div style="padding: 8px 0 8px 12px; border-left: 2px solid var(--border); margin-left: 4px;">
+    <div style="font-size: 0.72rem; color: var(--muted); font-weight: 600;">ma 25 mei · 17:00</div>
+    <div style="font-weight: 700; color: var(--deep); font-size: 0.9rem; opacity: 0.6;">M3 — 📍 Bram thuis</div>
+  </div>
+  <div style="padding: 8px 0 8px 12px; border-left: 2px solid var(--border); margin-left: 4px;">
+    <div style="font-size: 0.72rem; color: var(--muted); font-weight: 600;">ma 8 jun · 17:00</div>
+    <div style="font-weight: 700; color: var(--deep); font-size: 0.9rem; opacity: 0.6;">M4 — 💻 online</div>
+  </div>
+  <div style="padding: 8px 0 8px 12px; border-left: 2px solid var(--border); margin-left: 4px;">
+    <div style="font-size: 0.72rem; color: var(--muted); font-weight: 600;">ma 22 jun · 17:00</div>
+    <div style="font-weight: 700; color: var(--deep); font-size: 0.9rem; opacity: 0.6;">M5 — 📍 Beach House</div>
+  </div>
+  <div style="padding: 8px 0 8px 12px; border-left: 2px solid var(--border); margin-left: 4px;">
+    <div style="font-size: 0.72rem; color: var(--muted); font-weight: 600;">ma 6 jul · 17:00</div>
+    <div style="font-weight: 700; color: var(--deep); font-size: 0.9rem; opacity: 0.6;">M6 — 💻 online</div>
+  </div>
+  <div style="padding: 8px 0 8px 12px; border-left: 2px solid var(--border); margin-left: 4px;">
+    <div style="font-size: 0.72rem; color: var(--muted); font-weight: 600;">ma 20 jul · 17:00</div>
+    <div style="font-weight: 700; color: var(--deep); font-size: 0.9rem; opacity: 0.6;">M7 — 📍 Bram thuis</div>
+  </div>
+  <div style="padding: 8px 0 8px 12px; border-left: 2px solid var(--border); margin-left: 4px;">
+    <div style="font-size: 0.72rem; color: var(--muted); font-weight: 600;">ma 3 aug · 17:00</div>
+    <div style="font-weight: 700; color: var(--deep); font-size: 0.9rem; opacity: 0.6;">M8 — 💻 online</div>
+  </div>
+  <div style="padding: 8px 0 8px 12px; border-left: 3px solid var(--accent); margin-left: 4px;">
+    <div style="font-size: 0.72rem; color: var(--muted); font-weight: 600;">ma 17 aug · 17:00</div>
+    <div style="font-weight: 700; color: var(--accent); font-size: 0.9rem;">M9 — eind stap 1 ⭐</div>
+  </div>
 
   <div class="kbd-hint">
     <kbd>↓</kbd>/<kbd>↑</kbd> scroll
@@ -313,23 +345,33 @@
 
   <section id="progress">
     <div class="progress-summary">
-      <h3>Voortgang stap 1</h3>
-      <div class="progress-row">
+      <h3>📊 Status M2 (ma 11 mei) · live dashboard</h3>
+      <p style="opacity: 0.85; font-size: 0.88rem; margin-bottom: 14px;">Live uitgelezen uit jouw actielijst-vinkjes. Toine en Bram hebben elk een eigen view (per browser-localStorage).</p>
+      <div class="progress-row" style="grid-template-columns: 1fr 1fr 1fr 1fr;">
         <div class="ps-item">
-          <div class="lbl">Meetings</div>
-          <div class="val" id="prog-meetings">1 / 9</div>
-          <div class="sub">M1 gehad · M2 11 mei</div>
+          <div class="lbl">Acties afgerond</div>
+          <div class="val" id="prog-actions">0 / 15</div>
+          <div class="sub" id="prog-actions-pct">0%</div>
         </div>
-        <div class="ps-item">
-          <div class="lbl">Acties Toine</div>
-          <div class="val" id="prog-toine">0 / 5</div>
-          <div class="sub">uit actielijst M1</div>
+        <div class="ps-item" id="prog-toine-card">
+          <div class="lbl">Toine klaar?</div>
+          <div class="val" id="prog-toine">⏳ nog niet</div>
+          <div class="sub">druk op de actielijst-knop</div>
         </div>
-        <div class="ps-item">
-          <div class="lbl">Acties Bram</div>
-          <div class="val" id="prog-bram">0 / 7</div>
-          <div class="sub">uit actielijst M1</div>
+        <div class="ps-item" id="prog-bram-card">
+          <div class="lbl">Bram klaar?</div>
+          <div class="val" id="prog-bram">⏳ nog niet</div>
+          <div class="sub">druk op de actielijst-knop</div>
         </div>
+        <div class="ps-item" id="prog-verdict-card">
+          <div class="lbl">Verdict M2</div>
+          <div class="val" id="prog-verdict">niet klaar</div>
+          <div class="sub" id="prog-verdict-sub">wacht op acties + ready-knoppen</div>
+        </div>
+      </div>
+      <div style="margin-top: 16px; display: flex; gap: 10px; flex-wrap: wrap;">
+        <a href="m1-actielijst.html" style="background: var(--accent); color: white; padding: 10px 18px; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 0.86rem;">→ Naar actielijst</a>
+        <button onclick="navigator.clipboard.writeText(getStatusText()).then(()=>alert('Status gekopieerd naar klembord'))" style="background: rgba(255,255,255,0.15); color: white; padding: 10px 18px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.3); font-weight: 700; font-size: 0.86rem; cursor: pointer; font-family: inherit;">📋 Kopieer status (WhatsApp)</button>
       </div>
     </div>
   </section>
@@ -741,34 +783,79 @@
 </footer>
 
 <script>
-// Read action progress from localStorage (m1-actielijst)
-try {
-  const state = JSON.parse(localStorage.getItem('blow-pilot-m1-actielijst') || '{}');
-  let toineDone = 0, bramDone = 0;
-  // T-keys: t-1..t-5 = Toine acties, B-keys: b-1..b-7 = Bram acties
-  for (let i = 1; i <= 5; i++) {
-    if (state[`t-${i}-toine`] && state[`t-${i}-bram`]) toineDone++;
+// Live dashboard van actielijst M1
+let progState = { actions: {}, readyToine: false, readyBram: false };
+function loadProgress() {
+  try {
+    progState = JSON.parse(localStorage.getItem('blow-pilot-m1-actielijst') || '{"actions":{}}');
+    if (!progState.actions) progState.actions = {};
+  } catch (e) { console.warn(e); }
+  renderProgress();
+}
+
+function renderProgress() {
+  const TOTAL_ACTIONS = 15;
+  const done = Object.keys(progState.actions || {}).filter(k => progState.actions[k]).length;
+  const pct = Math.round((done / TOTAL_ACTIONS) * 100);
+  document.getElementById('prog-actions').textContent = `${done} / ${TOTAL_ACTIONS}`;
+  document.getElementById('prog-actions-pct').textContent = `${pct}%`;
+
+  const toineReady = !!progState.readyToine;
+  const bramReady = !!progState.readyBram;
+
+  const toineEl = document.getElementById('prog-toine');
+  toineEl.textContent = toineReady ? '✅ klaar' : '⏳ nog niet';
+  document.getElementById('prog-toine-card').style.background = toineReady ? 'rgba(45, 134, 89, 0.4)' : 'rgba(255,255,255,0.1)';
+
+  const bramEl = document.getElementById('prog-bram');
+  bramEl.textContent = bramReady ? '✅ klaar' : '⏳ nog niet';
+  document.getElementById('prog-bram-card').style.background = bramReady ? 'rgba(45, 134, 89, 0.4)' : 'rgba(255,255,255,0.1)';
+
+  const allReady = toineReady && bramReady;
+  const enoughDone = pct >= 80;
+  const verdict = document.getElementById('prog-verdict');
+  const sub = document.getElementById('prog-verdict-sub');
+  const card = document.getElementById('prog-verdict-card');
+
+  if (allReady && enoughDone) {
+    verdict.textContent = '✓ GO M2';
+    sub.textContent = 'beiden klaar + 80%+ acties';
+    card.style.background = 'rgba(45, 134, 89, 0.5)';
+  } else if (allReady) {
+    verdict.textContent = '⚠ go (acties laag)';
+    sub.textContent = `beiden klaar, maar ${pct}% < 80%`;
+    card.style.background = 'rgba(217, 119, 6, 0.4)';
+  } else if (enoughDone) {
+    verdict.textContent = '⏳ wacht op klaar-knop';
+    sub.textContent = `${pct}% acties · nog niet beiden klaar`;
+    card.style.background = 'rgba(217, 119, 6, 0.3)';
+  } else {
+    verdict.textContent = '⏳ niet klaar';
+    sub.textContent = 'acties + klaar-knoppen';
+    card.style.background = 'rgba(255,255,255,0.1)';
   }
-  for (let i = 1; i <= 7; i++) {
-    if (state[`b-${i}-toine`] && state[`b-${i}-bram`]) bramDone++;
-  }
-  document.getElementById('prog-toine').textContent = `${toineDone} / 5`;
-  document.getElementById('prog-bram').textContent = `${bramDone} / 7`;
-  // Mark M1 actions visually
-  const m1List = document.getElementById('m1-actions');
-  if (m1List) {
-    [...m1List.querySelectorAll('li')].forEach((li, i) => {
-      const ids = ['t-1', 't-2', 't-3', 's-1', 's-2'];
-      const id = ids[i];
-      if (state[`${id}-toine`] && state[`${id}-bram`]) li.classList.add('done');
-      else if (state[`${id}-toine`] || state[`${id}-bram`]) li.classList.add('partial');
-    });
-  }
-} catch (e) { console.warn(e); }
+}
+
+function getStatusText() {
+  const TOTAL = 15;
+  const done = Object.keys(progState.actions || {}).filter(k => progState.actions[k]).length;
+  const pct = Math.round((done / TOTAL) * 100);
+  return `BLOW pilot · status M2-readiness\n` +
+    `Acties: ${done}/${TOTAL} (${pct}%)\n` +
+    `Toine klaar: ${progState.readyToine ? '✅' : '⏳'}\n` +
+    `Bram klaar: ${progState.readyBram ? '✅' : '⏳'}\n\n` +
+    `→ ${pct >= 80 && progState.readyToine && progState.readyBram ? 'GO voor M2 ma 11 mei' : 'Nog niet helemaal klaar'}`;
+}
+
+// Refresh dashboard if user changes vinkjes in another tab
+window.addEventListener('storage', (e) => {
+  if (e.key === 'blow-pilot-m1-actielijst') loadProgress();
+});
+loadProgress();
 
 // Scroll-spy
 const sections = document.querySelectorAll('section[id]');
-const tocLinks = document.querySelectorAll('.toc a');
+const tocLinks = document.querySelectorAll('.page-toc a');
 function updateActive() {
   let current = '';
   sections.forEach(s => { if (s.getBoundingClientRect().top < 130) current = s.id; });
