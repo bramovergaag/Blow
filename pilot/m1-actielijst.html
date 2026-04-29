@@ -200,6 +200,35 @@
   .priority.med { background: var(--amber-soft); color: var(--amber); }
   .priority.low { background: var(--sand-light); color: var(--muted); }
 
+  /* HOW-instructies per actie */
+  .how { margin-top: 10px; }
+  .how summary {
+    cursor: pointer; font-size: 0.78rem; font-weight: 700;
+    color: var(--sea); padding: 4px 0; user-select: none;
+    list-style: none;
+  }
+  .how summary::-webkit-details-marker { display: none; }
+  .how summary::before { content: "▸ "; transition: transform 0.2s; display: inline-block; }
+  .how[open] summary::before { content: "▼ "; }
+  .how summary:hover { color: var(--deep); }
+  .how-body {
+    margin-top: 8px; padding: 12px 14px;
+    background: var(--sand-light); border-radius: 6px;
+    border-left: 3px solid var(--sea);
+  }
+  .how-body ol { margin: 0; padding-left: 20px; }
+  .how-body ol li { padding: 3px 0; font-size: 0.84rem; line-height: 1.5; }
+  .how-body ol li strong { color: var(--deep); }
+  .how-body code {
+    background: var(--foam); padding: 1px 5px; border-radius: 3px;
+    font-size: 0.82em;
+  }
+  .how-body .blocker {
+    background: var(--red-soft); color: var(--red); padding: 2px 8px;
+    border-radius: 4px; font-weight: 700; font-size: 0.74rem;
+    margin-bottom: 6px; display: inline-block;
+  }
+
   .pending {
     background: linear-gradient(135deg, var(--amber) 0%, #b35a05 100%);
     color: white; border-radius: 12px; padding: 22px 26px; margin-bottom: 24px;
@@ -387,6 +416,14 @@
             <div class="deadline">deadline: vóór week 1 stap 1</div>
           </div>
           <div class="priority high">hoog</div>
+          <details class="how"><summary>Hoe? · stap-voor-stap</summary><div class="how-body">
+<span class="blocker">⚠ DEZE WEEK · blokkeert audit + scenario 1</span>
+<ol>
+<li><strong>Search Console:</strong> open <code>search.google.com/search-console</code> · selecteer property <code>sc-domain:blow.surf</code> of <code>https://blow.surf/</code> · Settings → Users and permissions → Add user · email <code>bramovergaag@gmail.com</code> · permission "Restricted" of "Full"</li>
+<li><strong>Google Analytics 4:</strong> open <code>analytics.google.com</code> · selecteer BLOW property · Admin → Property Access Management → Add user · zelfde email · "Viewer"-rol minimaal</li>
+<li><strong>Viking Bookings:</strong> log in op <code>blow.vikingbookings.com</code> · Settings → Users → Add → zelfde email · "Read-only" rol of API-key genereren</li>
+<li><strong>Bevestig in WhatsApp</strong> aan Bram zodra alle drie gedeeld</li>
+</ol></div></details>
         </div>
 
         <div class="action" data-id="t-2" data-who="toine">
@@ -398,6 +435,13 @@
             <div class="deadline">deadline: binnen 2 weken</div>
           </div>
           <div class="priority high">hoog</div>
+          <details class="how"><summary>Hoe? · stap-voor-stap</summary><div class="how-body">
+<ol>
+<li><strong>Lijst maken:</strong> wie in jouw netwerk heeft <em>process-denker</em>-mindset (zoals Kris die in M1-gesprek genoemd werd)?</li>
+<li><strong>Specialisaties matchen:</strong> 1 voor strategie/visie, 1 voor operations/admin, 1 voor marketing</li>
+<li><strong>Polsen:</strong> stuur per persoon een korte WA: "we zijn met BLOW een SEO-pilot gestart, 2u/2wk meedenken — interesse?"</li>
+<li><strong>Aanleveren:</strong> deel namen + rollen met Bram via WhatsApp of in M2</li>
+</ol></div></details>
         </div>
 
         <div class="action" data-id="t-3" data-who="toine">
@@ -409,6 +453,13 @@
             <div class="deadline">deadline: deze week</div>
           </div>
           <div class="priority high">hoog</div>
+          <details class="how"><summary>Hoe? · stap-voor-stap</summary><div class="how-body">
+<ol>
+<li><strong>Vendor terugbellen:</strong> bevestig keuze (wel/niet tekenen) deze week — vendor wacht niet eeuwig</li>
+<li><strong>Bij hybride keuze:</strong> kleinste pakket (€420/mnd Starter) en duidelijk maken dat tweede spoor (Bram) parallel loopt</li>
+<li><strong>Bij niet-tekenen:</strong> geen formele afwijzing nodig — gewoon niet reageren of "we starten eerst zelf 4 mnd, contact via M5 weer"</li>
+<li><strong>Beslissing communiceren</strong> via WhatsApp aan Bram (verandert weinig aan zijn werk, wel aan budget-context)</li>
+</ol></div></details>
         </div>
 
         <div class="action" data-id="t-4" data-who="toine">
@@ -420,6 +471,13 @@
             <div class="deadline">deadline: vóór publicatie post</div>
           </div>
           <div class="priority med">medium</div>
+          <details class="how"><summary>Hoe? · stap-voor-stap</summary><div class="how-body">
+<ol>
+<li><strong>Open</strong> Post A op <code>bramovergaag.github.io/Blow/pilot/posts/01-zandmotor-veiligheid.html</code></li>
+<li><strong>Lees</strong> 3 specifieke claims: "15 jaar lesgegeven" · "lagune 1–1,5m diep" · "07:30 wind-check + bellen cursist"</li>
+<li><strong>Markeer</strong> wat klopt / wat aangepast moet (bv. "13 jaar" i.p.v. 15)</li>
+<li><strong>Stuur correcties</strong> als WA-bericht naar Bram, hij past de bron aan</li>
+</ol></div></details>
         </div>
 
         <div class="action" data-id="t-5" data-who="toine">
@@ -430,6 +488,13 @@
             <div class="desc">Kiteschool / Rest / Events met sub-categorieën in ContentQueue verwerken.</div>
           </div>
           <div class="priority med">medium</div>
+          <details class="how"><summary>Hoe? · stap-voor-stap</summary><div class="how-body">
+<ol>
+<li><strong>Open</strong> de bronmateriaal-pagina · whiteboard sectie 02</li>
+<li><strong>Bevestig</strong> de 3 onleesbare items: <code>csp · beach r</code> (?) en <code>VEIS · beants</code> (?) — wat stond er eigenlijk?</li>
+<li><strong>Aanvullen</strong> in de content-queue indien er meer ideeën uit het gesprek niet op het whiteboard kwamen</li>
+<li><strong>Antwoord</strong> via WhatsApp — Bram werkt het door in <code>content-queue-seed.csv</code></li>
+</ol></div></details>
         </div>
       </div>
     </section>
@@ -449,6 +514,15 @@
             <div class="deadline">deadline: week 1 stap 1</div>
           </div>
           <div class="priority high">hoog</div>
+          <details class="how"><summary>Hoe? · stap-voor-stap</summary><div class="how-body">
+<ol>
+<li><strong>Account:</strong> ga naar <code>make.com</code> · sign-up met BLOW-email · upgrade naar Pro (€10/mnd, voor 10k operations)</li>
+<li><strong>Connecties:</strong> Settings → Connections → add Google (OAuth voor Sheets + GSC), WordPress (REST + app-password), Anthropic API (key vanuit claude.com/settings)</li>
+<li><strong>Scenario 1 (GSC):</strong> import blueprint <code>blow-make-blueprints/01-gsc-to-sheets.blueprint.json</code> · vervang IDs · schedule: weekly maandag 07:00</li>
+<li><strong>Scenario 2 (Content):</strong> import <code>02-content-generator.blueprint.json</code> · trigger: sheet-watcher op status=ready_for_brief</li>
+<li><strong>Scenario 3 (WP):</strong> import <code>03-wordpress-publisher.blueprint.json</code> · trigger: status=approved</li>
+<li><strong>Test</strong> met 1 dummy-row in sheet voor scenario 2 → checken of draft terugkomt</li>
+</ol></div></details>
         </div>
 
         <div class="action" data-id="b-2" data-who="bram">
@@ -460,6 +534,15 @@
             <div class="deadline">deadline: 1 week na GSC-toegang</div>
           </div>
           <div class="priority high">hoog</div>
+          <details class="how"><summary>Hoe? · stap-voor-stap</summary><div class="how-body">
+<ol>
+<li><strong>Wacht</strong> op GSC-toegang (T-1)</li>
+<li><strong>Open</strong> GSC dashboard · Performance → laatste 3 maanden · sorteer op impressions desc</li>
+<li><strong>Filter</strong> position 11–25: top 20 underperformers exporteren als CSV</li>
+<li><strong>Filter</strong> position 4–10 + CTR &lt; 2%: quick-win kandidaten</li>
+<li><strong>Voeg toe</strong> aan <code>pilot/audit-2026-04-27.md</code> als bijlage <code>audit-data-gsc.csv</code></li>
+<li><strong>Update</strong> audit-HTML met top-20 underperformers in tabel</li>
+</ol></div></details>
         </div>
 
         <div class="action" data-id="b-3" data-who="bram">
@@ -471,6 +554,15 @@
             <div class="deadline">deadline: week 2 stap 1</div>
           </div>
           <div class="priority high">hoog</div>
+          <details class="how"><summary>Hoe? · stap-voor-stap</summary><div class="how-body">
+<ol>
+<li><strong>Login</strong> WordPress admin van blow.surf (vraag toegang aan Toine als nodig)</li>
+<li><strong>/kitesurfles:</strong> title-tag → <code>Kitesurfles Zandmotor Kijkduin · BLOW Beach House</code> (58 chars) · meta-desc → 155 chars met CTA</li>
+<li><strong>/restaurant:</strong> title → <code>Restaurant Beach House Kijkduin · BLOW · Italiaans + houtoven</code> · meta met "elektrische keuken + houtoven"</li>
+<li><strong>/events:</strong> title → <code>Events op het strand Kijkduin · bruiloften + bedrijfsuitjes · BLOW</code></li>
+<li><strong>/over-blow:</strong> title → <code>Over BLOW · IKO-kitesurfschool sinds 2013 · Kijkduin Den Haag</code></li>
+<li><strong>/blog:</strong> title → <code>Blog · BLOW Beach House Kijkduin · kitesurf + horeca + events</code></li>
+</ol></div></details>
         </div>
 
         <div class="action" data-id="b-4" data-who="bram">
@@ -482,6 +574,16 @@
             <div class="deadline">deadline: week 2 stap 1</div>
           </div>
           <div class="priority med">medium</div>
+          <details class="how"><summary>Hoe? · stap-voor-stap</summary><div class="how-body">
+<ol>
+<li><strong>Wacht</strong> op cijfer-validatie van Toine (T-4)</li>
+<li><strong>Pas aan:</strong> "15 jaar" → werkelijke aantal · evt lagune-diepte aanpassen</li>
+<li><strong>Open WordPress</strong> · Posts → Add New · plak markdown via een MD-to-HTML converter (Pandoc lokaal, of online <code>markdowntohtml.com</code>)</li>
+<li><strong>Hero-image:</strong> drone-shot Zandmotor uit Toine's bibliotheek of Pexels/Unsplash gratis-stock</li>
+<li><strong>Yoast/RankMath:</strong> primary keyword <code>kitesurfen zandmotor</code> · meta-desc uit frontmatter · slug <code>kitesurfen-zandmotor-kijkduin</code></li>
+<li><strong>Internal-links:</strong> /kitesurfles-zandmotor/ + /restaurant + /over-blow toevoegen via Gutenberg-link-tool</li>
+<li><strong>Publiceren</strong> en delen via WA + IG (template uit <code>distributie/templates.md</code>)</li>
+</ol></div></details>
         </div>
 
         <div class="action" data-id="b-5" data-who="bram">
@@ -493,6 +595,15 @@
             <div class="deadline">deadline: week 3 stap 1</div>
           </div>
           <div class="priority med">medium</div>
+          <details class="how"><summary>Hoe? · stap-voor-stap</summary><div class="how-body">
+<ol>
+<li><strong>Open</strong> <code>posts/02-kijkduin-vs-scheveningen.md</code> — outline staat klaar</li>
+<li><strong>Schrijf body</strong> · richtlijnen in skeleton: 35–45% feit / 55–65% verhaal · "ik/wij"-perspectief · geen aanvallen op concurrenten</li>
+<li><strong>Tabel</strong> met side-by-side vergelijking: wind, drukte, obstakels, horeca, parkeren, OV</li>
+<li><strong>Eerlijke "wanneer Scheveningen wel past"-sectie</strong> — trust-builder</li>
+<li><strong>Concurrentie-validatie:</strong> SERP-snapshot toonde geen vergelijking-pagina in top-10 → directe top-3 kans</li>
+<li><strong>Publiceren</strong> via dezelfde flow als B-4</li>
+</ol></div></details>
         </div>
 
         <div class="action" data-id="b-6" data-who="bram">
@@ -504,6 +615,15 @@
             <div class="deadline">deadline: week 4 stap 1</div>
           </div>
           <div class="priority med">medium</div>
+          <details class="how"><summary>Hoe? · stap-voor-stap</summary><div class="how-body">
+<ol>
+<li><strong>Restaurant post:</strong> kies keyword "beste Italiaanse pizza Kijkduin" of "lunchen aan zee Kijkduin"</li>
+<li><strong>Brief in sheet:</strong> primary + secondary keywords · audience local/tourist · target ~800w</li>
+<li><strong>Trigger</strong> scenario 2 voor Claude-draft</li>
+<li><strong>Events post:</strong> kies "bedrijfsuitje strand Kijkduin" (B2B-target volgens audit)</li>
+<li><strong>Repliceer</strong> trouw-template structuur (BLOW staat #3 op trouwen — werkt)</li>
+<li><strong>Beide draft → review</strong> in sheet, Toine kort feedbacken via WA</li>
+</ol></div></details>
         </div>
 
         <div class="action" data-id="b-7" data-who="bram">
@@ -514,6 +634,14 @@
             <div class="desc">3-deling Kiteschool / Rest / Events met sub-categorieën verwerken in seed-CSV.</div>
           </div>
           <div class="priority low">laag</div>
+          <details class="how"><summary>Hoe? · stap-voor-stap</summary><div class="how-body">
+<ol>
+<li><strong>Open</strong> Google Sheet · ContentQueue tab</li>
+<li><strong>Voeg kolom toe</strong> "cluster" met dropdown: Kitesurf · Restaurant · Events-particulier · Events-zakelijk · Events-actief</li>
+<li><strong>Importeer</strong> 30-keyword seed uit <code>content-queue-seed.csv</code> in sheet</li>
+<li><strong>Verrijk</strong> met whiteboard-categorieën uit M1-gesprek (na T-5 antwoord)</li>
+<li><strong>Sorteer</strong> per cluster · markeer top-10 (1 per dag × 10 dagen) als priority=high voor M2</li>
+</ol></div></details>
         </div>
       </div>
     </section>
@@ -533,6 +661,14 @@
             <div class="deadline">deadline: week 1 stap 1</div>
           </div>
           <div class="priority high">hoog</div>
+          <details class="how"><summary>Hoe? · stap-voor-stap</summary><div class="how-body">
+<ol>
+<li><strong>Plan</strong> 1u-sessie via WhatsApp · liefst tijdens M2 (ma 11 mei) of apart</li>
+<li><strong>Bram bereidt voor:</strong> 5 KPI-categorieën uit pilot sectie 07 (volume / SEO / business / operatie / strategisch)</li>
+<li><strong>Toine kiest:</strong> per categorie 1 KPI die voor BLOW relevant is</li>
+<li><strong>Streefcijfers:</strong> ambitieus maar haalbaar (bv. 50 posts in fase 1, +30% verkeer, 10 leads met UTM)</li>
+<li><strong>Vastleggen</strong> in <code>pilot/kpis-fase-1.md</code></li>
+</ol></div></details>
         </div>
 
         <div class="action" data-id="s-2" data-who="shared">
@@ -544,6 +680,14 @@
             <div class="deadline">deadline: einde week 2 stap 1</div>
           </div>
           <div class="priority high">hoog</div>
+          <details class="how"><summary>Hoe? · stap-voor-stap</summary><div class="how-body">
+<ol>
+<li><strong>Bram opstellen:</strong> 1-pager met 5 secties — wat ik inbreng / wat BLOW inbrengt / KPI's / spelregels / stop-clausule</li>
+<li><strong>Basis:</strong> samenwerkingstabel uit pilot sectie 07</li>
+<li><strong>Eind stap 1 punten:</strong> eigendomsstructuur · go/no-go fase 2 · gedeelde info bij stop</li>
+<li><strong>Beide ondertekenen</strong> · Bram bewaart in repo onder <code>pilot/afspraak-fase-1.md</code></li>
+<li><strong>Optioneel jurist-check</strong> — niet noodzakelijk voor fase 1, wel als Stap 4 productisering doorgaat</li>
+</ol></div></details>
         </div>
 
         <div class="action" data-id="s-3" data-who="shared">
@@ -554,6 +698,14 @@
             <div class="desc">2-wekelijks 30 min review + ad-hoc bij vragen. Tijdslot kiezen.</div>
           </div>
           <div class="priority med">medium</div>
+          <details class="how"><summary>Hoe? · stap-voor-stap</summary><div class="how-body">
+<ol>
+<li><strong>Plan recurring agenda-events</strong> — gebruik Google Calendar 1-klik export uit planning.html</li>
+<li><strong>9 meetings</strong> ma 17:00 · alternating online/fysiek · zie meeting-tabel</li>
+<li><strong>Default kanaal:</strong> Google Meet voor online · adressen voor fysiek</li>
+<li><strong>Ad-hoc:</strong> WhatsApp-groep "BLOW SEO pilot" met Bram + Toine + (later) Toine's coaches</li>
+<li><strong>No-show beleid:</strong> bij ziekte/onbereikbaar → online-meetings worden 1-1, fysiek wordt verschoven 1 wk</li>
+</ol></div></details>
         </div>
       </div>
     </section>
