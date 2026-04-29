@@ -12,7 +12,7 @@
     --sea-light: #4a90b8;
     --foam: #ffffff;
     --deep: #0b2e4a;
-    --accent: #e85d04;
+    --accent: #C66A1F;
     --accent-soft: #f8ddc7;
     --green: #2d8659;
     --red: #b63b3b;
@@ -20,8 +20,8 @@
     --teal: #2a8e8e;
     --gold: #c9a227;
     --text: #1a2a3a;
-    --muted: #5c6b7a;
-    --border: rgba(30, 96, 145, 0.15);
+    --muted: #4B5563;
+    --border: rgba(30, 96, 145, 0.22);
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
@@ -613,6 +613,45 @@
     h1 { font-size: 1.5rem; }
     .lead { font-size: 0.95rem; }
   }
+
+  /* Tile-bar — 3 hoofdvieuws tussen brand-bar en breadcrumb */
+  .tile-bar {
+    background: var(--foam, #FDF8F3); border-bottom: 1px solid var(--border, #E5DFD3);
+    padding: 14px 24px;
+  }
+  .tile-bar .tiles {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 14px; max-width: 1280px; margin: 0 auto;
+  }
+  @media (max-width: 700px) {
+    .tile-bar { padding: 12px 16px; }
+    .tile-bar .tiles { grid-template-columns: 1fr; }
+  }
+  .tile {
+    background: var(--sand-light, #F5EDE0); border-radius: 10px;
+    padding: 14px 18px; text-decoration: none; transition: all 0.15s;
+    display: flex; align-items: center; gap: 14px;
+    border: 2px solid transparent;
+    color: var(--deep, #1F2A37);
+  }
+  .tile:hover { transform: translateY(-2px); box-shadow: 0 4px 14px rgba(11, 46, 74, 0.1); }
+  .tile.active.pipeline {
+    background: linear-gradient(135deg, #C66A1F 0%, #b35a05 100%);
+    color: white;
+  }
+  .tile.active.planning {
+    background: linear-gradient(135deg, #6B66B8 0%, #5a55a3 100%);
+    color: white;
+  }
+  .tile.active.timeline {
+    background: linear-gradient(135deg, #2C8159 0%, #1e6e44 100%);
+    color: white;
+  }
+  .tile.active .tile-sub { color: rgba(255, 255, 255, 0.85); }
+  .tile-icon { font-size: 1.6rem; line-height: 1; flex-shrink: 0; }
+  .tile-content { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+  .tile-name { font-size: 0.98rem; font-weight: 700; line-height: 1.2; }
+  .tile-sub { font-size: 0.74rem; color: var(--muted, #4B5563); line-height: 1.3; }
 </style>
 </head>
 <body>
@@ -627,6 +666,34 @@
     <a href="https://bramovergaag.github.io/balistoel.nl/">Balistoel</a>
   </nav>
 </header>
+
+<nav class="tile-bar" aria-label="Hoofdvieuws">
+  <div class="tiles">
+    <a href="./" class="tile pipeline">
+      <span class="tile-icon">📊</span>
+      <div class="tile-content">
+        <div class="tile-name">Pipeline-dashboard</div>
+        <div class="tile-sub">21 posts/week · status per stage</div>
+      </div>
+    </a>
+    <a href="planning.html" class="tile planning">
+      <span class="tile-icon">📅</span>
+      <div class="tile-content">
+        <div class="tile-name">Planning</div>
+        <div class="tile-sub">~14 mnd · 4 fases · 27 meetings</div>
+      </div>
+    </a>
+    <a href="m1-agenda.html" class="tile timeline active">
+      <span class="tile-icon">🗓</span>
+      <div class="tile-content">
+        <div class="tile-name">Timeline</div>
+        <div class="tile-sub">9 meetings · M1 t/m M9 · agenda · acties</div>
+      </div>
+    </a>
+  </div>
+</nav>
+
+
 
 <nav class="breadcrumb" aria-label="Terug naar pilot">
   <a href="./">← Pilot-overzicht</a>

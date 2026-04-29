@@ -7,10 +7,10 @@
 <style>
   :root {
     --sand: #f4ecd8; --sand-light: #faf5e6; --sea: #1e6091; --sea-light: #4a90b8;
-    --foam: #ffffff; --deep: #0b2e4a; --accent: #e85d04; --accent-soft: #f8ddc7;
+    --foam: #ffffff; --deep: #0b2e4a; --accent: #C66A1F; --accent-soft: #f8ddc7;
     --green: #2d8659; --green-soft: #d1e8d8; --red: #b63b3b; --red-soft: #f0d4d4;
     --amber: #d97706; --amber-soft: #fde7c7; --purple: #7b77c7;
-    --text: #1a2a3a; --muted: #5c6b7a; --border: rgba(30, 96, 145, 0.15);
+    --text: #1a2a3a; --muted: #4B5563; --border: rgba(30, 96, 145, 0.22);
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
@@ -141,7 +141,7 @@
   .stage-dot {
     width: 18px; height: 18px; border-radius: 4px;
     display: inline-flex; align-items: center; justify-content: center;
-    font-size: 0.62rem; font-weight: 700;
+    font-size: 0.7rem; font-weight: 700;
     background: var(--foam); border: 1px solid var(--border);
     color: var(--muted);
   }
@@ -290,8 +290,8 @@
     <a href="m1-agenda.html" class="tile timeline">
       <span class="tile-icon">🗓</span>
       <div class="tile-content">
-        <div class="tile-name">Timeline M1</div>
-        <div class="tile-sub">Agenda · Notulen · Actielijst</div>
+        <div class="tile-name">Timeline</div>
+        <div class="tile-sub">9 meetings · M1 t/m M9 · agenda · acties</div>
       </div>
     </a>
   </div>
@@ -318,15 +318,6 @@
     </div>
   </header>
 
-  <div style="background: linear-gradient(135deg, var(--sea) 0%, var(--deep) 100%); color: white; padding: 18px 24px; border-radius: 12px; margin-bottom: 24px; display: grid; grid-template-columns: auto 1fr auto; gap: 18px; align-items: center;">
-    <div style="font-size: 1.8rem;">📅</div>
-    <div>
-      <div style="font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; opacity: 0.85; font-weight: 700;">Volgende meeting</div>
-      <div style="font-size: 1.1rem; font-weight: 700; margin-top: 2px;">M2 · ma 11 mei · 17:00 · Google Meet</div>
-      <div style="font-size: 0.84rem; opacity: 0.85; margin-top: 4px;">Kick-off review · GSC-toegang · Scenarios 1+2+3 setup</div>
-    </div>
-    <a href="planning.html#meeting-table" style="background: var(--accent); color: white; padding: 10px 16px; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 0.84rem; white-space: nowrap;">📅 Add to GCal</a>
-  </div>
 
   <section id="kpi">
     <div class="kpi-strip">
