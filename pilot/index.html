@@ -472,10 +472,36 @@ const STAGES = [
   { key: 'wa', name: 'WhatsApp verzonden', desc: 'Bericht naar groep · 2u feedback' },
   { key: 'pub', name: 'Gepubliceerd', desc: 'Live op blow.surf' }
 ];
+// Audit-derived topics uit content-queue-seed.csv (M1 audit · 27 apr 2026)
+// Volgorde = priority high → medium → low binnen elk cluster
 const SAMPLE_TITLES = {
-  events: ['Bruiloft strand Kijkduin', 'Vrijgezellenfeest', 'Familie reünie', 'Beach games corp', 'Kinderfeestje strand', 'Bedrijfsuitje Den Haag', 'Verjaardag aan zee'],
-  rest: ['Beste Italiaanse pizza', 'Romantisch dineren', 'Workshop pizza maken', 'Hidden gem Kijkduin', 'Borrelen aan zee', 'Lunch met view', 'Vegan strand-lunch'],
-  kite: ['Kitesurfles Zandmotor', 'Wind voor beginners', 'Kitesurfen vs windsurfen', 'IKO certificering', 'Trainen voor kite', 'Kitespot review', 'Kitesurf gear gids']
+  events: [
+    'Bedrijfsuitje strand Kijkduin',       // high · b2b
+    'Teambuilding kitesurfen',             // high · unieke prop
+    'Zomerfeest organiseren strand',       // high · plannen mrt-apr
+    'Verjaardag vieren aan zee',           // medium · weekend bookings
+    'Kinderfeestje strand Kijkduin',       // medium · families
+    'Oud en nieuw aan zee',                // medium · seizoensspike
+    'Bruiloft strand Kijkduin'             // low · hoge-waarde
+  ],
+  rest: [
+    'Strandrestaurant Kijkduin',           // high · refresh bestaande pagina
+    'Dagje strand Kijkduin',               // medium · weekend-intent
+    'Ontbijt aan zee Den Haag',            // medium · ochtend-publiek
+    'Borrelen aan zee — vrijmibo',         // medium · after-work
+    'Winter aan zee Kijkduin',             // medium · dal-periode
+    'Beach House interieur',               // low · imago-content
+    'Trouwen op het strand'                // low · lange voorlooptijd
+  ],
+  kite: [
+    'Kitesurfen Zandmotor — veiligste spot', // high · Post A (live)
+    'Kijkduin vs Scheveningen — beginners',  // high · Post B (live)
+    'Kitesurfen leren als volwassene 40+',   // high · gap in markt
+    'Kitesurfen veiligheid beginners',       // high · E-E-A-T anker
+    'Beste maand kitesurfen Nederland',      // medium · evergreen
+    'Wind Zandmotor — live voorspelling',    // medium · utility
+    'Kitesurfen vanaf welke leeftijd'        // medium · families
+  ]
 };
 
 // Real posts (already done/in-progress) — overlay op week-grid
