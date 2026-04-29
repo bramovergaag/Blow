@@ -431,6 +431,27 @@
   .as-text { flex: 1; }
   .as-bar { height: 6px; background: rgba(0,0,0,0.05); border-radius: 3px; margin-top: 8px; overflow: hidden; }
   .as-bar .fill { height: 100%; background: var(--green); transition: width 0.3s; }
+  /* M2 voorwaarde-acties collapsible (in meeting-table) */
+  tr.m-acties-row td { background: var(--foam); }
+  details.m-acties > summary {
+    list-style: none; cursor: pointer; padding: 12px 16px;
+    background: var(--sand-light); border-top: 1px dashed var(--border);
+    font-size: 0.9rem; user-select: none;
+    display: flex; align-items: center; gap: 8px;
+  }
+  details.m-acties > summary::-webkit-details-marker { display: none; }
+  details.m-acties > summary::after {
+    content: '▸'; margin-left: auto; color: var(--muted); transition: transform 0.2s;
+  }
+  details.m-acties[open] > summary::after { transform: rotate(90deg); }
+  details.m-acties > summary:hover { background: var(--accent-soft); }
+  details.m-acties .m-acties-hint { color: var(--muted); font-size: 0.82rem; font-weight: 400; }
+  .m-acties-body { padding: 16px 18px; background: var(--foam); }
+  .m-acties-summary { padding-bottom: 12px; border-bottom: 1px solid var(--border); margin-bottom: 14px; }
+  .m-acties-bar { height: 6px; background: rgba(0,0,0,0.05); border-radius: 3px; overflow: hidden; margin-bottom: 6px; }
+  .m-acties-bar .fill { height: 100%; background: var(--green); transition: width 0.3s; }
+  .m-acties-meta { font-size: 0.84rem; color: var(--muted); }
+  .m-acties-meta a { color: var(--accent); text-decoration: none; font-weight: 600; }
 </style>
 </head>
 <body>
@@ -480,11 +501,9 @@
 
 <nav class="page-toc" aria-label="Op deze pagina">
   <ul>
-    <li><a href="#progress">Status M2</a></li>
     <li><a href="#jaaroverzicht">Jaar-overzicht</a></li>
     <li><a href="#detail">Detail per stap</a></li>
     <li><a href="#meeting-table">Meetings</a></li>
-    <li><a href="#acties-status">Status acties M1</a></li>
   </ul>
 </nav>
 
@@ -497,40 +516,6 @@
     <h1>~14 maanden · 4 fases · 27 meetings</h1>
     <p style="color: var(--muted); font-size: 0.9rem; margin-top: 6px;">Fase 1: 9 meetings (2-wkly, 18 wk) · Fasen 2/3/4: elk 6 meetings (2-wkly, 12 wk).</p>
   </header>
-
-  <section id="progress">
-    <div class="progress-summary">
-      <h3>📊 Status M2 (ma 11 mei) · live dashboard</h3>
-      <p style="opacity: 0.85; font-size: 0.88rem; margin-bottom: 14px;">Live uit jouw actielijst-vinkjes. Toine en Bram hebben elk hun eigen view per browser.</p>
-      <div class="progress-row" style="grid-template-columns: 1fr 1fr 1fr 1fr;">
-        <div class="ps-item">
-          <div class="lbl">Acties afgerond</div>
-          <div class="val" id="prog-actions">0 / 15</div>
-          <div class="sub" id="prog-actions-pct">0%</div>
-        </div>
-        <div class="ps-item" id="prog-toine-card">
-          <div class="lbl">Toine klaar?</div>
-          <div class="val" id="prog-toine">⏳ nog niet</div>
-          <div class="sub">druk op de actielijst-knop</div>
-        </div>
-        <div class="ps-item" id="prog-bram-card">
-          <div class="lbl">Bram klaar?</div>
-          <div class="val" id="prog-bram">⏳ nog niet</div>
-          <div class="sub">druk op de actielijst-knop</div>
-        </div>
-        <div class="ps-item" id="prog-verdict-card">
-          <div class="lbl">Verdict M2</div>
-          <div class="val" id="prog-verdict">niet klaar</div>
-          <div class="sub" id="prog-verdict-sub">wacht op acties + ready-knoppen</div>
-        </div>
-      </div>
-      <div style="margin-top: 16px; display: flex; gap: 10px; flex-wrap: wrap;">
-        <a href="m1-actielijst.html" style="background: var(--accent); color: white; padding: 10px 18px; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 0.86rem;">→ Naar actielijst</a>
-        <button onclick="navigator.clipboard.writeText(getStatusText()).then(()=>alert('Status gekopieerd naar klembord'))" style="background: rgba(255,255,255,0.15); color: white; padding: 10px 18px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.3); font-weight: 700; font-size: 0.86rem; cursor: pointer; font-family: inherit;">📋 Kopieer status (WhatsApp)</button>
-      </div>
-    </div>
-  </section>
-
   <section id="jaaroverzicht" style="margin-bottom: 28px;">
     <h2 class="sec" style="margin-top: 16px;">Jaar-overzicht — 4 fases</h2>
     <div class="year-gantt">
@@ -725,36 +710,6 @@
       Tip: in fase 2 plannen we auto-mailen van agenda's naar Toine + Bram (MAKE óf GitHub Actions).
     </p>
   </section>
-
-  <section id="acties-status" style="margin-bottom: 32px;">
-    <h2 class="sec">Status acties M1 — fase 1</h2>
-    <p class="sec-sub">Live uit ieders eigen actielijst-vinkjes (per device, via localStorage). Open de actielijst om te updaten.</p>
-
-    <div class="as-wrap">
-      <div class="as-header">
-        <h3>Actie-voortgang</h3>
-        <span class="as-count"><strong id="as-done">0</strong> / 15 afgerond · <strong id="as-pct">0%</strong></span>
-        <a class="as-link" href="m1-actielijst.html">→ Open actielijst</a>
-      </div>
-      <div class="as-bar"><div class="fill" id="as-fill" style="width: 0%"></div></div>
-
-      <div class="as-groups" style="margin-top: 18px;">
-        <div class="as-group toine">
-          <h4>Toine <span class="pct" id="as-pct-toine">0/5</span></h4>
-          <div id="as-list-toine"></div>
-        </div>
-        <div class="as-group bram">
-          <h4>Bram <span class="pct" id="as-pct-bram">0/7</span></h4>
-          <div id="as-list-bram"></div>
-        </div>
-        <div class="as-group shared">
-          <h4>Samen <span class="pct" id="as-pct-shared">0/3</span></h4>
-          <div id="as-list-shared"></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
 </main>
 </main>
 
@@ -814,7 +769,7 @@ function renderMeetingTable() {
     const btn = m.past
       ? `<span class="gcal-btn">✓ gehad</span>`
       : `<a class="gcal-btn" href="${gcalUrl(m)}" target="_blank" rel="noopener">📅 Google Cal</a>`;
-    return `<tr class="${cls}">
+    let row = `<tr class="${cls}">
       <td><span class="m-num">${m.id}</span></td>
       <td>${m.dateLabel}</td>
       <td>${m.start}</td>
@@ -823,6 +778,16 @@ function renderMeetingTable() {
       <td>${m.doel}</td>
       <td>${btn}</td>
     </tr>`;
+    // Voeg M1-acties als collapsible toe onder M2 (voorwaarde voor de meeting)
+    if (m.id === 'M2') {
+      row += `<tr class="m-acties-row"><td colspan="7" style="padding: 0; border: 0;">
+        <details class="m-acties">
+          <summary>📋 <strong>Voorwaarde-acties M1</strong> — <span id="m2-actcount">0</span>/15 afgerond <span class="m-acties-hint">(klik om te zien)</span></summary>
+          <div class="m-acties-body" id="m2-actbody"><!-- gevuld door renderActionsStatus --></div>
+        </details>
+      </td></tr>`;
+    }
+    return row;
   }).join('');
 }
 renderMeetingTable();
@@ -860,31 +825,36 @@ function loadProgress() {
 }
 
 function renderActionsStatus() {
-  const groups = { toine: [], bram: [], shared: [] };
-  M1_ACTIONS.forEach(a => groups[a.who].push(a));
+  const body = document.getElementById('m2-actbody');
+  const cnt = document.getElementById('m2-actcount');
+  if (!body) return;
+  const groups = { toine: { name: 'Toine', list: [] }, bram: { name: 'Bram', list: [] }, shared: { name: 'Samen', list: [] } };
+  M1_ACTIONS.forEach(a => groups[a.who].list.push(a));
   let totalDone = 0;
+  let html = '<div class="as-groups">';
   ['toine', 'bram', 'shared'].forEach(who => {
-    const list = groups[who];
-    const done = list.filter(a => !!progState.actions[a.id]).length;
+    const g = groups[who];
+    const done = g.list.filter(a => !!progState.actions[a.id]).length;
     totalDone += done;
-    const pctEl = document.getElementById('as-pct-' + who);
-    if (pctEl) pctEl.textContent = `${done}/${list.length}`;
-    const ul = document.getElementById('as-list-' + who);
-    if (ul) ul.innerHTML = list.map(a => {
-      const isDone = !!progState.actions[a.id];
-      return `<div class="as-item${isDone ? ' done' : ''}">
-        <span class="as-dot">${isDone ? '✓' : ''}</span>
-        <span class="as-text">${a.title}</span>
-      </div>`;
-    }).join('');
+    html += `<div class="as-group ${who}">
+      <h4>${g.name} <span class="pct">${done}/${g.list.length}</span></h4>` +
+      g.list.map(a => {
+        const isDone = !!progState.actions[a.id];
+        return `<div class="as-item${isDone ? ' done' : ''}">
+          <span class="as-dot">${isDone ? '✓' : ''}</span>
+          <span class="as-text">${a.title}</span>
+        </div>`;
+      }).join('') + '</div>';
   });
+  html += '</div>';
   const pct = Math.round((totalDone / M1_ACTIONS.length) * 100);
-  const dEl = document.getElementById('as-done');
-  const pEl = document.getElementById('as-pct');
-  const fEl = document.getElementById('as-fill');
-  if (dEl) dEl.textContent = totalDone;
-  if (pEl) pEl.textContent = pct + '%';
-  if (fEl) fEl.style.width = pct + '%';
+  html = `<div class="m-acties-summary">
+    <div class="m-acties-bar"><div class="fill" style="width:${pct}%"></div></div>
+    <div class="m-acties-meta">${totalDone} / ${M1_ACTIONS.length} afgerond · ${pct}% ·
+      <a href="m1-actielijst.html">→ open actielijst</a></div>
+  </div>` + html;
+  body.innerHTML = html;
+  if (cnt) cnt.textContent = totalDone;
 }
 
 function renderProgress() {
