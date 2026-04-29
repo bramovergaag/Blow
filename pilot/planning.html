@@ -252,6 +252,106 @@
   .kbd-hint kbd { background: var(--foam); border: 1px solid var(--border); border-radius: 3px;
     padding: 1px 5px; font-family: ui-monospace, monospace; font-size: 0.7rem;
     color: var(--deep); font-weight: 700; }
+
+  /* Step expand/collapse */
+  .step-detail {
+    background: var(--foam); border-radius: 12px; margin-bottom: 12px;
+    box-shadow: 0 2px 8px rgba(11, 46, 74, 0.05); overflow: hidden;
+  }
+  .step-detail[open] { box-shadow: 0 4px 16px rgba(11, 46, 74, 0.08); }
+  .step-summary {
+    cursor: pointer; padding: 16px 22px;
+    display: flex; align-items: center; gap: 14px;
+    list-style: none; user-select: none;
+    background: var(--foam); transition: background 0.15s;
+  }
+  .step-summary::-webkit-details-marker { display: none; }
+  .step-summary:hover { background: var(--sand-light); }
+  .step-detail[open] .step-summary { border-bottom: 1px solid var(--border); }
+  .step-pill {
+    color: white; padding: 6px 12px; border-radius: 6px;
+    font-size: 0.74rem; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .step-pill.p1 { background: var(--sea); }
+  .step-pill.p2 { background: var(--green); }
+  .step-pill.p3 { background: var(--accent); }
+  .step-pill.p4 { background: var(--purple); }
+  .step-title { font-size: 1.05rem; font-weight: 700; color: var(--deep); flex: 1; }
+  .step-meta { font-size: 0.82rem; color: var(--muted); }
+  .step-arrow {
+    font-size: 0.78rem; color: var(--muted); transition: transform 0.2s;
+  }
+  .step-detail[open] .step-arrow { transform: rotate(180deg); }
+  .step-body { padding: 22px 26px 26px; }
+  .step-goal {
+    background: var(--sand-light); padding: 12px 16px; border-radius: 8px;
+    margin-bottom: 18px; font-size: 0.92rem;
+  }
+  .step-goal strong { color: var(--deep); }
+  .step-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 22px;
+    margin-bottom: 16px;
+  }
+  @media (max-width: 700px) { .step-grid { grid-template-columns: 1fr; } }
+  .step-col h4 {
+    color: var(--deep); font-size: 0.92rem; margin-bottom: 8px;
+    padding-bottom: 6px; border-bottom: 2px solid var(--sand-light);
+  }
+  .step-col ul { list-style: none; padding: 0; }
+  .step-col ul li {
+    padding: 6px 0 6px 18px; position: relative; font-size: 0.86rem;
+    line-height: 1.5;
+  }
+  .step-col ul li::before {
+    content: "▸"; position: absolute; left: 0; color: var(--accent);
+  }
+  .next-physical {
+    background: linear-gradient(135deg, var(--accent) 0%, #b35a05 100%);
+    color: white; padding: 14px 18px; border-radius: 8px;
+    font-size: 0.92rem; margin-top: 14px;
+  }
+  .next-physical strong { font-weight: 700; }
+
+  /* Meeting table */
+  .m-table-wrap {
+    background: var(--foam); border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(11, 46, 74, 0.06);
+    overflow-x: auto;
+  }
+  .m-table { width: 100%; border-collapse: collapse; font-size: 0.86rem; }
+  .m-table th, .m-table td {
+    padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  .m-table th {
+    background: var(--deep); color: white; font-weight: 700;
+    font-size: 0.74rem; letter-spacing: 0.08em; text-transform: uppercase;
+    position: sticky; top: 56px; z-index: 5;
+  }
+  .m-table tr:hover td { background: var(--sand-light); }
+  .m-table tr.current td { background: var(--accent-soft); }
+  .m-table tr.eval td { background: rgba(11, 46, 74, 0.06); }
+  .m-table .m-num {
+    font-weight: 800; color: var(--deep); font-size: 1rem;
+  }
+  .m-table tr.current .m-num { color: var(--accent); }
+  .m-table tr.eval .m-num { color: var(--deep); }
+  .m-table .m-modus-pill {
+    display: inline-block; padding: 2px 8px; border-radius: 4px;
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .m-table .m-modus-pill.online { background: var(--sea-light); color: white; }
+  .m-table .m-modus-pill.fysiek { background: var(--accent-soft); color: var(--accent); }
+  .m-table .gcal-btn {
+    background: var(--sea); color: white; padding: 6px 12px;
+    border-radius: 6px; text-decoration: none; font-weight: 700;
+    font-size: 0.78rem; white-space: nowrap;
+    display: inline-flex; align-items: center; gap: 4px;
+  }
+  .m-table .gcal-btn:hover { background: var(--deep); }
+  .m-table tr.gehad td .gcal-btn { background: var(--muted); pointer-events: none; opacity: 0.5; }
 </style>
 </head>
 <body>
@@ -265,17 +365,6 @@
     <a href="https://bramovergaag.github.io/balistoel.nl/">Balistoel</a>
   </nav>
 </header>
-
-<nav class="page-toc" aria-label="Op deze pagina">
-  <ul>
-    <li><a href="#progress">Status M2</a></li>
-    <li><a href="#year">01 · Jaar-overzicht</a></li>
-    <li><a href="#fase1">02 · Fase 1 — meetings</a></li>
-    <li><a href="#geidentificeerd">03 · Geïdentificeerd</a></li>
-    <li><a href="#naar-fase-2">04 · Geschoven fase 2</a></li>
-    <li><a href="#fase2-4">05 · Fase 2-4</a></li>
-  </ul>
-</nav>
 
 <div class="wrap">
 
@@ -337,16 +426,15 @@
 
 <main>
 
-  <header class="hero">
+  <header class="hero" style="padding: 6px 0 16px; margin-bottom: 18px;">
     <div class="eyebrow">Planning</div>
-    <h1>16 maanden · 4 fases · 9 meetings stap 1</h1>
-    <p class="lead">Hoog-niveau jaar-overzicht voor fase 1 t/m 4. Voor de huidige fase (Stap 1) per meeting de doelstelling + actie-status uit de actielijst.</p>
+    <h1>16 maanden · 4 fases · 9 meetings</h1>
   </header>
 
   <section id="progress">
     <div class="progress-summary">
       <h3>📊 Status M2 (ma 11 mei) · live dashboard</h3>
-      <p style="opacity: 0.85; font-size: 0.88rem; margin-bottom: 14px;">Live uitgelezen uit jouw actielijst-vinkjes. Toine en Bram hebben elk een eigen view (per browser-localStorage).</p>
+      <p style="opacity: 0.85; font-size: 0.88rem; margin-bottom: 14px;">Live uit jouw actielijst-vinkjes. Toine en Bram hebben elk hun eigen view per browser.</p>
       <div class="progress-row" style="grid-template-columns: 1fr 1fr 1fr 1fr;">
         <div class="ps-item">
           <div class="lbl">Acties afgerond</div>
@@ -376,13 +464,11 @@
     </div>
   </section>
 
-  <section id="year">
-    <h2 class="sec"><span class="badge">01</span>Jaar-overzicht — 4 fases</h2>
-    <p class="sec-sub">Hoog-niveau planning. Elke fase 4 maanden. Eind elke fase = beoordelingsmoment.</p>
-
+  <section style="margin-bottom: 28px;">
+    <h2 class="sec" style="margin-top: 16px;">Jaar-overzicht — 4 fases</h2>
     <div class="year-gantt">
       <div class="yg-months">
-        <div class="lbl">2026 · 2027</div>
+        <div class="lbl">2026 — 2027</div>
         <div class="m">apr</div><div class="m">mei</div><div class="m">jun</div><div class="m">jul</div>
         <div class="m">aug</div><div class="m">sep</div><div class="m">okt</div><div class="m">nov</div>
         <div class="m">dec</div><div class="m">jan</div><div class="m">feb</div><div class="m">mrt</div>
@@ -405,370 +491,175 @@
         <div class="yg-bar p4" style="grid-column: 14 / 18">mei — aug 2027</div>
       </div>
     </div>
-
-    <div class="phase-cards">
-      <div class="phase-card p1 current">
-        <div class="num">Fase 1 · huidig</div>
-        <h3>Bouw + bewijs</h3>
-        <div class="period">apr – aug 2026 · 4 mnd</div>
-        <p class="goal">Systeem werkt, eerste meetbare output, samenwerkingsstructuur bevestigd.</p>
-        <ul class="activities">
-          <li>MAKE scenarios 1–6 live</li>
-          <li>Audit + GSC-data</li>
-          <li>10–15 publicatie-klare posts</li>
-          <li>KPI's gedefinieerd + baseline</li>
-        </ul>
-      </div>
-      <div class="phase-card p2">
-        <div class="num">Fase 2</div>
-        <h3>Schaal + automatisering</h3>
-        <div class="period">sep – dec 2026 · 4 mnd</div>
-        <p class="goal">Volume opschalen, distributie geautomatiseerd, restaurant + events content opgebouwd.</p>
-        <ul class="activities">
-          <li>Distributie-automation</li>
-          <li>Multi-departement cadans</li>
-          <li>EN/DE talen overweging</li>
-          <li>KPI-tussenmeting</li>
-        </ul>
-      </div>
-      <div class="phase-card p3">
-        <div class="num">Fase 3</div>
-        <h3>Optimalisatie + attributie</h3>
-        <div class="period">jan – apr 2027 · 4 mnd</div>
-        <p class="goal">ROI aantoonbaar, refresh-flow productief, GA4-attributie + UTM compleet.</p>
-        <ul class="activities">
-          <li>Refresh-flow voor stale posts</li>
-          <li>Conversie-tracking + leads</li>
-          <li>Jaar-1 evaluatie</li>
-          <li>Eigendom-besluit (was open)</li>
-        </ul>
-      </div>
-      <div class="phase-card p4">
-        <div class="num">Fase 4</div>
-        <h3>Productisering / replicatie</h3>
-        <div class="period">mei – aug 2027 · 4 mnd</div>
-        <p class="goal">Geanonimiseerd template + 2e klant pilot. Business model (model B) gevalideerd.</p>
-        <ul class="activities">
-          <li>Template-extractie</li>
-          <li>2e klant onboarding</li>
-          <li>Sales-tooling</li>
-          <li>Commerciële roll-out beslissing</li>
-        </ul>
-      </div>
-    </div>
   </section>
 
-  <section id="fase1">
-    <h2 class="sec"><span class="badge">02</span>Fase 1 detail — 9 meetings</h2>
-    <p class="sec-sub">2-wkly cadans, maandag 17:00, alternating online ↔ fysiek. Per meeting: doel + acties (live status uit actielijst).</p>
+  <section style="margin-bottom: 32px;">
+    <h2 class="sec">Detail per stap — uitvouwen</h2>
+    <p class="sec-sub">Klik om uit te vouwen. Stap 1 staat open omdat we daar nu in zitten.</p>
 
-    <div class="meeting-grid">
+    <details class="step-detail" open>
+      <summary class="step-summary">
+        <span class="step-pill p1">Stap 1</span>
+        <span class="step-title">Bouw + bewijs</span>
+        <span class="step-meta">apr — aug 2026 · 4 mnd · 9 meetings</span>
+        <span class="step-arrow">▼</span>
+      </summary>
+      <div class="step-body">
+        <p class="step-goal"><strong>Eind-doel:</strong> systeem werkt + eerste meetbare output, samenwerkingsstructuur bevestigd.</p>
 
-      <article class="m-card physical current">
-        <div class="m-head">
-          <div class="num">M1</div>
-          <div class="meta"><div class="date">wo 29 apr · 18:00</div><div>Beach House (Toine)</div></div>
+        <div class="step-grid">
+          <div class="step-col">
+            <h4>Geïdentificeerd in M1</h4>
+            <ul>
+              <li><strong>Kiteschool</strong> — top-1 + 1 lead/dag (kitesurfles, kiteschool, cursus, proefles)</li>
+              <li><strong>Restaurant</strong> — hidden gem, romantisch, beste Italiaanse pizza, workshops</li>
+              <li><strong>Events particulier</strong> — bruiloft (35/jr), familie/jubilea, beach games</li>
+              <li><strong>Events zakelijk</strong> — vergaderen, teamuitje, bedrijfsfeest, doordeweekse markt</li>
+              <li><strong>1 post per cluster per dag</strong> = 30+ posts/maand</li>
+            </ul>
+          </div>
+          <div class="step-col">
+            <h4>Belangrijkste deliverables</h4>
+            <ul>
+              <li>MAKE scenarios 1+2+3 productief</li>
+              <li>GSC + GA4 toegang + audit-deel-1</li>
+              <li>10–15 publicatie-klare posts</li>
+              <li>KPI's gedefinieerd + baseline gemeten</li>
+              <li>Title-tags + meta op 5 sleutel-pagina's</li>
+              <li>3-departement content-cluster gestart</li>
+            </ul>
+          </div>
         </div>
-        <span class="m-modus fysiek">📍 fysiek</span>
-        <p class="doel"><strong>Doel:</strong> kennismaking + voorstel + commitment voor stap 1. Whiteboard-clusters bevestigen (Kiteschool / Rest / Events).</p>
-        <div class="m-actions">
-          <h4>Acties uit M1</h4>
-          <ul id="m1-actions">
-            <li><span class="who-tag t">T</span><span class="text">GSC + GA4 + Viking-toegang regelen voor Bram</span></li>
-            <li><span class="who-tag t">T</span><span class="text">2 namen voor coaching-rollen aanleveren</span></li>
-            <li><span class="who-tag t">T</span><span class="text">Vendor-keuze definitief maken</span></li>
-            <li><span class="who-tag s">S</span><span class="text">KPI-sessie inplannen</span></li>
-            <li><span class="who-tag s">S</span><span class="text">Schriftelijke afspraak opstellen</span></li>
-          </ul>
-        </div>
-        <a href="m1-actielijst.html" class="m-link">→ Volledige actielijst M1</a>
-      </article>
 
-      <article class="m-card">
-        <div class="m-head">
-          <div class="num">M2</div>
-          <div class="meta"><div class="date">ma 11 mei · 17:00</div><div>Google Meet</div></div>
+        <div class="next-physical">
+          📌 <strong>Volgende fysieke meeting:</strong> M3 · ma 25 mei · Bram thuis · status techniek + content review + KPI-conceptlijst
         </div>
-        <span class="m-modus online">💻 online</span>
-        <p class="doel"><strong>Doel:</strong> kick-off review. GSC-toegang gelukt? Scenarios 1+2+3 opgezet? Eerste content-experiment besproken.</p>
-        <div class="m-actions">
-          <h4>Verwachte items</h4>
-          <ul>
-            <li><span class="who-tag b">B</span><span class="text">MAKE-account + scenarios 1+2+3 live</span></li>
-            <li><span class="who-tag b">B</span><span class="text">Audit-deel-1 (GSC) afgerond</span></li>
-            <li><span class="who-tag s">S</span><span class="text">KPI's eerste concept</span></li>
-          </ul>
-        </div>
-      </article>
+      </div>
+    </details>
 
-      <article class="m-card physical">
-        <div class="m-head">
-          <div class="num">M3</div>
-          <div class="meta"><div class="date">ma 25 mei · 17:00</div><div>Bram thuis</div></div>
+    <details class="step-detail">
+      <summary class="step-summary">
+        <span class="step-pill p2">Stap 2</span>
+        <span class="step-title">Schaal + automatisering</span>
+        <span class="step-meta">sep — dec 2026 · 4 mnd</span>
+        <span class="step-arrow">▼</span>
+      </summary>
+      <div class="step-body">
+        <p class="step-goal"><strong>Eind-doel:</strong> 30+ posts gepubliceerd, distributie geautomatiseerd, ROI-data binnen.</p>
+        <div class="step-grid">
+          <div class="step-col">
+            <h4>Activiteiten</h4>
+            <ul>
+              <li>Scenario 6 (WA-feedback-loop) productief</li>
+              <li>Mailchimp + IG/FB auto-publish</li>
+              <li>Restaurant + events cluster volwassen</li>
+              <li>Mid-jaar KPI-review (m8)</li>
+            </ul>
+          </div>
+          <div class="step-col">
+            <h4>Geschoven uit Stap 1</h4>
+            <ul>
+              <li>WhatsApp feedback-loop productie</li>
+              <li>Distributie-automatisering (IG/FB/nieuwsbrief/GBP)</li>
+              <li>Cross-cluster optimalisatie (5%-top-performers)</li>
+              <li>Auto-agenda mailen naar Toine + Bram (MAKE óf GitHub Actions)</li>
+            </ul>
+          </div>
         </div>
-        <span class="m-modus fysiek">📍 fysiek</span>
-        <p class="doel"><strong>Doel:</strong> eerste posts gepubliceerd? Title-tags + meta klaar? Restaurant-content gestart?</p>
-        <div class="m-actions">
-          <h4>Verwachte items</h4>
-          <ul>
-            <li><span class="who-tag b">B</span><span class="text">Title + meta op 5 sleutel-paginas</span></li>
-            <li><span class="who-tag b">B</span><span class="text">Post A (Zandmotor) gepubliceerd</span></li>
-            <li><span class="who-tag b">B</span><span class="text">Post B (Kijkduin vs Scheveningen) klaar</span></li>
-          </ul>
-        </div>
-      </article>
+      </div>
+    </details>
 
-      <article class="m-card">
-        <div class="m-head">
-          <div class="num">M4</div>
-          <div class="meta"><div class="date">ma 8 jun · 17:00</div><div>Google Meet</div></div>
+    <details class="step-detail">
+      <summary class="step-summary">
+        <span class="step-pill p3">Stap 3</span>
+        <span class="step-title">Optimalisatie + attributie</span>
+        <span class="step-meta">jan — apr 2027 · 4 mnd</span>
+        <span class="step-arrow">▼</span>
+      </summary>
+      <div class="step-body">
+        <p class="step-goal"><strong>Eind-doel:</strong> ROI per content-cluster aantoonbaar, refresh-flow draait, GA4 + UTM compleet.</p>
+        <div class="step-grid">
+          <div class="step-col">
+            <h4>Activiteiten</h4>
+            <ul>
+              <li>Refresh-flow voor stale posts</li>
+              <li>UTM-attributie + Viking-koppeling</li>
+              <li>Content-performance dashboard</li>
+              <li>Jaar-1 evaluatie + jaar-2 afspraak</li>
+            </ul>
+          </div>
+          <div class="step-col">
+            <h4>Geschoven uit Stap 2</h4>
+            <ul>
+              <li>Multi-language (EN/DE) overweging</li>
+              <li>Niet-publieke review-laag op website</li>
+            </ul>
+          </div>
         </div>
-        <span class="m-modus online">💻 online</span>
-        <p class="doel"><strong>Doel:</strong> tussentijdse status. Eerste GSC-data over pilot-posts terug?</p>
-        <div class="m-actions">
-          <h4>Verwachte items</h4>
-          <ul>
-            <li><span class="who-tag b">B</span><span class="text">Eerste restaurant + events post gedraft</span></li>
-            <li><span class="who-tag s">S</span><span class="text">Voortgang-snapshot bekijken</span></li>
-          </ul>
-        </div>
-      </article>
+      </div>
+    </details>
 
-      <article class="m-card physical">
-        <div class="m-head">
-          <div class="num">M5</div>
-          <div class="meta"><div class="date">ma 22 jun · 17:00</div><div>Beach House (Toine)</div></div>
+    <details class="step-detail">
+      <summary class="step-summary">
+        <span class="step-pill p4">Stap 4</span>
+        <span class="step-title">Productisering / replicatie</span>
+        <span class="step-meta">mei — aug 2027 · 4 mnd</span>
+        <span class="step-arrow">▼</span>
+      </summary>
+      <div class="step-body">
+        <p class="step-goal"><strong>Eind-doel:</strong> geanonimiseerd template + 2e klant pilot lopend. Business model B gevalideerd of verworpen.</p>
+        <div class="step-grid">
+          <div class="step-col">
+            <h4>Activiteiten</h4>
+            <ul>
+              <li>Template-extractie van methodiek</li>
+              <li>2e klant onboarding (proof)</li>
+              <li>Sales-materiaal voor productisering</li>
+              <li>Commerciële roll-out besluit</li>
+            </ul>
+          </div>
+          <div class="step-col">
+            <h4>Outcome</h4>
+            <ul>
+              <li>Of: methodiek samen verkopen aan andere horeca/sport-MKB</li>
+              <li>Of: BLOW houdt het intern, Bram bouwt elders door</li>
+              <li>Beslissing aan eind stap 4 — eind aug 2027</li>
+            </ul>
+          </div>
         </div>
-        <span class="m-modus fysiek">📍 fysiek</span>
-        <p class="doel"><strong>Doel:</strong> halverwege fase 1. Maand-2-review met KPI-baseline. Scenarios 4+5 productief?</p>
-        <div class="m-actions">
-          <h4>Verwachte items</h4>
-          <ul>
-            <li><span class="who-tag b">B</span><span class="text">Scenarios 4 (Competitor) + 5 (Reviews) live</span></li>
-            <li><span class="who-tag s">S</span><span class="text">KPI-baseline geregistreerd</span></li>
-          </ul>
-        </div>
-      </article>
-
-      <article class="m-card">
-        <div class="m-head">
-          <div class="num">M6</div>
-          <div class="meta"><div class="date">ma 6 jul · 17:00</div><div>Google Meet</div></div>
-        </div>
-        <span class="m-modus online">💻 online</span>
-        <p class="doel"><strong>Doel:</strong> tussentijdse status. 8–12 nieuwe posts gepubliceerd, distributie-pipeline gestart?</p>
-        <div class="m-actions">
-          <h4>Verwachte items</h4>
-          <ul>
-            <li><span class="who-tag b">B</span><span class="text">Distributie-templates productief</span></li>
-            <li><span class="who-tag b">B</span><span class="text">Scenario 6 (WA feedback-loop) ontwerp af</span></li>
-          </ul>
-        </div>
-      </article>
-
-      <article class="m-card physical">
-        <div class="m-head">
-          <div class="num">M7</div>
-          <div class="meta"><div class="date">ma 20 jul · 17:00</div><div>Bram thuis</div></div>
-        </div>
-        <span class="m-modus fysiek">📍 fysiek</span>
-        <p class="doel"><strong>Doel:</strong> voorbereiding eind-stap-1 evaluatie. Welke KPI's hebben we gehaald?</p>
-        <div class="m-actions">
-          <h4>Verwachte items</h4>
-          <ul>
-            <li><span class="who-tag s">S</span><span class="text">KPI-tussenmeting</span></li>
-            <li><span class="who-tag s">S</span><span class="text">Eigendom-discussie voorbereiden</span></li>
-          </ul>
-        </div>
-      </article>
-
-      <article class="m-card">
-        <div class="m-head">
-          <div class="num">M8</div>
-          <div class="meta"><div class="date">ma 3 aug · 17:00</div><div>Google Meet</div></div>
-        </div>
-        <span class="m-modus online">💻 online</span>
-        <p class="doel"><strong>Doel:</strong> laatste check vóór eind-stap-1. Wat moet er nog af? Welke vragen liggen open?</p>
-        <div class="m-actions">
-          <h4>Verwachte items</h4>
-          <ul>
-            <li><span class="who-tag s">S</span><span class="text">Open punten geïnventariseerd</span></li>
-            <li><span class="who-tag s">S</span><span class="text">Stap 2 voorlopige scope</span></li>
-          </ul>
-        </div>
-      </article>
-
-      <article class="m-card eval">
-        <div class="m-head">
-          <div class="num">M9</div>
-          <div class="meta"><div class="date">ma 17 aug · 17:00</div><div>Beach House (Toine)</div></div>
-        </div>
-        <span class="m-modus eval">⭐ eind stap 1 · evaluatie</span>
-        <p class="doel"><strong>Doel:</strong> eind stap 1 evaluatie. <strong>Eigendom-besluit.</strong> Go/no-go stap 2. Resultaat: schriftelijke afspraak voor jaar 2.</p>
-        <div class="m-actions">
-          <h4>Beslissingen</h4>
-          <ul>
-            <li><span class="who-tag s">S</span><span class="text">Eigendom-structuur methodiek + blueprints</span></li>
-            <li><span class="who-tag s">S</span><span class="text">Go/no-go fase 2</span></li>
-            <li><span class="who-tag s">S</span><span class="text">Samenwerkingsvorm jaar 2</span></li>
-          </ul>
-        </div>
-      </article>
-
-    </div>
+      </div>
+    </details>
   </section>
 
-  <section id="geidentificeerd">
-    <h2 class="sec"><span class="badge">03</span>Geïdentificeerd in M1 · activiteiten voor fase 1</h2>
-    <p class="sec-sub">Tijdens het kennismakingsgesprek besproken en akkoord. Komen terug in M3 (eerste fysieke werk-sessie).</p>
+  <section id="meeting-table" style="margin-bottom: 32px;">
+    <h2 class="sec">Meetings — tabel + agenda-export</h2>
+    <p class="sec-sub">Klik op de kalenderknop om een meeting in Google Calendar te plannen. Werkt op desktop én mobiel — opent met alles vooringevuld.</p>
 
-    <div class="phase-cards" style="grid-template-columns: repeat(2, 1fr);">
-      <div class="phase-card p1">
-        <div class="num">Cluster · Kiteschool</div>
-        <h3>4 keywords + ambitie</h3>
-        <p class="goal"><strong>Ambitie:</strong> #1 in SEO + 1 lead per dag.</p>
-        <ul class="activities">
-          <li>kitesurfles · kiteschool</li>
-          <li>kitesurf cursus · testen kitesurfen</li>
-          <li>1 post per dag in dit cluster</li>
-          <li>Internal-link Zandmotor → Beach House lunch</li>
-        </ul>
-      </div>
-      <div class="phase-card p3">
-        <div class="num">Cluster · Restaurant</div>
-        <h3>Hidden-gem positionering</h3>
-        <p class="goal"><strong>Doel:</strong> doordeweekse traffic via long-tail.</p>
-        <ul class="activities">
-          <li>Kwaliteit eten · romantische plek</li>
-          <li>Beste Italiaanse pizza · workshops</li>
-          <li>Beach-experience i.p.v. snel hapje</li>
-          <li>1 post per dag in dit cluster</li>
-        </ul>
-      </div>
-      <div class="phase-card p2">
-        <div class="num">Cluster · Events particulier</div>
-        <h3>Bruiloft + familie</h3>
-        <p class="goal"><strong>Cijfer:</strong> 35 bruiloften/jaar volle weekenden — focus weekdagen.</p>
-        <ul class="activities">
-          <li>Bruiloft strand Kijkduin</li>
-          <li>Familie · verjaardagen · jubilea</li>
-          <li>Beach games / Expeditie Robinson</li>
-          <li>Replicatie van bestaande #3-rank op trouwen</li>
-        </ul>
-      </div>
-      <div class="phase-card p4">
-        <div class="num">Cluster · Events zakelijk</div>
-        <h3>Doordeweekse markt</h3>
-        <p class="goal"><strong>Kans:</strong> beste content-gap volgens Toine — minste competitie + hoogste marge.</p>
-        <ul class="activities">
-          <li>Vergaderen aan zee · teamuitje</li>
-          <li>Bedrijfsdagen · bedrijfsfeest</li>
-          <li>Teambuilding kitesurfen (NL-markt leeg)</li>
-          <li>Bereikbaarheid: aandacht voor OV-friction</li>
-        </ul>
-      </div>
+    <div class="m-table-wrap">
+      <table class="m-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Datum</th>
+            <th>Tijd</th>
+            <th>Modus</th>
+            <th>Locatie</th>
+            <th>Doel</th>
+            <th>Actie</th>
+          </tr>
+        </thead>
+        <tbody id="meeting-tbody">
+          <!-- gevuld door JS -->
+        </tbody>
+      </table>
     </div>
 
-    <div class="progress-summary" style="background: linear-gradient(135deg, var(--accent) 0%, #b35a05 100%); margin-top: 22px;">
-      <h3>📌 Volgende fysieke meeting · M3 · ma 25 mei · Bram thuis</h3>
-      <p style="margin-bottom: 12px;">Werk-sessie van een halve dag. Hoofdvraag: scenarios 1+2+3 staan? Eerste posts gepubliceerd? Audit-deel-1 (GSC) afgerond?</p>
-      <div class="progress-row">
-        <div class="ps-item"><div class="lbl">Hoofdthema</div><div class="val" style="font-size: 1rem; font-weight: 700; line-height: 1.3;">Status techniek + content review</div></div>
-        <div class="ps-item"><div class="lbl">Voorbereiding</div><div class="val" style="font-size: 1rem; font-weight: 700; line-height: 1.3;">M2 acties afgerond</div></div>
-        <div class="ps-item"><div class="lbl">Output</div><div class="val" style="font-size: 1rem; font-weight: 700; line-height: 1.3;">KPI-conceptlijst + restaurant-cluster start</div></div>
-      </div>
-    </div>
+    <p style="margin-top: 12px; font-size: 0.78rem; color: var(--muted); font-style: italic;">
+      Tip: in fase 2 plannen we auto-mailen van agenda's naar Toine + Bram (MAKE óf GitHub Actions).
+    </p>
   </section>
 
-  <section id="naar-fase-2">
-    <h2 class="sec"><span class="badge">04</span>Geschoven naar fase 2</h2>
-    <p class="sec-sub">Onderwerpen die in M1 ter sprake kwamen maar bewust nog niet in fase 1 zitten — eerst basis stabiel, daarna uitbreiden.</p>
-
-    <div class="phase-cards" style="grid-template-columns: repeat(3, 1fr);">
-      <div class="phase-card p2">
-        <div class="num">Naar fase 2</div>
-        <h3>WhatsApp feedback-loop</h3>
-        <div class="period">scenario 6 — productie</div>
-        <p class="goal">Ontwerp staat in pilot, productie pas zodra content-flow draait. 2u-response window + auto-publish.</p>
-      </div>
-      <div class="phase-card p2">
-        <div class="num">Naar fase 2</div>
-        <h3>Distributie-automatisering</h3>
-        <div class="period">IG / FB / nieuwsbrief / GBP</div>
-        <p class="goal">Eerste fase: handmatig posten. Pas automatiseren als top-5% content geïdentificeerd is.</p>
-      </div>
-      <div class="phase-card p2">
-        <div class="num">Naar fase 2</div>
-        <h3>Refresh-flow</h3>
-        <div class="period">stale posts → update</div>
-        <p class="goal">Onderpresterende posts identificeren en verbeteren. Vereist eerst 4+ maanden GSC-data.</p>
-      </div>
-      <div class="phase-card p2">
-        <div class="num">Naar fase 2</div>
-        <h3>Cross-cluster optimalisatie</h3>
-        <div class="period">winnende elementen kopiëren</div>
-        <p class="goal">5% top-performers analyseren → patroon delen tussen kitesurf / restaurant / events.</p>
-      </div>
-      <div class="phase-card p3">
-        <div class="num">Naar fase 2-3</div>
-        <h3>Multi-language (EN/DE)</h3>
-        <div class="period">internationale doelgroep</div>
-        <p class="goal">Den Haag heeft expat-publiek. Vertaal-scenario na bewijs dat NL werkt.</p>
-      </div>
-      <div class="phase-card p3">
-        <div class="num">Naar fase 3</div>
-        <h3>Review-aspect uitbreiden</h3>
-        <div class="period">website preview-laag</div>
-        <p class="goal">Niet-publieke pagina's voor reviews + WhatsApp-bericht-review-flow.</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="fase2-4">
-    <h2 class="sec"><span class="badge">05</span>Fase 2-4 — high-level</h2>
-    <p class="sec-sub">Detail-planning komt na evaluatie M9. Voor nu alleen eind-doel + activiteiten.</p>
-
-    <div class="phase-cards">
-      <div class="phase-card p2">
-        <div class="num">Fase 2</div>
-        <h3>Schaal + automatisering</h3>
-        <div class="period">sep – dec 2026</div>
-        <p class="goal"><strong>Eind-doel:</strong> 30+ posts gepubliceerd, distributie geautomatiseerd, ROI-data binnen.</p>
-        <ul class="activities">
-          <li>Scenario 6 (WA-feedback) productief</li>
-          <li>Mailchimp + IG/FB auto-publish</li>
-          <li>Restaurant + events cluster volwassen</li>
-          <li>EN/DE talen overweging</li>
-          <li>Mid-jaar KPI-review (m8)</li>
-        </ul>
-      </div>
-      <div class="phase-card p3">
-        <div class="num">Fase 3</div>
-        <h3>Optimalisatie + attributie</h3>
-        <div class="period">jan – apr 2027</div>
-        <p class="goal"><strong>Eind-doel:</strong> ROI per content-cluster aantoonbaar, refresh-flow draait, GA4 + UTM compleet.</p>
-        <ul class="activities">
-          <li>Refresh-flow voor stale posts</li>
-          <li>UTM-attributie + Viking koppeling</li>
-          <li>Content-performance dashboard</li>
-          <li>Jaar-1 evaluatie + jaar-2 afspraak</li>
-        </ul>
-      </div>
-      <div class="phase-card p4">
-        <div class="num">Fase 4</div>
-        <h3>Productisering / replicatie</h3>
-        <div class="period">mei – aug 2027</div>
-        <p class="goal"><strong>Eind-doel:</strong> geanonimiseerd template + 2e klant pilot lopend. Business model B gevalideerd of verworpen.</p>
-        <ul class="activities">
-          <li>Template-extractie van methodiek</li>
-          <li>2e klant onboarding (proof)</li>
-          <li>Sales-materiaal voor productisering</li>
-          <li>Commerciële roll-out besluit</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
+</main>
 </main>
 
 </div>
@@ -783,7 +674,59 @@
 </footer>
 
 <script>
-// Live dashboard van actielijst M1
+// ====== Meeting data + Google Calendar links ======
+const MEETINGS = [
+  { id: 'M1', date: '2026-04-29', dateLabel: 'wo 29 apr', start: '18:00', end: '20:00', modus: 'fysiek', locatie: 'Beach House Kijkduin (Toine)', address: 'Westmadeweg 66, 2553 EM Den Haag', doel: 'Kennismaking + voorstel + commitment fase 1', past: true },
+  { id: 'M2', date: '2026-05-11', dateLabel: 'ma 11 mei', start: '17:00', end: '17:30', modus: 'online', locatie: 'Google Meet', address: '', doel: 'Kick-off review · GSC-toegang · Scenarios 1+2+3 setup', past: false },
+  { id: 'M3', date: '2026-05-25', dateLabel: 'ma 25 mei', start: '17:00', end: '19:00', modus: 'fysiek', locatie: 'Bram thuis (Den Haag)', address: '', doel: 'Status techniek + content review + KPI-conceptlijst', past: false },
+  { id: 'M4', date: '2026-06-08', dateLabel: 'ma 8 jun', start: '17:00', end: '17:30', modus: 'online', locatie: 'Google Meet', address: '', doel: 'Tussenstand · eerste GSC-data over pilot-posts', past: false },
+  { id: 'M5', date: '2026-06-22', dateLabel: 'ma 22 jun', start: '17:00', end: '19:00', modus: 'fysiek', locatie: 'Beach House Kijkduin (Toine)', address: 'Westmadeweg 66, 2553 EM Den Haag', doel: 'Maand-2 review · KPI-baseline · scenarios 4+5 productief', past: false },
+  { id: 'M6', date: '2026-07-06', dateLabel: 'ma 6 jul', start: '17:00', end: '17:30', modus: 'online', locatie: 'Google Meet', address: '', doel: 'Tussenstand · 8-12 nieuwe posts · distributie-pipeline', past: false },
+  { id: 'M7', date: '2026-07-20', dateLabel: 'ma 20 jul', start: '17:00', end: '19:00', modus: 'fysiek', locatie: 'Bram thuis (Den Haag)', address: '', doel: 'Voorbereiding eind-stap-1 evaluatie · KPI-tussenmeting', past: false },
+  { id: 'M8', date: '2026-08-03', dateLabel: 'ma 3 aug', start: '17:00', end: '17:30', modus: 'online', locatie: 'Google Meet', address: '', doel: 'Laatste check vóór eind-stap-1 · open punten', past: false },
+  { id: 'M9', date: '2026-08-17', dateLabel: 'ma 17 aug', start: '17:00', end: '19:00', modus: 'fysiek', locatie: 'Beach House Kijkduin (Toine)', address: 'Westmadeweg 66, 2553 EM Den Haag', doel: '⭐ Eind stap 1 evaluatie · eigendomsbesluit · go/no-go stap 2', past: false }
+];
+
+function gcalUrl(m) {
+  // Format: YYYYMMDDTHHMMSS in local time, with ctz parameter
+  const d = m.date.replace(/-/g, '');
+  const start = d + 'T' + m.start.replace(':', '') + '00';
+  const end = d + 'T' + m.end.replace(':', '') + '00';
+  const text = `${m.id} · BLOW Pilot · ${m.modus === 'online' ? 'online review' : 'werksessie'}`;
+  const details = `BLOW SEO Pilot — ${m.id}\n\nDoel: ${m.doel}\n\nPlanning: https://bramovergaag.github.io/Blow/pilot/planning.html\nActielijst: https://bramovergaag.github.io/Blow/pilot/m1-actielijst.html`;
+  const params = new URLSearchParams({
+    action: 'TEMPLATE',
+    text,
+    dates: `${start}/${end}`,
+    details,
+    location: m.address || m.locatie,
+    ctz: 'Europe/Amsterdam'
+  });
+  return 'https://calendar.google.com/calendar/render?' + params.toString();
+}
+
+function renderMeetingTable() {
+  const tbody = document.getElementById('meeting-tbody');
+  if (!tbody) return;
+  tbody.innerHTML = MEETINGS.map(m => {
+    const cls = m.past ? 'gehad' : (m.id === 'M9' ? 'eval' : (m.id === 'M2' ? 'current' : ''));
+    const btn = m.past
+      ? `<span class="gcal-btn">✓ gehad</span>`
+      : `<a class="gcal-btn" href="${gcalUrl(m)}" target="_blank" rel="noopener">📅 Google Cal</a>`;
+    return `<tr class="${cls}">
+      <td><span class="m-num">${m.id}</span></td>
+      <td>${m.dateLabel}</td>
+      <td>${m.start}</td>
+      <td><span class="m-modus-pill ${m.modus}">${m.modus === 'online' ? '💻 online' : '📍 fysiek'}</span></td>
+      <td>${m.locatie}</td>
+      <td>${m.doel}</td>
+      <td>${btn}</td>
+    </tr>`;
+  }).join('');
+}
+renderMeetingTable();
+
+// ====== Live dashboard van actielijst M1 ======
 let progState = { actions: {}, readyToine: false, readyBram: false };
 function loadProgress() {
   try {
