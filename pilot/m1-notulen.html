@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Notulen M1 · BLOW SEO pilot</title>
+<style>
+  :root {
+    --sand: #f4ecd8; --sand-light: #faf5e6; --sea: #1e6091; --sea-light: #4a90b8;
+    --foam: #ffffff; --deep: #0b2e4a; --accent: #e85d04; --accent-soft: #f8ddc7;
+    --green: #2d8659; --green-soft: #d1e8d8; --red: #b63b3b; --red-soft: #f0d4d4;
+    --amber: #d97706; --amber-soft: #fde7c7;
+    --text: #1a2a3a; --muted: #5c6b7a; --border: rgba(30, 96, 145, 0.15);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: linear-gradient(180deg, var(--sand) 0%, #ffffff 30%);
+    color: var(--text); line-height: 1.55; min-height: 100vh;
+  }
+
+  /* Brand bar */
+  .brand-bar {
+    background: #C66A1F; color: #F4EFE2; padding: 14px 24px;
+    display: flex; align-items: center; gap: 18px;
+    border-bottom: 4px solid #1A1A1A;
+    font-family: "Oswald", "Bebas Neue", sans-serif;
+  }
+  .brand-bar .logo {
+    width: 38px; height: 38px; border: 2px solid #F4EFE2; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 12px; letter-spacing: 1.5px; flex-shrink: 0;
+  }
+  .brand-bar .brand-name {
+    font-weight: 700; font-size: 18px; letter-spacing: 2px; text-transform: uppercase;
+  }
+  .brand-tabs { margin-left: auto; display: flex; gap: 4px; }
+  .brand-tabs a {
+    font-family: inherit; font-weight: 500; font-size: 13px; letter-spacing: 2px;
+    text-transform: uppercase; padding: 10px 18px;
+    color: rgba(244, 239, 226, 0.7); border-bottom: 3px solid transparent;
+    text-decoration: none; margin-bottom: -14px;
+  }
+  .brand-tabs a:hover { color: #F4EFE2; }
+  .brand-tabs a.active { color: #F4EFE2; border-bottom-color: #F4EFE2; }
+  @media (max-width: 600px) {
+    .brand-bar { padding: 12px 16px; gap: 12px; }
+    .brand-bar .brand-name { font-size: 15px; }
+    .brand-tabs a { padding: 10px 12px; font-size: 12px; letter-spacing: 1.5px; }
+  }
+
+  /* Cycle stepper (top) */
+  .cycle {
+    background: var(--foam);
+    border-bottom: 1px solid var(--border);
+    padding: 0 16px;
+  }
+  .cycle ul {
+    list-style: none; display: flex; max-width: 1100px; margin: 0 auto;
+    overflow-x: auto; gap: 4px;
+  }
+  .cycle li { display: flex; align-items: center; }
+  .cycle a {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 0.85rem; color: var(--muted); text-decoration: none;
+    padding: 14px 14px; font-weight: 500; white-space: nowrap;
+    border-bottom: 2px solid transparent;
+  }
+  .cycle a:hover { color: var(--deep); }
+  .cycle a.active { color: var(--sea); border-bottom-color: var(--sea); font-weight: 700; }
+  .cycle a.done { color: var(--green); }
+  .cycle a.done .step-num { background: var(--green); color: white; }
+  .cycle a.future { opacity: 0.4; pointer-events: none; }
+  .cycle .step-num {
+    width: 22px; height: 22px; border-radius: 50%;
+    background: var(--sand-light); display: inline-flex; align-items: center; justify-content: center;
+    font-size: 0.72rem; font-weight: 700;
+  }
+  .cycle a.active .step-num { background: var(--sea); color: white; }
+  .cycle .arrow { color: var(--border); padding: 0 4px; font-size: 0.9rem; }
+
+  /* Layout: timeline left + content right */
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 24px 24px 80px;
+    display: grid; grid-template-columns: 220px 1fr; gap: 32px; }
+  @media (max-width: 1000px) { .wrap { grid-template-columns: 1fr; } }
+
+  /* Timeline */
+  .timeline {
+    background: var(--foam); border-radius: 12px; padding: 18px;
+    box-shadow: 0 2px 10px rgba(11, 46, 74, 0.06);
+    position: sticky; top: 16px; align-self: start;
+    font-size: 0.85rem;
+  }
+  @media (max-width: 1000px) { .timeline { position: static; } }
+  .timeline h3 {
+    font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--muted); font-weight: 700; margin-bottom: 10px;
+  }
+  .tl-meeting { padding: 8px 0; border-left: 2px solid var(--border); padding-left: 12px; margin-left: 4px; position: relative; }
+  .tl-meeting::before {
+    content: ""; position: absolute; left: -7px; top: 12px;
+    width: 12px; height: 12px; border-radius: 50%;
+    background: var(--foam); border: 2px solid var(--border);
+  }
+  .tl-meeting.current::before { background: var(--accent); border-color: var(--accent); }
+  .tl-meeting.future { opacity: 0.45; }
+  .tl-meeting .date {
+    font-size: 0.72rem; color: var(--muted); font-weight: 600; letter-spacing: 0.05em;
+  }
+  .tl-meeting .title { font-weight: 700; color: var(--deep); margin: 2px 0 6px; font-size: 0.9rem; }
+  .tl-meeting ul { list-style: none; padding: 0; margin: 0; }
+  .tl-meeting li { padding: 3px 0; font-size: 0.8rem; }
+  .tl-meeting a {
+    color: var(--muted); text-decoration: none;
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .tl-meeting a:hover { color: var(--deep); }
+  .tl-meeting a.active { color: var(--sea); font-weight: 700; }
+  .tl-meeting a.done { color: var(--green); }
+  .tl-meeting .add-meeting {
+    border: 1px dashed var(--border); border-radius: 8px; padding: 8px 10px;
+    font-size: 0.78rem; color: var(--muted); text-align: center; cursor: pointer;
+    margin-top: 10px;
+  }
+
+  /* Hero */
+  header.hero { padding: 12px 0 24px; border-bottom: 3px solid var(--sea); margin-bottom: 32px; }
+  .eyebrow {
+    font-size: 0.78rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--sea); font-weight: 700; margin-bottom: 8px;
+  }
+  h1 { font-size: clamp(1.6rem, 3.2vw, 2.2rem); font-weight: 800; color: var(--deep); line-height: 1.2; }
+  .hero-meta { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 12px; font-size: 0.84rem; color: var(--muted); }
+  .hero-meta span { padding: 3px 10px; background: var(--foam); border-radius: 999px; border: 1px solid var(--border); }
+
+  /* Sections */
+  section { margin-bottom: 36px; }
+  h2.sec {
+    font-size: 1.25rem; color: var(--deep); margin-bottom: 6px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  h2.sec .badge {
+    background: var(--sea); color: white; font-size: 0.66rem;
+    padding: 3px 9px; border-radius: 8px; letter-spacing: 0.12em; font-weight: 700;
+  }
+  .sec-sub { color: var(--muted); margin-bottom: 16px; font-size: 0.92rem; }
+
+  /* Banner — pending content */
+  .pending {
+    background: linear-gradient(135deg, var(--amber) 0%, #b35a05 100%);
+    color: white; border-radius: 12px; padding: 22px 26px; margin-bottom: 28px;
+  }
+  .pending h3 { color: white; font-size: 1.1rem; margin-bottom: 8px; }
+  .pending p { font-size: 0.93rem; opacity: 0.95; }
+  .pending .ts { font-family: ui-monospace, monospace; font-size: 0.82rem; opacity: 0.85; margin-top: 8px; }
+
+  /* Block — discussion topics */
+  .topics { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 22px; }
+  @media (max-width: 700px) { .topics { grid-template-columns: 1fr; } }
+  .topic {
+    background: var(--foam); border-radius: 10px; padding: 18px 20px;
+    box-shadow: 0 2px 8px rgba(11, 46, 74, 0.05);
+    border-left: 4px solid var(--sea);
+  }
+  .topic .lbl {
+    font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--sea); font-weight: 700; margin-bottom: 4px;
+  }
+  .topic h4 { color: var(--deep); font-size: 0.98rem; margin-bottom: 6px; }
+  .topic p { font-size: 0.86rem; color: var(--text); }
+  .topic .placeholder { font-style: italic; color: var(--muted); }
+
+  /* Decisions */
+  .decisions {
+    background: var(--foam); border-radius: 12px; padding: 22px 26px;
+    box-shadow: 0 2px 10px rgba(11, 46, 74, 0.06);
+  }
+  .decisions ul { list-style: none; padding: 0; margin: 0; }
+  .decisions li {
+    padding: 10px 0 10px 28px; position: relative;
+    font-size: 0.92rem; border-bottom: 1px solid var(--border);
+  }
+  .decisions li:last-child { border-bottom: none; }
+  .decisions li::before {
+    content: "✓"; position: absolute; left: 0; top: 10px;
+    color: var(--green); font-weight: 700; font-size: 1.05rem;
+  }
+  .decisions li strong { color: var(--deep); }
+
+  /* Footer nav */
+  .next-step {
+    background: linear-gradient(135deg, var(--sea) 0%, var(--deep) 100%);
+    color: white; border-radius: 14px; padding: 24px 28px; margin-top: 32px;
+    display: flex; justify-content: space-between; align-items: center; gap: 18px; flex-wrap: wrap;
+  }
+  .next-step h3 { color: white; margin-bottom: 4px; font-size: 1.1rem; }
+  .next-step p { opacity: 0.9; font-size: 0.88rem; }
+  .next-step a {
+    background: var(--accent); color: white; padding: 12px 22px; border-radius: 8px;
+    text-decoration: none; font-weight: 700; font-size: 0.9rem;
+    letter-spacing: 0.1em; text-transform: uppercase; flex-shrink: 0;
+  }
+  .next-step a:hover { background: #c44a00; }
+
+  footer { margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--border);
+    text-align: center; color: var(--muted); font-size: 0.84rem; }
+  footer a { color: var(--sea); text-decoration: none; font-weight: 600; }
+</style>
+</head>
+<body>
+
+<header class="brand-bar">
+  <div class="logo">BLOW</div>
+  <div class="brand-name">Beach House</div>
+  <nav class="brand-tabs" aria-label="Hoofdmenu">
+    <a href="../">Bestelling</a>
+    <a href="./" class="active" aria-current="page">SEO</a>
+    <a href="https://bramovergaag.github.io/balistoel.nl/">Balistoel</a>
+  </nav>
+</header>
+
+<nav class="cycle" aria-label="Meeting cycle">
+  <ul>
+    <li><a href="./" class="done"><span class="step-num">✓</span>Agenda M1</a></li>
+    <li class="arrow">→</li>
+    <li><a href="m1-notulen.html" class="active" aria-current="page"><span class="step-num">2</span>Notulen M1</a></li>
+    <li class="arrow">→</li>
+    <li><a href="m1-actielijst.html"><span class="step-num">3</span>Actielijst M1</a></li>
+    <li class="arrow">→</li>
+    <li><a href="#" class="future"><span class="step-num">4</span>Agenda M2</a></li>
+  </ul>
+</nav>
+
+<div class="wrap">
+
+  <aside class="timeline">
+    <h3>Timeline</h3>
+
+    <div class="tl-meeting current">
+      <div class="date">29 apr 2026</div>
+      <div class="title">Meeting 1 — Beach House</div>
+      <ul>
+        <li><a href="./" class="done">✓ Agenda</a></li>
+        <li><a href="m1-notulen.html" class="active">▸ Notulen</a></li>
+        <li><a href="m1-actielijst.html">○ Actielijst</a></li>
+        <li style="padding-top: 6px; margin-top: 4px; border-top: 1px dashed var(--border); font-size: 0.76rem;">
+          <a href="m1-bronmateriaal.html" style="color: var(--accent);">📷 Bronmateriaal</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="tl-meeting future">
+      <div class="date">datum?</div>
+      <div class="title">Meeting 2</div>
+      <ul>
+        <li>○ Agenda</li>
+        <li>○ Notulen</li>
+        <li>○ Actielijst</li>
+      </ul>
+    </div>
+
+    <div class="add-meeting">+ Plan meeting 2</div>
+  </aside>
+
+  <main>
+
+    <header class="hero">
+      <div class="eyebrow">Notulen · Meeting 1</div>
+      <h1>BLOW × Bram — eerste werkafspraak</h1>
+      <div class="hero-meta">
+        <span>📅 29 april 2026</span>
+        <span>📍 Beach House, Kijkduin</span>
+        <span>👥 Toine + Bram</span>
+        <span>⏱ ~98 min opname</span>
+      </div>
+    </header>
+
+    <section class="pending" id="status">
+      <h3>⏳ Notulen worden aangevuld</h3>
+      <p>Lokale transcriptie via faster-whisper (NL) loopt — duurt nog ongeveer 40-50 min op CPU. Zodra het transcript klaar is, vul ik onderstaande secties met de échte besproken punten en beslissingen.</p>
+      <p class="ts">Audio: 5.864s · Model: small int8 · Output: <code>Blow Beach House.transcript.txt</code></p>
+    </section>
+
+    <section id="agenda-recap">
+      <h2 class="sec"><span class="badge">01</span>Wat er op tafel lag (uit agenda M1)</h2>
+      <p class="sec-sub">Vóór het gesprek opgesteld: pilot v2.0 met audit, samenwerkingsstructuur, kosten, vraagtekens, beslissing.</p>
+
+      <div class="topics">
+        <div class="topic">
+          <div class="lbl">Audit-bewijs</div>
+          <h4>Site + SERP-snapshot</h4>
+          <p>Vendor-fingerprint (15 posts in 1 dag), restaurant + events 0 content, 7/10 SERPs niet in top-10.</p>
+        </div>
+        <div class="topic">
+          <div class="lbl">Voorstel</div>
+          <h4>4-8u/wk werk + tools + coaching</h4>
+          <p>Geen factuur jaar 1. BLOW draagt €2.445 tools + ~265u team-tijd verdeeld over 3 review-rollen.</p>
+        </div>
+        <div class="topic">
+          <div class="lbl">Fasering</div>
+          <h4>4 stappen × 4 maanden</h4>
+          <p>16 maanden totaal. Eigendomsstructuur besluit eind stap 1 (≈ maand 4).</p>
+        </div>
+        <div class="topic">
+          <div class="lbl">Vraagtekens</div>
+          <h4>8 open punten</h4>
+          <p>Reviewers, KPI's, eigendom, data-toegang, vendor-keuze, publicatie-flow, talen, brand.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="discussed">
+      <h2 class="sec"><span class="badge">02</span>Wat er besproken is</h2>
+      <p class="sec-sub">Komt zodra transcript verwerkt is. Hieronder structuur — secties worden gevuld met daadwerkelijke gespreksinhoud.</p>
+
+      <div class="topics">
+        <div class="topic">
+          <div class="lbl">Reactie op audit</div>
+          <h4>Toine's eerste reactie</h4>
+          <p class="placeholder">[uit transcript]</p>
+        </div>
+        <div class="topic">
+          <div class="lbl">Vendor-discussie</div>
+          <h4>Wel of niet tekenen</h4>
+          <p class="placeholder">[uit transcript]</p>
+        </div>
+        <div class="topic">
+          <div class="lbl">Coaching-team</div>
+          <h4>Wie krijgt welke review-rol</h4>
+          <p class="placeholder">[uit transcript — namen ingevuld]</p>
+        </div>
+        <div class="topic">
+          <div class="lbl">KPI-discussie</div>
+          <h4>Welke 4-6 KPI's</h4>
+          <p class="placeholder">[uit transcript]</p>
+        </div>
+        <div class="topic">
+          <div class="lbl">Whiteboard-clusters</div>
+          <h4>Kiteschool / Rest / Events (#1, 1× per dag)</h4>
+          <p>Gevisualiseerd op whiteboard tijdens gesprek. Drie content-clusters bevestigd. Kiteschool ambitie: top-1 + 1 lead/dag.</p>
+        </div>
+        <div class="topic">
+          <div class="lbl">Eigendom + IP</div>
+          <h4>Methodiek, blueprints, content</h4>
+          <p class="placeholder">[uit transcript]</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="decisions">
+      <h2 class="sec"><span class="badge">03</span>Beslissingen + afspraken</h2>
+      <p class="sec-sub">Wordt aangevuld na transcript-verwerking. Voorlopig zichtbaar wat al rondom het gesprek besloten was.</p>
+
+      <div class="decisions">
+        <ul>
+          <li><strong>Pilot-document live</strong> op <code>bramovergaag.github.io/Blow/pilot/</code> — gedeeld vóór gesprek</li>
+          <li><strong>MAKE-account op naam Bram</strong>, BLOW-data toegankelijk + exporteerbaar</li>
+          <li><strong>Transcript van gesprek</strong> wordt lokaal verwerkt (faster-whisper, gratis, geen cloud)</li>
+          <li class="placeholder" style="opacity:0.5; font-style: italic;">[meer beslissingen na transcript]</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="quotes">
+      <h2 class="sec"><span class="badge">04</span>Sleutel-citaten</h2>
+      <p class="sec-sub placeholder">Wordt aangevuld — uit transcript pakken we 3-5 letterlijke quotes die de toon van het gesprek vatten.</p>
+    </section>
+
+    <div class="next-step">
+      <div>
+        <h3>Volgende stap</h3>
+        <p>Na deze notulen: actielijst opstellen die jullie beiden kunnen afvinken.</p>
+      </div>
+      <a href="m1-actielijst.html">Naar actielijst →</a>
+    </div>
+
+  </main>
+
+</div>
+
+<footer>
+  <p><strong>Notulen Meeting 1</strong> · 29 april 2026 · BLOW × Bram</p>
+  <p>
+    <a href="./">Agenda</a> ·
+    <a href="m1-actielijst.html">Actielijst</a> ·
+    <a href="audit-2026-04-27.html">Audit-bewijs</a>
+  </p>
+</footer>
+
+</body>
+</html>

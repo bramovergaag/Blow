@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Actielijst M1 · BLOW SEO pilot</title>
+<style>
+  :root {
+    --sand: #f4ecd8; --sand-light: #faf5e6; --sea: #1e6091; --sea-light: #4a90b8;
+    --foam: #ffffff; --deep: #0b2e4a; --accent: #e85d04; --accent-soft: #f8ddc7;
+    --green: #2d8659; --green-soft: #d1e8d8; --red: #b63b3b; --red-soft: #f0d4d4;
+    --amber: #d97706; --amber-soft: #fde7c7;
+    --text: #1a2a3a; --muted: #5c6b7a; --border: rgba(30, 96, 145, 0.15);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: linear-gradient(180deg, var(--sand) 0%, #ffffff 30%);
+    color: var(--text); line-height: 1.55; min-height: 100vh;
+  }
+
+  .brand-bar {
+    background: #C66A1F; color: #F4EFE2; padding: 14px 24px;
+    display: flex; align-items: center; gap: 18px;
+    border-bottom: 4px solid #1A1A1A;
+    font-family: "Oswald", "Bebas Neue", sans-serif;
+  }
+  .brand-bar .logo { width: 38px; height: 38px; border: 2px solid #F4EFE2; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 12px; letter-spacing: 1.5px; flex-shrink: 0; }
+  .brand-bar .brand-name { font-weight: 700; font-size: 18px; letter-spacing: 2px; text-transform: uppercase; }
+  .brand-tabs { margin-left: auto; display: flex; gap: 4px; }
+  .brand-tabs a { font-family: inherit; font-weight: 500; font-size: 13px; letter-spacing: 2px;
+    text-transform: uppercase; padding: 10px 18px;
+    color: rgba(244, 239, 226, 0.7); border-bottom: 3px solid transparent;
+    text-decoration: none; margin-bottom: -14px; }
+  .brand-tabs a:hover { color: #F4EFE2; }
+  .brand-tabs a.active { color: #F4EFE2; border-bottom-color: #F4EFE2; }
+  @media (max-width: 600px) {
+    .brand-bar { padding: 12px 16px; gap: 12px; }
+    .brand-bar .brand-name { font-size: 15px; }
+    .brand-tabs a { padding: 10px 12px; font-size: 12px; letter-spacing: 1.5px; }
+  }
+
+  .cycle { background: var(--foam); border-bottom: 1px solid var(--border); padding: 0 16px; }
+  .cycle ul { list-style: none; display: flex; max-width: 1100px; margin: 0 auto; overflow-x: auto; gap: 4px; }
+  .cycle li { display: flex; align-items: center; }
+  .cycle a { display: flex; align-items: center; gap: 8px;
+    font-size: 0.85rem; color: var(--muted); text-decoration: none;
+    padding: 14px 14px; font-weight: 500; white-space: nowrap;
+    border-bottom: 2px solid transparent; }
+  .cycle a:hover { color: var(--deep); }
+  .cycle a.active { color: var(--sea); border-bottom-color: var(--sea); font-weight: 700; }
+  .cycle a.done { color: var(--green); }
+  .cycle a.done .step-num { background: var(--green); color: white; }
+  .cycle a.future { opacity: 0.4; pointer-events: none; }
+  .cycle .step-num { width: 22px; height: 22px; border-radius: 50%;
+    background: var(--sand-light); display: inline-flex; align-items: center; justify-content: center;
+    font-size: 0.72rem; font-weight: 700; }
+  .cycle a.active .step-num { background: var(--sea); color: white; }
+  .cycle .arrow { color: var(--border); padding: 0 4px; font-size: 0.9rem; }
+
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 24px 24px 80px;
+    display: grid; grid-template-columns: 220px 1fr; gap: 32px; }
+  @media (max-width: 1000px) { .wrap { grid-template-columns: 1fr; } }
+
+  .timeline {
+    background: var(--foam); border-radius: 12px; padding: 18px;
+    box-shadow: 0 2px 10px rgba(11, 46, 74, 0.06);
+    position: sticky; top: 16px; align-self: start; font-size: 0.85rem;
+  }
+  @media (max-width: 1000px) { .timeline { position: static; } }
+  .timeline h3 { font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--muted); font-weight: 700; margin-bottom: 10px; }
+  .tl-meeting { padding: 8px 0; border-left: 2px solid var(--border); padding-left: 12px;
+    margin-left: 4px; position: relative; }
+  .tl-meeting::before { content: ""; position: absolute; left: -7px; top: 12px;
+    width: 12px; height: 12px; border-radius: 50%;
+    background: var(--foam); border: 2px solid var(--border); }
+  .tl-meeting.current::before { background: var(--accent); border-color: var(--accent); }
+  .tl-meeting.future { opacity: 0.45; }
+  .tl-meeting .date { font-size: 0.72rem; color: var(--muted); font-weight: 600; letter-spacing: 0.05em; }
+  .tl-meeting .title { font-weight: 700; color: var(--deep); margin: 2px 0 6px; font-size: 0.9rem; }
+  .tl-meeting ul { list-style: none; padding: 0; margin: 0; }
+  .tl-meeting li { padding: 3px 0; font-size: 0.8rem; }
+  .tl-meeting a { color: var(--muted); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
+  .tl-meeting a:hover { color: var(--deep); }
+  .tl-meeting a.active { color: var(--sea); font-weight: 700; }
+  .tl-meeting a.done { color: var(--green); }
+  .tl-meeting .add-meeting { border: 1px dashed var(--border); border-radius: 8px;
+    padding: 8px 10px; font-size: 0.78rem; color: var(--muted); text-align: center;
+    cursor: pointer; margin-top: 10px; }
+
+  header.hero { padding: 12px 0 24px; border-bottom: 3px solid var(--sea); margin-bottom: 28px; }
+  .eyebrow { font-size: 0.78rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--sea); font-weight: 700; margin-bottom: 8px; }
+  h1 { font-size: clamp(1.6rem, 3.2vw, 2.2rem); font-weight: 800; color: var(--deep); line-height: 1.2; }
+  .hero-meta { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 12px; font-size: 0.84rem; color: var(--muted); }
+  .hero-meta span { padding: 3px 10px; background: var(--foam); border-radius: 999px; border: 1px solid var(--border); }
+
+  /* Progress bar */
+  .progress-wrap {
+    background: var(--foam); border-radius: 12px; padding: 18px 22px;
+    box-shadow: 0 2px 10px rgba(11, 46, 74, 0.06);
+    margin-bottom: 22px;
+  }
+  .progress-row { display: flex; gap: 18px; align-items: center; flex-wrap: wrap; }
+  .progress-row .col { flex: 1; min-width: 140px; }
+  .progress-bar { height: 10px; border-radius: 5px; background: var(--sand-light); overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--green); transition: width 0.3s; }
+  .progress-fill.toine { background: var(--sea); }
+  .progress-row .lbl { font-size: 0.74rem; color: var(--muted); font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px; }
+  .progress-row .val { font-weight: 700; color: var(--deep); font-size: 0.9rem; margin-top: 4px; }
+  .who-toine { color: var(--sea); }
+  .who-bram { color: var(--accent); }
+
+  /* Action sections */
+  section { margin-bottom: 28px; }
+  h2.sec { font-size: 1.2rem; color: var(--deep); margin-bottom: 6px;
+    display: flex; align-items: center; gap: 10px; }
+  h2.sec .badge { background: var(--sea); color: white; font-size: 0.66rem;
+    padding: 3px 9px; border-radius: 8px; letter-spacing: 0.12em; font-weight: 700; }
+  .sec-sub { color: var(--muted); margin-bottom: 14px; font-size: 0.9rem; }
+
+  .actions {
+    background: var(--foam); border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(11, 46, 74, 0.06);
+    overflow: hidden;
+  }
+  .action {
+    display: grid;
+    grid-template-columns: 60px 60px 1fr auto;
+    gap: 14px; align-items: center;
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--border);
+  }
+  @media (max-width: 700px) {
+    .action { grid-template-columns: 1fr; gap: 8px; }
+    .action .who-cell { display: inline-flex; gap: 14px; }
+  }
+  .action:last-child { border-bottom: none; }
+  .action.done { background: var(--green-soft); }
+  .action.partial { background: var(--amber-soft); }
+  .action.done .text { text-decoration: line-through; opacity: 0.7; }
+
+  .who-cell { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+  @media (max-width: 700px) { .who-cell { flex-direction: row; align-items: center; } }
+  .who-cell .who-lbl {
+    font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase;
+    font-weight: 700;
+  }
+  .who-cell .who-lbl.toine { color: var(--sea); }
+  .who-cell .who-lbl.bram { color: var(--accent); }
+  .check {
+    width: 26px; height: 26px; border-radius: 6px;
+    border: 2px solid var(--border); background: var(--foam);
+    cursor: pointer; appearance: none; -webkit-appearance: none;
+    position: relative; transition: all 0.15s;
+  }
+  .check:hover { border-color: var(--sea); }
+  .check.toine:checked { background: var(--sea); border-color: var(--sea); }
+  .check.bram:checked { background: var(--accent); border-color: var(--accent); }
+  .check:checked::after {
+    content: "✓"; position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%); color: white; font-weight: 700; font-size: 0.95rem;
+  }
+
+  .text-block .text { font-weight: 600; color: var(--deep); font-size: 0.95rem; }
+  .text-block .desc { font-size: 0.82rem; color: var(--muted); margin-top: 2px; }
+  .text-block .deadline { font-size: 0.74rem; color: var(--accent);
+    font-weight: 700; margin-top: 4px; }
+
+  .priority {
+    font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700;
+    padding: 3px 8px; border-radius: 4px;
+  }
+  .priority.high { background: var(--red-soft); color: var(--red); }
+  .priority.med { background: var(--amber-soft); color: var(--amber); }
+  .priority.low { background: var(--sand-light); color: var(--muted); }
+
+  .pending {
+    background: linear-gradient(135deg, var(--amber) 0%, #b35a05 100%);
+    color: white; border-radius: 12px; padding: 22px 26px; margin-bottom: 24px;
+  }
+  .pending h3 { color: white; font-size: 1.05rem; margin-bottom: 6px; }
+  .pending p { font-size: 0.9rem; opacity: 0.95; }
+
+  .controls {
+    display: flex; gap: 8px; margin-bottom: 18px; flex-wrap: wrap;
+  }
+  .controls button {
+    padding: 8px 14px; border-radius: 6px; border: 1px solid var(--border);
+    background: var(--foam); color: var(--deep); cursor: pointer;
+    font-size: 0.82rem; font-weight: 600;
+  }
+  .controls button:hover { border-color: var(--sea); color: var(--sea); }
+
+  /* Next-meeting suggestion */
+  .next-step {
+    background: linear-gradient(135deg, var(--sea) 0%, var(--deep) 100%);
+    color: white; border-radius: 14px; padding: 24px 28px; margin-top: 32px;
+  }
+  .next-step h3 { color: white; margin-bottom: 6px; font-size: 1.1rem; }
+  .next-step p { opacity: 0.9; font-size: 0.9rem; margin-bottom: 14px; }
+  .next-step .form-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  .next-step input[type="date"] {
+    padding: 9px 12px; border-radius: 6px; border: none;
+    font-size: 0.9rem; min-width: 160px;
+  }
+  .next-step button {
+    padding: 9px 18px; border-radius: 6px; border: none;
+    background: var(--accent); color: white; font-weight: 700; cursor: pointer;
+    font-size: 0.86rem; letter-spacing: 0.05em; text-transform: uppercase;
+  }
+  .next-step button:hover { background: #c44a00; }
+
+  footer { margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--border);
+    text-align: center; color: var(--muted); font-size: 0.84rem; }
+  footer a { color: var(--sea); text-decoration: none; font-weight: 600; }
+</style>
+</head>
+<body>
+
+<header class="brand-bar">
+  <div class="logo">BLOW</div>
+  <div class="brand-name">Beach House</div>
+  <nav class="brand-tabs" aria-label="Hoofdmenu">
+    <a href="../">Bestelling</a>
+    <a href="./" class="active" aria-current="page">SEO</a>
+    <a href="https://bramovergaag.github.io/balistoel.nl/">Balistoel</a>
+  </nav>
+</header>
+
+<nav class="cycle" aria-label="Meeting cycle">
+  <ul>
+    <li><a href="./" class="done"><span class="step-num">✓</span>Agenda M1</a></li>
+    <li class="arrow">→</li>
+    <li><a href="m1-notulen.html" class="done"><span class="step-num">✓</span>Notulen M1</a></li>
+    <li class="arrow">→</li>
+    <li><a href="m1-actielijst.html" class="active" aria-current="page"><span class="step-num">3</span>Actielijst M1</a></li>
+    <li class="arrow">→</li>
+    <li><a href="#" class="future"><span class="step-num">4</span>Agenda M2</a></li>
+  </ul>
+</nav>
+
+<div class="wrap">
+
+  <aside class="timeline">
+    <h3>Timeline</h3>
+
+    <div class="tl-meeting current">
+      <div class="date">29 apr 2026</div>
+      <div class="title">Meeting 1 — Beach House</div>
+      <ul>
+        <li><a href="./" class="done">✓ Agenda</a></li>
+        <li><a href="m1-notulen.html" class="done">✓ Notulen</a></li>
+        <li><a href="m1-actielijst.html" class="active">▸ Actielijst</a></li>
+        <li style="padding-top: 6px; margin-top: 4px; border-top: 1px dashed var(--border); font-size: 0.76rem;">
+          <a href="m1-bronmateriaal.html" style="color: var(--accent);">📷 Bronmateriaal</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="tl-meeting future">
+      <div class="date">datum?</div>
+      <div class="title">Meeting 2</div>
+      <ul>
+        <li>○ Agenda</li>
+        <li>○ Notulen</li>
+        <li>○ Actielijst</li>
+      </ul>
+    </div>
+
+    <div class="add-meeting">+ Plan meeting 2</div>
+  </aside>
+
+  <main>
+
+    <header class="hero">
+      <div class="eyebrow">Actielijst · Meeting 1</div>
+      <h1>Wat we afgesproken hebben</h1>
+      <div class="hero-meta">
+        <span>📅 Opgesteld 29 apr 2026</span>
+        <span>👥 Toine + Bram</span>
+        <span id="progress-meta">— afgerond</span>
+      </div>
+    </header>
+
+    <section class="pending" id="status">
+      <h3>⏳ Voorlopige actielijst</h3>
+      <p>Items hieronder zijn een eerste opzet op basis van de pilot-agenda. Worden bijgewerkt zodra het transcript van de meeting is verwerkt en we de daadwerkelijke afspraken kunnen toevoegen.</p>
+    </section>
+
+    <div class="progress-wrap">
+      <div class="progress-row">
+        <div class="col">
+          <div class="lbl who-toine">Toine</div>
+          <div class="progress-bar"><div class="progress-fill toine" id="bar-toine" style="width: 0%"></div></div>
+          <div class="val" id="val-toine">0 / 0 afgerond</div>
+        </div>
+        <div class="col">
+          <div class="lbl who-bram">Bram</div>
+          <div class="progress-bar"><div class="progress-fill" id="bar-bram" style="width: 0%"></div></div>
+          <div class="val" id="val-bram">0 / 0 afgerond</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button onclick="exportState()">📋 Status exporteren</button>
+      <button onclick="resetState()">↺ Reset alle vinkjes</button>
+      <button onclick="window.print()">🖨 Print</button>
+    </div>
+
+    <!-- ============ TOINE ACTIES ============ -->
+    <section>
+      <h2 class="sec"><span class="badge">A</span>Acties voor Toine</h2>
+      <p class="sec-sub">Toegang regelen + interne afstemming. Vinkjes zijn lokaal opgeslagen — Toine vinkt op zijn device aan, Bram op het zijne.</p>
+
+      <div class="actions" id="actions-toine">
+        <div class="action" data-id="t-1" data-who="toine">
+          <div class="who-cell"><span class="who-lbl toine">Toine</span><input type="checkbox" class="check toine" data-id="t-1"></div>
+          <div class="who-cell"><span class="who-lbl bram">Bram</span><input type="checkbox" class="check bram" data-id="t-1"></div>
+          <div class="text-block">
+            <div class="text">GSC + GA4 + Viking-toegang regelen voor Bram</div>
+            <div class="desc">bramovergaag@gmail.com toevoegen als beperkte gebruiker. Voorwaarde voor audit-deel-1.</div>
+            <div class="deadline">deadline: vóór week 1 stap 1</div>
+          </div>
+          <div class="priority high">hoog</div>
+        </div>
+
+        <div class="action" data-id="t-2" data-who="toine">
+          <div class="who-cell"><span class="who-lbl toine">Toine</span><input type="checkbox" class="check toine" data-id="t-2"></div>
+          <div class="who-cell"><span class="who-lbl bram">Bram</span><input type="checkbox" class="check bram" data-id="t-2"></div>
+          <div class="text-block">
+            <div class="text">2 namen voor coaching-rollen aanleveren</div>
+            <div class="desc">Strategie / Operations / Marketing — wie van het team neemt welke rol. Coaching mag verspreid.</div>
+            <div class="deadline">deadline: binnen 2 weken</div>
+          </div>
+          <div class="priority high">hoog</div>
+        </div>
+
+        <div class="action" data-id="t-3" data-who="toine">
+          <div class="who-cell"><span class="who-lbl toine">Toine</span><input type="checkbox" class="check toine" data-id="t-3"></div>
+          <div class="who-cell"><span class="who-lbl bram">Bram</span><input type="checkbox" class="check bram" data-id="t-3"></div>
+          <div class="text-block">
+            <div class="text">Vendor-keuze definitief maken</div>
+            <div class="desc">Wel of niet WP SEO AI tekenen. Bram-advies: niet tekenen, eerst pilot 4 maanden.</div>
+            <div class="deadline">deadline: deze week</div>
+          </div>
+          <div class="priority high">hoog</div>
+        </div>
+
+        <div class="action" data-id="t-4" data-who="toine">
+          <div class="who-cell"><span class="who-lbl toine">Toine</span><input type="checkbox" class="check toine" data-id="t-4"></div>
+          <div class="who-cell"><span class="who-lbl bram">Bram</span><input type="checkbox" class="check bram" data-id="t-4"></div>
+          <div class="text-block">
+            <div class="text">Cijfer-claims valideren in Post A (Zandmotor)</div>
+            <div class="desc">"15 jaar lesgegeven" / "lagune 1-1,5m diep" / "07:30 wind-check" — bevestigen of bijstellen.</div>
+            <div class="deadline">deadline: vóór publicatie post</div>
+          </div>
+          <div class="priority med">medium</div>
+        </div>
+
+        <div class="action" data-id="t-5" data-who="toine">
+          <div class="who-cell"><span class="who-lbl toine">Toine</span><input type="checkbox" class="check toine" data-id="t-5"></div>
+          <div class="who-cell"><span class="who-lbl bram">Bram</span><input type="checkbox" class="check bram" data-id="t-5"></div>
+          <div class="text-block">
+            <div class="text">Whiteboard-clusters digitaliseren</div>
+            <div class="desc">Kiteschool / Rest / Events met sub-categorieën in ContentQueue verwerken.</div>
+          </div>
+          <div class="priority med">medium</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ BRAM ACTIES ============ -->
+    <section>
+      <h2 class="sec"><span class="badge">B</span>Acties voor Bram</h2>
+      <p class="sec-sub">Setup + content-werk in eerste 2 weken stap 1.</p>
+
+      <div class="actions" id="actions-bram">
+        <div class="action" data-id="b-1" data-who="bram">
+          <div class="who-cell"><span class="who-lbl toine">Toine</span><input type="checkbox" class="check toine" data-id="b-1"></div>
+          <div class="who-cell"><span class="who-lbl bram">Bram</span><input type="checkbox" class="check bram" data-id="b-1"></div>
+          <div class="text-block">
+            <div class="text">MAKE-account + scenarios 1+2+3 inrichten</div>
+            <div class="desc">GSC-pull, Content Generator, WordPress Publisher op Bram's MAKE-account.</div>
+            <div class="deadline">deadline: week 1 stap 1</div>
+          </div>
+          <div class="priority high">hoog</div>
+        </div>
+
+        <div class="action" data-id="b-2" data-who="bram">
+          <div class="who-cell"><span class="who-lbl toine">Toine</span><input type="checkbox" class="check toine" data-id="b-2"></div>
+          <div class="who-cell"><span class="who-lbl bram">Bram</span><input type="checkbox" class="check bram" data-id="b-2"></div>
+          <div class="text-block">
+            <div class="text">Audit-deel-1 (GSC) afronden zodra toegang er is</div>
+            <div class="desc">Top 20 underperformers + quick-wins → audit-data-gsc.csv → toevoegen aan audit-rapport.</div>
+            <div class="deadline">deadline: 1 week na GSC-toegang</div>
+          </div>
+          <div class="priority high">hoog</div>
+        </div>
+
+        <div class="action" data-id="b-3" data-who="bram">
+          <div class="who-cell"><span class="who-lbl toine">Toine</span><input type="checkbox" class="check toine" data-id="b-3"></div>
+          <div class="who-cell"><span class="who-lbl bram">Bram</span><input type="checkbox" class="check bram" data-id="b-3"></div>
+          <div class="text-block">
+            <div class="text">Title-tags + meta repareren op 5 sleutel-pagina's</div>
+            <div class="desc">/kitesurfles · /restaurant/ · /events/ · /over-blow/ · /blog — quick-win uit audit.</div>
+            <div class="deadline">deadline: week 2 stap 1</div>
+          </div>
+          <div class="priority high">hoog</div>
+        </div>
+
+        <div class="action" data-id="b-4" data-who="bram">
+          <div class="who-cell"><span class="who-lbl toine">Toine</span><input type="checkbox" class="check toine" data-id="b-4"></div>
+          <div class="who-cell"><span class="who-lbl bram">Bram</span><input type="checkbox" class="check bram" data-id="b-4"></div>
+          <div class="text-block">
+            <div class="text">Post A (Zandmotor) publiceren naar blow.surf</div>
+            <div class="desc">Na cijfer-validatie door Toine. Eerste blogpost in 9 maanden = freshness-signaal.</div>
+            <div class="deadline">deadline: week 2 stap 1</div>
+          </div>
+          <div class="priority med">medium</div>
+        </div>
+
+        <div class="action" data-id="b-5" data-who="bram">
+          <div class="who-cell"><span class="who-lbl toine">Toine</span><input type="checkbox" class="check toine" data-id="b-5"></div>
+          <div class="who-cell"><span class="who-lbl bram">Bram</span><input type="checkbox" class="check bram" data-id="b-5"></div>
+          <div class="text-block">
+            <div class="text">Post B (Kijkduin vs Scheveningen) afmaken + publiceren</div>
+            <div class="desc">SERP-snapshot toonde: geen vergelijking-pagina in top-10. Open kans op #1-3.</div>
+            <div class="deadline">deadline: week 3 stap 1</div>
+          </div>
+          <div class="priority med">medium</div>
+        </div>
+
+        <div class="action" data-id="b-6" data-who="bram">
+          <div class="who-cell"><span class="who-lbl toine">Toine</span><input type="checkbox" class="check toine" data-id="b-6"></div>
+          <div class="who-cell"><span class="who-lbl bram">Bram</span><input type="checkbox" class="check bram" data-id="b-6"></div>
+          <div class="text-block">
+            <div class="text">Eerste restaurant-post + eerste events-post draften</div>
+            <div class="desc">Departement 2 + 3 krijgen content-bestaansrecht. Restaurant kandidaat: "beste Italiaanse pizza Kijkduin".</div>
+            <div class="deadline">deadline: week 4 stap 1</div>
+          </div>
+          <div class="priority med">medium</div>
+        </div>
+
+        <div class="action" data-id="b-7" data-who="bram">
+          <div class="who-cell"><span class="who-lbl toine">Toine</span><input type="checkbox" class="check toine" data-id="b-7"></div>
+          <div class="who-cell"><span class="who-lbl bram">Bram</span><input type="checkbox" class="check bram" data-id="b-7"></div>
+          <div class="text-block">
+            <div class="text">ContentQueue uitbreiden met whiteboard-clusters</div>
+            <div class="desc">3-deling Kiteschool / Rest / Events met sub-categorieën verwerken in seed-CSV.</div>
+          </div>
+          <div class="priority low">laag</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ GEZAMENLIJK ============ -->
+    <section>
+      <h2 class="sec"><span class="badge">C</span>Gezamenlijk</h2>
+      <p class="sec-sub">KPI's + planning — beiden vinken aan zodra besluit gemaakt.</p>
+
+      <div class="actions" id="actions-shared">
+        <div class="action" data-id="s-1" data-who="shared">
+          <div class="who-cell"><span class="who-lbl toine">Toine</span><input type="checkbox" class="check toine" data-id="s-1"></div>
+          <div class="who-cell"><span class="who-lbl bram">Bram</span><input type="checkbox" class="check bram" data-id="s-1"></div>
+          <div class="text-block">
+            <div class="text">KPI-sessie inplannen (1 uur)</div>
+            <div class="desc">Samen 4-6 KPI's kiezen uit 5 categorieën (volume / SEO / business / operatie / strategisch).</div>
+            <div class="deadline">deadline: week 1 stap 1</div>
+          </div>
+          <div class="priority high">hoog</div>
+        </div>
+
+        <div class="action" data-id="s-2" data-who="shared">
+          <div class="who-cell"><span class="who-lbl toine">Toine</span><input type="checkbox" class="check toine" data-id="s-2"></div>
+          <div class="who-cell"><span class="who-lbl bram">Bram</span><input type="checkbox" class="check bram" data-id="s-2"></div>
+          <div class="text-block">
+            <div class="text">Schriftelijke afspraak opstellen + ondertekenen</div>
+            <div class="desc">Op basis van pilot v2.0 sectie 07 + spelregels + KPI's uit sessie 1.</div>
+            <div class="deadline">deadline: einde week 2 stap 1</div>
+          </div>
+          <div class="priority high">hoog</div>
+        </div>
+
+        <div class="action" data-id="s-3" data-who="shared">
+          <div class="who-cell"><span class="who-lbl toine">Toine</span><input type="checkbox" class="check toine" data-id="s-3"></div>
+          <div class="who-cell"><span class="who-lbl bram">Bram</span><input type="checkbox" class="check bram" data-id="s-3"></div>
+          <div class="text-block">
+            <div class="text">Cadans-overleg vastleggen</div>
+            <div class="desc">2-wekelijks 30 min review + ad-hoc bij vragen. Tijdslot kiezen.</div>
+          </div>
+          <div class="priority med">medium</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ NEXT MEETING ============ -->
+    <div class="next-step">
+      <h3>📅 Volgende meeting plannen</h3>
+      <p>Aan het eind van Meeting 2 doorlopen we deze actielijst, vinken af wat klaar is, en bouwen we de agenda voor M2.</p>
+      <div class="form-row">
+        <input type="date" id="m2-date" />
+        <button onclick="planM2()">Plan Meeting 2</button>
+      </div>
+    </div>
+
+  </main>
+
+</div>
+
+<footer>
+  <p><strong>Actielijst Meeting 1</strong> · 29 april 2026 · BLOW × Bram</p>
+  <p>
+    <a href="./">Agenda</a> ·
+    <a href="m1-notulen.html">Notulen</a> ·
+    <a href="audit-2026-04-27.html">Audit-bewijs</a>
+  </p>
+</footer>
+
+<script>
+const STORAGE_KEY = 'blow-pilot-m1-actielijst';
+
+// Load state from localStorage
+function loadState() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+    document.querySelectorAll('input.check').forEach(el => {
+      const key = `${el.dataset.id}-${el.classList.contains('toine') ? 'toine' : 'bram'}`;
+      if (saved[key]) el.checked = true;
+    });
+  } catch (e) { console.warn('localStorage load failed', e); }
+  updateProgress();
+}
+
+function saveState() {
+  const state = {};
+  document.querySelectorAll('input.check').forEach(el => {
+    const key = `${el.dataset.id}-${el.classList.contains('toine') ? 'toine' : 'bram'}`;
+    if (el.checked) state[key] = true;
+  });
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+  catch (e) { console.warn('localStorage save failed', e); }
+  updateProgress();
+}
+
+function updateProgress() {
+  const allActions = document.querySelectorAll('.action');
+  let toineDone = 0, bramDone = 0;
+  allActions.forEach(a => {
+    const t = a.querySelector('.check.toine').checked;
+    const b = a.querySelector('.check.bram').checked;
+    if (t) toineDone++;
+    if (b) bramDone++;
+    a.classList.remove('done', 'partial');
+    if (t && b) a.classList.add('done');
+    else if (t || b) a.classList.add('partial');
+  });
+  const total = allActions.length;
+  document.getElementById('bar-toine').style.width = `${(toineDone/total)*100}%`;
+  document.getElementById('bar-bram').style.width = `${(bramDone/total)*100}%`;
+  document.getElementById('val-toine').textContent = `${toineDone} / ${total} afgerond`;
+  document.getElementById('val-bram').textContent = `${bramDone} / ${total} afgerond`;
+  const both = Array.from(allActions).filter(a =>
+    a.querySelector('.check.toine').checked && a.querySelector('.check.bram').checked
+  ).length;
+  document.getElementById('progress-meta').textContent = `${both} / ${total} volledig afgerond`;
+}
+
+document.querySelectorAll('input.check').forEach(el => {
+  el.addEventListener('change', saveState);
+});
+
+function exportState() {
+  const lines = ['ACTIELIJST M1 — STATUS\n'];
+  document.querySelectorAll('.action').forEach(a => {
+    const t = a.querySelector('.check.toine').checked ? '☑' : '☐';
+    const b = a.querySelector('.check.bram').checked ? '☑' : '☐';
+    const text = a.querySelector('.text').textContent;
+    lines.push(`Toine ${t} | Bram ${b} | ${text}`);
+  });
+  const out = lines.join('\n');
+  navigator.clipboard.writeText(out).then(() => alert('Status gekopieerd naar klembord — plak in WhatsApp/mail om te delen.'));
+}
+
+function resetState() {
+  if (!confirm('Weet je zeker dat je alle vinkjes wilt resetten?')) return;
+  localStorage.removeItem(STORAGE_KEY);
+  document.querySelectorAll('input.check').forEach(el => el.checked = false);
+  updateProgress();
+}
+
+function planM2() {
+  const d = document.getElementById('m2-date').value;
+  if (!d) { alert('Kies een datum.'); return; }
+  alert(`Meeting 2 voorlopig gepland op ${d}.\n\nVolgende stap: Bram + Toine bevestigen via WhatsApp en bouwen samen agenda M2 op basis van afgevinkte actielijst.`);
+}
+
+loadState();
+</script>
+
+</body>
+</html>
