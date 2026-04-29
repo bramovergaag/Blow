@@ -146,14 +146,14 @@
   }
   .sec-sub { color: var(--muted); margin-bottom: 16px; font-size: 0.92rem; }
 
-  /* Banner — pending content */
-  .pending {
-    background: linear-gradient(135deg, var(--amber) 0%, #b35a05 100%);
+  /* Banner — ready content (notulen vastgesteld) */
+  .ready {
+    background: linear-gradient(135deg, var(--green) 0%, #1e6e44 100%);
     color: white; border-radius: 12px; padding: 22px 26px; margin-bottom: 28px;
   }
-  .pending h3 { color: white; font-size: 1.1rem; margin-bottom: 8px; }
-  .pending p { font-size: 0.93rem; opacity: 0.95; }
-  .pending .ts { font-family: ui-monospace, monospace; font-size: 0.82rem; opacity: 0.85; margin-top: 8px; }
+  .ready h3 { color: white; font-size: 1.1rem; margin-bottom: 8px; }
+  .ready p { font-size: 0.93rem; opacity: 0.95; }
+  .ready .ts { font-family: ui-monospace, monospace; font-size: 0.82rem; opacity: 0.85; margin-top: 8px; }
 
   /* Block — discussion topics */
   .topics { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 22px; }
@@ -397,10 +397,10 @@
       </div>
     </header>
 
-    <section class="pending" id="status">
-      <h3>⏳ Notulen worden aangevuld</h3>
-      <p>Lokale transcriptie via faster-whisper (NL) loopt — duurt nog ongeveer 40-50 min op CPU. Zodra het transcript klaar is, vul ik onderstaande secties met de échte besproken punten en beslissingen.</p>
-      <p class="ts">Audio: 5.864s · Model: small int8 · Output: <code>Blow Beach House.transcript.txt</code></p>
+    <section class="ready" id="status">
+      <h3>✅ Notulen vastgesteld</h3>
+      <p>Onderstaande secties zijn ingevuld op basis van het lokaal verwerkte transcript (faster-whisper NL). Reageer op losse punten via de SEO-WhatsApp-groep.</p>
+      <p class="ts">Bron: <code>Blow Beach House.transcript.txt</code> · ~98 min opname · model small-int8</p>
     </section>
 
     <section id="agenda-recap">
