@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BLOW — MAKE 06 · WhatsApp feedback-loop</title>
+<style>
+  :root {
+    --sand: #f4ecd8;
+    --sand-light: #faf5e6;
+    --sea: #1e6091;
+    --sea-light: #4a90b8;
+    --foam: #ffffff;
+    --deep: #0b2e4a;
+    --accent: #e85d04;
+    --accent-soft: #f8ddc7;
+    --green: #2d8659;
+    --green-soft: #d4edda;
+    --red: #b63b3b;
+    --red-soft: #fadbdb;
+    --purple: #6b4f9b;
+    --teal: #2a8e8e;
+    --gold: #c9a227;
+    --wa: #25d366;
+    --wa-deep: #128c7e;
+    --text: #1a2a3a;
+    --muted: #5c6b7a;
+    --border: rgba(30, 96, 145, 0.15);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: linear-gradient(180deg, var(--sand) 0%, #ffffff 40%);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+  .container { max-width: 1200px; margin: 0 auto; padding: 24px 24px 80px; }
+
+  /* Brand bar */
+  .brand-bar {
+    background: #C66A1F;
+    color: #F4EFE2;
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    border-bottom: 4px solid #1A1A1A;
+    font-family: "Oswald", "Bebas Neue", sans-serif;
+  }
+  .brand-bar .logo {
+    width: 38px; height: 38px;
+    border: 2px solid #F4EFE2;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    flex-shrink: 0;
+  }
+  .brand-bar .brand-name {
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .brand-tabs {
+    margin-left: auto;
+    display: flex;
+    gap: 4px;
+  }
+  .brand-tabs a {
+    font-family: inherit;
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 10px 18px;
+    color: rgba(244, 239, 226, 0.7);
+    border-bottom: 3px solid transparent;
+    text-decoration: none;
+    transition: color 0.15s, border-color 0.15s;
+    margin-bottom: -14px;
+  }
+  .brand-tabs a:hover { color: #F4EFE2; }
+  .brand-tabs a.active {
+    color: #F4EFE2;
+    border-bottom-color: #F4EFE2;
+  }
+  @media (max-width: 600px) {
+    .brand-bar { padding: 12px 16px; gap: 12px; }
+    .brand-bar .brand-name { font-size: 15px; }
+    .brand-tabs a { padding: 10px 12px; font-size: 12px; letter-spacing: 1.5px; }
+  }
+
+  /* Hero */
+  header.hero {
+    text-align: center;
+    padding: 40px 0 32px;
+    border-bottom: 3px solid var(--wa-deep);
+    margin-bottom: 32px;
+  }
+  .eyebrow {
+    font-size: 0.78rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--wa-deep);
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  h1 {
+    font-size: clamp(1.7rem, 4vw, 2.6rem);
+    font-weight: 800;
+    color: var(--deep);
+    line-height: 1.15;
+    margin-bottom: 12px;
+  }
+  h1 .accent { color: var(--wa-deep); }
+  .lead {
+    font-size: 1.05rem;
+    color: var(--muted);
+    max-width: 760px;
+    margin: 0 auto 16px;
+  }
+  .meta-pills {
+    display: inline-flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    font-size: 0.82rem;
+    color: var(--muted);
+    margin-top: 8px;
+  }
+  .meta-pills span {
+    padding: 4px 12px;
+    background: var(--foam);
+    border-radius: 999px;
+    border: 1px solid var(--border);
+  }
+  .meta-pills .pill-wa {
+    background: var(--wa);
+    color: white;
+    border-color: var(--wa-deep);
+    font-weight: 700;
+  }
+
+  /* Section heads */
+  h2.section-title {
+    font-size: 1.4rem;
+    color: var(--deep);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  h2.section-title .badge {
+    background: var(--wa-deep);
+    color: white;
+    font-size: 0.7rem;
+    padding: 4px 10px;
+    border-radius: 10px;
+    letter-spacing: 0.12em;
+    font-weight: 700;
+  }
+  .section-sub {
+    color: var(--muted);
+    margin-bottom: 22px;
+    font-size: 0.94rem;
+  }
+
+  /* Flow diagram */
+  .flow-card {
+    background: var(--foam);
+    border-radius: 14px;
+    padding: 22px;
+    margin-bottom: 28px;
+    box-shadow: 0 2px 12px rgba(11, 46, 74, 0.06);
+    border-left: 6px solid var(--wa-deep);
+  }
+  .flow {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    overflow-x: auto;
+    padding: 8px 4px 16px;
+    scrollbar-width: thin;
+  }
+  .flow::-webkit-scrollbar { height: 6px; }
+  .flow::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+  .step {
+    flex: 0 0 auto;
+    min-width: 150px;
+    max-width: 190px;
+    background: var(--sand-light);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    position: relative;
+  }
+  .step .step-icon {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .step .step-name {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--deep);
+    line-height: 1.25;
+  }
+  .step .step-sub {
+    font-size: 0.76rem;
+    color: var(--muted);
+    line-height: 1.35;
+  }
+  .step.trigger { background: #fff7e6; border-color: #f0c674; }
+  .step.api    { background: #e8f0fa; border-color: #b3cde8; }
+  .step.wa     { background: #dcf8c6; border-color: var(--wa); }
+  .step.sheet  { background: #e8f5e9; border-color: #a8d4ad; }
+  .step.util   { background: #f4f4f4; border-color: #ccc; }
+  .step.decision { background: #f3e8fa; border-color: #d4b3e8; }
+  .step.wait   { background: #fff3e0; border-color: #f0b770; }
+
+  .arrow-h {
+    flex: 0 0 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--wa-deep);
+    font-size: 1.4rem;
+    font-weight: 700;
+  }
+
+  .flow-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 4px;
+    flex-wrap: wrap;
+  }
+  .flow-num {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: var(--wa-deep);
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 0.92rem;
+    flex-shrink: 0;
+  }
+  .flow-head h3 { font-size: 1.1rem; color: var(--deep); flex: 1; }
+  .trigger-pill {
+    background: var(--sand-light);
+    border: 1px solid var(--border);
+    color: var(--deep);
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .trigger-pill.wa-pill { background: var(--wa); color: white; border-color: var(--wa-deep); }
+  .flow-purpose {
+    color: var(--muted);
+    font-size: 0.92rem;
+    margin: 4px 0 18px 50px;
+  }
+  @media (max-width: 600px) {
+    .flow-purpose { margin-left: 0; }
+  }
+
+  /* WhatsApp message mock */
+  .wa-mock-wrap {
+    background: #ECE5DD;
+    border-radius: 14px;
+    padding: 24px;
+    margin-bottom: 28px;
+    box-shadow: 0 2px 12px rgba(11, 46, 74, 0.06);
+  }
+  .wa-mock-wrap h3 {
+    color: var(--deep);
+    margin-bottom: 14px;
+    font-size: 1.05rem;
+  }
+  .wa-bubble {
+    max-width: 520px;
+    margin-left: auto;
+    background: #DCF8C6;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 0.88rem;
+    line-height: 1.45;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.08);
+    position: relative;
+    margin-bottom: 12px;
+  }
+  .wa-bubble.in {
+    margin-left: 0;
+    margin-right: auto;
+    background: #FFFFFF;
+  }
+  .wa-bubble strong { color: var(--wa-deep); }
+  .wa-bubble em { color: var(--muted); font-style: normal; font-weight: 600; }
+  .wa-bubble .who {
+    font-size: 0.74rem;
+    font-weight: 700;
+    color: var(--wa-deep);
+    margin-bottom: 4px;
+  }
+  .wa-bubble.in .who { color: var(--purple); }
+  .wa-bubble pre {
+    font-family: -apple-system, "Segoe UI", sans-serif;
+    white-space: pre-wrap;
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--text);
+  }
+  .wa-time {
+    font-size: 0.68rem;
+    color: var(--muted);
+    text-align: right;
+    margin-top: 4px;
+  }
+  .wa-bubble.in .wa-time { text-align: left; }
+
+  /* Keyword table */
+  .kw-table {
+    background: var(--foam);
+    border-radius: 14px;
+    padding: 22px;
+    margin-bottom: 28px;
+    box-shadow: 0 2px 12px rgba(11, 46, 74, 0.06);
+    overflow-x: auto;
+  }
+  .kw-table table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+  .kw-table th {
+    text-align: left;
+    padding: 10px 12px;
+    background: var(--sand-light);
+    color: var(--deep);
+    font-weight: 700;
+    font-size: 0.82rem;
+    letter-spacing: 0.04em;
+    border-bottom: 2px solid var(--border);
+  }
+  .kw-table td {
+    padding: 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  .kw-table tr:last-child td { border-bottom: none; }
+  .kw-table .kw-cat {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 6px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  .kw-cat.pos { background: var(--green-soft); color: var(--green); }
+  .kw-cat.edit { background: var(--accent-soft); color: var(--accent); }
+  .kw-cat.skip { background: var(--red-soft); color: var(--red); }
+  .kw-cat.silent { background: #e8f0fa; color: var(--sea); }
+  .kw-table code {
+    font-family: "SF Mono", Monaco, monospace;
+    font-size: 0.78rem;
+    background: var(--sand-light);
+    padding: 1px 6px;
+    border-radius: 4px;
+    color: var(--deep);
+  }
+  .kw-table .out {
+    font-family: "SF Mono", Monaco, monospace;
+    font-size: 0.78rem;
+    color: var(--purple);
+    font-weight: 700;
+  }
+
+  /* Failure panel */
+  .fail-panel {
+    background: var(--foam);
+    border-radius: 14px;
+    padding: 22px;
+    margin-bottom: 28px;
+    box-shadow: 0 2px 12px rgba(11, 46, 74, 0.06);
+    border-left: 6px solid var(--red);
+  }
+  .fail-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 14px;
+    margin-top: 14px;
+  }
+  .fail-card {
+    background: var(--sand-light);
+    border-radius: 10px;
+    padding: 14px;
+    border-left: 3px solid var(--red);
+  }
+  .fail-card h4 {
+    font-size: 0.92rem;
+    color: var(--deep);
+    margin-bottom: 6px;
+  }
+  .fail-card p {
+    font-size: 0.82rem;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+  .fail-card .mit {
+    font-size: 0.78rem;
+    color: var(--green);
+    font-weight: 600;
+  }
+
+  /* Decision visual */
+  .decision-tree {
+    background: var(--foam);
+    border-radius: 14px;
+    padding: 22px;
+    margin-bottom: 28px;
+    box-shadow: 0 2px 12px rgba(11, 46, 74, 0.06);
+  }
+  .branches {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+    margin-top: 16px;
+  }
+  .branch {
+    border-radius: 10px;
+    padding: 14px;
+    border-left: 4px solid var(--muted);
+  }
+  .branch.b-skip { background: var(--red-soft); border-left-color: var(--red); }
+  .branch.b-edit { background: var(--accent-soft); border-left-color: var(--accent); }
+  .branch.b-pos  { background: var(--green-soft); border-left-color: var(--green); }
+  .branch.b-silent { background: #e8f0fa; border-left-color: var(--sea); }
+  .branch h4 {
+    font-size: 0.92rem;
+    margin-bottom: 4px;
+    color: var(--deep);
+  }
+  .branch .next {
+    font-size: 0.8rem;
+    font-family: "SF Mono", Monaco, monospace;
+    margin-top: 6px;
+    color: var(--deep);
+    font-weight: 700;
+  }
+  .branch p { font-size: 0.82rem; color: var(--text); }
+
+  /* Footer */
+  footer.foot {
+    margin-top: 40px;
+    padding: 24px;
+    background: var(--foam);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    text-align: center;
+    font-size: 0.88rem;
+    color: var(--muted);
+  }
+  footer.foot a {
+    color: var(--wa-deep);
+    text-decoration: none;
+    margin: 0 8px;
+    font-weight: 600;
+  }
+  footer.foot a:hover { color: var(--accent); text-decoration: underline; }
+
+  @media (max-width: 600px) {
+    .container { padding: 16px 14px 60px; }
+    .flow-card { padding: 16px; }
+    .flow-num { width: 30px; height: 30px; font-size: 0.85rem; }
+    .flow-head h3 { font-size: 1rem; }
+    h1 { font-size: 1.5rem; }
+    .lead { font-size: 0.95rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Brand tab bar -->
+<header class="brand-bar">
+  <div class="logo">BLOW</div>
+  <div class="brand-name">Beach House</div>
+  <nav class="brand-tabs" aria-label="Hoofdmenu">
+    <a href="../">Bestelling</a>
+    <a href="./" class="active" aria-current="page">SEO</a>
+    <a href="https://bramovergaag.github.io/balistoel.nl/">Balistoel</a>
+  </nav>
+</header>
+
+<nav style="background: var(--foam); border-bottom: 1px solid var(--border); padding: 12px 24px;">
+  <div style="max-width: 1280px; margin: 0 auto; font-size: 0.85rem; color: var(--muted);">
+    <a href="./" style="color: var(--accent); text-decoration: none; font-weight: 600;">← Pilot-overzicht</a>
+    <span style="padding: 0 6px; color: var(--border);">·</span>
+    <span>WhatsApp feedback-loop · scenario 06 referentie</span>
+  </div>
+</nav>
+
+<div class="container">
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="eyebrow">SEO automation • MAKE.com · scenario 06</div>
+    <h1>WhatsApp feedback-loop — <span class="accent">auto-publish na 2u stilte</span></h1>
+    <p class="lead">Wanneer scenario 02 een nieuwe draft oplevert, postet de bot een preview in de WA-groep. Toine + Bram krijgen 2 uur om te reageren. Daarna wint de stilte: zonder bezwaar gaat de draft automatisch naar <code>approved</code>, en scenario 03 publiceert.</p>
+    <div class="meta-pills" aria-label="Overzicht">
+      <span class="pill-wa">WhatsApp via 2chat</span>
+      <span>2u review-window</span>
+      <span>Auto-approve op stilte</span>
+      <span>Splits in 06a (send) + 06b (resolve)</span>
+    </div>
+  </header>
+
+  <!-- =================== FLOW 06A =================== -->
+  <h2 class="section-title"><span class="badge">FLOW</span>06a · Trigger + WA-post + deadline</h2>
+  <p class="section-sub">Reageert op rijen die scenario 02 net heeft afgerond. Postet preview in de groep en stempelt deadline (now + 2u) op de sheet-rij.</p>
+
+  <article class="flow-card">
+    <div class="flow-head">
+      <span class="flow-num">6a</span>
+      <h3>Send → Stamp deadline</h3>
+      <span class="trigger-pill">📋 Sheet watchRows</span>
+    </div>
+    <p class="flow-purpose">Filter na trigger: <code>status=draft_ready_for_review</code> AND <code>review_deadline_at</code> leeg. Voorkomt dat 06a opnieuw afvuurt op een rij die al wacht op feedback.</p>
+
+    <div class="flow" aria-label="Flow 06a">
+      <div class="step trigger">
+        <div class="step-icon">Trigger</div>
+        <div class="step-name">Sheets watchRows</div>
+        <div class="step-sub">draft_ready_for_review · deadline empty</div>
+      </div>
+      <div class="arrow-h" aria-hidden="true">→</div>
+      <div class="step util">
+        <div class="step-icon">SetVar</div>
+        <div class="step-name">Build preview</div>
+        <div class="step-sub">title + 200 chars body + sheetlink</div>
+      </div>
+      <div class="arrow-h" aria-hidden="true">→</div>
+      <div class="step util">
+        <div class="step-icon">SetVar</div>
+        <div class="step-name">Format WA-msg</div>
+        <div class="step-sub">*bold* + _italic_ + instructies</div>
+      </div>
+      <div class="arrow-h" aria-hidden="true">→</div>
+      <div class="step wa">
+        <div class="step-icon">2chat HTTP</div>
+        <div class="step-name">Send to group</div>
+        <div class="step-sub">POST /send-message · WA_GROUP_ID</div>
+      </div>
+      <div class="arrow-h" aria-hidden="true">→</div>
+      <div class="step sheet">
+        <div class="step-icon">Sheets</div>
+        <div class="step-name">Stamp deadline</div>
+        <div class="step-sub">review_sent_at · review_deadline_at = now+2h</div>
+      </div>
+    </div>
+  </article>
+
+  <!-- =================== WAIT WINDOW =================== -->
+  <h2 class="section-title"><span class="badge">WAIT</span>2-uurs review-venster</h2>
+  <p class="section-sub">In dit venster reageren Toine + Bram in de groep. De sheet-rij staat nog op <code>draft_ready_for_review</code>, scenario 03 doet niets.</p>
+
+  <article class="flow-card" style="border-left-color: var(--gold);">
+    <div class="flow" style="justify-content:center;">
+      <div class="step wait">
+        <div class="step-icon">T+0</div>
+        <div class="step-name">WA-post live</div>
+        <div class="step-sub">groep krijgt preview</div>
+      </div>
+      <div class="arrow-h">→</div>
+      <div class="step wait">
+        <div class="step-icon">T+0…2u</div>
+        <div class="step-name">Reactie-venster</div>
+        <div class="step-sub">👍 / edit / skip / niets</div>
+      </div>
+      <div class="arrow-h">→</div>
+      <div class="step decision">
+        <div class="step-icon">T+2u</div>
+        <div class="step-name">06b polt</div>
+        <div class="step-sub">elke 30 min sweep</div>
+      </div>
+    </div>
+  </article>
+
+  <!-- =================== FLOW 06B =================== -->
+  <h2 class="section-title"><span class="badge">FLOW</span>06b · Poll + classify + decide</h2>
+  <p class="section-sub">Apart scenario, draait elke 30 minuten. Vindt rijen waarvan de deadline gepasseerd is, haalt WA-replies op, classificeert keywords, beslist.</p>
+
+  <article class="flow-card">
+    <div class="flow-head">
+      <span class="flow-num">6b</span>
+      <h3>Resolver — keywords → status</h3>
+      <span class="trigger-pill">⏰ Schedule · elke 30 min</span>
+    </div>
+    <p class="flow-purpose">Volgorde van precedence: <strong>skip &gt; edit &gt; positive &gt; silent</strong>. Edge case: bij gemengde reacties ("ok maar één edit") wint <em>edit</em> — veiliger default dan onbedoeld publiceren.</p>
+
+    <div class="flow" aria-label="Flow 06b">
+      <div class="step trigger">
+        <div class="step-icon">Trigger</div>
+        <div class="step-name">Schedule</div>
+        <div class="step-sub">elke 30 min</div>
+      </div>
+      <div class="arrow-h">→</div>
+      <div class="step sheet">
+        <div class="step-icon">Sheets</div>
+        <div class="step-name">searchRows</div>
+        <div class="step-sub">status=draft_… AND deadline≤now</div>
+      </div>
+      <div class="arrow-h">→</div>
+      <div class="step wa">
+        <div class="step-icon">2chat HTTP</div>
+        <div class="step-name">Get messages</div>
+        <div class="step-sub">since review_sent_at</div>
+      </div>
+      <div class="arrow-h">→</div>
+      <div class="step util">
+        <div class="step-icon">SetVar</div>
+        <div class="step-name">Classify</div>
+        <div class="step-sub">hasSkip · hasEdit · hasPositive</div>
+      </div>
+      <div class="arrow-h">→</div>
+      <div class="step decision">
+        <div class="step-icon">SetVar</div>
+        <div class="step-name">Decide</div>
+        <div class="step-sub">if/else → newStatus</div>
+      </div>
+      <div class="arrow-h">→</div>
+      <div class="step sheet">
+        <div class="step-icon">Sheets</div>
+        <div class="step-name">Update Row</div>
+        <div class="step-sub">status + resolution + clear deadline</div>
+      </div>
+      <div class="arrow-h">→</div>
+      <div class="step wa">
+        <div class="step-icon">2chat</div>
+        <div class="step-name">Confirm in group</div>
+        <div class="step-sub">"…→ approved (silent)"</div>
+      </div>
+    </div>
+  </article>
+
+  <!-- =================== WA MOCK =================== -->
+  <h2 class="section-title"><span class="badge">PREVIEW</span>Voorbeeld: hoe ziet de WA-groep eruit</h2>
+  <p class="section-sub">Mock van een live review-cyclus, T+0 tot T+2u.</p>
+
+  <div class="wa-mock-wrap">
+    <h3>WA-groep · BLOW Content Review</h3>
+
+    <div class="wa-bubble">
+      <div class="who">BLOW review-bot · 09:00</div>
+      <pre><strong>BLOW — concept klaar voor review</strong>
+
+<em>Titel:</em> Kitesurfles Brouwersdam — beste tijd, locatie, prijzen
+<em>Afdeling:</em> kitesurfschool
+<em>Type:</em> kitesurf_city
+
+<em>Preview:</em>
+Brouwersdam staat bekend als één van de beste kite-spots van Nederland. De combinatie van constante wind, ondiep water aan de binnenkant en een goed opgeleide instructie maakt het...
+
+<em>Sheet-rij:</em> sheets.google.com/…/row/142
+
+<strong>Reageer binnen 2u (deadline 29-04 11:00):</strong>
+• 👍 of "OK" of "ja" → wordt automatisch goedgekeurd
+• "edit" + opmerking → blijft op draft, jij past aan
+• "skip" → status naar needs_revision
+• Geen reactie → automatisch goedgekeurd na 2u</pre>
+      <div class="wa-time">09:00 ✓✓</div>
+    </div>
+
+    <div class="wa-bubble in">
+      <div class="who">Toine</div>
+      <pre>👍 prima zo</pre>
+      <div class="wa-time">09:42</div>
+    </div>
+
+    <div class="wa-bubble">
+      <div class="who">BLOW review-bot · 11:00</div>
+      <pre>BLOW review-bot: 'Kitesurfles Brouwersdam — beste tijd, locatie, prijzen' → approved (positive_reaction)</pre>
+      <div class="wa-time">11:00 ✓✓</div>
+    </div>
+  </div>
+
+  <!-- =================== KEYWORD TABLE =================== -->
+  <h2 class="section-title"><span class="badge">CLASSIFY</span>Keyword-tabel</h2>
+  <p class="section-sub">Alle replies in de groep tussen <code>review_sent_at</code> en <code>now</code> worden samengevoegd, lowercased, en op deze keywords gematcht.</p>
+
+  <div class="kw-table">
+    <table>
+      <thead>
+        <tr>
+          <th>Categorie</th>
+          <th>Keywords (NL + EN)</th>
+          <th>Triggert</th>
+          <th>Sheet-update</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="kw-cat skip">skip</span></td>
+          <td><code>skip</code> · <code>stop</code> · <code>nee</code> · <code>reject</code></td>
+          <td>Hoogste precedence — wint van alles anders</td>
+          <td><span class="out">status = needs_revision</span></td>
+        </tr>
+        <tr>
+          <td><span class="kw-cat edit">edit</span></td>
+          <td><code>edit</code> · <code>aanpas</code> · <code>wijzig</code> · <code>verander</code></td>
+          <td>Mens past zelf aan in de sheet, daarna handmatig naar approved</td>
+          <td><span class="out">status = draft_ready_for_review</span> (deadline cleared)</td>
+        </tr>
+        <tr>
+          <td><span class="kw-cat pos">positive</span></td>
+          <td><code>👍</code> · <code>ok</code> · <code>oke</code> · <code>prima</code> · <code>top</code> · <code>goed</code> · <code>ja</code> · <code>akkoord</code> · <code>approved</code></td>
+          <td>Een van Toine of Bram bevestigt expliciet</td>
+          <td><span class="out">status = approved</span> (scenario 03 pikt op)</td>
+        </tr>
+        <tr>
+          <td><span class="kw-cat silent">silent</span></td>
+          <td>Geen replies in venster</td>
+          <td>Default na 2u stilte — vertrouwen in pipeline</td>
+          <td><span class="out">status = approved</span> (resolution = silent_auto_approve)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- =================== DECISION TREE =================== -->
+  <h2 class="section-title"><span class="badge">DECIDE</span>Beslissings-tak in 06b</h2>
+  <p class="section-sub">Eén <code>SetVariables</code>-module met geneste if/else. Bewust simpel — geen routers nodig.</p>
+
+  <div class="decision-tree">
+    <pre style="background:var(--sand-light); padding:14px; border-radius:8px; font-size:0.84rem; overflow-x:auto;">newStatus = if(hasSkip,    "needs_revision",
+            if(hasEdit,    "draft_ready_for_review",
+                           "approved"))                  // covers positive + silent</pre>
+
+    <div class="branches">
+      <div class="branch b-skip">
+        <h4>1 · skip gedetecteerd</h4>
+        <p>Toine of Bram heeft "skip"/"stop" getypt. Pipeline stopt voor deze rij.</p>
+        <div class="next">→ needs_revision</div>
+      </div>
+      <div class="branch b-edit">
+        <h4>2 · edit gedetecteerd</h4>
+        <p>Mens wil zelf aanpassen. Status blijft draft, deadline gewist zodat 06a niet re-trigger't.</p>
+        <div class="next">→ draft_ready_for_review</div>
+      </div>
+      <div class="branch b-pos">
+        <h4>3 · positive reaction</h4>
+        <p>👍 / ok / ja / etc. — expliciete goedkeuring binnen het venster.</p>
+        <div class="next">→ approved → S03 publish</div>
+      </div>
+      <div class="branch b-silent">
+        <h4>4 · silent (geen replies)</h4>
+        <p>Niemand heeft gereageerd in 2u. Default = vertrouwen, want de AI-output was al door scenario 02 gevalideerd op JSON-schema.</p>
+        <div class="next">→ approved → S03 publish</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =================== FAILURE PANEL =================== -->
+  <h2 class="section-title"><span class="badge">FALLBACK</span>Wat als er iets mis gaat</h2>
+  <p class="section-sub">Externe afhankelijkheden: 2chat (WA gateway), Google Sheets API, MAKE-runners. Per failure-mode is er een mitigatie.</p>
+
+  <div class="fail-panel">
+    <div class="fail-grid">
+
+      <div class="fail-card">
+        <h4>2chat is down (4xx/5xx op send)</h4>
+        <p>Make retry'et tot 3× (maxErrors=3). Als alle 3 falen: rij blijft op <code>draft_ready_for_review</code> zonder deadline.</p>
+        <div class="mit">→ 06a fired niet opnieuw, want filter is ook "deadline empty"; manual fallback: Bram zet handmatig op approved.</div>
+      </div>
+
+      <div class="fail-card">
+        <h4>WA-groep gemute / Toine afk</h4>
+        <p>Niemand ziet de notificatie. Reacties = 0.</p>
+        <div class="mit">→ Default: silent_auto_approve = approved. Geaccepteerd risico: vertrouwen op scenario 02 output. Mitigatie: maandelijks audit (% silent vs. positive).</div>
+      </div>
+
+      <div class="fail-card">
+        <h4>2chat get-messages mist replies</h4>
+        <p>Bijv. iemand reageert in een sub-thread die 2chat niet retourneert.</p>
+        <div class="mit">→ Risico klein omdat we from_date=review_sent_at gebruiken (geen filtering op reply-to). Edge case: gebruik group directly, geen quoted replies.</div>
+      </div>
+
+      <div class="fail-card">
+        <h4>Sheet API quota / rate limit</h4>
+        <p>Vooral bij 06b sweep met veel pending rijen.</p>
+        <div class="mit">→ Make backoff doet z'n werk; 06b draait elke 30 min, dus volgende run pakt achterstand op. Limiet sheet limit=10 op 06a watcher.</div>
+      </div>
+
+      <div class="fail-card">
+        <h4>False-positive op keyword "ja"</h4>
+        <p>Iemand typt "jaarlijks moet dit nog…" → match op "ja".</p>
+        <div class="mit">→ In code prefix " ja" met spatie in de match-string (zie blueprint). Als blijkt te vaak fout: stap over naar regex-word-boundaries of vraag explicietere reacties.</div>
+      </div>
+
+      <div class="fail-card">
+        <h4>Dubbele publicatie</h4>
+        <p>Wat als 06b twee keer beslist op dezelfde rij?</p>
+        <div class="mit">→ Scenario 03 heeft eigen filter <code>status=approved AND post_id leeg</code>. Idempotent. Tweede run van 06b vindt rij niet meer (deadline cleared).</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="foot">
+    <strong>Gerelateerd:</strong>
+    <a href="./">Pilot index</a>·
+    <a href="m1-make-process.html">5 scenario's overzicht</a>·
+    <a href="m1-notulen.html">Notulen M1</a>·
+    <a href="m1-actielijst.html">Actielijst M1</a>·
+    <a href="audit-2026-04-27.html">SEO-audit</a>
+    <div style="margin-top: 10px; font-size: 0.78rem; color: var(--muted);">
+      Bron: <code>blow-make-blueprints/06-wa-feedback-loop.blueprint.json</code> · Versie 2026-04-29
+    </div>
+  </footer>
+
+</div>
+
+</body>
+</html>
