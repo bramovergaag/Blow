@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Planning · BLOW SEO pilot</title>
+<style>
+  :root {
+    --sand: #f4ecd8; --sand-light: #faf5e6; --sea: #1e6091; --sea-light: #4a90b8;
+    --foam: #ffffff; --deep: #0b2e4a; --accent: #e85d04; --accent-soft: #f8ddc7;
+    --green: #2d8659; --green-soft: #d1e8d8; --red: #b63b3b; --red-soft: #f0d4d4;
+    --amber: #d97706; --amber-soft: #fde7c7; --purple: #7b77c7;
+    --text: #1a2a3a; --muted: #5c6b7a; --border: rgba(30, 96, 145, 0.15);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: linear-gradient(180deg, var(--sand) 0%, #ffffff 30%);
+    color: var(--text); line-height: 1.55; min-height: 100vh;
+  }
+  .brand-bar {
+    background: #C66A1F; color: #F4EFE2; padding: 14px 24px;
+    display: flex; align-items: center; gap: 18px;
+    border-bottom: 4px solid #1A1A1A;
+    font-family: "Oswald", "Bebas Neue", sans-serif;
+  }
+  .brand-bar .logo { width: 38px; height: 38px; border: 2px solid #F4EFE2; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 12px; letter-spacing: 1.5px; flex-shrink: 0; }
+  .brand-bar .brand-name { font-weight: 700; font-size: 18px; letter-spacing: 2px; text-transform: uppercase; }
+  .brand-tabs { margin-left: auto; display: flex; gap: 4px; }
+  .brand-tabs a { font-family: inherit; font-weight: 500; font-size: 13px; letter-spacing: 2px;
+    text-transform: uppercase; padding: 10px 18px;
+    color: rgba(244, 239, 226, 0.7); border-bottom: 3px solid transparent;
+    text-decoration: none; margin-bottom: -14px; }
+  .brand-tabs a:hover { color: #F4EFE2; }
+  .brand-tabs a.active { color: #F4EFE2; border-bottom-color: #F4EFE2; }
+  @media (max-width: 600px) {
+    .brand-bar { padding: 12px 16px; gap: 12px; }
+    .brand-bar .brand-name { font-size: 15px; }
+    .brand-tabs a { padding: 10px 12px; font-size: 12px; letter-spacing: 1.5px; }
+  }
+  .breadcrumb { background: var(--foam); border-bottom: 1px solid var(--border); padding: 12px 24px; }
+  .breadcrumb .row { max-width: 1280px; margin: 0 auto; font-size: 0.85rem; color: var(--muted); }
+  .breadcrumb a { color: var(--accent); text-decoration: none; font-weight: 600; }
+  .breadcrumb .sep { padding: 0 6px; color: var(--border); }
+
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 24px 24px 80px;
+    display: grid; grid-template-columns: 220px 1fr; gap: 32px; }
+  @media (max-width: 1000px) { .wrap { grid-template-columns: 1fr; } }
+
+  .timeline { background: var(--foam); border-radius: 12px; padding: 18px;
+    box-shadow: 0 2px 10px rgba(11, 46, 74, 0.06);
+    position: sticky; top: 16px; align-self: start; font-size: 0.85rem; }
+  @media (max-width: 1000px) { .timeline { position: static; } }
+  .timeline h3 { font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--muted); font-weight: 700; margin-bottom: 10px; }
+  .toc-block { margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--border); }
+  .toc { list-style: none; padding: 0; margin: 0; }
+  .toc li { padding: 0; margin: 0; }
+  .toc a { display: block; padding: 4px 10px 4px 12px; font-size: 0.82rem; color: var(--muted);
+    text-decoration: none; border-left: 2px solid transparent;
+    transition: color 0.15s, border-color 0.15s, background 0.15s; line-height: 1.4; }
+  .toc a:hover { color: var(--deep); }
+  .toc a.active { color: var(--sea); border-left-color: var(--sea); background: var(--sand-light); font-weight: 700; }
+
+  .tl-link { display: block; padding: 6px 10px; font-size: 0.82rem;
+    color: var(--muted); text-decoration: none; border-left: 2px solid var(--border);
+    margin-left: 4px; }
+  .tl-link:hover { color: var(--deep); }
+  .tl-link.active { color: var(--sea); border-left-color: var(--sea); font-weight: 600; background: var(--sand-light); }
+
+  header.hero { padding: 12px 0 24px; border-bottom: 3px solid var(--sea); margin-bottom: 32px; }
+  .eyebrow { font-size: 0.78rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--sea); font-weight: 700; margin-bottom: 8px; }
+  h1 { font-size: clamp(1.6rem, 3.2vw, 2.4rem); font-weight: 800; color: var(--deep); line-height: 1.2; }
+  .lead { font-size: 1rem; color: var(--muted); max-width: 720px; margin-top: 12px; }
+
+  section { margin-bottom: 48px; scroll-margin-top: 24px; }
+  h2.sec { font-size: 1.4rem; color: var(--deep); margin-bottom: 6px;
+    display: flex; align-items: center; gap: 10px; }
+  h2.sec .badge { background: var(--sea); color: white; font-size: 0.66rem;
+    padding: 3px 9px; border-radius: 8px; letter-spacing: 0.12em; font-weight: 700; }
+  .sec-sub { color: var(--muted); margin-bottom: 18px; font-size: 0.92rem; }
+
+  /* Year Gantt - 4 phases */
+  .year-gantt {
+    background: var(--foam); border-radius: 14px; padding: 22px 26px;
+    box-shadow: 0 2px 10px rgba(11, 46, 74, 0.06); margin-bottom: 22px;
+  }
+  .yg-months {
+    display: grid; grid-template-columns: 200px repeat(16, 1fr);
+    gap: 4px; align-items: center; margin-bottom: 14px;
+  }
+  .yg-months .lbl { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--muted); font-weight: 700; }
+  .yg-months .m { text-align: center; font-size: 0.66rem; color: var(--muted); font-weight: 600; }
+  .yg-row {
+    display: grid; grid-template-columns: 200px repeat(16, 1fr);
+    gap: 4px; align-items: center; margin-bottom: 8px;
+  }
+  .yg-row .row-lbl {
+    font-size: 0.86rem; color: var(--deep); font-weight: 700; padding-right: 12px;
+  }
+  .yg-row .row-lbl .sub { display: block; font-size: 0.74rem; color: var(--muted); font-weight: 400; }
+  .yg-bar {
+    color: white; padding: 12px 14px; border-radius: 6px;
+    font-weight: 700; font-size: 0.82rem; text-align: center;
+    line-height: 1.3;
+  }
+  .yg-bar.p1 { background: var(--sea); }
+  .yg-bar.p2 { background: var(--green); }
+  .yg-bar.p3 { background: var(--accent); }
+  .yg-bar.p4 { background: var(--purple); }
+  .yg-bar.current { box-shadow: 0 0 0 3px var(--accent-soft); }
+
+  .phase-cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  @media (max-width: 900px) { .phase-cards { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 500px) { .phase-cards { grid-template-columns: 1fr; } }
+  .phase-card {
+    background: var(--foam); border-radius: 12px; padding: 18px 20px;
+    box-shadow: 0 2px 8px rgba(11, 46, 74, 0.05);
+    border-top: 4px solid var(--sea);
+  }
+  .phase-card.p1 { border-top-color: var(--sea); }
+  .phase-card.p2 { border-top-color: var(--green); }
+  .phase-card.p3 { border-top-color: var(--accent); }
+  .phase-card.p4 { border-top-color: var(--purple); }
+  .phase-card.current { box-shadow: 0 4px 18px rgba(232, 93, 4, 0.18); }
+  .phase-card .num { font-size: 0.66rem; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--muted); font-weight: 700; margin-bottom: 4px; }
+  .phase-card h3 { font-size: 1rem; color: var(--deep); margin-bottom: 6px; }
+  .phase-card .period { font-size: 0.78rem; color: var(--muted); margin-bottom: 10px; }
+  .phase-card .goal { font-size: 0.86rem; line-height: 1.5; }
+  .phase-card .activities {
+    margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border);
+    font-size: 0.78rem; color: var(--muted);
+  }
+  .phase-card .activities li { padding: 2px 0; padding-left: 12px; position: relative; list-style: none; }
+  .phase-card .activities li::before { content: "▸"; position: absolute; left: 0; color: var(--sea-light); }
+  .phase-card.current .activities li::before { color: var(--accent); }
+
+  /* M-step grid */
+  .meeting-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  @media (max-width: 800px) { .meeting-grid { grid-template-columns: 1fr; } }
+  .m-card {
+    background: var(--foam); border-radius: 12px; padding: 20px 22px;
+    box-shadow: 0 2px 10px rgba(11, 46, 74, 0.06);
+    border-left: 4px solid var(--sea-light); position: relative;
+  }
+  .m-card.physical { border-left-color: var(--accent); }
+  .m-card.eval { border-left-color: var(--deep); border-left-width: 5px;
+    background: linear-gradient(180deg, var(--sand-light) 0%, var(--foam) 60%); }
+  .m-card.current {
+    box-shadow: 0 4px 18px rgba(11, 46, 74, 0.12);
+    border-left-color: var(--accent);
+  }
+  .m-card.current::before {
+    content: "huidig"; position: absolute; top: -10px; left: 16px;
+    background: var(--accent); color: white; font-size: 0.62rem;
+    padding: 2px 8px; border-radius: 4px; letter-spacing: 0.1em;
+    font-weight: 700; text-transform: uppercase;
+  }
+  .m-head {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    flex-wrap: wrap; gap: 8px; margin-bottom: 8px;
+  }
+  .m-head .num {
+    font-size: 1.6rem; font-weight: 800; color: var(--deep); line-height: 1;
+  }
+  .m-card.current .m-head .num { color: var(--accent); }
+  .m-head .meta {
+    text-align: right; font-size: 0.74rem; color: var(--muted);
+  }
+  .m-head .meta .date { font-weight: 700; color: var(--deep); }
+  .m-modus {
+    display: inline-block; padding: 2px 8px; border-radius: 4px;
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.05em;
+    text-transform: uppercase; margin-bottom: 8px;
+  }
+  .m-modus.online { background: var(--sea-light); color: white; }
+  .m-modus.fysiek { background: var(--accent-soft); color: var(--accent); }
+  .m-modus.eval { background: var(--deep); color: white; }
+  .m-card .doel { font-size: 0.92rem; color: var(--text); margin-bottom: 12px;
+    line-height: 1.5; }
+  .m-card .doel strong { color: var(--deep); }
+
+  .m-actions {
+    margin-top: 10px; padding-top: 10px;
+    border-top: 1px solid var(--border);
+  }
+  .m-actions h4 {
+    font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--muted); font-weight: 700; margin-bottom: 8px;
+  }
+  .m-actions ul { list-style: none; padding: 0; margin: 0; }
+  .m-actions li {
+    padding: 4px 0 4px 22px; font-size: 0.84rem; position: relative;
+    line-height: 1.4;
+  }
+  .m-actions li::before {
+    content: "○"; position: absolute; left: 0; top: 4px;
+    color: var(--muted); font-weight: 700;
+  }
+  .m-actions li.done::before { content: "✓"; color: var(--green); }
+  .m-actions li.partial::before { content: "◐"; color: var(--amber); }
+  .m-actions li.done .text { text-decoration: line-through; opacity: 0.7; }
+
+  .m-actions .who-tag { font-size: 0.62rem; padding: 1px 5px; border-radius: 3px;
+    letter-spacing: 0.1em; font-weight: 700; margin-right: 4px; vertical-align: middle; }
+  .m-actions .who-tag.t { background: var(--accent-soft); color: var(--accent); }
+  .m-actions .who-tag.b { background: rgba(30, 96, 145, 0.12); color: var(--sea); }
+  .m-actions .who-tag.s { background: var(--green-soft); color: var(--green); }
+
+  .m-link { display: block; margin-top: 10px; font-size: 0.78rem;
+    color: var(--accent); text-decoration: none; font-weight: 600;
+    padding-top: 8px; border-top: 1px dashed var(--border); }
+  .m-link:hover { color: var(--deep); }
+
+  /* Progress */
+  .progress-summary {
+    background: linear-gradient(135deg, var(--sea) 0%, var(--deep) 100%);
+    color: white; border-radius: 14px; padding: 24px 28px;
+    margin-bottom: 24px;
+  }
+  .progress-summary h3 { color: white; font-size: 1.1rem; margin-bottom: 12px; }
+  .progress-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px;
+    margin-top: 12px; }
+  @media (max-width: 700px) { .progress-row { grid-template-columns: 1fr; } }
+  .ps-item { background: rgba(255,255,255,0.1); border-radius: 8px; padding: 10px 14px; }
+  .ps-item .lbl { font-size: 0.7rem; opacity: 0.7; letter-spacing: 0.1em;
+    text-transform: uppercase; font-weight: 600; }
+  .ps-item .val { font-size: 1.6rem; font-weight: 800; line-height: 1; margin-top: 4px; }
+  .ps-item .sub { font-size: 0.74rem; opacity: 0.8; margin-top: 2px; }
+
+  footer { margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--border);
+    text-align: center; color: var(--muted); font-size: 0.84rem; }
+  footer a { color: var(--sea); text-decoration: none; font-weight: 600; }
+
+  .kbd-hint { margin-top: 14px; padding: 8px 10px; background: var(--sand-light);
+    border-radius: 6px; font-size: 0.72rem; color: var(--muted); text-align: center; }
+  .kbd-hint kbd { background: var(--foam); border: 1px solid var(--border); border-radius: 3px;
+    padding: 1px 5px; font-family: ui-monospace, monospace; font-size: 0.7rem;
+    color: var(--deep); font-weight: 700; }
+</style>
+</head>
+<body>
+
+<header class="brand-bar">
+  <div class="logo">BLOW</div>
+  <div class="brand-name">Beach House</div>
+  <nav class="brand-tabs" aria-label="Hoofdmenu">
+    <a href="../">Bestelling</a>
+    <a href="./" class="active" aria-current="page">SEO</a>
+    <a href="https://bramovergaag.github.io/balistoel.nl/">Balistoel</a>
+  </nav>
+</header>
+
+<nav class="breadcrumb">
+  <div class="row">
+    <a href="./">← Pilot-overzicht</a>
+    <span class="sep">·</span>
+    <span>Planning · 16 maanden + Fase 1 detail</span>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<aside class="timeline">
+  <div class="toc-block">
+    <h3>Op deze pagina</h3>
+    <ul class="toc">
+      <li><a href="#progress">Voortgang</a></li>
+      <li><a href="#year">01 · Jaar-overzicht</a></li>
+      <li><a href="#fase1">02 · Fase 1 — meetings</a></li>
+      <li><a href="#fase2-4">03 · Fase 2-4 — high-level</a></li>
+    </ul>
+  </div>
+
+  <h3>Snelnavigatie</h3>
+  <a href="./" class="tl-link">Agenda M1</a>
+  <a href="m1-notulen.html" class="tl-link">Notulen M1</a>
+  <a href="m1-actielijst.html" class="tl-link">Actielijst M1</a>
+  <a href="m1-bronmateriaal.html" class="tl-link">📷 Bronmateriaal</a>
+  <a href="m1-make-process.html" class="tl-link">⚙️ MAKE-process</a>
+  <a href="m1-feedback-loop.html" class="tl-link">💬 Feedback-loop</a>
+
+  <div class="kbd-hint">
+    <kbd>↓</kbd>/<kbd>↑</kbd> scroll
+  </div>
+</aside>
+
+<main>
+
+  <header class="hero">
+    <div class="eyebrow">Planning</div>
+    <h1>16 maanden · 4 fases · 9 meetings stap 1</h1>
+    <p class="lead">Hoog-niveau jaar-overzicht voor fase 1 t/m 4. Voor de huidige fase (Stap 1) per meeting de doelstelling + actie-status uit de actielijst.</p>
+  </header>
+
+  <section id="progress">
+    <div class="progress-summary">
+      <h3>Voortgang stap 1</h3>
+      <div class="progress-row">
+        <div class="ps-item">
+          <div class="lbl">Meetings</div>
+          <div class="val" id="prog-meetings">1 / 9</div>
+          <div class="sub">M1 gehad · M2 11 mei</div>
+        </div>
+        <div class="ps-item">
+          <div class="lbl">Acties Toine</div>
+          <div class="val" id="prog-toine">0 / 5</div>
+          <div class="sub">uit actielijst M1</div>
+        </div>
+        <div class="ps-item">
+          <div class="lbl">Acties Bram</div>
+          <div class="val" id="prog-bram">0 / 7</div>
+          <div class="sub">uit actielijst M1</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="year">
+    <h2 class="sec"><span class="badge">01</span>Jaar-overzicht — 4 fases</h2>
+    <p class="sec-sub">Hoog-niveau planning. Elke fase 4 maanden. Eind elke fase = beoordelingsmoment.</p>
+
+    <div class="year-gantt">
+      <div class="yg-months">
+        <div class="lbl">2026 · 2027</div>
+        <div class="m">apr</div><div class="m">mei</div><div class="m">jun</div><div class="m">jul</div>
+        <div class="m">aug</div><div class="m">sep</div><div class="m">okt</div><div class="m">nov</div>
+        <div class="m">dec</div><div class="m">jan</div><div class="m">feb</div><div class="m">mrt</div>
+        <div class="m">apr</div><div class="m">mei</div><div class="m">jun</div><div class="m">jul</div>
+      </div>
+      <div class="yg-row">
+        <div class="row-lbl">Stap 1<span class="sub">Bouw + bewijs</span></div>
+        <div class="yg-bar p1 current" style="grid-column: 2 / 6">apr — aug 2026</div>
+      </div>
+      <div class="yg-row">
+        <div class="row-lbl">Stap 2<span class="sub">Schaal</span></div>
+        <div class="yg-bar p2" style="grid-column: 6 / 10">sep — dec 2026</div>
+      </div>
+      <div class="yg-row">
+        <div class="row-lbl">Stap 3<span class="sub">Optimalisatie</span></div>
+        <div class="yg-bar p3" style="grid-column: 10 / 14">jan — apr 2027</div>
+      </div>
+      <div class="yg-row">
+        <div class="row-lbl">Stap 4<span class="sub">Productisering</span></div>
+        <div class="yg-bar p4" style="grid-column: 14 / 18">mei — aug 2027</div>
+      </div>
+    </div>
+
+    <div class="phase-cards">
+      <div class="phase-card p1 current">
+        <div class="num">Fase 1 · huidig</div>
+        <h3>Bouw + bewijs</h3>
+        <div class="period">apr – aug 2026 · 4 mnd</div>
+        <p class="goal">Systeem werkt, eerste meetbare output, samenwerkingsstructuur bevestigd.</p>
+        <ul class="activities">
+          <li>MAKE scenarios 1–6 live</li>
+          <li>Audit + GSC-data</li>
+          <li>10–15 publicatie-klare posts</li>
+          <li>KPI's gedefinieerd + baseline</li>
+        </ul>
+      </div>
+      <div class="phase-card p2">
+        <div class="num">Fase 2</div>
+        <h3>Schaal + automatisering</h3>
+        <div class="period">sep – dec 2026 · 4 mnd</div>
+        <p class="goal">Volume opschalen, distributie geautomatiseerd, restaurant + events content opgebouwd.</p>
+        <ul class="activities">
+          <li>Distributie-automation</li>
+          <li>Multi-departement cadans</li>
+          <li>EN/DE talen overweging</li>
+          <li>KPI-tussenmeting</li>
+        </ul>
+      </div>
+      <div class="phase-card p3">
+        <div class="num">Fase 3</div>
+        <h3>Optimalisatie + attributie</h3>
+        <div class="period">jan – apr 2027 · 4 mnd</div>
+        <p class="goal">ROI aantoonbaar, refresh-flow productief, GA4-attributie + UTM compleet.</p>
+        <ul class="activities">
+          <li>Refresh-flow voor stale posts</li>
+          <li>Conversie-tracking + leads</li>
+          <li>Jaar-1 evaluatie</li>
+          <li>Eigendom-besluit (was open)</li>
+        </ul>
+      </div>
+      <div class="phase-card p4">
+        <div class="num">Fase 4</div>
+        <h3>Productisering / replicatie</h3>
+        <div class="period">mei – aug 2027 · 4 mnd</div>
+        <p class="goal">Geanonimiseerd template + 2e klant pilot. Business model (model B) gevalideerd.</p>
+        <ul class="activities">
+          <li>Template-extractie</li>
+          <li>2e klant onboarding</li>
+          <li>Sales-tooling</li>
+          <li>Commerciële roll-out beslissing</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="fase1">
+    <h2 class="sec"><span class="badge">02</span>Fase 1 detail — 9 meetings</h2>
+    <p class="sec-sub">2-wkly cadans, maandag 17:00, alternating online ↔ fysiek. Per meeting: doel + acties (live status uit actielijst).</p>
+
+    <div class="meeting-grid">
+
+      <article class="m-card physical current">
+        <div class="m-head">
+          <div class="num">M1</div>
+          <div class="meta"><div class="date">wo 29 apr · 18:00</div><div>Beach House (Toine)</div></div>
+        </div>
+        <span class="m-modus fysiek">📍 fysiek</span>
+        <p class="doel"><strong>Doel:</strong> kennismaking + voorstel + commitment voor stap 1. Whiteboard-clusters bevestigen (Kiteschool / Rest / Events).</p>
+        <div class="m-actions">
+          <h4>Acties uit M1</h4>
+          <ul id="m1-actions">
+            <li><span class="who-tag t">T</span><span class="text">GSC + GA4 + Viking-toegang regelen voor Bram</span></li>
+            <li><span class="who-tag t">T</span><span class="text">2 namen voor coaching-rollen aanleveren</span></li>
+            <li><span class="who-tag t">T</span><span class="text">Vendor-keuze definitief maken</span></li>
+            <li><span class="who-tag s">S</span><span class="text">KPI-sessie inplannen</span></li>
+            <li><span class="who-tag s">S</span><span class="text">Schriftelijke afspraak opstellen</span></li>
+          </ul>
+        </div>
+        <a href="m1-actielijst.html" class="m-link">→ Volledige actielijst M1</a>
+      </article>
+
+      <article class="m-card">
+        <div class="m-head">
+          <div class="num">M2</div>
+          <div class="meta"><div class="date">ma 11 mei · 17:00</div><div>Google Meet</div></div>
+        </div>
+        <span class="m-modus online">💻 online</span>
+        <p class="doel"><strong>Doel:</strong> kick-off review. GSC-toegang gelukt? Scenarios 1+2+3 opgezet? Eerste content-experiment besproken.</p>
+        <div class="m-actions">
+          <h4>Verwachte items</h4>
+          <ul>
+            <li><span class="who-tag b">B</span><span class="text">MAKE-account + scenarios 1+2+3 live</span></li>
+            <li><span class="who-tag b">B</span><span class="text">Audit-deel-1 (GSC) afgerond</span></li>
+            <li><span class="who-tag s">S</span><span class="text">KPI's eerste concept</span></li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="m-card physical">
+        <div class="m-head">
+          <div class="num">M3</div>
+          <div class="meta"><div class="date">ma 25 mei · 17:00</div><div>Bram thuis</div></div>
+        </div>
+        <span class="m-modus fysiek">📍 fysiek</span>
+        <p class="doel"><strong>Doel:</strong> eerste posts gepubliceerd? Title-tags + meta klaar? Restaurant-content gestart?</p>
+        <div class="m-actions">
+          <h4>Verwachte items</h4>
+          <ul>
+            <li><span class="who-tag b">B</span><span class="text">Title + meta op 5 sleutel-paginas</span></li>
+            <li><span class="who-tag b">B</span><span class="text">Post A (Zandmotor) gepubliceerd</span></li>
+            <li><span class="who-tag b">B</span><span class="text">Post B (Kijkduin vs Scheveningen) klaar</span></li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="m-card">
+        <div class="m-head">
+          <div class="num">M4</div>
+          <div class="meta"><div class="date">ma 8 jun · 17:00</div><div>Google Meet</div></div>
+        </div>
+        <span class="m-modus online">💻 online</span>
+        <p class="doel"><strong>Doel:</strong> tussentijdse status. Eerste GSC-data over pilot-posts terug?</p>
+        <div class="m-actions">
+          <h4>Verwachte items</h4>
+          <ul>
+            <li><span class="who-tag b">B</span><span class="text">Eerste restaurant + events post gedraft</span></li>
+            <li><span class="who-tag s">S</span><span class="text">Voortgang-snapshot bekijken</span></li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="m-card physical">
+        <div class="m-head">
+          <div class="num">M5</div>
+          <div class="meta"><div class="date">ma 22 jun · 17:00</div><div>Beach House (Toine)</div></div>
+        </div>
+        <span class="m-modus fysiek">📍 fysiek</span>
+        <p class="doel"><strong>Doel:</strong> halverwege fase 1. Maand-2-review met KPI-baseline. Scenarios 4+5 productief?</p>
+        <div class="m-actions">
+          <h4>Verwachte items</h4>
+          <ul>
+            <li><span class="who-tag b">B</span><span class="text">Scenarios 4 (Competitor) + 5 (Reviews) live</span></li>
+            <li><span class="who-tag s">S</span><span class="text">KPI-baseline geregistreerd</span></li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="m-card">
+        <div class="m-head">
+          <div class="num">M6</div>
+          <div class="meta"><div class="date">ma 6 jul · 17:00</div><div>Google Meet</div></div>
+        </div>
+        <span class="m-modus online">💻 online</span>
+        <p class="doel"><strong>Doel:</strong> tussentijdse status. 8–12 nieuwe posts gepubliceerd, distributie-pipeline gestart?</p>
+        <div class="m-actions">
+          <h4>Verwachte items</h4>
+          <ul>
+            <li><span class="who-tag b">B</span><span class="text">Distributie-templates productief</span></li>
+            <li><span class="who-tag b">B</span><span class="text">Scenario 6 (WA feedback-loop) ontwerp af</span></li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="m-card physical">
+        <div class="m-head">
+          <div class="num">M7</div>
+          <div class="meta"><div class="date">ma 20 jul · 17:00</div><div>Bram thuis</div></div>
+        </div>
+        <span class="m-modus fysiek">📍 fysiek</span>
+        <p class="doel"><strong>Doel:</strong> voorbereiding eind-stap-1 evaluatie. Welke KPI's hebben we gehaald?</p>
+        <div class="m-actions">
+          <h4>Verwachte items</h4>
+          <ul>
+            <li><span class="who-tag s">S</span><span class="text">KPI-tussenmeting</span></li>
+            <li><span class="who-tag s">S</span><span class="text">Eigendom-discussie voorbereiden</span></li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="m-card">
+        <div class="m-head">
+          <div class="num">M8</div>
+          <div class="meta"><div class="date">ma 3 aug · 17:00</div><div>Google Meet</div></div>
+        </div>
+        <span class="m-modus online">💻 online</span>
+        <p class="doel"><strong>Doel:</strong> laatste check vóór eind-stap-1. Wat moet er nog af? Welke vragen liggen open?</p>
+        <div class="m-actions">
+          <h4>Verwachte items</h4>
+          <ul>
+            <li><span class="who-tag s">S</span><span class="text">Open punten geïnventariseerd</span></li>
+            <li><span class="who-tag s">S</span><span class="text">Stap 2 voorlopige scope</span></li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="m-card eval">
+        <div class="m-head">
+          <div class="num">M9</div>
+          <div class="meta"><div class="date">ma 17 aug · 17:00</div><div>Beach House (Toine)</div></div>
+        </div>
+        <span class="m-modus eval">⭐ eind stap 1 · evaluatie</span>
+        <p class="doel"><strong>Doel:</strong> eind stap 1 evaluatie. <strong>Eigendom-besluit.</strong> Go/no-go stap 2. Resultaat: schriftelijke afspraak voor jaar 2.</p>
+        <div class="m-actions">
+          <h4>Beslissingen</h4>
+          <ul>
+            <li><span class="who-tag s">S</span><span class="text">Eigendom-structuur methodiek + blueprints</span></li>
+            <li><span class="who-tag s">S</span><span class="text">Go/no-go fase 2</span></li>
+            <li><span class="who-tag s">S</span><span class="text">Samenwerkingsvorm jaar 2</span></li>
+          </ul>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section id="fase2-4">
+    <h2 class="sec"><span class="badge">03</span>Fase 2-4 — high-level</h2>
+    <p class="sec-sub">Detail-planning komt na evaluatie M9. Voor nu alleen eind-doel + activiteiten.</p>
+
+    <div class="phase-cards">
+      <div class="phase-card p2">
+        <div class="num">Fase 2</div>
+        <h3>Schaal + automatisering</h3>
+        <div class="period">sep – dec 2026</div>
+        <p class="goal"><strong>Eind-doel:</strong> 30+ posts gepubliceerd, distributie geautomatiseerd, ROI-data binnen.</p>
+        <ul class="activities">
+          <li>Scenario 6 (WA-feedback) productief</li>
+          <li>Mailchimp + IG/FB auto-publish</li>
+          <li>Restaurant + events cluster volwassen</li>
+          <li>EN/DE talen overweging</li>
+          <li>Mid-jaar KPI-review (m8)</li>
+        </ul>
+      </div>
+      <div class="phase-card p3">
+        <div class="num">Fase 3</div>
+        <h3>Optimalisatie + attributie</h3>
+        <div class="period">jan – apr 2027</div>
+        <p class="goal"><strong>Eind-doel:</strong> ROI per content-cluster aantoonbaar, refresh-flow draait, GA4 + UTM compleet.</p>
+        <ul class="activities">
+          <li>Refresh-flow voor stale posts</li>
+          <li>UTM-attributie + Viking koppeling</li>
+          <li>Content-performance dashboard</li>
+          <li>Jaar-1 evaluatie + jaar-2 afspraak</li>
+        </ul>
+      </div>
+      <div class="phase-card p4">
+        <div class="num">Fase 4</div>
+        <h3>Productisering / replicatie</h3>
+        <div class="period">mei – aug 2027</div>
+        <p class="goal"><strong>Eind-doel:</strong> geanonimiseerd template + 2e klant pilot lopend. Business model B gevalideerd of verworpen.</p>
+        <ul class="activities">
+          <li>Template-extractie van methodiek</li>
+          <li>2e klant onboarding (proof)</li>
+          <li>Sales-materiaal voor productisering</li>
+          <li>Commerciële roll-out besluit</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+</div>
+
+<footer>
+  <p><strong>Planning · BLOW SEO pilot</strong> · 16 maanden in 4 fases</p>
+  <p>
+    <a href="./">Pilot-overzicht</a> ·
+    <a href="m1-actielijst.html">Actielijst M1</a> ·
+    <a href="m1-bronmateriaal.html">Bronmateriaal</a>
+  </p>
+</footer>
+
+<script>
+// Read action progress from localStorage (m1-actielijst)
+try {
+  const state = JSON.parse(localStorage.getItem('blow-pilot-m1-actielijst') || '{}');
+  let toineDone = 0, bramDone = 0;
+  // T-keys: t-1..t-5 = Toine acties, B-keys: b-1..b-7 = Bram acties
+  for (let i = 1; i <= 5; i++) {
+    if (state[`t-${i}-toine`] && state[`t-${i}-bram`]) toineDone++;
+  }
+  for (let i = 1; i <= 7; i++) {
+    if (state[`b-${i}-toine`] && state[`b-${i}-bram`]) bramDone++;
+  }
+  document.getElementById('prog-toine').textContent = `${toineDone} / 5`;
+  document.getElementById('prog-bram').textContent = `${bramDone} / 7`;
+  // Mark M1 actions visually
+  const m1List = document.getElementById('m1-actions');
+  if (m1List) {
+    [...m1List.querySelectorAll('li')].forEach((li, i) => {
+      const ids = ['t-1', 't-2', 't-3', 's-1', 's-2'];
+      const id = ids[i];
+      if (state[`${id}-toine`] && state[`${id}-bram`]) li.classList.add('done');
+      else if (state[`${id}-toine`] || state[`${id}-bram`]) li.classList.add('partial');
+    });
+  }
+} catch (e) { console.warn(e); }
+
+// Scroll-spy
+const sections = document.querySelectorAll('section[id]');
+const tocLinks = document.querySelectorAll('.toc a');
+function updateActive() {
+  let current = '';
+  sections.forEach(s => { if (s.getBoundingClientRect().top < 130) current = s.id; });
+  tocLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
+}
+window.addEventListener('scroll', updateActive, { passive: true });
+updateActive();
+</script>
+
+</body>
+</html>

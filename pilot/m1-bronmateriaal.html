@@ -257,7 +257,9 @@
       <div class="src">
         Bron-materiaal:<br>
         <a href="m1-bronmateriaal.html" class="active">▸ Foto + transcript</a><br>
-        <a href="m1-make-process.html" style="color: var(--accent);">⚙️ MAKE-process</a>
+        <a href="m1-make-process.html" style="color: var(--accent);">⚙️ MAKE-process</a><br>
+        <a href="m1-feedback-loop.html" style="color: var(--accent);">💬 Feedback-loop</a><br>
+        <a href="planning.html" style="color: var(--accent);">📅 Planning-overzicht</a>
       </div>
     </div>
 
@@ -380,20 +382,22 @@
       <div class="transcript-wrap">
         <div class="transcript-meta">
           <span>🎙️ Duur: 97,7 min</span>
-          <span>🤖 Model: faster-whisper small int8</span>
-          <span>🔒 Volledig lokaal verwerkt</span>
-          <span class="status-pending" id="trans-status">⏳ verwerkt nog…</span>
+          <span>📝 15.767 woorden</span>
+          <span>🤖 faster-whisper small int8</span>
+          <span>🔒 Volledig lokaal</span>
+          <span class="status-done" id="trans-status">✓ klaar</span>
         </div>
 
-        <div class="pending" id="pending-block">
-          <h4>⏳ Transcript wordt nog verwerkt</h4>
-          <p>Faster-whisper draait op CPU. Volledig lokaal — geen audio gaat naar de cloud. Verwachte resterende tijd: ~30-40 min.</p>
-          <p class="progress">Voortgang: zie <code>C:\Users\Administrator\Desktop\transcribe.log</code>. Bestand wordt opgeslagen als <code>Blow Beach House.transcript.txt</code>.</p>
-        </div>
+        <p style="font-size: 0.86rem; color: var(--muted); margin-bottom: 12px;">
+          Volledig transcript geladen vanuit <code>bronmateriaal/audio-transcript-2026-04-29.txt</code>.
+          Audio is lokaal verwerkt — geen cloud-upload. Onderstaande tekst is ruwe Whisper-output (niet geredigeerd):
+        </p>
 
-        <div class="transcript-body placeholder" id="trans-body" style="margin-top: 14px;">
-          [Het transcript verschijnt hier zodra faster-whisper klaar is. Bram voegt het dan toe via een commit.]
-        </div>
+        <div class="transcript-body" id="trans-body" style="margin-top: 14px;">Bezig met laden…</div>
+
+        <p style="margin-top: 10px; font-size: 0.78rem; color: var(--muted); font-style: italic;">
+          ⚠️ Whisper-output bevat herkenningsfouten (eigennamen, vakjargon). Voor notulen-extractie gebruiken we deze tekst als bron, niet als eindversie.
+        </p>
       </div>
     </section>
 
@@ -480,6 +484,18 @@
 document.getElementById('wb-img').addEventListener('click', () => {
   document.getElementById('lightbox').classList.add('open');
 });
+
+// Load transcript
+fetch('bronmateriaal/audio-transcript-2026-04-29.txt')
+  .then(r => r.ok ? r.text() : Promise.reject(r.status))
+  .then(text => {
+    const body = document.getElementById('trans-body');
+    body.textContent = text;
+    body.classList.remove('placeholder');
+  })
+  .catch(err => {
+    document.getElementById('trans-body').textContent = '[Transcript niet beschikbaar — fout: ' + err + ']';
+  });
 
 const sections = document.querySelectorAll('section[id], header[id]');
 const tocLinks = document.querySelectorAll('.toc a');
