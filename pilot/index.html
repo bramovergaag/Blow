@@ -758,6 +758,26 @@
     font-weight: 700;
     margin: 8px 0 2px;
   }
+  .meeting-track {
+    display: flex; align-items: center; gap: 3px;
+    height: 22px; padding: 0 6px;
+    background: var(--accent-soft); border-radius: 4px;
+  }
+  .meeting-track.notulen { background: rgba(30, 96, 145, 0.12); }
+  .m-marker {
+    flex: 1; min-width: 0;
+    display: inline-flex; align-items: center; justify-content: center;
+    background: var(--accent); color: white;
+    font-size: 0.62rem; font-weight: 700;
+    padding: 3px 2px; border-radius: 3px;
+    text-decoration: none; line-height: 1;
+    text-align: center; white-space: nowrap;
+  }
+  .m-marker.doc { background: var(--sea); }
+  .m-marker.future { background: var(--sand); color: var(--muted); }
+  .m-marker.future:hover { background: var(--sand-light); color: var(--deep); }
+  .m-marker.eval { background: var(--deep); }
+  .m-marker.active { box-shadow: 0 0 0 2px var(--foam), 0 0 0 4px var(--accent); }
 
   /* ---------- Footer ---------- */
   footer {
@@ -961,11 +981,12 @@
 <div class="wrap">
 
 <aside class="timeline-side">
-  <h3>Timeline</h3>
+  <h3>Timeline · Fase 1</h3>
 
   <div class="tl-meeting current">
-    <div class="date">29 apr 2026</div>
-    <div class="title">Meeting 1 — Beach House</div>
+    <div class="date">wo 29 apr · 18:00</div>
+    <div class="title">M1 — fysiek</div>
+    <div style="font-size: 0.74rem; color: var(--muted); margin-bottom: 4px;">📍 Beach House (Toine)</div>
     <ul>
       <li><a href="./" class="active">▸ Agenda</a></li>
       <li><a href="m1-notulen.html">○ Notulen</a></li>
@@ -976,17 +997,21 @@
     </ul>
   </div>
 
-  <div class="tl-meeting future">
-    <div class="date">datum?</div>
-    <div class="title">Meeting 2</div>
-    <ul>
-      <li>○ Agenda</li>
-      <li>○ Notulen</li>
-      <li>○ Actielijst</li>
-    </ul>
+  <div class="tl-meeting future"><div class="date">ma 11 mei · 17:00</div><div class="title">M2 — 💻 online</div></div>
+  <div class="tl-meeting future"><div class="date">ma 25 mei · 17:00</div><div class="title">M3 — 📍 Bram thuis</div></div>
+  <div class="tl-meeting future"><div class="date">ma 8 jun · 17:00</div><div class="title">M4 — 💻 online</div></div>
+  <div class="tl-meeting future"><div class="date">ma 22 jun · 17:00</div><div class="title">M5 — 📍 Beach House</div></div>
+  <div class="tl-meeting future"><div class="date">ma 6 jul · 17:00</div><div class="title">M6 — 💻 online</div></div>
+  <div class="tl-meeting future"><div class="date">ma 20 jul · 17:00</div><div class="title">M7 — 📍 Bram thuis</div></div>
+  <div class="tl-meeting future"><div class="date">ma 3 aug · 17:00</div><div class="title">M8 — 💻 online</div></div>
+
+  <div class="tl-meeting future" style="border-left-color: var(--accent); border-left-width: 3px;">
+    <div class="date">ma 17 aug · 17:00</div>
+    <div class="title" style="color: var(--accent);">M9 — 📍 Beach House</div>
+    <div style="font-size: 0.72rem; color: var(--accent); font-weight: 700; margin-top: 2px;">⭐ Eind stap 1 · go/no-go</div>
   </div>
 
-  <div class="add-meeting">+ Plan meeting 2</div>
+  <div class="add-meeting" style="margin-top: 14px;">Stap 2 plannen</div>
 </aside>
 
 <div class="container">
@@ -1644,6 +1669,34 @@
 
       <div class="row-label">Demo-stack 2e klant<span class="sub">replicatie + sales tooling stap 4</span></div>
       <div class="tool late" style="grid-column: 14 / 18"></div>
+
+      <div class="gantt-section-head">Meetings + documentatie · stap 1</div>
+
+      <div class="row-label">Agenda's M1–M9<span class="sub">2-wkly · ma 17:00</span></div>
+      <div class="meeting-track" style="grid-column: 2 / 6">
+        <a href="./" class="m-marker active" title="M1 · ma 29 apr · Beach House">M1</a>
+        <a href="#" class="m-marker future" title="M2 · ma 11 mei · online">M2</a>
+        <a href="#" class="m-marker future" title="M3 · ma 25 mei · Bram">M3</a>
+        <a href="#" class="m-marker future" title="M4 · ma 8 jun · online">M4</a>
+        <a href="#" class="m-marker future" title="M5 · ma 22 jun · Beach House">M5</a>
+        <a href="#" class="m-marker future" title="M6 · ma 6 jul · online">M6</a>
+        <a href="#" class="m-marker future" title="M7 · ma 20 jul · Bram">M7</a>
+        <a href="#" class="m-marker future" title="M8 · ma 3 aug · online">M8</a>
+        <a href="#" class="m-marker future eval" title="M9 · ma 17 aug · eind stap 1">M9★</a>
+      </div>
+
+      <div class="row-label">Notulen M1–M9<span class="sub">na elke meeting</span></div>
+      <div class="meeting-track notulen" style="grid-column: 2 / 6">
+        <a href="m1-notulen.html" class="m-marker doc" title="Notulen M1">N1</a>
+        <span class="m-marker doc future" title="Notulen M2">N2</span>
+        <span class="m-marker doc future" title="Notulen M3">N3</span>
+        <span class="m-marker doc future" title="Notulen M4">N4</span>
+        <span class="m-marker doc future" title="Notulen M5">N5</span>
+        <span class="m-marker doc future" title="Notulen M6">N6</span>
+        <span class="m-marker doc future" title="Notulen M7">N7</span>
+        <span class="m-marker doc future" title="Notulen M8">N8</span>
+        <span class="m-marker doc future eval" title="Notulen M9 · evaluatie">N9★</span>
+      </div>
     </div>
   </div>
 
