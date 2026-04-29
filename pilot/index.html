@@ -932,6 +932,40 @@
   .tl-meeting .add-meeting { border: 1px dashed var(--border); border-radius: 8px;
     padding: 8px 10px; font-size: 0.78rem; color: var(--muted); text-align: center;
     cursor: pointer; margin-top: 10px; }
+
+  /* TOC (sections of current page) */
+  .toc-block { margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--border); }
+  .toc { list-style: none; padding: 0; margin: 0; }
+  .toc li { padding: 0; margin: 0; }
+  .toc a {
+    display: block;
+    padding: 4px 10px; padding-left: 12px;
+    font-size: 0.82rem; color: var(--muted);
+    text-decoration: none;
+    border-left: 2px solid transparent;
+    transition: color 0.15s, border-color 0.15s, background 0.15s;
+    line-height: 1.4;
+  }
+  .toc a:hover { color: var(--deep); }
+  .toc a.active {
+    color: var(--sea);
+    border-left-color: var(--sea);
+    background: var(--sand-light);
+    font-weight: 700;
+  }
+
+  /* Keyboard nav hint */
+  .kbd-hint {
+    margin-top: 14px; padding: 8px 10px;
+    background: var(--sand-light); border-radius: 6px;
+    font-size: 0.72rem; color: var(--muted); text-align: center;
+  }
+  .kbd-hint kbd {
+    background: var(--foam); border: 1px solid var(--border);
+    border-radius: 3px; padding: 1px 5px;
+    font-family: ui-monospace, monospace; font-size: 0.7rem;
+    color: var(--deep); font-weight: 700;
+  }
 </style>
 </head>
 <body>
@@ -947,40 +981,27 @@
   </nav>
 </header>
 
-<!-- Meeting cycle stepper -->
-<nav class="cycle" aria-label="Meeting cycle">
-  <ul>
-    <li><a href="./" class="active" aria-current="page"><span class="step-num">1</span>Agenda M1</a></li>
-    <li class="arrow">→</li>
-    <li><a href="m1-notulen.html"><span class="step-num">2</span>Notulen M1</a></li>
-    <li class="arrow">→</li>
-    <li><a href="m1-actielijst.html"><span class="step-num">3</span>Actielijst M1</a></li>
-    <li class="arrow">→</li>
-    <li><a href="#" class="future"><span class="step-num">4</span>Agenda M2</a></li>
-  </ul>
-</nav>
-
-<!-- Sticky navigation -->
-<nav class="side">
-  <ul>
-    <li><a href="#start" class="nav-link">Start</a></li>
-    <li><a href="#aanpak" class="nav-link">Aanpak</a></li>
-    <li><a href="#pijplijn" class="nav-link">Pijplijn</a></li>
-    <li><a href="#bewijs" class="nav-link">Pilot-bewijs</a></li>
-    <li><a href="#blogpost" class="nav-link">Voorbeeld</a></li>
-    <li><a href="#distributie" class="nav-link">Distributie</a></li>
-    <li><a href="#kosten" class="nav-link">Kosten</a></li>
-    <li><a href="#samenwerking" class="nav-link">Samenwerking</a></li>
-    <li><a href="#fasering" class="nav-link">Fasering</a></li>
-    <li><a href="#risico" class="nav-link">Risico</a></li>
-    <li><a href="#vraagtekens" class="nav-link">Vraagtekens</a></li>
-    <li><a href="#beslissing" class="nav-link">Beslissing</a></li>
-  </ul>
-</nav>
-
 <div class="wrap">
 
 <aside class="timeline-side">
+  <div class="toc-block">
+    <h3>Op deze pagina</h3>
+    <ul class="toc">
+      <li><a href="#start">Start</a></li>
+      <li><a href="#aanpak">01 · Aanpak</a></li>
+      <li><a href="#pijplijn">02 · Pijplijn</a></li>
+      <li><a href="#bewijs">03 · Pilot-bewijs</a></li>
+      <li><a href="#blogpost">04 · Voorbeeld</a></li>
+      <li><a href="#distributie">05 · Distributie</a></li>
+      <li><a href="#kosten">06 · Kosten</a></li>
+      <li><a href="#samenwerking">07 · Samenwerking</a></li>
+      <li><a href="#fasering">08 · Fasering</a></li>
+      <li><a href="#risico">09 · Risico</a></li>
+      <li><a href="#vraagtekens">10 · Vraagtekens</a></li>
+      <li><a href="#beslissing">11 · Beslissing</a></li>
+    </ul>
+  </div>
+
   <h3>Timeline · Fase 1</h3>
 
   <div class="tl-meeting current">
@@ -1015,6 +1036,10 @@
   </div>
 
   <div class="add-meeting" style="margin-top: 14px;">Stap 2 plannen</div>
+
+  <div class="kbd-hint">
+    <kbd>→</kbd> volgende · <kbd>↓</kbd> scroll
+  </div>
 </aside>
 
 <div class="container">
@@ -1972,9 +1997,9 @@ stepsEl.addEventListener('click', (e) => {
 
 renderStep(1);
 
-// ---------- Active nav highlight on scroll ----------
+// ---------- Scroll-spy: highlight current section in TOC ----------
 const sections = document.querySelectorAll('section[id], header[id]');
-const navLinks = document.querySelectorAll('.nav-link');
+const tocLinks = document.querySelectorAll('.toc a');
 
 function updateActiveNav() {
   let current = '';
@@ -1982,13 +2007,24 @@ function updateActiveNav() {
     const rect = sec.getBoundingClientRect();
     if (rect.top < 130) current = sec.id;
   });
-  navLinks.forEach(link => {
+  tocLinks.forEach(link => {
     link.classList.toggle('active', link.getAttribute('href') === '#' + current);
   });
 }
 
 window.addEventListener('scroll', updateActiveNav, { passive: true });
 updateActiveNav();
+
+// ---------- Keyboard nav: arrow keys navigate cycle ----------
+const PREV_PAGE = null; // first page in cycle
+const NEXT_PAGE = 'm1-notulen.html';
+
+document.addEventListener('keydown', (e) => {
+  if (e.target.matches('input, textarea, select')) return;
+  if (e.metaKey || e.ctrlKey || e.altKey) return;
+  if (e.key === 'ArrowLeft' && PREV_PAGE) { e.preventDefault(); window.location.href = PREV_PAGE; }
+  if (e.key === 'ArrowRight' && NEXT_PAGE) { e.preventDefault(); window.location.href = NEXT_PAGE; }
+});
 </script>
 
 </body>
