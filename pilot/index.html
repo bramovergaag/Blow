@@ -302,8 +302,7 @@
   <ul>
     <li><a href="#kpi">Status</a></li>
     <li><a href="#week">Week-rooster</a></li>
-    <li><a href="#quick">Snelnavigatie</a></li>
-  </ul>
+      </ul>
 </nav>
 
 <div class="container">
@@ -408,33 +407,6 @@
       <a href="posts-archive.html" style="margin-left: auto; background: var(--sea); color: white; padding: 8px 14px; border-radius: 6px; text-decoration: none; font-weight: 700; font-size: 0.84rem;">📚 Alle posts archief</a>
     </div>
   </section>
-
-  <section id="quick">
-    <h2 class="sec"><span class="lbl">Snel</span>Verdere navigatie</h2>
-    <div class="quick-links">
-      <a href="planning.html" class="ql-card purple">
-        <div class="icon">📅</div>
-        <div class="name">Planning</div>
-        <div class="sub">16 mnd · 4 fases · meetings</div>
-      </a>
-      <a href="m1-actielijst.html" class="ql-card accent">
-        <div class="icon">✅</div>
-        <div class="name">Actielijst M1</div>
-        <div class="sub">Afvinken voor M2</div>
-      </a>
-      <a href="m1-agenda.html" class="ql-card">
-        <div class="icon">📄</div>
-        <div class="name">Agenda M1</div>
-        <div class="sub">Voorstel + samenwerking</div>
-      </a>
-      <a href="m1-bronmateriaal.html" class="ql-card green">
-        <div class="icon">📷</div>
-        <div class="name">Bronmateriaal</div>
-        <div class="sub">Whiteboard + transcript</div>
-      </a>
-    </div>
-  </section>
-
 </div>
 
 <!-- Modal -->
@@ -686,5 +658,38 @@ window.addEventListener('scroll', updateActive, { passive: true });
 updateActive();
 </script>
 
+
+<script>
+// page-toc scrollspy + smooth-scroll active highlight
+(function(){
+  const toc = document.querySelector('.page-toc');
+  if (!toc) return;
+  const links = Array.from(toc.querySelectorAll('a[href^="#"]'));
+  if (!links.length) return;
+  const sections = links.map(a => {
+    const id = a.getAttribute('href').slice(1);
+    return { link: a, el: id ? document.getElementById(id) : null };
+  }).filter(x => x.el);
+  if (!sections.length) return;
+  const tocH = toc.offsetHeight || 50;
+  function setActive(id) {
+    links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + id));
+  }
+  const obs = new IntersectionObserver((entries) => {
+    // pick the topmost intersecting section
+    const visible = entries.filter(e => e.isIntersecting)
+      .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+    if (visible[0]) setActive(visible[0].target.id);
+  }, {
+    rootMargin: `-${tocH + 10}px 0px -65% 0px`,
+    threshold: 0
+  });
+  sections.forEach(s => obs.observe(s.el));
+  // initial state
+  setActive(sections[0].el.id);
+  // smooth scroll already via CSS; ensure click sets active immediately
+  links.forEach(a => a.addEventListener('click', () => setActive(a.getAttribute('href').slice(1))));
+})();
+</script>
 </body>
 </html>
