@@ -254,6 +254,16 @@
   }
   .reactie-block .saved-indicator.show { opacity: 1; }
 
+  .afronding-tag {
+    margin-top: 8px; padding: 7px 11px;
+    background: rgba(45, 134, 89, 0.08); border-radius: 5px;
+    border-left: 3px solid var(--green);
+    font-size: 0.78rem; color: var(--text); line-height: 1.4;
+  }
+  .afronding-tag strong { color: var(--green); }
+  .afronding-tag code { background: var(--foam); padding: 1px 5px; border-radius: 3px; font-size: 0.82em; }
+
+
 
   .pending {
     background: linear-gradient(135deg, var(--amber) 0%, #b35a05 100%);
@@ -516,11 +526,7 @@
 <li><strong>Viking Bookings:</strong> log in op <code>blow.vikingbookings.com</code> · Settings → Users → Add → zelfde email · "Read-only" rol of API-key genereren</li>
 <li><strong>Bevestig in WhatsApp</strong> aan Bram zodra alle drie gedeeld</li>
 </ol></div></details>
-          <div class="reactie-block">
-            <label for="reactie-t-1">📥 Uitkomst / reactie</label>
-            <textarea id="reactie-t-1" data-reactie-id="t-1" placeholder='Bv. "Bram toegevoegd aan GSC + GA4 + Viking · 30 apr · alle 3 bevestigd"'></textarea>
-            <div class="saved-indicator" data-for="t-1">✓ opgeslagen</div>
-          </div>
+          <div class="afronding-tag">💬 SEO-groep: <strong>Toine bevestigt</strong> dat GSC + GA4 + Viking-toegang verleend zijn</div>
         </div>
 
         <div class="action" data-id="t-2" data-who="toine">
@@ -539,11 +545,7 @@
 <li><strong>Polsen:</strong> stuur per persoon een korte WA: "we zijn met BLOW een SEO-pilot gestart, 2u/2wk meedenken — interesse?"</li>
 <li><strong>Aanleveren:</strong> deel namen + rollen met Bram via WhatsApp of in M2</li>
 </ol></div></details>
-          <div class="reactie-block">
-            <label for="reactie-t-2">📥 Uitkomst / reactie</label>
-            <textarea id="reactie-t-2" data-reactie-id="t-2" placeholder='Bv. "Strategie: Kris (achternaam) · Marketing: ... · Operations: ..."'></textarea>
-            <div class="saved-indicator" data-for="t-2">✓ opgeslagen</div>
-          </div>
+          <div class="afronding-tag">💬 SEO-groep: <strong>Toine deelt</strong> 2 namen + rollen (strategie / ops / marketing)</div>
         </div>
 
         <div class="action" data-id="t-3" data-who="toine">
@@ -557,16 +559,13 @@
           <div class="priority high">hoog</div>
           <details class="how"><summary>Hoe? · stap-voor-stap</summary><div class="how-body">
 <ol>
-<li><strong>Vendor terugbellen:</strong> bevestig keuze (wel/niet tekenen) deze week — vendor wacht niet eeuwig</li>
-<li><strong>Bij hybride keuze:</strong> kleinste pakket (€420/mnd Starter) en duidelijk maken dat tweede spoor (Bram) parallel loopt</li>
-<li><strong>Bij niet-tekenen:</strong> geen formele afwijzing nodig — gewoon niet reageren of "we starten eerst zelf 4 mnd, contact via M5 weer"</li>
-<li><strong>Beslissing communiceren</strong> via WhatsApp aan Bram (verandert weinig aan zijn werk, wel aan budget-context)</li>
+<li><strong>Bram is voor tekenen</strong> — hybride aanpak: vendor + pilot parallel = beste leersituatie</li>
+<li><strong>Vendor terugbellen:</strong> bevestig deze week, kleinste pakket (Starter €420/mnd) onderhandelen</li>
+<li><strong>Tweede spoor expliciet maken:</strong> "we lopen ook eigen pilot, vergelijking is leerdoel" — vendor moet weten dat het geen exclusive is</li>
+<li><strong>Onderhandelen:</strong> kortere lock-in (3 mnd opzegbaar i.p.v. jaar) + meer contact-momenten met specialist</li>
+<li><strong>Beslissing communiceren</strong> in SEO-groep · invloed op budget + vergelijking-KPIs voor M9</li>
 </ol></div></details>
-          <div class="reactie-block">
-            <label for="reactie-t-3">📥 Uitkomst / reactie</label>
-            <textarea id="reactie-t-3" data-reactie-id="t-3" placeholder='Bv. "Vendor niet getekend, eerst pilot 4 mnd"'></textarea>
-            <div class="saved-indicator" data-for="t-3">✓ opgeslagen</div>
-          </div>
+          <div class="afronding-tag">💬 SEO-groep: <strong>Toine bevestigt</strong> getekend bij vendor (Bram is voor tekenen, hybride model)</div>
         </div>
 
         <div class="action" data-id="t-4" data-who="toine">
@@ -585,11 +584,7 @@
 <li><strong>Markeer</strong> wat klopt / wat aangepast moet (bv. "13 jaar" i.p.v. 15)</li>
 <li><strong>Stuur correcties</strong> als WA-bericht naar Bram, hij past de bron aan</li>
 </ol></div></details>
-          <div class="reactie-block">
-            <label for="reactie-t-4">📥 Uitkomst / reactie</label>
-            <textarea id="reactie-t-4" data-reactie-id="t-4" placeholder='Bv. "13 jaar klopt (was 15) · lagune 1,5m bevestigd · 07:30 wind-check ja"'></textarea>
-            <div class="saved-indicator" data-for="t-4">✓ opgeslagen</div>
-          </div>
+          <div class="afronding-tag">💬 SEO-groep: <strong>Toine stuurt</strong> validatie-correcties op Post A claims</div>
         </div>
 
         <div class="action" data-id="t-5" data-who="toine">
@@ -607,11 +602,7 @@
 <li><strong>Aanvullen</strong> in de content-queue indien er meer ideeën uit het gesprek niet op het whiteboard kwamen</li>
 <li><strong>Antwoord</strong> via WhatsApp — Bram werkt het door in <code>content-queue-seed.csv</code></li>
 </ol></div></details>
-          <div class="reactie-block">
-            <label for="reactie-t-5">📥 Uitkomst / reactie</label>
-            <textarea id="reactie-t-5" data-reactie-id="t-5" placeholder='Bv. "csp = strandevent · VEIS = vergaderingen · andere klusters bevestigd"'></textarea>
-            <div class="saved-indicator" data-for="t-5">✓ opgeslagen</div>
-          </div>
+          <div class="afronding-tag">💬 SEO-groep: <strong>Toine antwoordt</strong> op whiteboard-onleesbare items + extra clusters</div>
         </div>
       </div>
     </section>
@@ -640,11 +631,7 @@
 <li><strong>Scenario 3 (WP):</strong> import <code>03-wordpress-publisher.blueprint.json</code> · trigger: status=approved</li>
 <li><strong>Test</strong> met 1 dummy-row in sheet voor scenario 2 → checken of draft terugkomt</li>
 </ol></div></details>
-          <div class="reactie-block">
-            <label for="reactie-b-1">📥 Uitkomst / reactie</label>
-            <textarea id="reactie-b-1" data-reactie-id="b-1" placeholder='Bv. "Make Pro live · scenarios 1+2+3 geïmporteerd · Toine als beheerder uitgenodigd"'></textarea>
-            <div class="saved-indicator" data-for="b-1">✓ opgeslagen</div>
-          </div>
+          <div class="afronding-tag">💬 SEO-groep: <strong>Bram deelt</strong> Make-overzicht-screenshot + uitnodiging beheerder</div>
         </div>
 
         <div class="action" data-id="b-2" data-who="bram">
@@ -665,11 +652,7 @@
 <li><strong>Voeg toe</strong> aan <code>pilot/audit-2026-04-27.md</code> als bijlage <code>audit-data-gsc.csv</code></li>
 <li><strong>Update</strong> audit-HTML met top-20 underperformers in tabel</li>
 </ol></div></details>
-          <div class="reactie-block">
-            <label for="reactie-b-2">📥 Uitkomst / reactie</label>
-            <textarea id="reactie-b-2" data-reactie-id="b-2" placeholder='Bv. "Top 20 underperformers geëxporteerd · 5 quick-wins gemarkeerd · audit-data-gsc.csv toegevoegd"'></textarea>
-            <div class="saved-indicator" data-for="b-2">✓ opgeslagen</div>
-          </div>
+          <div class="afronding-tag">💬 SEO-groep (na T-1): <strong>Bram deelt</strong> top-20 underperformer-CSV + 5 quick-wins</div>
         </div>
 
         <div class="action" data-id="b-3" data-who="bram">
@@ -690,11 +673,7 @@
 <li><strong>/over-blow:</strong> title → <code>Over BLOW · IKO-kitesurfschool sinds 2013 · Kijkduin Den Haag</code></li>
 <li><strong>/blog:</strong> title → <code>Blog · BLOW Beach House Kijkduin · kitesurf + horeca + events</code></li>
 </ol></div></details>
-          <div class="reactie-block">
-            <label for="reactie-b-3">📥 Uitkomst / reactie</label>
-            <textarea id="reactie-b-3" data-reactie-id="b-3" placeholder='Bv. "5 paginas SEO-fixes live · CTR-impact gemeten over 4 wk"'></textarea>
-            <div class="saved-indicator" data-for="b-3">✓ opgeslagen</div>
-          </div>
+          <div class="afronding-tag">💬 SEO-groep: <strong>Bram deelt</strong> before/after-screenshots van 5 paginas</div>
         </div>
 
         <div class="action" data-id="b-4" data-who="bram">
@@ -716,11 +695,7 @@
 <li><strong>Internal-links:</strong> /kitesurfles-zandmotor/ + /restaurant + /over-blow toevoegen via Gutenberg-link-tool</li>
 <li><strong>Publiceren</strong> en delen via WA + IG (template uit <code>distributie/templates.md</code>)</li>
 </ol></div></details>
-          <div class="reactie-block">
-            <label for="reactie-b-4">📥 Uitkomst / reactie</label>
-            <textarea id="reactie-b-4" data-reactie-id="b-4" placeholder='Bv. "Live op blow.surf/blog/zandmotor-veiligheid · gepubliceerd 2 mei · 8 unieke views eerste 24u"'></textarea>
-            <div class="saved-indicator" data-for="b-4">✓ opgeslagen</div>
-          </div>
+          <div class="afronding-tag">💬 SEO-groep: <strong>Bram deelt</strong> URL gepubliceerde Zandmotor-post (na cijfer-validatie T-4)</div>
         </div>
 
         <div class="action" data-id="b-5" data-who="bram">
@@ -741,11 +716,7 @@
 <li><strong>Concurrentie-validatie:</strong> SERP-snapshot toonde geen vergelijking-pagina in top-10 → directe top-3 kans</li>
 <li><strong>Publiceren</strong> via dezelfde flow als B-4</li>
 </ol></div></details>
-          <div class="reactie-block">
-            <label for="reactie-b-5">📥 Uitkomst / reactie</label>
-            <textarea id="reactie-b-5" data-reactie-id="b-5" placeholder='Bv. "Body geschreven · 1.100 woorden · gepubliceerd 4 mei"'></textarea>
-            <div class="saved-indicator" data-for="b-5">✓ opgeslagen</div>
-          </div>
+          <div class="afronding-tag">💬 SEO-groep: <strong>Bram deelt</strong> URL gepubliceerde Kijkduin-vs-Scheveningen-post</div>
         </div>
 
         <div class="action" data-id="b-6" data-who="bram">
@@ -766,11 +737,7 @@
 <li><strong>Repliceer</strong> trouw-template structuur (BLOW staat #3 op trouwen — werkt)</li>
 <li><strong>Beide draft → review</strong> in sheet, Toine kort feedbacken via WA</li>
 </ol></div></details>
-          <div class="reactie-block">
-            <label for="reactie-b-6">📥 Uitkomst / reactie</label>
-            <textarea id="reactie-b-6" data-reactie-id="b-6" placeholder='Bv. "Restaurant: pizza-post draft klaar · Events: bedrijfsuitje keyword targeting in proces"'></textarea>
-            <div class="saved-indicator" data-for="b-6">✓ opgeslagen</div>
-          </div>
+          <div class="afronding-tag">💬 SEO-groep: <strong>Bram deelt</strong> 2 drafts (restaurant + events) voor Toine review</div>
         </div>
 
         <div class="action" data-id="b-7" data-who="bram">
@@ -789,11 +756,7 @@
 <li><strong>Verrijk</strong> met whiteboard-categorieën uit M1-gesprek (na T-5 antwoord)</li>
 <li><strong>Sorteer</strong> per cluster · markeer top-10 (1 per dag × 10 dagen) als priority=high voor M2</li>
 </ol></div></details>
-          <div class="reactie-block">
-            <label for="reactie-b-7">📥 Uitkomst / reactie</label>
-            <textarea id="reactie-b-7" data-reactie-id="b-7" placeholder='Bv. "Cluster-kolom toegevoegd · 30 keywords geïmporteerd · top-10 voor M2 gemarkeerd"'></textarea>
-            <div class="saved-indicator" data-for="b-7">✓ opgeslagen</div>
-          </div>
+          <div class="afronding-tag">💬 SEO-groep: <strong>Bram deelt</strong> ContentQueue sheet-link + top-10 priority voor M2</div>
         </div>
       </div>
     </section>
@@ -821,11 +784,7 @@
 <li><strong>Streefcijfers:</strong> ambitieus maar haalbaar (bv. 50 posts in fase 1, +30% verkeer, 10 leads met UTM)</li>
 <li><strong>Vastleggen</strong> in <code>pilot/kpis-fase-1.md</code></li>
 </ol></div></details>
-          <div class="reactie-block">
-            <label for="reactie-s-1">📥 Uitkomst / reactie</label>
-            <textarea id="reactie-s-1" data-reactie-id="s-1" placeholder='Bv. "5 KPIs gekozen: posts/maand, top-10 SERPs, leads via UTM, restaurant klikken, events conversie"'></textarea>
-            <div class="saved-indicator" data-for="s-1">✓ opgeslagen</div>
-          </div>
+          <div class="afronding-tag">💬 SEO-groep + repo: <strong>5 KPIs vastgelegd</strong> in <code>pilot/kpis-fase-1.md</code></div>
         </div>
 
         <div class="action" data-id="s-2" data-who="shared">
@@ -845,11 +804,7 @@
 <li><strong>Beide ondertekenen</strong> · Bram bewaart in repo onder <code>pilot/afspraak-fase-1.md</code></li>
 <li><strong>Optioneel jurist-check</strong> — niet noodzakelijk voor fase 1, wel als Stap 4 productisering doorgaat</li>
 </ol></div></details>
-          <div class="reactie-block">
-            <label for="reactie-s-2">📥 Uitkomst / reactie</label>
-            <textarea id="reactie-s-2" data-reactie-id="s-2" placeholder='Bv. "Afspraak getekend dd 6 mei · staat in pilot/afspraak-fase-1.md"'></textarea>
-            <div class="saved-indicator" data-for="s-2">✓ opgeslagen</div>
-          </div>
+          <div class="afronding-tag">💬 SEO-groep: <strong>schriftelijke afspraak</strong> gedeeld + ondertekend door beiden</div>
         </div>
 
         <div class="action" data-id="s-3" data-who="shared">
@@ -868,11 +823,7 @@
 <li><strong>Ad-hoc:</strong> WhatsApp-groep "BLOW SEO pilot" met Bram + Toine + (later) Toine's coaches</li>
 <li><strong>No-show beleid:</strong> bij ziekte/onbereikbaar → online-meetings worden 1-1, fysiek wordt verschoven 1 wk</li>
 </ol></div></details>
-          <div class="reactie-block">
-            <label for="reactie-s-3">📥 Uitkomst / reactie</label>
-            <textarea id="reactie-s-3" data-reactie-id="s-3" placeholder='Bv. "WA-groep BLOW SEO pilot aangemaakt · 9 GCal-events ingepland"'></textarea>
-            <div class="saved-indicator" data-for="s-3">✓ opgeslagen</div>
-          </div>
+          <div class="afronding-tag">💬 SEO-groep + GCal: <strong>WA-groep aangemaakt</strong> + 9 meeting-events gepland</div>
         </div>
       </div>
     </section>
@@ -935,29 +886,18 @@ function loadState() {
       btn.querySelector('.dt-icon').textContent = '✓';
     }
   });
-  // Load reacties (uitkomsten per action)
-  if (saved.reacties) {
-    document.querySelectorAll('textarea[data-reactie-id]').forEach(ta => {
-      const id = ta.dataset.reactieId;
-      if (saved.reacties[id]) ta.value = saved.reacties[id];
-    });
-  }
   if (saved.readyToine) document.getElementById('ready-toine').classList.add('ready');
   if (saved.readyBram) document.getElementById('ready-bram').classList.add('ready');
   updateProgress();
 }
 
 function saveState() {
-  const state = { actions: {}, reacties: {}, readyToine: false, readyBram: false };
+  const state = { actions: {}, readyToine: false, readyBram: false };
   document.querySelectorAll('.action').forEach(a => {
     if (a.classList.contains('done')) {
       const id = a.querySelector('button.done-toggle').dataset.id;
       state.actions[id] = true;
     }
-  });
-  document.querySelectorAll('textarea[data-reactie-id]').forEach(ta => {
-    const id = ta.dataset.reactieId;
-    if (ta.value.trim()) state.reacties[id] = ta.value;
   });
   state.readyToine = document.getElementById('ready-toine').classList.contains('ready');
   state.readyBram = document.getElementById('ready-bram').classList.contains('ready');
@@ -986,21 +926,6 @@ document.querySelectorAll('button.done-toggle').forEach(btn => {
 });
 
 
-document.querySelectorAll('textarea[data-reactie-id]').forEach(ta => {
-  let saveTimer;
-  ta.addEventListener('input', () => {
-    clearTimeout(saveTimer);
-    saveTimer = setTimeout(() => {
-      saveState();
-      const id = ta.dataset.reactieId;
-      const indicator = document.querySelector(`.saved-indicator[data-for="${id}"]`);
-      if (indicator) {
-        indicator.classList.add('show');
-        setTimeout(() => indicator.classList.remove('show'), 1500);
-      }
-    }, 500);
-  });
-});
 
 document.querySelectorAll('.ready-btn').forEach(btn => {
   btn.addEventListener('click', () => {
@@ -1020,11 +945,7 @@ function exportState() {
   document.querySelectorAll('.action').forEach(a => {
     const status = a.classList.contains('done') ? '☑' : '☐';
     const text = a.querySelector('.text').textContent;
-    const id = a.querySelector('button.done-toggle').dataset.id;
-    const ta = document.querySelector(`textarea[data-reactie-id="${id}"]`);
-    const reactie = ta && ta.value.trim() ? ta.value.trim() : '';
-    lines.push(`${status} ${text}`);
-    if (reactie) lines.push(`   📥 ${reactie}`);
+lines.push(`${status} ${text}`);
   });
   const t = document.getElementById('ready-toine').classList.contains('ready') ? '✅ klaar' : '⏳ nog niet';
   const b = document.getElementById('ready-bram').classList.contains('ready') ? '✅ klaar' : '⏳ nog niet';
@@ -1032,7 +953,7 @@ function exportState() {
   lines.push(`Toine: ${t}`);
   lines.push(`Bram: ${b}`);
   navigator.clipboard.writeText(lines.join('\n')).then(() =>
-    alert('Status + uitkomsten gekopieerd naar klembord — plak in WhatsApp/mail om te delen.'));
+    alert('Status gekopieerd naar klembord — plak in WhatsApp/mail om te delen.'));
 }
 
 function resetState() {
