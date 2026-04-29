@@ -309,8 +309,8 @@
         <div class="wt-day-head" data-dow="3"><div>wo</div><span class="num"></span></div>
         <div class="wt-day-head" data-dow="4"><div>do</div><span class="num"></span></div>
         <div class="wt-day-head" data-dow="5"><div>vr</div><span class="num"></span></div>
-        <div class="wt-day-head weekend" data-dow="6"><div>za</div><span class="num"></span></div>
-        <div class="wt-day-head weekend" data-dow="0"><div>zo</div><span class="num"></span></div>
+        <div class="wt-day-head" data-dow="6"><div>za</div><span class="num"></span></div>
+        <div class="wt-day-head" data-dow="0"><div>zo</div><span class="num"></span></div>
 
         <!-- Events row -->
         <div class="wt-slot-head"><span class="icon">📅</span><br>Events<span class="time">09:00</span></div>
@@ -319,8 +319,8 @@
         <div class="post-cell" data-slot="events" data-dow="3"></div>
         <div class="post-cell" data-slot="events" data-dow="4"></div>
         <div class="post-cell" data-slot="events" data-dow="5"></div>
-        <div class="post-cell weekend" data-slot="events" data-dow="6"></div>
-        <div class="post-cell weekend" data-slot="events" data-dow="0"></div>
+        <div class="post-cell" data-slot="events" data-dow="6"></div>
+        <div class="post-cell" data-slot="events" data-dow="0"></div>
 
         <!-- Restaurant row -->
         <div class="wt-slot-head"><span class="icon">🍕</span><br>Restaurant<span class="time">12:30</span></div>
@@ -329,8 +329,8 @@
         <div class="post-cell" data-slot="rest" data-dow="3"></div>
         <div class="post-cell" data-slot="rest" data-dow="4"></div>
         <div class="post-cell" data-slot="rest" data-dow="5"></div>
-        <div class="post-cell weekend" data-slot="rest" data-dow="6"></div>
-        <div class="post-cell weekend" data-slot="rest" data-dow="0"></div>
+        <div class="post-cell" data-slot="rest" data-dow="6"></div>
+        <div class="post-cell" data-slot="rest" data-dow="0"></div>
 
         <!-- Kiteschool row -->
         <div class="wt-slot-head"><span class="icon">🪁</span><br>Kiteschool<span class="time">16:00</span></div>
@@ -339,8 +339,8 @@
         <div class="post-cell" data-slot="kite" data-dow="3"></div>
         <div class="post-cell" data-slot="kite" data-dow="4"></div>
         <div class="post-cell" data-slot="kite" data-dow="5"></div>
-        <div class="post-cell weekend" data-slot="kite" data-dow="6"></div>
-        <div class="post-cell weekend" data-slot="kite" data-dow="0"></div>
+        <div class="post-cell" data-slot="kite" data-dow="6"></div>
+        <div class="post-cell" data-slot="kite" data-dow="0"></div>
       </div>
     </div>
 
@@ -524,15 +524,8 @@ function renderWeek() {
     const dow = parseInt(cell.dataset.dow);
     const idx = dow === 0 ? 6 : dow - 1;
     const d = dates[idx];
-    const isWeekend = dow === 0 || dow === 6;
     cell.innerHTML = '';
-    if (isWeekend) {
-      cell.classList.add('weekend');
-      cell.innerHTML = '<span style="font-size:0.7rem;color:var(--muted);text-align:center;align-self:center;">geen post</span>';
-      return;
-    } else {
-      cell.classList.remove('weekend');
-    }
+    cell.classList.remove('weekend');
     totalPosts++;
 
     const post = getPost(d, slot);
