@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BLOW — MAKE process (5 scenario's visueel)</title>
+<style>
+  :root {
+    --sand: #f4ecd8;
+    --sand-light: #faf5e6;
+    --sea: #1e6091;
+    --sea-light: #4a90b8;
+    --foam: #ffffff;
+    --deep: #0b2e4a;
+    --accent: #e85d04;
+    --accent-soft: #f8ddc7;
+    --green: #2d8659;
+    --red: #b63b3b;
+    --purple: #6b4f9b;
+    --teal: #2a8e8e;
+    --gold: #c9a227;
+    --text: #1a2a3a;
+    --muted: #5c6b7a;
+    --border: rgba(30, 96, 145, 0.15);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: linear-gradient(180deg, var(--sand) 0%, #ffffff 40%);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+  .container { max-width: 1200px; margin: 0 auto; padding: 24px 24px 80px; }
+
+  /* Brand bar */
+  .brand-bar {
+    background: #C66A1F;
+    color: #F4EFE2;
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    border-bottom: 4px solid #1A1A1A;
+    font-family: "Oswald", "Bebas Neue", sans-serif;
+  }
+  .brand-bar .logo {
+    width: 38px; height: 38px;
+    border: 2px solid #F4EFE2;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    flex-shrink: 0;
+  }
+  .brand-bar .brand-name {
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .brand-tabs {
+    margin-left: auto;
+    display: flex;
+    gap: 4px;
+  }
+  .brand-tabs a {
+    font-family: inherit;
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 10px 18px;
+    color: rgba(244, 239, 226, 0.7);
+    border-bottom: 3px solid transparent;
+    text-decoration: none;
+    transition: color 0.15s, border-color 0.15s;
+    margin-bottom: -14px;
+  }
+  .brand-tabs a:hover { color: #F4EFE2; }
+  .brand-tabs a.active {
+    color: #F4EFE2;
+    border-bottom-color: #F4EFE2;
+  }
+  @media (max-width: 600px) {
+    .brand-bar { padding: 12px 16px; gap: 12px; }
+    .brand-bar .brand-name { font-size: 15px; }
+    .brand-tabs a { padding: 10px 12px; font-size: 12px; letter-spacing: 1.5px; }
+  }
+
+  /* Cycle stepper */
+  .cycle {
+    background: var(--foam);
+    border-bottom: 1px solid var(--border);
+    padding: 0 16px;
+  }
+  .cycle ul {
+    list-style: none; display: flex; max-width: 1280px; margin: 0 auto;
+    overflow-x: auto; gap: 4px;
+  }
+  .cycle li { display: flex; align-items: center; }
+  .cycle a {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 0.85rem; color: var(--muted); text-decoration: none;
+    padding: 14px 14px; font-weight: 500; white-space: nowrap;
+    border-bottom: 2px solid transparent;
+  }
+  .cycle a:hover { color: var(--deep); }
+  .cycle a.active { color: var(--sea); border-bottom-color: var(--sea); font-weight: 700; }
+  .cycle a.done { color: var(--green); }
+  .cycle a.done .step-num { background: var(--green); color: white; }
+  .cycle a.future { opacity: 0.4; pointer-events: none; }
+  .cycle .step-num {
+    width: 22px; height: 22px; border-radius: 50%;
+    background: var(--sand-light); display: inline-flex; align-items: center; justify-content: center;
+    font-size: 0.72rem; font-weight: 700;
+  }
+  .cycle a.active .step-num { background: var(--sea); color: white; }
+  .cycle .arrow { color: var(--border); padding: 0 4px; font-size: 0.9rem; }
+
+  /* Hero */
+  header.hero {
+    text-align: center;
+    padding: 40px 0 32px;
+    border-bottom: 3px solid var(--sea);
+    margin-bottom: 32px;
+  }
+  .eyebrow {
+    font-size: 0.78rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--sea);
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  h1 {
+    font-size: clamp(1.7rem, 4vw, 2.6rem);
+    font-weight: 800;
+    color: var(--deep);
+    line-height: 1.15;
+    margin-bottom: 12px;
+  }
+  h1 .accent { color: var(--accent); }
+  .lead {
+    font-size: 1.05rem;
+    color: var(--muted);
+    max-width: 720px;
+    margin: 0 auto 16px;
+  }
+  .meta-pills {
+    display: inline-flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    font-size: 0.82rem;
+    color: var(--muted);
+    margin-top: 8px;
+  }
+  .meta-pills span {
+    padding: 4px 12px;
+    background: var(--foam);
+    border-radius: 999px;
+    border: 1px solid var(--border);
+  }
+
+  /* Tabs */
+  .view-tabs {
+    display: flex;
+    gap: 4px;
+    background: var(--foam);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 6px;
+    margin: 0 auto 28px;
+    max-width: 560px;
+    box-shadow: 0 2px 10px rgba(11, 46, 74, 0.04);
+  }
+  .view-tabs button {
+    flex: 1;
+    border: none;
+    background: transparent;
+    padding: 10px 14px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--muted);
+    cursor: pointer;
+    border-radius: 8px;
+    font-family: inherit;
+    transition: all 0.15s;
+  }
+  .view-tabs button:hover { color: var(--deep); }
+  .view-tabs button.active {
+    background: var(--sea);
+    color: white;
+    box-shadow: 0 2px 8px rgba(30, 96, 145, 0.25);
+  }
+
+  .view { display: none; }
+  .view.active { display: block; }
+
+  /* Section heads */
+  h2.section-title {
+    font-size: 1.4rem;
+    color: var(--deep);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  h2.section-title .badge {
+    background: var(--sea);
+    color: white;
+    font-size: 0.7rem;
+    padding: 4px 10px;
+    border-radius: 10px;
+    letter-spacing: 0.12em;
+    font-weight: 700;
+  }
+  .section-sub {
+    color: var(--muted);
+    margin-bottom: 22px;
+    font-size: 0.94rem;
+  }
+
+  /* Scenario cards */
+  .scen {
+    background: var(--foam);
+    border-radius: 14px;
+    padding: 22px;
+    margin-bottom: 22px;
+    box-shadow: 0 2px 12px rgba(11, 46, 74, 0.06);
+    border-left: 6px solid var(--sea);
+  }
+  .scen.s1 { border-left-color: var(--sea); }
+  .scen.s2 { border-left-color: var(--accent); }
+  .scen.s3 { border-left-color: var(--green); }
+  .scen.s4 { border-left-color: var(--purple); }
+  .scen.s5 { border-left-color: var(--gold); }
+
+  .scen-head {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 4px;
+    flex-wrap: wrap;
+  }
+  .scen-num {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: var(--sea);
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+  .scen.s1 .scen-num { background: var(--sea); }
+  .scen.s2 .scen-num { background: var(--accent); }
+  .scen.s3 .scen-num { background: var(--green); }
+  .scen.s4 .scen-num { background: var(--purple); }
+  .scen.s5 .scen-num { background: var(--gold); color: var(--deep); }
+
+  .scen-head h3 {
+    font-size: 1.1rem;
+    color: var(--deep);
+    flex: 1;
+  }
+  .trigger-pill {
+    background: var(--sand-light);
+    border: 1px solid var(--border);
+    color: var(--deep);
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .scen-purpose {
+    color: var(--muted);
+    font-size: 0.92rem;
+    margin: 4px 0 18px 50px;
+  }
+  @media (max-width: 600px) {
+    .scen-purpose { margin-left: 0; }
+  }
+
+  /* Flow diagram (horizontal box-and-arrow) */
+  .flow {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    overflow-x: auto;
+    padding: 8px 4px 16px;
+    scrollbar-width: thin;
+  }
+  .flow::-webkit-scrollbar { height: 6px; }
+  .flow::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+  .step {
+    flex: 0 0 auto;
+    min-width: 140px;
+    max-width: 180px;
+    background: var(--sand-light);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    position: relative;
+  }
+  .step .step-icon {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .step .step-name {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--deep);
+    line-height: 1.25;
+  }
+  .step .step-sub {
+    font-size: 0.76rem;
+    color: var(--muted);
+    line-height: 1.35;
+  }
+  .step.trigger { background: #fff7e6; border-color: #f0c674; }
+  .step.api    { background: #e8f0fa; border-color: #b3cde8; }
+  .step.ai     { background: #f3e8fa; border-color: #d4b3e8; }
+  .step.sheet  { background: #e8f5e9; border-color: #a8d4ad; }
+  .step.wp     { background: #e6f4f4; border-color: #9ec9c9; }
+  .step.mail   { background: #fde8df; border-color: #f4b89a; }
+  .step.util   { background: #f4f4f4; border-color: #ccc; }
+  .step.router { background: #fff3e0; border-color: #f0b770; }
+
+  .arrow-h {
+    flex: 0 0 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--sea);
+    font-size: 1.4rem;
+    font-weight: 700;
+  }
+
+  .scen-outputs {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px dashed var(--border);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+  }
+  .scen-outputs .label {
+    font-size: 0.74rem;
+    font-weight: 700;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-right: 4px;
+  }
+  .out-pill {
+    background: var(--foam);
+    border: 1px solid var(--border);
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    color: var(--deep);
+    font-weight: 500;
+  }
+  .out-pill code {
+    font-family: "SF Mono", Monaco, monospace;
+    font-size: 0.78rem;
+    color: var(--accent);
+  }
+
+  /* Router visualization */
+  .router-box {
+    flex: 0 0 auto;
+    min-width: 160px;
+    background: #fff3e0;
+    border: 1px solid #f0b770;
+    border-radius: 10px;
+    padding: 12px;
+  }
+  .router-box .step-icon { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+  .router-box .step-name { font-size: 0.88rem; font-weight: 700; color: var(--deep); margin-bottom: 6px; }
+  .router-routes { display: flex; flex-direction: column; gap: 4px; margin-top: 6px; }
+  .router-routes span {
+    font-size: 0.74rem;
+    background: #fff;
+    padding: 3px 8px;
+    border-radius: 6px;
+    border: 1px solid #f0c674;
+    color: var(--deep);
+  }
+
+  /* ---------- CROSS-SCENARIO VIEW ---------- */
+  .hub-diagram {
+    background: var(--foam);
+    border-radius: 14px;
+    padding: 28px;
+    box-shadow: 0 2px 12px rgba(11, 46, 74, 0.06);
+    margin-bottom: 28px;
+  }
+  .hub-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr 1fr;
+    gap: 18px;
+    align-items: center;
+  }
+  @media (max-width: 780px) {
+    .hub-grid { grid-template-columns: 1fr; }
+  }
+  .hub-side h4 {
+    font-size: 0.74rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+    font-weight: 700;
+  }
+  .hub-card {
+    background: var(--sand-light);
+    border-left: 4px solid var(--sea);
+    border-radius: 8px;
+    padding: 10px 12px;
+    margin-bottom: 8px;
+    font-size: 0.86rem;
+  }
+  .hub-card.s1 { border-left-color: var(--sea); }
+  .hub-card.s4 { border-left-color: var(--purple); }
+  .hub-card.s5 { border-left-color: var(--gold); }
+  .hub-card.s2 { border-left-color: var(--accent); }
+  .hub-card.s3 { border-left-color: var(--green); }
+  .hub-card .num {
+    display: inline-block;
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: var(--deep);
+    color: white;
+    text-align: center;
+    line-height: 20px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    margin-right: 6px;
+  }
+  .hub-card.s1 .num { background: var(--sea); }
+  .hub-card.s4 .num { background: var(--purple); }
+  .hub-card.s5 .num { background: var(--gold); color: var(--deep); }
+  .hub-card.s2 .num { background: var(--accent); }
+  .hub-card.s3 .num { background: var(--green); }
+  .hub-card .what { font-weight: 700; color: var(--deep); }
+  .hub-card .into { font-size: 0.78rem; color: var(--muted); margin-top: 2px; }
+
+  .hub-center {
+    background: linear-gradient(180deg, var(--sea) 0%, var(--deep) 100%);
+    color: white;
+    border-radius: 14px;
+    padding: 28px 20px;
+    text-align: center;
+    box-shadow: 0 6px 20px rgba(30, 96, 145, 0.25);
+  }
+  .hub-center .icon {
+    font-size: 2rem;
+    margin-bottom: 8px;
+  }
+  .hub-center h3 {
+    font-size: 1.1rem;
+    margin-bottom: 6px;
+  }
+  .hub-center .tabs {
+    font-size: 0.78rem;
+    opacity: 0.85;
+    margin-bottom: 12px;
+  }
+  .hub-center .columns {
+    background: rgba(255,255,255,0.1);
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 0.74rem;
+    font-family: "SF Mono", Monaco, monospace;
+    line-height: 1.5;
+    text-align: left;
+    color: rgba(255,255,255,0.95);
+  }
+
+  .arrow-into {
+    text-align: center;
+    color: var(--sea);
+    font-size: 1.6rem;
+    line-height: 1;
+    margin: 4px 0;
+  }
+  .arrow-out {
+    text-align: center;
+    color: var(--green);
+    font-size: 1.6rem;
+    line-height: 1;
+    margin: 4px 0;
+  }
+  @media (max-width: 780px) {
+    .arrow-into::after { content: " ↓"; }
+    .arrow-out::after { content: " ↓"; }
+  }
+
+  /* Status flow */
+  .status-flow {
+    background: var(--foam);
+    border-radius: 14px;
+    padding: 28px 20px;
+    box-shadow: 0 2px 12px rgba(11, 46, 74, 0.06);
+    margin-bottom: 28px;
+  }
+  .status-bar {
+    display: flex;
+    align-items: stretch;
+    overflow-x: auto;
+    gap: 0;
+    padding: 8px 0 16px;
+  }
+  .status-node {
+    flex: 1;
+    min-width: 130px;
+    background: var(--sand-light);
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 10px;
+    text-align: center;
+    position: relative;
+  }
+  .status-node code {
+    font-family: "SF Mono", Monaco, monospace;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--deep);
+    display: block;
+    margin-bottom: 4px;
+  }
+  .status-node .who {
+    font-size: 0.72rem;
+    color: var(--muted);
+  }
+  .status-node.s-idea     { border-color: var(--gold); background: #fff8e1; }
+  .status-node.s-brief    { border-color: var(--sea); background: #e8f0fa; }
+  .status-node.s-draft    { border-color: var(--accent); background: #fde8df; }
+  .status-node.s-approved { border-color: var(--purple); background: #f3e8fa; }
+  .status-node.s-wp       { border-color: var(--green); background: #e8f5e9; }
+  .status-node.s-pub      { border-color: var(--green); background: #d4edda; }
+
+  .status-arrow {
+    flex: 0 0 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--sea);
+    font-size: 1.3rem;
+    font-weight: 700;
+  }
+
+  .status-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    font-size: 0.84rem;
+    color: var(--muted);
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px dashed var(--border);
+  }
+  .status-legend strong { color: var(--deep); }
+
+  /* Footer */
+  footer.foot {
+    margin-top: 40px;
+    padding: 24px;
+    background: var(--foam);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    text-align: center;
+    font-size: 0.88rem;
+    color: var(--muted);
+  }
+  footer.foot a {
+    color: var(--sea);
+    text-decoration: none;
+    margin: 0 8px;
+    font-weight: 600;
+  }
+  footer.foot a:hover { color: var(--accent); text-decoration: underline; }
+
+  @media (max-width: 600px) {
+    .container { padding: 16px 14px 60px; }
+    .scen { padding: 16px; }
+    .scen-num { width: 30px; height: 30px; font-size: 0.9rem; }
+    .scen-head h3 { font-size: 1rem; }
+    h1 { font-size: 1.5rem; }
+    .lead { font-size: 0.95rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Brand tab bar -->
+<header class="brand-bar">
+  <div class="logo">BLOW</div>
+  <div class="brand-name">Beach House</div>
+  <nav class="brand-tabs" aria-label="Hoofdmenu">
+    <a href="../">Bestelling</a>
+    <a href="./" class="active" aria-current="page">SEO</a>
+    <a href="https://bramovergaag.github.io/balistoel.nl/">Balistoel</a>
+  </nav>
+</header>
+
+<!-- Meeting cycle stepper -->
+<nav class="cycle" aria-label="Meeting cycle">
+  <ul>
+    <li><a href="./"><span class="step-num">1</span>Agenda M1</a></li>
+    <li class="arrow">→</li>
+    <li><a href="m1-notulen.html"><span class="step-num">2</span>Notulen M1</a></li>
+    <li class="arrow">→</li>
+    <li><a href="m1-actielijst.html"><span class="step-num">3</span>Actielijst M1</a></li>
+    <li class="arrow">→</li>
+    <li><a href="#" class="future"><span class="step-num">4</span>Agenda M2</a></li>
+  </ul>
+</nav>
+
+<div class="container">
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="eyebrow">SEO automation • MAKE.com</div>
+    <h1>MAKE process — <span class="accent">5 scenario's</span> visueel</h1>
+    <p class="lead">Hoe Google Search Console, OpenAI, WordPress en Google Business Profile samen één SEO-pijplijn vormen rondom de centrale ContentQueue.</p>
+    <div class="meta-pills" aria-label="Overzicht">
+      <span>5 scenario's</span>
+      <span>1 centrale Sheet</span>
+      <span>6 status-stappen</span>
+      <span>Bron: blueprint JSON exports</span>
+    </div>
+  </header>
+
+  <!-- View tabs -->
+  <div class="view-tabs" role="tablist" aria-label="Weergave">
+    <button class="active" role="tab" aria-selected="true" data-view="per-scenario">Per scenario</button>
+    <button role="tab" aria-selected="false" data-view="cross">Cross-scenario flow</button>
+    <button role="tab" aria-selected="false" data-view="status">Status-flow</button>
+  </div>
+
+  <!-- ============== VIEW 1: PER-SCENARIO ============== -->
+  <section class="view active" id="view-per-scenario" role="tabpanel" aria-label="Per scenario">
+
+    <h2 class="section-title"><span class="badge">FLOWS</span>De 5 scenario's, module-voor-module</h2>
+    <p class="section-sub">Elke kaart toont de trigger, de modules zoals ze in de blueprint staan, en wat het scenario produceert.</p>
+
+    <!-- Scenario 1 -->
+    <article class="scen s1" aria-labelledby="s1-title">
+      <div class="scen-head">
+        <span class="scen-num" aria-hidden="true">1</span>
+        <h3 id="s1-title">GSC → Sheets (weekly sync)</h3>
+        <span class="trigger-pill" aria-label="Trigger">⏰ Schedule · ma 07:00</span>
+      </div>
+      <p class="scen-purpose">Wekelijkse pull van Google Search Console: per query+page de clicks, impressions, CTR en positie. Foundation voor underperformer-detectie en content-refresh.</p>
+
+      <div class="flow" aria-label="Flow scenario 1">
+        <div class="step trigger">
+          <div class="step-icon">Trigger</div>
+          <div class="step-name">Schedule</div>
+          <div class="step-sub">Weekly Mon 07:00</div>
+        </div>
+        <div class="arrow-h" aria-hidden="true">→</div>
+        <div class="step util">
+          <div class="step-icon">Util</div>
+          <div class="step-name">Set Variables</div>
+          <div class="step-sub">siteUrl, dateRange, rowLimit</div>
+        </div>
+        <div class="arrow-h" aria-hidden="true">→</div>
+        <div class="step api">
+          <div class="step-icon">HTTP · OAuth</div>
+          <div class="step-name">GSC API</div>
+          <div class="step-sub">searchAnalytics/query · query+page</div>
+        </div>
+        <div class="arrow-h" aria-hidden="true">→</div>
+        <div class="step util">
+          <div class="step-icon">Iterator</div>
+          <div class="step-name">Per row</div>
+          <div class="step-sub">over response.rows</div>
+        </div>
+        <div class="arrow-h" aria-hidden="true">→</div>
+        <div class="step sheet">
+          <div class="step-icon">Sheets</div>
+          <div class="step-name">Add Row</div>
+          <div class="step-sub">tab: GSC_raw</div>
+        </div>
+      </div>
+
+      <div class="scen-outputs">
+        <span class="label">Output →</span>
+        <span class="out-pill">Sheet tab <code>GSC_raw</code></span>
+        <span class="out-pill">date · query · page · clicks · impressions · CTR · position</span>
+      </div>
+    </article>
+
+    <!-- Scenario 2 -->
+    <article class="scen s2" aria-labelledby="s2-title">
+      <div class="scen-head">
+        <span class="scen-num" aria-hidden="true">2</span>
+        <h3 id="s2-title">Content Generator (Sheet row → AI draft)</h3>
+        <span class="trigger-pill" aria-label="Trigger">📋 Sheet watchRows</span>
+      </div>
+      <p class="scen-purpose">Reageert op rijen met status <code>ready_for_brief</code>. Een router stuurt op het type-veld door naar één van vier prompt-templates, die in één OpenAI-call de draft (title, meta, body, FAQ, tags) genereren.</p>
+
+      <div class="flow" aria-label="Flow scenario 2">
+        <div class="step trigger">
+          <div class="step-icon">Trigger</div>
+          <div class="step-name">Sheets watchRows</div>
+          <div class="step-sub">tab ContentQueue · status=ready_for_brief</div>
+        </div>
+        <div class="arrow-h" aria-hidden="true">→</div>
+        <div class="router-box">
+          <div class="step-icon">Router</div>
+          <div class="step-name">By type</div>
+          <div class="router-routes">
+            <span>A · kitesurf_city</span>
+            <span>B · event_case</span>
+            <span>C · seasonal</span>
+            <span>D · beachhouse_guide</span>
+          </div>
+        </div>
+        <div class="arrow-h" aria-hidden="true">→</div>
+        <div class="step util">
+          <div class="step-icon">4× SetVar</div>
+          <div class="step-name">Prompt template</div>
+          <div class="step-sub">systemPrompt + templateHint</div>
+        </div>
+        <div class="arrow-h" aria-hidden="true">→</div>
+        <div class="step ai">
+          <div class="step-icon">OpenAI</div>
+          <div class="step-name">Chat Completion</div>
+          <div class="step-sub">JSON output · ≥800 wrd</div>
+        </div>
+        <div class="arrow-h" aria-hidden="true">→</div>
+        <div class="step util">
+          <div class="step-icon">JSON</div>
+          <div class="step-name">Parse</div>
+          <div class="step-sub">title, meta, body, faq, tags</div>
+        </div>
+        <div class="arrow-h" aria-hidden="true">→</div>
+        <div class="step sheet">
+          <div class="step-icon">Sheets</div>
+          <div class="step-name">Update Row</div>
+          <div class="step-sub">→ status=draft_ready_for_review</div>
+        </div>
+        <div class="arrow-h" aria-hidden="true">→</div>
+        <div class="step mail">
+          <div class="step-icon">Gmail</div>
+          <div class="step-name">Notify Toine</div>
+          <div class="step-sub">link naar review-rij</div>
+        </div>
+      </div>
+
+      <div class="scen-outputs">
+        <span class="label">Output →</span>
+        <span class="out-pill">Same row updated · <code>status=draft_ready_for_review</code></span>
+        <span class="out-pill">Email naar Toine</span>
+      </div>
+    </article>
+
+    <!-- Scenario 3 -->
+    <article class="scen s3" aria-labelledby="s3-title">
+      <div class="scen-head">
+        <span class="scen-num" aria-hidden="true">3</span>
+        <h3 id="s3-title">WordPress Publisher (approved → WP draft)</h3>
+        <span class="trigger-pill" aria-label="Trigger">📋 Sheet watchRows</span>
+      </div>
+      <p class="scen-purpose">Triggert wanneer een rij naar status <code>approved</code> gaat. Genereert een hero-image via DALL·E, converteert markdown → HTML en zet alles als concept-post in WordPress (Toine drukt zelf op publiceren).</p>
+
+      <div class="flow" aria-label="Flow scenario 3">
+        <div class="step trigger">
+          <div class="step-icon">Trigger</div>
+          <div class="step-name">Sheets watchRows</div>
+          <div class="step-sub">filter: status=approved · post_id leeg</div>
+        </div>
+        <div class="arrow-h" aria-hidden="true">→</div>
+        <div class="step ai">
+          <div class="step-icon">OpenAI</div>
+          <div class="step-name">CreateImage</div>
+          <div class="step-sub">DALL·E hero (1024×1024)</div>
+        </div>
+        <div class="arrow-h" aria-hidden="true">→</div>
+        <div class="step api">
+          <div class="step-icon">HTTP</div>
+          <div class="step-name">Get File</div>
+          <div class="step-sub">image als binary buffer</div>
+        </div>
+        <div class="arrow-h" aria-hidden="true">→</div>
+        <div class="step wp">
+          <div class="step-icon">WordPress</div>
+          <div class="step-name">Upload Media</div>
+          <div class="step-sub">→ media library</div>
+        </div>
+        <div class="arrow-h" aria-hidden="true">→</div>
+        <div class="step ai">
+          <div class="step-icon">OpenAI</div>
+          <div class="step-name">MD → HTML</div>
+          <div class="step-sub">body conversie</div>
+        </div>
+        <div class="arrow-h" aria-hidden="true">→</div>
+        <div class="step wp">
+          <div class="step-icon">WordPress</div>
+          <div class="step-name">Create Post</div>
+          <div class="step-sub">status=draft · Yoast/RankMath meta</div>
+        </div>
+        <div class="arrow-h" aria-hidden="true">→</div>
+        <div class="step sheet">
+          <div class="step-icon">Sheets</div>
+          <div class="step-name">Update Row</div>
+          <div class="step-sub">post_id, post_url terug</div>
+        </div>
+      </div>
+
+      <div class="scen-outputs">
+        <span class="label">Output →</span>
+        <span class="out-pill">WordPress draft post</span>
+        <span class="out-pill">Hero image in media library</span>
+        <span class="out-pill">Sheet row · <code>status=wp_draft_created</code></span>
+      </div>
+    </article>
+
+    <!-- Scenario 4 -->
+    <article class="scen s4" aria-labelledby="s4-title">
+      <div class="scen-head">
+        <span class="scen-num" aria-hidden="true">4</span>
+        <h3 id="s4-title">Competitor Monitor (RSS → AI → Sheet)</h3>
+        <span class="trigger-pill" aria-label="Trigger">📰 RSS · daily 08:00</span>
+      </div>
+      <p class="scen-purpose">Scant dagelijks RSS-feeds van concurrenten (natural-high.nl, kitesurfschool-brouwersdam.nl, beach clubs). GPT-4o-mini classificeert relevantie en extraheert de hook → InspirationQueue.</p>
+
+      <div class="flow" aria-label="Flow scenario 4">
+        <div class="step trigger">
+          <div class="step-icon">Trigger</div>
+          <div class="step-name">RSS</div>
+          <div class="step-sub">new feed item · daily 08:00</div>
+        </div>
+        <div class="arrow-h" aria-hidden="true">→</div>
+        <div class="step ai">
+          <div class="step-icon">OpenAI</div>
+          <div class="step-name">gpt-4o-mini</div>
+          <div class="step-sub">classifier + summary</div>
+        </div>
+        <div class="arrow-h" aria-hidden="true">→</div>
+        <div class="step util">
+          <div class="step-icon">JSON</div>
+          <div class="step-name">Parse</div>
+          <div class="step-sub">department, hook, priority</div>
+        </div>
+        <div class="arrow-h" aria-hidden="true">→</div>
+        <div class="step util">
+          <div class="step-icon">Filter</div>
+          <div class="step-name">Relevant for BLOW</div>
+          <div class="step-sub">drop irrelevant items</div>
+        </div>
+        <div class="arrow-h" aria-hidden="true">→</div>
+        <div class="step sheet">
+          <div class="step-icon">Sheets</div>
+          <div class="step-name">Add Row</div>
+          <div class="step-sub">tab: InspirationQueue</div>
+        </div>
+      </div>
+
+      <div class="scen-outputs">
+        <span class="label">Output →</span>
+        <span class="out-pill">Sheet tab <code>InspirationQueue</code></span>
+        <span class="out-pill">date · source · summary · hook · priority · reason</span>
+      </div>
+    </article>
+
+    <!-- Scenario 5 -->
+    <article class="scen s5" aria-labelledby="s5-title">
+      <div class="scen-head">
+        <span class="scen-num" aria-hidden="true">5</span>
+        <h3 id="s5-title">Review Aggregator (GBP → AI → digest + Sheet)</h3>
+        <span class="trigger-pill" aria-label="Trigger">⏰ Schedule · ma 07:00</span>
+      </div>
+      <p class="scen-purpose">Haalt wekelijks Google Business reviews, aggregeert tot één AI-call (GPT-4o), splitst output in operationele insights (mail) en blogtopics (Sheet rows met status=idea).</p>
+
+      <div class="flow" aria-label="Flow scenario 5">
+        <div class="step trigger">
+          <div class="step-icon">Trigger</div>
+          <div class="step-name">Schedule</div>
+          <div class="step-sub">Weekly Mon 07:00</div>
+        </div>
+        <div class="arrow-h" aria-hidden="true">→</div>
+        <div class="step api">
+          <div class="step-icon">HTTP · OAuth</div>
+          <div class="step-name">GBP API</div>
+          <div class="step-sub">reviews · pageSize=50</div>
+        </div>
+        <div class="arrow-h" aria-hidden="true">→</div>
+        <div class="step util">
+          <div class="step-icon">Aggregator</div>
+          <div class="step-name">Bundle reviews</div>
+          <div class="step-sub">één payload</div>
+        </div>
+        <div class="arrow-h" aria-hidden="true">→</div>
+        <div class="step ai">
+          <div class="step-icon">OpenAI</div>
+          <div class="step-name">gpt-4o</div>
+          <div class="step-sub">analyse + blog topics</div>
+        </div>
+        <div class="arrow-h" aria-hidden="true">→</div>
+        <div class="step util">
+          <div class="step-icon">JSON</div>
+          <div class="step-name">Parse</div>
+          <div class="step-sub">insights + topics[]</div>
+        </div>
+        <div class="arrow-h" aria-hidden="true">→</div>
+        <div class="step util">
+          <div class="step-icon">Iterator</div>
+          <div class="step-name">Per topic</div>
+          <div class="step-sub">over topics[]</div>
+        </div>
+        <div class="arrow-h" aria-hidden="true">→</div>
+        <div class="step sheet">
+          <div class="step-icon">Sheets</div>
+          <div class="step-name">Add Row</div>
+          <div class="step-sub">ContentQueue · status=idea</div>
+        </div>
+        <div class="arrow-h" aria-hidden="true">→</div>
+        <div class="step mail">
+          <div class="step-icon">Gmail</div>
+          <div class="step-name">Digest</div>
+          <div class="step-sub">naar Toine (parallel)</div>
+        </div>
+      </div>
+
+      <div class="scen-outputs">
+        <span class="label">Output →</span>
+        <span class="out-pill">ContentQueue · nieuwe ideas</span>
+        <span class="out-pill">Wekelijks mail-digest</span>
+      </div>
+    </article>
+
+  </section>
+
+  <!-- ============== VIEW 2: CROSS-SCENARIO ============== -->
+  <section class="view" id="view-cross" role="tabpanel" aria-label="Cross-scenario flow">
+
+    <h2 class="section-title"><span class="badge">HUB</span>De Sheet als centrale data-hub</h2>
+    <p class="section-sub">Drie scenario's <strong>schrijven naar</strong> de Google Sheet, twee <strong>lezen ervan</strong>. De status-kolom is de schakelaar tussen alle stappen.</p>
+
+    <div class="hub-diagram">
+      <div class="hub-grid">
+
+        <div class="hub-side">
+          <h4>Schrijven naar sheet →</h4>
+
+          <div class="hub-card s1">
+            <span class="num" aria-hidden="true">1</span>
+            <span class="what">GSC → Sheets</span>
+            <div class="into">naar tab <code>GSC_raw</code></div>
+          </div>
+          <div class="hub-card s4">
+            <span class="num" aria-hidden="true">4</span>
+            <span class="what">Competitor Monitor</span>
+            <div class="into">naar tab <code>InspirationQueue</code></div>
+          </div>
+          <div class="hub-card s5">
+            <span class="num" aria-hidden="true">5</span>
+            <span class="what">Review Aggregator</span>
+            <div class="into">naar <code>ContentQueue</code> als idea</div>
+          </div>
+        </div>
+
+        <div class="hub-center" aria-label="Centrale Google Sheet">
+          <div class="icon" aria-hidden="true">📊</div>
+          <h3>BLOW Content Hub</h3>
+          <div class="tabs">Google Sheet · 3 tabbladen</div>
+          <div class="columns">
+GSC_raw · query | page | clicks | imp | ctr | pos
+ContentQueue · row_id | dept | type | keyword | status | title | meta | body | faq | post_id
+InspirationQueue · source | summary | hook | priority
+          </div>
+        </div>
+
+        <div class="hub-side">
+          <h4>← Lezen van sheet</h4>
+
+          <div class="hub-card s2">
+            <span class="num" aria-hidden="true">2</span>
+            <span class="what">Content Generator</span>
+            <div class="into">watchRows · <code>status=ready_for_brief</code></div>
+          </div>
+          <div class="hub-card s3">
+            <span class="num" aria-hidden="true">3</span>
+            <span class="what">WordPress Publisher</span>
+            <div class="into">watchRows · <code>status=approved</code></div>
+          </div>
+
+          <div class="hub-card" style="border-left-color:var(--muted); margin-top:14px; background:#f4f4f4;">
+            <strong style="color:var(--deep)">Loop:</strong>
+            <div class="into">scenario 5 voedt <code>ContentQueue</code> met nieuwe ideas → mens promoveert naar <code>ready_for_brief</code> → scenario 2 pakt op → review → scenario 3 publiceert. Zelf-vullende pipeline.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <h2 class="section-title"><span class="badge">DEPENDENCY</span>Wie heeft wie nodig?</h2>
+    <p class="section-sub">Volgorde van uitrol: scenario 1 + 5 eerst (vullen Sheet), dan 2, dan 3. Scenario 4 is onafhankelijk.</p>
+
+    <div class="hub-diagram">
+      <div class="flow" style="justify-content: center;">
+        <div class="step sheet">
+          <div class="step-icon">Phase 1 · Foundation</div>
+          <div class="step-name">Sheet + tabs</div>
+          <div class="step-sub">handmatig opzetten</div>
+        </div>
+        <div class="arrow-h" aria-hidden="true">→</div>
+        <div class="step api">
+          <div class="step-icon">Phase 2 · Inputs</div>
+          <div class="step-name">Scenario 1 + 4 + 5</div>
+          <div class="step-sub">vullen de tabs</div>
+        </div>
+        <div class="arrow-h" aria-hidden="true">→</div>
+        <div class="step ai">
+          <div class="step-icon">Phase 3 · AI</div>
+          <div class="step-name">Scenario 2</div>
+          <div class="step-sub">drafts schrijven</div>
+        </div>
+        <div class="arrow-h" aria-hidden="true">→</div>
+        <div class="step wp">
+          <div class="step-icon">Phase 4 · Publish</div>
+          <div class="step-name">Scenario 3</div>
+          <div class="step-sub">naar WordPress</div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ============== VIEW 3: STATUS FLOW ============== -->
+  <section class="view" id="view-status" role="tabpanel" aria-label="Status-flow">
+
+    <h2 class="section-title"><span class="badge">STATUS</span>Lifecycle van een ContentQueue-rij</h2>
+    <p class="section-sub">De <code>status</code>-kolom is de central state machine. Elke transitie wordt getriggerd door óf een scenario óf een mens.</p>
+
+    <div class="status-flow">
+      <div class="status-bar" aria-label="Status flow">
+        <div class="status-node s-idea">
+          <code>idea</code>
+          <div class="who">Scenario 5 of mens</div>
+        </div>
+        <div class="status-arrow" aria-hidden="true">→</div>
+        <div class="status-node s-brief">
+          <code>ready_for_brief</code>
+          <div class="who">Mens (Bram/Toine)</div>
+        </div>
+        <div class="status-arrow" aria-hidden="true">→</div>
+        <div class="status-node s-draft">
+          <code>draft_ready_for_review</code>
+          <div class="who">Scenario 2 (AI)</div>
+        </div>
+        <div class="status-arrow" aria-hidden="true">→</div>
+        <div class="status-node s-approved">
+          <code>approved</code>
+          <div class="who">Mens (Toine review)</div>
+        </div>
+        <div class="status-arrow" aria-hidden="true">→</div>
+        <div class="status-node s-wp">
+          <code>wp_draft_created</code>
+          <div class="who">Scenario 3 (auto)</div>
+        </div>
+        <div class="status-arrow" aria-hidden="true">→</div>
+        <div class="status-node s-pub">
+          <code>published</code>
+          <div class="who">Toine in WP admin</div>
+        </div>
+      </div>
+
+      <div class="status-legend" aria-label="Legenda">
+        <div><strong>Mens-acties:</strong> ready_for_brief, approved, published</div>
+        <div><strong>Scenario-acties:</strong> idea (S5), draft_ready_for_review (S2), wp_draft_created (S3)</div>
+        <div><strong>Veiligheid:</strong> Scenario 3 gebruikt filter <code>status=approved AND post_id is empty</code> om dubbele publicaties te voorkomen.</div>
+      </div>
+    </div>
+
+    <h2 class="section-title"><span class="badge">REVIEW</span>De twee menselijke gates</h2>
+    <p class="section-sub">Het systeem laat AI hard werken, maar laat de gevoelige momenten bij Toine.</p>
+
+    <div class="hub-diagram">
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 18px;">
+        <div style="background: var(--sand-light); border-radius: 10px; padding: 16px; border-left: 4px solid var(--accent);">
+          <h4 style="color: var(--deep); margin-bottom: 8px; font-size: 1rem;">Gate 1 · Brief approval</h4>
+          <p style="font-size: 0.9rem; color: var(--text);">Scenario 5 + mens leveren ideeën aan. Bram/Toine bekijkt het idee, vult evt. <code>keyword</code>, <code>type</code>, <code>audience</code> in en zet status op <code>ready_for_brief</code>. Pas dan start de AI.</p>
+        </div>
+        <div style="background: var(--sand-light); border-radius: 10px; padding: 16px; border-left: 4px solid var(--purple);">
+          <h4 style="color: var(--deep); margin-bottom: 8px; font-size: 1rem;">Gate 2 · Draft approval</h4>
+          <p style="font-size: 0.9rem; color: var(--text);">Scenario 2 levert title, meta, body, FAQ in de sheet. Toine leest mee, past aan, zet status op <code>approved</code>. Pas dan publiceert scenario 3 als WP-concept (en zelfs dáár drukt Toine zelf op publish).</p>
+        </div>
+      </div>
+      <p style="text-align:center; margin-top: 16px; font-size: 0.86rem; color: var(--muted);">
+        Resultaat: 2 menselijke checks op een verder volledig geautomatiseerde pipeline.
+      </p>
+    </div>
+
+  </section>
+
+  <!-- Footer -->
+  <footer class="foot">
+    <strong>Gerelateerd:</strong>
+    <a href="./">Pilot index</a>·
+    <a href="audit-2026-04-27.html">SEO-audit 27-04-2026</a>·
+    <a href="m1-notulen.html">Notulen M1</a>·
+    <a href="m1-actielijst.html">Actielijst M1</a>·
+    <a href="m1-bronmateriaal.html">Bronmateriaal</a>
+    <div style="margin-top: 10px; font-size: 0.78rem; color: var(--muted);">
+      Bron: <code>blow-make-blueprints/*.json</code> (5 MAKE blueprint exports) · Versie 2026-04-29
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  // Tab switching
+  const tabs = document.querySelectorAll('.view-tabs button');
+  const views = document.querySelectorAll('.view');
+  tabs.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.dataset.view;
+      tabs.forEach(b => {
+        const active = b === btn;
+        b.classList.toggle('active', active);
+        b.setAttribute('aria-selected', active ? 'true' : 'false');
+      });
+      views.forEach(v => {
+        v.classList.toggle('active', v.id === 'view-' + target);
+      });
+      // Scroll to top of view
+      window.scrollTo({ top: document.querySelector('.view-tabs').offsetTop - 80, behavior: 'smooth' });
+    });
+  });
+</script>
+
+</body>
+</html>
