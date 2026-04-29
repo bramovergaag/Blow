@@ -1,0 +1,2054 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BLOW — Pilot & Samenwerkingsvoorstel</title>
+<style>
+  :root {
+    --sand: #f4ecd8;
+    --sand-light: #faf5e6;
+    --sea: #1e6091;
+    --sea-light: #4a90b8;
+    --foam: #ffffff;
+    --deep: #0b2e4a;
+    --accent: #e85d04;
+    --accent-soft: #f8ddc7;
+    --green: #2d8659;
+    --red: #b63b3b;
+    --text: #1a2a3a;
+    --muted: #5c6b7a;
+    --border: rgba(30, 96, 145, 0.15);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: linear-gradient(180deg, var(--sand) 0%, #ffffff 40%);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+  .container { max-width: 1100px; margin: 0 auto; padding: 32px 24px 80px; }
+
+  /* ---------- Sticky horizontal section nav ---------- */
+  nav.side {
+    position: sticky;
+    top: 0;
+    background: var(--foam);
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 2px 8px rgba(11, 46, 74, 0.05);
+    z-index: 100;
+    padding: 0 16px;
+  }
+  nav.side ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 2px;
+    overflow-x: auto;
+    max-width: 1100px;
+    margin: 0 auto;
+    scrollbar-width: thin;
+  }
+  nav.side ul::-webkit-scrollbar { height: 4px; }
+  nav.side ul::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+  nav.side a {
+    display: block;
+    font-size: 0.82rem;
+    color: var(--muted);
+    text-decoration: none;
+    padding: 12px 14px;
+    font-weight: 500;
+    transition: color 0.15s, border-color 0.15s;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+  }
+  nav.side a:hover { color: var(--deep); }
+  nav.side a.active {
+    color: var(--sea);
+    border-bottom-color: var(--sea);
+    font-weight: 600;
+  }
+
+  /* ---------- Hero ---------- */
+  header.hero {
+    text-align: center;
+    padding: 48px 0 40px;
+    border-bottom: 3px solid var(--sea);
+    margin-bottom: 48px;
+  }
+  .eyebrow {
+    font-size: 0.8rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--sea);
+    font-weight: 700;
+    margin-bottom: 14px;
+  }
+  h1 {
+    font-size: clamp(1.8rem, 4.2vw, 2.9rem);
+    font-weight: 800;
+    color: var(--deep);
+    line-height: 1.15;
+    margin-bottom: 14px;
+  }
+  h1 .accent { color: var(--accent); }
+  .lead {
+    font-size: 1.08rem;
+    color: var(--muted);
+    max-width: 720px;
+    margin: 0 auto 20px;
+  }
+  .meta {
+    display: inline-flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-top: 12px;
+  }
+  .meta span { padding: 4px 12px; background: var(--foam); border-radius: 999px; border: 1px solid var(--border); }
+
+  /* ---------- Sections ---------- */
+  section { margin-bottom: 56px; scroll-margin-top: 110px; }
+  header.hero { scroll-margin-top: 110px; }
+  h2.section-title {
+    font-size: 1.5rem;
+    color: var(--deep);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  h2.section-title .badge {
+    background: var(--sea);
+    color: white;
+    font-size: 0.72rem;
+    padding: 4px 10px;
+    border-radius: 10px;
+    letter-spacing: 0.12em;
+    font-weight: 700;
+  }
+  .section-sub {
+    color: var(--muted);
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+  }
+
+  /* ---------- Cards ---------- */
+  .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  @media (max-width: 780px) {
+    .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  }
+
+  .card {
+    background: var(--foam);
+    border-radius: 12px;
+    padding: 22px;
+    box-shadow: 0 2px 10px rgba(11, 46, 74, 0.06);
+    border-left: 4px solid var(--sea);
+  }
+  .card.accent { border-left-color: var(--accent); }
+  .card.green { border-left-color: var(--green); }
+  .card.red { border-left-color: var(--red); }
+  .card h3 { font-size: 1rem; color: var(--deep); margin-bottom: 8px; }
+  .card p { font-size: 0.9rem; color: var(--text); }
+
+  /* ---------- Interactive pipeline ---------- */
+  .pipeline {
+    background: var(--deep);
+    border-radius: 16px;
+    padding: 28px;
+    color: white;
+    margin-bottom: 16px;
+  }
+  .pipeline-steps {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+  @media (max-width: 780px) {
+    .pipeline-steps { grid-template-columns: repeat(2, 1fr); }
+  }
+  .pipe-step {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 10px;
+    padding: 14px 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+  }
+  .pipe-step:hover { background: rgba(255,255,255,0.14); transform: translateY(-2px); }
+  .pipe-step.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    box-shadow: 0 4px 14px rgba(232, 93, 4, 0.4);
+  }
+  .pipe-step .num {
+    font-size: 0.72rem;
+    opacity: 0.7;
+    letter-spacing: 0.15em;
+    margin-bottom: 4px;
+  }
+  .pipe-step .name { font-weight: 700; font-size: 0.95rem; }
+  .pipe-detail {
+    background: rgba(255,255,255,0.06);
+    border-radius: 10px;
+    padding: 22px;
+    min-height: 180px;
+  }
+  .pipe-detail h4 {
+    color: white;
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+  }
+  .pipe-detail p { font-size: 0.92rem; opacity: 0.9; margin-bottom: 12px; }
+  .pipe-detail .io {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-top: 14px;
+  }
+  @media (max-width: 600px) { .pipe-detail .io { grid-template-columns: 1fr; } }
+  .pipe-detail .io-block {
+    background: rgba(0,0,0,0.22);
+    border-radius: 8px;
+    padding: 12px 14px;
+  }
+  .pipe-detail .io-block .lbl {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    opacity: 0.65;
+    margin-bottom: 6px;
+  }
+  .pipe-detail .io-block .val {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.82rem;
+    line-height: 1.5;
+  }
+
+  /* ---------- Proof cards ---------- */
+  .proof-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+  }
+  @media (max-width: 780px) { .proof-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 480px) { .proof-grid { grid-template-columns: 1fr; } }
+  .proof {
+    background: var(--foam);
+    border-radius: 12px;
+    padding: 20px;
+    border-top: 4px solid var(--accent);
+    box-shadow: 0 4px 16px rgba(11, 46, 74, 0.07);
+    cursor: pointer;
+    transition: transform 0.15s;
+  }
+  .proof:hover { transform: translateY(-3px); }
+  .proof .kind {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .proof h4 { color: var(--deep); font-size: 0.98rem; margin-bottom: 8px; }
+  .proof p { font-size: 0.85rem; color: var(--muted); }
+  .proof .cta {
+    margin-top: 10px;
+    font-size: 0.82rem;
+    color: var(--sea);
+    font-weight: 600;
+  }
+
+  /* ---------- Post preview ---------- */
+  .post-preview {
+    background: var(--foam);
+    border-radius: 14px;
+    padding: 36px 40px;
+    box-shadow: 0 4px 18px rgba(11, 46, 74, 0.08);
+    max-height: 520px;
+    overflow-y: auto;
+    position: relative;
+  }
+  .post-preview::after {
+    content: "";
+    position: sticky;
+    bottom: 0;
+    display: block;
+    height: 60px;
+    background: linear-gradient(to bottom, transparent, var(--foam));
+    margin: -60px -40px 0;
+    pointer-events: none;
+  }
+  .post-preview h3 {
+    font-size: 1.5rem;
+    color: var(--deep);
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
+  .post-preview h4 {
+    font-size: 1.1rem;
+    color: var(--deep);
+    margin-top: 20px;
+    margin-bottom: 8px;
+  }
+  .post-preview p { font-size: 0.95rem; margin-bottom: 12px; color: var(--text); }
+  .post-preview .tldr {
+    background: var(--sand-light);
+    border-left: 4px solid var(--accent);
+    padding: 14px 18px;
+    margin: 16px 0;
+    border-radius: 6px;
+    font-size: 0.94rem;
+  }
+  .post-preview ul { margin: 10px 0 14px 20px; }
+  .post-preview ul li { margin-bottom: 4px; font-size: 0.93rem; }
+  .post-preview table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 14px 0;
+    font-size: 0.85rem;
+  }
+  .post-preview th, .post-preview td {
+    padding: 8px 10px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  .post-preview th { background: var(--sand-light); color: var(--deep); font-weight: 700; }
+  .post-preview .faq-q { font-weight: 700; color: var(--deep); margin-top: 10px; }
+  .post-preview .faq-a { margin-bottom: 8px; font-size: 0.9rem; }
+  .post-preview .post-meta {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* ---------- Tables ---------- */
+  table.data {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--foam);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(11, 46, 74, 0.06);
+  }
+  table.data th, table.data td {
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.92rem;
+  }
+  table.data th {
+    background: var(--deep);
+    color: white;
+    font-weight: 700;
+    font-size: 0.82rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  table.data tr:last-child td { border-bottom: none; }
+  table.data td.num { font-family: ui-monospace, monospace; text-align: right; }
+  table.data .highlight { background: var(--accent-soft); font-weight: 700; }
+
+  /* ---------- Distribution visual ---------- */
+  .dist-hub {
+    background: var(--foam);
+    border-radius: 14px;
+    padding: 28px;
+    box-shadow: 0 2px 10px rgba(11, 46, 74, 0.06);
+    position: relative;
+  }
+  .dist-center {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .dist-center .bubble {
+    display: inline-block;
+    background: var(--accent);
+    color: white;
+    font-weight: 700;
+    padding: 10px 22px;
+    border-radius: 999px;
+    font-size: 0.95rem;
+  }
+  .dist-channels {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 10px;
+  }
+  @media (max-width: 780px) {
+    .dist-channels { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 480px) {
+    .dist-channels { grid-template-columns: repeat(2, 1fr); }
+  }
+  .dist-ch {
+    background: var(--sand-light);
+    padding: 12px 8px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 0.82rem;
+    color: var(--deep);
+    font-weight: 600;
+    border: 1px solid var(--border);
+  }
+  .dist-ch .icon { font-size: 1.4rem; display: block; margin-bottom: 4px; }
+
+  /* ---------- Partnership options ---------- */
+  .partner-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+  }
+  @media (max-width: 900px) { .partner-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 480px) { .partner-grid { grid-template-columns: 1fr; } }
+  .partner {
+    background: var(--foam);
+    border-radius: 12px;
+    padding: 18px;
+    box-shadow: 0 2px 8px rgba(11, 46, 74, 0.06);
+    position: relative;
+    transition: all 0.2s;
+  }
+  .partner.recommended {
+    border: 2px solid var(--accent);
+    box-shadow: 0 6px 20px rgba(232, 93, 4, 0.18);
+  }
+  .partner.recommended::before {
+    content: "VOORKEUR";
+    position: absolute;
+    top: -10px;
+    left: 14px;
+    background: var(--accent);
+    color: white;
+    font-size: 0.68rem;
+    padding: 3px 8px;
+    border-radius: 6px;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+  }
+  .partner .letter {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--sea);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .partner h4 { font-size: 0.95rem; color: var(--deep); margin-bottom: 8px; }
+  .partner p { font-size: 0.82rem; color: var(--muted); line-height: 1.45; }
+
+  /* ---------- Callout ---------- */
+  .callout {
+    background: linear-gradient(135deg, var(--sea) 0%, var(--deep) 100%);
+    color: white;
+    border-radius: 14px;
+    padding: 28px 32px;
+    margin: 20px 0;
+  }
+  .callout h3 { color: white; margin-bottom: 10px; font-size: 1.2rem; }
+  .callout p { font-size: 0.95rem; opacity: 0.95; }
+
+  /* ---------- Risk list ---------- */
+  .risk-list { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 780px) { .risk-list { grid-template-columns: 1fr; } }
+  .risk-item {
+    background: var(--foam);
+    padding: 18px;
+    border-radius: 10px;
+    border-left: 4px solid var(--red);
+  }
+  .risk-item h4 { font-size: 0.92rem; color: var(--deep); margin-bottom: 6px; }
+  .risk-item .mitigation {
+    background: var(--sand-light);
+    padding: 10px 12px;
+    border-radius: 6px;
+    margin-top: 8px;
+    font-size: 0.85rem;
+    border-left: 3px solid var(--green);
+  }
+  .risk-item .mitigation strong { color: var(--green); }
+
+  /* ---------- Roadmap ---------- */
+  .roadmap {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    position: relative;
+  }
+  @media (max-width: 780px) { .roadmap { grid-template-columns: 1fr; } }
+  .phase {
+    background: var(--foam);
+    padding: 22px;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(11, 46, 74, 0.06);
+    border-top: 4px solid var(--sea);
+  }
+  .phase .when {
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--sea);
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .phase h4 { color: var(--deep); margin-bottom: 12px; }
+  .phase ul { list-style: none; padding: 0; }
+  .phase ul li {
+    padding: 6px 0;
+    font-size: 0.88rem;
+    padding-left: 20px;
+    position: relative;
+  }
+  .phase ul li::before {
+    content: "▸";
+    color: var(--accent);
+    position: absolute;
+    left: 0;
+    font-weight: 700;
+  }
+
+  /* ---------- Decision block ---------- */
+  .decision {
+    background: var(--deep);
+    color: white;
+    border-radius: 16px;
+    padding: 36px;
+    text-align: center;
+  }
+  .decision h3 {
+    color: white;
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+  }
+  .decision p { opacity: 0.9; margin-bottom: 24px; font-size: 0.98rem; }
+  .decision-options {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-top: 20px;
+  }
+  @media (max-width: 780px) { .decision-options { grid-template-columns: 1fr; } }
+  .decision-opt {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 18px;
+    border-radius: 10px;
+    text-align: left;
+  }
+  .decision-opt .num {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--accent);
+  }
+  .decision-opt h5 { color: white; font-size: 0.98rem; margin: 6px 0 8px; }
+  .decision-opt p { font-size: 0.84rem; opacity: 0.85; }
+
+  /* ---------- Proposal blocks ---------- */
+  .proposal-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin-bottom: 20px;
+  }
+  @media (max-width: 780px) { .proposal-grid { grid-template-columns: 1fr; } }
+  .prop-card {
+    background: var(--foam);
+    border-radius: 12px;
+    padding: 22px 24px;
+    box-shadow: 0 2px 10px rgba(11, 46, 74, 0.06);
+  }
+  .prop-card.give { border-top: 4px solid var(--sea); }
+  .prop-card.take { border-top: 4px solid var(--accent); }
+  .prop-card .label {
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .prop-card.give .label { color: var(--sea); }
+  .prop-card.take .label { color: var(--accent); }
+  .prop-card h3 { color: var(--deep); font-size: 1.05rem; margin-bottom: 12px; }
+  .prop-card ul { list-style: none; padding: 0; margin: 0; }
+  .prop-card ul li {
+    padding: 6px 0 6px 22px;
+    font-size: 0.9rem;
+    position: relative;
+    border-bottom: 1px solid var(--border);
+  }
+  .prop-card ul li:last-child { border-bottom: none; }
+  .prop-card ul li::before {
+    content: "▸";
+    position: absolute;
+    left: 4px;
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .prop-card ul li strong { color: var(--deep); }
+  .prop-card .total {
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 2px solid var(--border);
+    font-weight: 700;
+    color: var(--deep);
+    text-align: right;
+  }
+
+  /* ---------- KPI categories ---------- */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    margin: 16px 0;
+  }
+  @media (max-width: 900px) { .kpi-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 480px) { .kpi-grid { grid-template-columns: 1fr; } }
+  .kpi-cat {
+    background: var(--foam);
+    padding: 14px 14px 12px;
+    border-radius: 10px;
+    border-left: 3px solid var(--sea);
+    box-shadow: 0 1px 6px rgba(11, 46, 74, 0.05);
+  }
+  .kpi-cat .lbl {
+    font-size: 0.66rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--sea);
+    font-weight: 700;
+  }
+  .kpi-cat h4 { color: var(--deep); font-size: 0.92rem; margin: 4px 0 8px; }
+  .kpi-cat ul { list-style: none; padding: 0; margin: 0; }
+  .kpi-cat ul li {
+    font-size: 0.78rem;
+    color: var(--text);
+    padding: 3px 0 3px 14px;
+    position: relative;
+    line-height: 1.4;
+  }
+  .kpi-cat ul li::before {
+    content: "□";
+    position: absolute;
+    left: 0;
+    color: var(--muted);
+  }
+
+  /* ---------- Open punten ---------- */
+  .open-points {
+    background: var(--sand-light);
+    border-radius: 10px;
+    padding: 18px 22px;
+    margin: 16px 0;
+  }
+  .open-points h4 { color: var(--deep); margin-bottom: 8px; font-size: 0.95rem; }
+  .open-points ul { list-style: none; padding: 0; margin: 0; }
+  .open-points ul li {
+    padding: 6px 0 6px 26px;
+    position: relative;
+    font-size: 0.9rem;
+    border-bottom: 1px dashed rgba(30, 96, 145, 0.2);
+  }
+  .open-points ul li:last-child { border-bottom: none; }
+  .open-points ul li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--green);
+    font-weight: 700;
+  }
+  .open-points ul li.todo::before { content: "○"; color: var(--accent); }
+
+  /* ---------- Gantt ---------- */
+  .gantt-wrap {
+    background: var(--foam);
+    border-radius: 12px;
+    padding: 18px;
+    box-shadow: 0 2px 10px rgba(11, 46, 74, 0.06);
+    overflow-x: auto;
+  }
+  .gantt {
+    display: grid;
+    grid-template-columns: 180px repeat(16, minmax(36px, 1fr));
+    gap: 4px;
+    align-items: center;
+    min-width: 760px;
+  }
+  .gantt .gh-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 700;
+    padding: 4px 6px;
+  }
+  .gantt .gh-month {
+    text-align: center;
+    font-size: 0.68rem;
+    color: var(--muted);
+    font-weight: 600;
+    padding: 4px 0;
+  }
+  .gantt .gh-quarter {
+    background: var(--sand-light);
+    color: var(--deep);
+    text-align: center;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 6px 0;
+    border-radius: 4px;
+  }
+  .gantt .row-label {
+    font-size: 0.82rem;
+    color: var(--deep);
+    font-weight: 600;
+    padding: 6px 10px 6px 0;
+  }
+  .gantt .row-label .sub {
+    display: block;
+    font-size: 0.72rem;
+    color: var(--muted);
+    font-weight: 400;
+    margin-top: 1px;
+  }
+  .gantt .bar {
+    color: white;
+    padding: 8px 10px;
+    border-radius: 5px;
+    font-weight: 700;
+    font-size: 0.74rem;
+    text-align: center;
+    line-height: 1.2;
+  }
+  .gantt .bar.p1 { background: var(--sea); }
+  .gantt .bar.p2 { background: var(--green); }
+  .gantt .bar.p3 { background: var(--accent); }
+  .gantt .bar.p4 { background: var(--deep); }
+  .gantt .tool {
+    background: rgba(30, 96, 145, 0.18);
+    border-radius: 3px;
+    height: 14px;
+  }
+  .gantt .tool.late { background: rgba(232, 93, 4, 0.22); }
+  .gantt-divider {
+    grid-column: 2 / -1;
+    height: 1px;
+    background: var(--border);
+    margin: 4px 0;
+  }
+  .gantt-section-head {
+    grid-column: 1 / -1;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 700;
+    margin: 8px 0 2px;
+  }
+  .meeting-track {
+    display: flex; align-items: center; gap: 3px;
+    height: 22px; padding: 0 6px;
+    background: var(--accent-soft); border-radius: 4px;
+  }
+  .meeting-track.notulen { background: rgba(30, 96, 145, 0.12); }
+  .m-marker {
+    flex: 1; min-width: 0;
+    display: inline-flex; align-items: center; justify-content: center;
+    background: var(--accent); color: white;
+    font-size: 0.62rem; font-weight: 700;
+    padding: 3px 2px; border-radius: 3px;
+    text-decoration: none; line-height: 1;
+    text-align: center; white-space: nowrap;
+  }
+  .m-marker.doc { background: var(--sea); }
+  .m-marker.future { background: var(--sand); color: var(--muted); }
+  .m-marker.future:hover { background: var(--sand-light); color: var(--deep); }
+  .m-marker.eval { background: var(--deep); }
+  .m-marker.active { box-shadow: 0 0 0 2px var(--foam), 0 0 0 4px var(--accent); }
+
+  /* ---------- Footer ---------- */
+  footer {
+    margin-top: 60px;
+    padding-top: 28px;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+  footer strong { color: var(--deep); }
+
+  /* ---------- Utility ---------- */
+  .check { color: var(--green); font-weight: 700; }
+  .cross { color: var(--red); font-weight: 700; }
+  .warn { color: var(--accent); font-weight: 700; }
+  .mono { font-family: ui-monospace, monospace; font-size: 0.9em; }
+
+  .print-hint {
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-top: 20px;
+    font-style: italic;
+  }
+
+  @media print {
+    nav.side { display: none; }
+    body { background: white; }
+    .card, .proof, .partner, .phase, table.data { box-shadow: none; border: 1px solid #ccc; }
+    section { page-break-inside: avoid; }
+  }
+
+  /* ---------- Brand tab bar (matcht hoofd-dashboard) ---------- */
+  .brand-bar {
+    background: #C66A1F;
+    color: #F4EFE2;
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    border-bottom: 4px solid #1A1A1A;
+    font-family: "Oswald", "Bebas Neue", sans-serif;
+  }
+  .brand-bar .logo {
+    width: 38px; height: 38px;
+    border: 2px solid #F4EFE2;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    flex-shrink: 0;
+  }
+  .brand-bar .brand-name {
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .brand-tabs {
+    margin-left: auto;
+    display: flex;
+    gap: 4px;
+  }
+  .brand-tabs a {
+    font-family: inherit;
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 10px 18px;
+    color: rgba(244, 239, 226, 0.7);
+    border-bottom: 3px solid transparent;
+    text-decoration: none;
+    transition: color 0.15s, border-color 0.15s;
+    margin-bottom: -14px;
+  }
+  .brand-tabs a:hover { color: #F4EFE2; }
+  .brand-tabs a.active {
+    color: #F4EFE2;
+    border-bottom-color: #F4EFE2;
+  }
+  @media (max-width: 600px) {
+    .brand-bar { padding: 12px 16px; gap: 12px; }
+    .brand-bar .brand-name { font-size: 15px; }
+    .brand-tabs a { padding: 10px 12px; font-size: 12px; letter-spacing: 1.5px; }
+  }
+
+  /* ---------- Cycle stepper (meeting flow) ---------- */
+  .cycle {
+    background: var(--foam);
+    border-bottom: 1px solid var(--border);
+    padding: 0 16px;
+  }
+  .cycle ul {
+    list-style: none; display: flex; max-width: 1280px; margin: 0 auto;
+    overflow-x: auto; gap: 4px;
+  }
+  .cycle li { display: flex; align-items: center; }
+  .cycle a {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 0.85rem; color: var(--muted); text-decoration: none;
+    padding: 14px 14px; font-weight: 500; white-space: nowrap;
+    border-bottom: 2px solid transparent;
+  }
+  .cycle a:hover { color: var(--deep); }
+  .cycle a.active { color: var(--sea); border-bottom-color: var(--sea); font-weight: 700; }
+  .cycle a.done { color: var(--green); }
+  .cycle a.done .step-num { background: var(--green); color: white; }
+  .cycle a.future { opacity: 0.4; pointer-events: none; }
+  .cycle .step-num {
+    width: 22px; height: 22px; border-radius: 50%;
+    background: var(--sand-light); display: inline-flex; align-items: center; justify-content: center;
+    font-size: 0.72rem; font-weight: 700;
+  }
+  .cycle a.active .step-num { background: var(--sea); color: white; }
+  .cycle .arrow { color: var(--border); padding: 0 4px; font-size: 0.9rem; }
+
+  /* ---------- Wrap met timeline links ---------- */
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 0 24px;
+    display: grid; grid-template-columns: 220px 1fr; gap: 32px; }
+  @media (max-width: 1100px) { .wrap { grid-template-columns: 1fr; padding: 0 16px; gap: 16px; } }
+  .wrap > .container { max-width: none; padding: 24px 0 80px 0; margin: 0; }
+
+  .timeline-side {
+    background: var(--foam); border-radius: 12px; padding: 18px;
+    box-shadow: 0 2px 10px rgba(11, 46, 74, 0.06);
+    position: sticky; top: 60px; align-self: start; font-size: 0.85rem;
+    margin-top: 24px;
+  }
+  @media (max-width: 1100px) { .timeline-side { position: static; margin-top: 16px; } }
+  .timeline-side h3 {
+    font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--muted); font-weight: 700; margin-bottom: 10px;
+  }
+  .tl-meeting { padding: 8px 0; border-left: 2px solid var(--border);
+    padding-left: 12px; margin-left: 4px; position: relative; }
+  .tl-meeting::before { content: ""; position: absolute; left: -7px; top: 12px;
+    width: 12px; height: 12px; border-radius: 50%;
+    background: var(--foam); border: 2px solid var(--border); }
+  .tl-meeting.current::before { background: var(--accent); border-color: var(--accent); }
+  .tl-meeting.future { opacity: 0.45; }
+  .tl-meeting .date { font-size: 0.72rem; color: var(--muted); font-weight: 600; letter-spacing: 0.05em; }
+  .tl-meeting .title { font-weight: 700; color: var(--deep); margin: 2px 0 6px; font-size: 0.9rem; }
+  .tl-meeting ul { list-style: none; padding: 0; margin: 0; }
+  .tl-meeting li { padding: 3px 0; font-size: 0.8rem; }
+  .tl-meeting a { color: var(--muted); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
+  .tl-meeting a:hover { color: var(--deep); }
+  .tl-meeting a.active { color: var(--sea); font-weight: 700; }
+  .tl-meeting a.done { color: var(--green); }
+  .tl-meeting .add-meeting { border: 1px dashed var(--border); border-radius: 8px;
+    padding: 8px 10px; font-size: 0.78rem; color: var(--muted); text-align: center;
+    cursor: pointer; margin-top: 10px; }
+
+  /* Page-TOC (horizontal nav onder brand-bar) */
+  .page-toc {
+    background: var(--foam);
+    border-bottom: 1px solid var(--border);
+    padding: 0 16px;
+    position: sticky; top: 0; z-index: 50;
+    box-shadow: 0 1px 4px rgba(11, 46, 74, 0.04);
+  }
+  .page-toc ul {
+    list-style: none; display: flex; flex-wrap: nowrap; gap: 4px;
+    overflow-x: auto; max-width: 1280px; margin: 0 auto;
+    scrollbar-width: thin;
+  }
+  .page-toc ul::-webkit-scrollbar { height: 4px; }
+  .page-toc a {
+    display: block; font-size: 0.84rem; color: var(--muted);
+    text-decoration: none; padding: 12px 14px; font-weight: 500;
+    white-space: nowrap; border-bottom: 2px solid transparent;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .page-toc a:hover { color: var(--deep); }
+  .page-toc a.active { color: var(--sea); border-bottom-color: var(--sea); font-weight: 700; }
+
+  /* Timeline scroll independently */
+  .timeline-side {
+    max-height: calc(100vh - 60px);
+    overflow-y: auto;
+    scrollbar-width: thin;
+  }
+  .timeline-side::-webkit-scrollbar { width: 4px; }
+  .timeline-side::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+  /* Keyboard nav hint */
+  .kbd-hint {
+    margin-top: 14px; padding: 8px 10px;
+    background: var(--sand-light); border-radius: 6px;
+    font-size: 0.72rem; color: var(--muted); text-align: center;
+  }
+  .kbd-hint kbd {
+    background: var(--foam); border: 1px solid var(--border);
+    border-radius: 3px; padding: 1px 5px;
+    font-family: ui-monospace, monospace; font-size: 0.7rem;
+    color: var(--deep); font-weight: 700;
+  }
+</style>
+</head>
+<body>
+
+<!-- Brand tab bar -->
+<header class="brand-bar">
+  <div class="logo">BLOW</div>
+  <div class="brand-name">Beach House</div>
+  <nav class="brand-tabs" aria-label="Hoofdmenu">
+    <a href="../">Bestelling</a>
+    <a href="./" class="active" aria-current="page">SEO</a>
+    <a href="https://bramovergaag.github.io/balistoel.nl/">Balistoel</a>
+  </nav>
+</header>
+
+<nav class="page-toc" aria-label="Op deze pagina">
+  <ul>
+    <li><a href="#start">Start</a></li>
+    <li><a href="#aanpak">01 · Aanpak</a></li>
+    <li><a href="#pijplijn">02 · Pijplijn</a></li>
+    <li><a href="#bewijs">03 · Bewijs</a></li>
+    <li><a href="#blogpost">04 · Voorbeeld</a></li>
+    <li><a href="#distributie">05 · Distributie</a></li>
+    <li><a href="#kosten">06 · Kosten</a></li>
+    <li><a href="#samenwerking">07 · Samenwerking</a></li>
+    <li><a href="#fasering">08 · Fasering</a></li>
+    <li><a href="#risico">09 · Risico</a></li>
+    <li><a href="#vraagtekens">10 · Vraagtekens</a></li>
+    <li><a href="#beslissing">11 · Beslissing</a></li>
+  </ul>
+</nav>
+
+<div class="wrap">
+
+<aside class="timeline-side">
+
+  <a href="planning.html" style="display: block; background: linear-gradient(135deg, var(--sea) 0%, var(--deep) 100%); color: white; padding: 14px 16px; border-radius: 10px; text-decoration: none; margin-bottom: 16px; font-weight: 700;">
+    <div style="font-size: 0.66rem; letter-spacing: 0.16em; text-transform: uppercase; opacity: 0.8; font-weight: 600;">Overzicht</div>
+    <div style="font-size: 1rem; margin-top: 2px;">📅 Planning · 16 mnd</div>
+    <div style="font-size: 0.74rem; opacity: 0.85; margin-top: 4px; font-weight: 400;">4 fases · 9 meetings · status</div>
+  </a>
+
+  <h3>Timeline · Fase 1</h3>
+
+  <div class="tl-meeting current">
+    <div class="date">wo 29 apr · 18:00</div>
+    <div class="title">M1 — fysiek</div>
+    <div style="font-size: 0.74rem; color: var(--muted); margin-bottom: 4px;">📍 Beach House (Toine)</div>
+    <ul>
+      <li><a href="m1-agenda.html" class="active">▸ Agenda</a></li>
+      <li><a href="m1-notulen.html">○ Notulen</a></li>
+      <li><a href="m1-actielijst.html">○ Actielijst</a></li>
+      <li style="padding-top: 6px; margin-top: 4px; border-top: 1px dashed var(--border); font-size: 0.76rem;">
+        <a href="m1-bronmateriaal.html" style="color: var(--accent);">📷 Bronmateriaal</a>
+      </li>
+      <li style="font-size: 0.76rem;">
+        <a href="m1-make-process.html" style="color: var(--accent);">⚙️ MAKE-process</a>
+      </li>
+      <li style="font-size: 0.76rem;">
+        <a href="m1-feedback-loop.html" style="color: var(--accent);">💬 Feedback-loop</a>
+      </li>
+      <li style="font-size: 0.76rem;">
+        <a href="planning.html" style="color: var(--accent);">📅 Planning-overzicht</a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="tl-meeting future"><div class="date">ma 11 mei · 17:00</div><div class="title">M2 — 💻 online</div></div>
+  <div class="tl-meeting future"><div class="date">ma 25 mei · 17:00</div><div class="title">M3 — 📍 Bram thuis</div></div>
+  <div class="tl-meeting future"><div class="date">ma 8 jun · 17:00</div><div class="title">M4 — 💻 online</div></div>
+  <div class="tl-meeting future"><div class="date">ma 22 jun · 17:00</div><div class="title">M5 — 📍 Beach House</div></div>
+  <div class="tl-meeting future"><div class="date">ma 6 jul · 17:00</div><div class="title">M6 — 💻 online</div></div>
+  <div class="tl-meeting future"><div class="date">ma 20 jul · 17:00</div><div class="title">M7 — 📍 Bram thuis</div></div>
+  <div class="tl-meeting future"><div class="date">ma 3 aug · 17:00</div><div class="title">M8 — 💻 online</div></div>
+
+  <div class="tl-meeting future" style="border-left-color: var(--accent); border-left-width: 3px;">
+    <div class="date">ma 17 aug · 17:00</div>
+    <div class="title" style="color: var(--accent);">M9 — 📍 Beach House</div>
+    <div style="font-size: 0.72rem; color: var(--accent); font-weight: 700; margin-top: 2px;">⭐ Eind stap 1 · go/no-go</div>
+  </div>
+
+  <div class="add-meeting" style="margin-top: 14px;">Stap 2 plannen</div>
+
+  <div class="kbd-hint">
+    <kbd>→</kbd> volgende · <kbd>↓</kbd> scroll
+  </div>
+</aside>
+
+<div class="container">
+
+<!-- ============ START ============ -->
+<header class="hero" id="start">
+  <div class="eyebrow">BLOW · Pilot & Samenwerkingsvoorstel</div>
+  <h1>Een eigen <span class="accent">content-motor</span> voor BLOW<br>zonder afhankelijkheid van een vendor</h1>
+  <p class="lead">Dit document toont wat ik in één weekend voor BLOW heb gebouwd als proeve, een 16-maanden plan in 4 stappen, en mijn samenwerkingsvoorstel: jij draagt de tools en coacht — ik factureer geen uren in jaar 1.</p>
+  <div class="meta">
+    <span>📅 Gesprek: woensdag 18:00, Beach House</span>
+    <span>⏱ Leestijd: ~14 min</span>
+    <span>🔄 Versie 2.0</span>
+  </div>
+</header>
+
+<!-- ============ AANPAK ============ -->
+<section id="aanpak">
+  <h2 class="section-title"><span class="badge">01</span>De aanpak in één plaat</h2>
+  <p class="section-sub">Vijf MAKE-scenario's, één Google Sheet als commandocentrum, volledige loop van signaal tot publicatie.</p>
+
+  <div class="grid-3" style="margin-bottom: 20px;">
+    <div class="card">
+      <h3>🔍 Wat komt binnen</h3>
+      <p>GSC-data, Google Business reviews, concurrent-RSS, Toine's input. Elke bron een wekelijkse of dagelijkse trigger.</p>
+    </div>
+    <div class="card accent">
+      <h3>⚙️ Wat gebeurt er</h3>
+      <p>5 scenario's draaien op MAKE: GSC-sync, Content Generator (Claude), WordPress Publisher, Competitor Monitor, Review Aggregator.</p>
+    </div>
+    <div class="card green">
+      <h3>📤 Wat komt eruit</h3>
+      <p>WordPress drafts, distributiepakketten, performance-data, pijnpunten-digest. Toine reviewt; publicatie = klik.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PIJPLIJN INTERACTIEF ============ -->
+<section id="pijplijn">
+  <h2 class="section-title"><span class="badge">02</span>Klik door de pijplijn</h2>
+  <p class="section-sub">Van keyword-signaal tot gepubliceerde post. Klik op een stap voor input, verwerking en output.</p>
+
+  <div class="pipeline">
+    <div class="pipeline-steps" id="pipeSteps">
+      <div class="pipe-step active" data-step="1">
+        <div class="num">STAP 1</div>
+        <div class="name">Audit + signaal</div>
+      </div>
+      <div class="pipe-step" data-step="2">
+        <div class="num">STAP 2</div>
+        <div class="name">Brief</div>
+      </div>
+      <div class="pipe-step" data-step="3">
+        <div class="num">STAP 3</div>
+        <div class="name">Draft</div>
+      </div>
+      <div class="pipe-step" data-step="4">
+        <div class="num">STAP 4</div>
+        <div class="name">Publicatie</div>
+      </div>
+      <div class="pipe-step" data-step="5">
+        <div class="num">STAP 5</div>
+        <div class="name">Distributie</div>
+      </div>
+    </div>
+
+    <div class="pipe-detail" id="pipeDetail">
+      <!-- Filled by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ============ BEWIJS ============ -->
+<section id="bewijs">
+  <h2 class="section-title"><span class="badge">03</span>Pilot-bewijs — wat ik dit weekend heb gebouwd</h2>
+  <p class="section-sub">Geen beloftes. Vier tastbare deliverables die je maandag kunt plaatsen, ongeacht hoe dit gesprek afloopt.</p>
+
+  <div class="proof-grid">
+    <div class="proof" onclick="window.open('audit-2026-04-27.html','_blank')">
+      <div class="kind">01 · Audit ✓</div>
+      <h4>Site-audit uitgevoerd 27 apr</h4>
+      <p>Bevinding: 15 blogposts in één dag (2025-07-14), niets sindsdien. Restaurant + events: nul content-equity. Concurrenten 3× zoveel volume. Top 5 quick-wins + 3 strategische kansen.</p>
+      <div class="cta">audit-2026-04-27.html →</div>
+    </div>
+    <div class="proof" onclick="window.open('posts/01-zandmotor-veiligheid.html','_blank')">
+      <div class="kind">02 · Blogpost ✓</div>
+      <h4>Zandmotor — veiligste kitespot van NL</h4>
+      <p>~1.050 woorden, publicatie-klaar. SEO + GEO + audit-data: SERP-positie #10 → doel #4–5. TU Delft + 15 jaar IKO als E-E-A-T anker. Internal-link strategie naar /kitesurfles-zandmotor/.</p>
+      <div class="cta">posts/01-zandmotor-veiligheid.html →</div>
+    </div>
+    <div class="proof" onclick="window.open('posts/02-kijkduin-vs-scheveningen.html','_blank')">
+      <div class="kind">03 · Blogpost ✓</div>
+      <h4>Kijkduin vs Scheveningen</h4>
+      <p>~1.000 woorden, publicatie-klaar. Eerlijke vergelijking als trust-builder. 15 jaar lesgegeven als E-E-A-T anker. Concrete Scheveningen-scholen genoemd. Funnel naar proefles.</p>
+      <div class="cta">posts/02-kijkduin-vs-scheveningen.html →</div>
+    </div>
+    <div class="proof">
+      <div class="kind">04 · Distributie</div>
+      <h4>6 kanalen, 1 post</h4>
+      <p>Templates voor IG, FB, WhatsApp (2chat), nieuwsbrief, Google Business, email-signature. Ingevuld voor post 1.</p>
+      <div class="cta">distributie/templates.md</div>
+    </div>
+  </div>
+
+  <div class="callout" style="margin-top: 24px;">
+    <h3>Wat dit bewijst</h3>
+    <p>Eén blogpost van 950 woorden kost handmatig 3–5 uur. Met deze pijplijn: <strong>review + publish in 30 minuten</strong>. Distributie naar 6 kanalen: <strong>15 minuten extra</strong>. Dat is de schaalfactor die een vendor niet levert — omdat hun model niet is ingericht op jouw afdelings-mix.</p>
+  </div>
+</section>
+
+<!-- ============ BLOGPOST PREVIEW ============ -->
+<section id="blogpost">
+  <h2 class="section-title"><span class="badge">04</span>Voorbeeld — blogpost A volledig</h2>
+  <p class="section-sub">Dit is precies wat er in WordPress komt te staan. Scroll binnen het venster.</p>
+
+  <article class="post-preview">
+    <div class="post-meta">
+      <span>📍 Categorie: spots</span>
+      <span>🏷 kitesurfschool</span>
+      <span>📝 950 woorden</span>
+      <span>🎯 primary: kitesurfen zandmotor</span>
+    </div>
+    <h3>Kitesurfen op de Zandmotor — de veiligste kitespot van Nederland</h3>
+
+    <div class="tldr">
+      <strong>Korte versie:</strong> De Zandmotor is in 2011 aangelegd: 21,5 miljoen kuub zand voor de kust van Kijkduin. Door die aanleg ontstond een enorme, ondiepe lagune met vlak water én een breed strand. Voor beginnende kitesurfers is dat de perfecte combinatie — nergens anders in Nederland vind je zo veel ruimte en zo weinig obstakels.
+    </div>
+
+    <p>Wij van BLOW zitten hier, aan de zuidrand van Kijkduin, precies waar de Zandmotor het strand raakt. Dit artikel legt uit waarom dit de veiligste kitesurfspot van Nederland is en hoe je er het beste gebruik van maakt.</p>
+
+    <h4>Wat is de Zandmotor eigenlijk?</h4>
+    <p>Rijkswaterstaat heeft in 2011 een haakvormig zandplateau voor de kust van Ter Heijde tot Kijkduin gestort. Het idee: laat stromingen en wind dat zand vanzelf over de hele Zuid-Hollandse kust verdelen, in plaats van elke paar jaar lokaal suppleren. Een kustbeschermings-experiment van internationale schaal.</p>
+    <p>Voor kitesurfers bleek het een geschenk:</p>
+    <ul>
+      <li>Een <strong>ondiepe lagune</strong> beschut tegen aflandige wind</li>
+      <li><strong>Honderden meters strand</strong> om kites te starten zonder obstakels</li>
+      <li><strong>Vlak water</strong> vlak bij de kust, golven verder op zee</li>
+      <li><strong>Geen pieren of strandhoofden</strong> die kite-lijnen kunnen vangen</li>
+    </ul>
+
+    <h4>Drie redenen waarom dit de veiligste spot is</h4>
+    <p><strong>1. Side-onshore zuidwestenwind.</strong> De dominante wind blaast schuin richting strand. Paniek? Je wordt vanzelf teruggeblazen.</p>
+    <p><strong>2. De lagune om op te staan.</strong> 1–1,5m diep, je zet je voeten neer en begint opnieuw.</p>
+    <p><strong>3. Ruimte.</strong> Geen pieren, geen drukte. We spreiden lessen over honderden meters strand.</p>
+
+    <h4>Beste wind voor de Zandmotor</h4>
+    <table>
+      <thead>
+        <tr><th>Richting</th><th>Bft</th><th>Beginner</th><th>Gevorderd</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Zuidwest</td><td>4–5</td><td class="check">✅</td><td class="check">✅</td></tr>
+        <tr><td>Zuidwest</td><td>6+</td><td class="warn">⚠️</td><td class="check">✅</td></tr>
+        <tr><td>West</td><td>4–6</td><td class="check">✅</td><td class="check">✅</td></tr>
+        <tr><td>Noordwest</td><td>4–6</td><td class="check">✅</td><td class="check">✅</td></tr>
+        <tr><td>Noord</td><td>4–6</td><td class="cross">❌</td><td class="warn">⚠️</td></tr>
+        <tr><td>Oost</td><td>alle</td><td class="cross">❌</td><td class="cross">❌</td></tr>
+      </tbody>
+    </table>
+
+    <h4>Veelgestelde vragen</h4>
+    <div class="faq-q">Is de Zandmotor geschikt voor absolute beginners?</div>
+    <div class="faq-a">Ja — juist daarom komen wij hier. De combinatie van vlak water, breed strand en side-onshore wind is in Nederland uniek.</div>
+    <div class="faq-q">Kan ik vanaf de parkeerplaats direct het water op?</div>
+    <div class="faq-a">Vanaf de BLOW-locatie aan de Westmadeweg sta je binnen 2 minuten op het zand.</div>
+    <div class="faq-q">Wat als er geen wind staat de dag dat ik boek?</div>
+    <div class="faq-a">We verplaatsen of geven een theorie-sessie. Ons weersoordeel doen we elke ochtend om 07:30.</div>
+
+    <p style="margin-top: 20px; padding-top: 14px; border-top: 1px solid var(--border); font-style: italic; color: var(--muted);">
+      <em>Volledige post + metadata: <span class="mono">posts/01-zandmotor-veiligheid.md</span></em>
+    </p>
+  </article>
+  <p class="print-hint">Zichtbaar in GitHub repo en optioneel te hosten via GitHub Pages.</p>
+</section>
+
+<!-- ============ DISTRIBUTIE ============ -->
+<section id="distributie">
+  <h2 class="section-title"><span class="badge">05</span>Distributie — één post wordt zes touchpoints</h2>
+  <p class="section-sub">De grote zwakte van vendor-oplossingen: zij stoppen na publicatie op de site. Wij niet.</p>
+
+  <div class="dist-hub">
+    <div class="dist-center">
+      <div class="bubble">1 blogpost</div>
+    </div>
+    <div class="dist-channels">
+      <div class="dist-ch"><span class="icon">🌐</span>blow.surf</div>
+      <div class="dist-ch"><span class="icon">📸</span>Instagram</div>
+      <div class="dist-ch"><span class="icon">👥</span>Facebook</div>
+      <div class="dist-ch"><span class="icon">💬</span>WhatsApp</div>
+      <div class="dist-ch"><span class="icon">📧</span>Nieuwsbrief</div>
+      <div class="dist-ch"><span class="icon">📍</span>Google Biz</div>
+    </div>
+    <p style="text-align: center; margin-top: 16px; font-size: 0.88rem; color: var(--muted);">
+      Handmatig nu, MAKE-geautomatiseerd in fase 2 (maand 4–6).
+    </p>
+  </div>
+</section>
+
+<!-- ============ KOSTEN ============ -->
+<section id="kosten">
+  <h2 class="section-title"><span class="badge">06</span>Kostenvergelijking — 3 jaar TCO</h2>
+  <p class="section-sub">Drie tabellen — cash, jaar 1 incl. team-tijd, en 3-jaar projectie. Alle uren à €60 voor opportunity-rekenwaarde, geen factuur.</p>
+
+  <div class="callout" style="margin-bottom: 24px; background: linear-gradient(135deg, var(--accent) 0%, #c44a00 100%);">
+    <h3>⚠ Lees deze tabellen niet als prijs-vergelijking</h3>
+    <p>Vendor en pilot leveren <strong>verschillende soorten investering</strong>. De cijfers zijn dezelfde munt-eenheid, niet hetzelfde product. Vendor = service-aankoop (OPEX), pilot = capability-opbouw (deels CAPEX). Lees de tabellen onderaan deze sectie ("Wat krijg je voor je investering?") naast de getallen.</p>
+  </div>
+
+  <h3 style="color: var(--deep); margin-bottom: 4px; font-size: 1.05rem;">A · Cash uit de deur</h3>
+  <p class="section-sub" style="margin-bottom: 12px; font-size: 0.88rem;">Alleen externe kosten — wat BLOW daadwerkelijk factureert/betaalt. Bram-uren = € 0 in jaar 1.</p>
+
+  <table class="data">
+    <thead>
+      <tr>
+        <th>Scenario</th>
+        <th>Jaar 1</th>
+        <th>Jaar 2</th>
+        <th>Jaar 3</th>
+        <th>3-jaar TCO</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Alleen vendor (WP SEO AI Basic)</td>
+        <td class="num">€11.440</td>
+        <td class="num">€7.680</td>
+        <td class="num">€7.680</td>
+        <td class="num">€26.800</td>
+      </tr>
+      <tr class="highlight">
+        <td>Pilot — eigen systeem (Bram € 0 jaar 1)</td>
+        <td class="num">€2.445</td>
+        <td class="num">€5.445</td>
+        <td class="num">€5.445</td>
+        <td class="num">€13.335</td>
+      </tr>
+      <tr>
+        <td>Hybride (vendor jaar 1 + pilot parallel)</td>
+        <td class="num">€13.885</td>
+        <td class="num">€5.445</td>
+        <td class="num">€5.445</td>
+        <td class="num">€24.775</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3 style="color: var(--deep); margin-top: 28px; margin-bottom: 4px; font-size: 1.05rem;">B · Inclusief BLOW team-tijd (à € 60/u)</h3>
+  <p class="section-sub" style="margin-bottom: 12px; font-size: 0.88rem;">Eerlijke vergelijking: review + coaching kost ook tijd, ongeacht welke route. Ook bij vendor moet iemand drafts beoordelen.</p>
+
+  <table class="data">
+    <thead>
+      <tr>
+        <th>Scenario</th>
+        <th>BLOW-uren / jaar</th>
+        <th>Tijd-kosten</th>
+        <th>+ Cash</th>
+        <th>= Totaal jaar 1</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Vendor + interne review (ca. 120u)</td>
+        <td class="num">~120</td>
+        <td class="num">€7.200</td>
+        <td class="num">€11.440</td>
+        <td class="num">€18.640</td>
+      </tr>
+      <tr class="highlight">
+        <td>Pilot — strategie + admin + marketing (265u)</td>
+        <td class="num">~265</td>
+        <td class="num">€15.900</td>
+        <td class="num">€2.445</td>
+        <td class="num">€18.345</td>
+      </tr>
+      <tr>
+        <td>Hybride</td>
+        <td class="num">~385</td>
+        <td class="num">€23.100</td>
+        <td class="num">€13.885</td>
+        <td class="num">€36.985</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p style="margin-top: 10px; font-size: 0.82rem; color: var(--muted); font-style: italic;">
+    Pilot-uren-verdeling: Strategie ≈ 65u (2,5u / 2wk) · Administratie ≈ 50u (2u / 2wk) · Marketing ≈ 150u (3u / wk).
+    Vendor-uren ≈ 10u review per maand × 12.
+  </p>
+
+  <h3 style="color: var(--deep); margin-top: 28px; margin-bottom: 4px; font-size: 1.05rem;">C · 3-jaar projectie inclusief team-tijd</h3>
+  <p class="section-sub" style="margin-bottom: 12px; font-size: 0.88rem;">Pilot-tijd schaalt af na bouw-fase: jaar 2-3 minder review-druk omdat systeem draait. Vendor blijft in jaar 2-3 gelijk doorlopen.</p>
+
+  <table class="data">
+    <thead>
+      <tr>
+        <th>Scenario</th>
+        <th>Jaar 1</th>
+        <th>Jaar 2</th>
+        <th>Jaar 3</th>
+        <th>3-jaar TCO</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Vendor + review</td>
+        <td class="num">€18.640</td>
+        <td class="num">€14.880</td>
+        <td class="num">€14.880</td>
+        <td class="num">€48.400</td>
+      </tr>
+      <tr class="highlight">
+        <td>Pilot — totaal incl. team-tijd</td>
+        <td class="num">€18.345</td>
+        <td class="num">€13.605</td>
+        <td class="num">€11.445</td>
+        <td class="num">€43.395</td>
+      </tr>
+      <tr>
+        <td>Hybride</td>
+        <td class="num">€36.985</td>
+        <td class="num">€13.605</td>
+        <td class="num">€11.445</td>
+        <td class="num">€62.035</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p style="margin-top: 10px; font-size: 0.82rem; color: var(--muted); font-style: italic;">
+    Pilot jaar 2-3 aannames: team-tijd schaalt af (jaar 2: ~135u · jaar 3: ~100u) want systeem draait + distributie geautomatiseerd. Bram jaar 2-3: ~50u onderhoud à €60 = €3.000 cash (afhankelijk van eind-stap-1-besluit). Vendor jaar 2-3 = €7.680 licentie + 120u review.
+  </p>
+
+  <div class="grid-2" style="margin-top: 22px;">
+    <div class="card green">
+      <h3>💡 Cash-besparing pilot vs vendor</h3>
+      <p><strong>€8.995 jaar 1 · €13.465 over 3 jaar</strong> aan échte facturen. Geen vendor-licentie, alleen tools-stack.</p>
+    </div>
+    <div class="card green">
+      <h3>✅ Pilot is óók in totaal goedkoper</h3>
+      <p><strong>−€295 jaar 1 · −€5.005 over 3 jaar</strong> incl. team-tijd. Pilot wint nu zowel op cash als op totaal — én levert capability erbij.</p>
+    </div>
+  </div>
+
+  <div class="grid-3" style="margin-top: 14px;">
+    <div class="card">
+      <h3>📉 Pilot-tijd schaalt af</h3>
+      <p>265u → 135u → 100u over 3 jaar. Systeem draait zelfstandiger naarmate templates + automatisering rijpen.</p>
+    </div>
+    <div class="card accent">
+      <h3>📈 Vendor-kosten blijven</h3>
+      <p>€7.680 licentie + 120u review elk jaar. 'Review-uren', geen 'capability-uren' — niets bouwt zich op.</p>
+    </div>
+    <div class="card green">
+      <h3>♾ Jaar 4+ effect</h3>
+      <p>Vendor: €14.880/jr door, oneindig. Pilot: ~€10.000/jr op kruissnelheid, alles in eigen huis.</p>
+    </div>
+  </div>
+
+  <div class="callout" style="margin-top: 18px;">
+    <h3>Hoe deze cijfers te lezen</h3>
+    <p>Pilot wint nu zowel op cash (−€8.995 jaar 1) als op totaal incl. tijd (−€295 jaar 1, −€5.005 over 3 jaar). De getallen alléén vertellen niet het hele verhaal — wat je voor dat bedrag krijgt verschilt fundamenteel per route. Lees de matrix hieronder.</p>
+  </div>
+
+  <h3 style="color: var(--deep); margin-top: 32px; margin-bottom: 4px; font-size: 1.05rem;">Wat krijg je voor je investering?</h3>
+  <p class="section-sub" style="margin-bottom: 16px; font-size: 0.88rem;">De grote variabelen die niet in een € te vatten zijn. Dit is waar de keuze écht over gaat.</p>
+
+  <div class="onpage-table-wrap" style="overflow-x: auto;">
+  <table class="data" style="font-size: 0.86rem;">
+    <thead>
+      <tr>
+        <th style="text-align:left; min-width: 180px;">Variabele</th>
+        <th style="min-width: 220px;">Vendor levert</th>
+        <th style="min-width: 220px;">Pilot levert</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="text-align:left; font-weight: 700; color: var(--deep);">Type uitgave</td>
+        <td>OPEX — terugkerende service-aankoop</td>
+        <td>CAPEX — eenmalige capability-opbouw</td>
+      </tr>
+      <tr>
+        <td style="text-align:left; font-weight: 700; color: var(--deep);">Eigendom systeem</td>
+        <td>Vendor — jij huurt het</td>
+        <td>BLOW — jij bezit het</td>
+      </tr>
+      <tr>
+        <td style="text-align:left; font-weight: 700; color: var(--deep);">Eigendom content</td>
+        <td>Op jouw site, batch-gemaakt</td>
+        <td>Eigen redactie + archief, exporteerbaar</td>
+      </tr>
+      <tr>
+        <td style="text-align:left; font-weight: 700; color: var(--deep);">Wat blijft na 12 mnd?</td>
+        <td>Posts + jaarlijks abonnement</td>
+        <td>Posts + skills + repo + automation + meet-systeem</td>
+      </tr>
+      <tr>
+        <td style="text-align:left; font-weight: 700; color: var(--deep);">Tijd-curve</td>
+        <td>Lineair — elk jaar gelijk werk</td>
+        <td>Front-loaded — jaar 1 zwaar, daarna afschalend</td>
+      </tr>
+      <tr>
+        <td style="text-align:left; font-weight: 700; color: var(--deep);">Departement-dekking</td>
+        <td>Vermoedelijk kitesurf-only (zoals huidige 14/15 posts)</td>
+        <td>3 departementen vanaf maand 1</td>
+      </tr>
+      <tr>
+        <td style="text-align:left; font-weight: 700; color: var(--deep);">Marketing-discipline</td>
+        <td>Niet — je consumeert externe output</td>
+        <td>Wel — review-rol leert door te sturen</td>
+      </tr>
+      <tr>
+        <td style="text-align:left; font-weight: 700; color: var(--deep);">Stop-impact</td>
+        <td>Content blijft, methodiek + tools weg</td>
+        <td>Alles blijft, jij draait door of bevriest</td>
+      </tr>
+      <tr>
+        <td style="text-align:left; font-weight: 700; color: var(--deep);">Strategische upside</td>
+        <td>Verlengen of stoppen — geen evolutie</td>
+        <td>Equity / productisering / exit open</td>
+      </tr>
+      <tr style="background: var(--sand-light);">
+        <td style="text-align:left; font-weight: 700; color: var(--deep);">Kernvraag</td>
+        <td><em>"Wil BLOW een leverancier?"</em></td>
+        <td><em>"Wil BLOW capability bouwen?"</em></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="callout" style="margin-top: 22px;">
+    <h3>De vier doorslaggevende variabelen voor BLOW</h3>
+    <p>
+      <strong>1. Capability-opbouw vs review-consumptie</strong> — Vendor maakt jullie betere content-consumenten, pilot betere content-makers.<br>
+      <strong>2. Eigendom + stop-impact</strong> — Pilot-stop laat alles achter (repo, MAKE, blueprints, content). Vendor-stop laat alleen content.<br>
+      <strong>3. Departement-dekking</strong> — Audit liet zien: 14/15 posts kitesurf, restaurant + events 0. Pilot ontwerpt vanaf dag 1 voor drie departementen.<br>
+      <strong>4. Strategische upside</strong> — Pilot kan evolueren naar productisering, retainer, equity. Vendor blijft service-aankoop.
+    </p>
+  </div>
+
+  <p style="margin-top: 18px; font-size: 0.82rem; color: var(--muted);">
+    <em>Eigen stack jaar 1: MAKE Pro €240 + Claude Max 5× €1.080 + 2chat €300 + GitHub Enterprise 2 seats €465 + OpenAI (licht gebruik) €360 = €2.445 tools.</em>
+  </p>
+</section>
+
+<!-- ============ SAMENWERKING ============ -->
+<section id="samenwerking">
+  <h2 class="section-title"><span class="badge">07</span>Samenwerkingsvoorstel</h2>
+  <p class="section-sub">Ik factureer geen uren in jaar 1. Jij draagt de infrastructuur. We coachen elkaar. KPI's stellen we samen op.</p>
+
+  <div class="proposal-grid">
+    <div class="prop-card give">
+      <div class="label">Ik breng in</div>
+      <h3>Werk + systeem</h3>
+      <ul>
+        <li><strong>4–8 uur per week</strong> — bouw, content, distributie, optimalisatie</li>
+        <li><strong>Geen factuur</strong> voor mijn tijd in jaar 1</li>
+        <li>Versiebeheer + documentatie in GitHub</li>
+        <li>Eigendom van alle output blijft bij BLOW</li>
+        <li>Boven 8u/week → €60/u (alleen op verzoek Toine)</li>
+      </ul>
+    </div>
+    <div class="prop-card take">
+      <div class="label">BLOW brengt in</div>
+      <h3>Tools + team-tijd</h3>
+      <ul>
+        <li><strong>Tools (cash):</strong> ≈ € 2.445 / jaar</li>
+        <li style="padding-left: 32px; font-size: 0.84rem; color: var(--muted);">MAKE Pro €240 · Claude Max 5× €1.080 · 2chat €300 · GitHub Ent (2 seats) €465 · image API €360 <em>(MAKE-account op naam Bram, BLOW-data toegankelijk)</em></li>
+        <li><strong>Team-tijd (intern, à € 60/u):</strong> ≈ € 15.900 / jaar</li>
+        <li style="padding-left: 32px; font-size: 0.84rem; color: var(--muted);">Strategie ~2,5u / 2 weken · Administratie ~2u / 2 weken · Marketing ~3u / week — drie review-rollen voor kruisbestuiving + continuïteit</li>
+      </ul>
+      <div class="total" style="display:grid; grid-template-columns: 1fr auto; gap:6px; text-align:left; font-weight:600;">
+        <span style="color: var(--muted);">Cash-investering:</span><span style="color: var(--deep);">≈ € 2.445</span>
+        <span style="color: var(--muted);">Team-tijd (opportunity):</span><span style="color: var(--deep);">≈ € 15.900</span>
+        <span style="color: var(--accent); font-weight:700;">Totaal jaar 1:</span><span style="color: var(--accent); font-weight:800; font-size: 1.1rem;">≈ € 18.345</span>
+      </div>
+    </div>
+  </div>
+
+  <h3 style="color:var(--deep); margin-top: 32px; margin-bottom: 6px;">Team aan tafel — rolverdeling</h3>
+  <p class="section-sub" style="margin-bottom: 14px;">Niet één coach, maar drie review-rollen naast Bram. Continuïteit als één afhaakt, kruisbestuiving van expertises.</p>
+
+  <div class="kpi-grid" style="grid-template-columns: repeat(4, 1fr);">
+    <div class="kpi-cat" style="border-left-color: var(--accent);">
+      <div class="lbl" style="color: var(--accent);">Bouw</div>
+      <h4>Software + Content</h4>
+      <ul style="list-style: none; padding: 0;">
+        <li style="padding-left: 0;">Automation + systeem</li>
+        <li style="padding-left: 0;">Content-productie</li>
+        <li style="padding-left: 0;">SEO/GEO-pipeline</li>
+        <li style="padding-left: 0;">Distributie</li>
+      </ul>
+    </div>
+    <div class="kpi-cat">
+      <div class="lbl">Strategie</div>
+      <h4>Product + Visie</h4>
+      <ul style="list-style: none; padding: 0;">
+        <li style="padding-left: 0;">~2,5u / 2 weken</li>
+        <li style="padding-left: 0;">Product-strategie</li>
+        <li style="padding-left: 0;">Business-model coaching</li>
+        <li style="padding-left: 0;">Eind-review content</li>
+      </ul>
+    </div>
+    <div class="kpi-cat" style="border-left-color: var(--green);">
+      <div class="lbl" style="color: var(--green);">Continuïteit</div>
+      <h4>Administratie</h4>
+      <ul style="list-style: none; padding: 0;">
+        <li style="padding-left: 0;">~2u / 2 weken</li>
+        <li style="padding-left: 0;">Operationele kennis + admin</li>
+        <li style="padding-left: 0;">Klant- en team-context</li>
+        <li style="padding-left: 0;">Reviewer events/restaurant</li>
+      </ul>
+    </div>
+    <div class="kpi-cat" style="border-left-color: var(--amber, #d97706);">
+      <div class="lbl" style="color: var(--amber, #d97706);">Marketing</div>
+      <h4>Commercieel</h4>
+      <ul style="list-style: none; padding: 0;">
+        <li style="padding-left: 0;">~3u / week</li>
+        <li style="padding-left: 0;">Pure marketing-ervaring</li>
+        <li style="padding-left: 0;">Content/distributie-review</li>
+        <li style="padding-left: 0;">Doelgroep-validatie</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout" style="margin-top: 18px;">
+    <h3>Waarom drie review-rollen i.p.v. één</h3>
+    <p><strong>Kennis:</strong> drie kritieke review-hoeken (product / operations / marketing) dekken samen de blinde vlekken van één coach. <strong>Continuïteit:</strong> als één afhaakt blijft het traject doorlopen. <strong>Kruisbestuiving:</strong> review vanuit drie perspectieven = scherpere output dan één-op-één.</p>
+  </div>
+
+  <h3 style="color:var(--deep); margin-top: 28px; margin-bottom: 6px;">KPI's — samen formuleren</h3>
+  <p class="section-sub" style="margin-bottom: 14px;">Ik prefer niet vooraf vast. Tijdens kick-off kiezen we 4–6 KPI's verdeeld over deze 5 categorieën. Je vinkt aan wat past.</p>
+
+  <div class="kpi-grid">
+    <div class="kpi-cat">
+      <div class="lbl">A · Volume</div>
+      <h4>Output</h4>
+      <ul>
+        <li>Gepubliceerde posts</li>
+        <li>Onderwerpen gedekt</li>
+        <li>Distributie-touchpoints</li>
+      </ul>
+    </div>
+    <div class="kpi-cat">
+      <div class="lbl">B · Vindbaar</div>
+      <h4>SEO + GEO</h4>
+      <ul>
+        <li>Organisch verkeer</li>
+        <li>Top-10 rankings</li>
+        <li>AI-overview citaties</li>
+        <li>Click-through rate</li>
+      </ul>
+    </div>
+    <div class="kpi-cat">
+      <div class="lbl">C · Business</div>
+      <h4>Resultaat</h4>
+      <ul>
+        <li>Leads met attributie</li>
+        <li>Boekingen via online</li>
+        <li>Omzet via online kanaal</li>
+      </ul>
+    </div>
+    <div class="kpi-cat">
+      <div class="lbl">D · Operatie</div>
+      <h4>Efficiëntie</h4>
+      <ul>
+        <li>Tijd per post</li>
+        <li>Reviewbelasting Toine</li>
+        <li>Foutmarge / herstelwerk</li>
+      </ul>
+    </div>
+    <div class="kpi-cat">
+      <div class="lbl">E · Lange termijn</div>
+      <h4>Strategisch</h4>
+      <ul>
+        <li>Documentatie compleet</li>
+        <li>Aantal scenario's productief</li>
+        <li>Replicabel voor 2e klant</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="open-points">
+    <h4>Spelregels</h4>
+    <ul>
+      <li><strong>Boven 8u/week werk</strong> = € 60/u, alleen op verzoek BLOW</li>
+      <li><strong>Coaching verdeeld over 3 BLOW-rollen</strong> (strategie / ops / marketing) — flexibel naar gelang behoefte</li>
+      <li><strong>Eigendomsstructuur</strong> wordt besloten na evaluatie van stap 1 (≈ maand 4)</li>
+      <li>Tot eigendomsbesluit: <strong>alle informatie vrij beschikbaar</strong> tussen partijen</li>
+      <li class="todo">Bij stoppen door één van de partijen: <strong>bereikte informatie wordt gedeeld</strong> — geen lock-out</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ FASERING ============ -->
+<section id="fasering">
+  <h2 class="section-title"><span class="badge">08</span>Fasering — 4 stappen × 4 maanden</h2>
+  <p class="section-sub">16 maanden totaal. Elke stap heeft eigen doel en eigen toolset. Aan het eind van stap 1 (≈ maand 4) bespreken we eigendomsstructuur en go/no-go voor stap 2.</p>
+
+  <div class="gantt-wrap">
+    <div class="gantt">
+      <!-- Header row: kwartaal-labels -->
+      <div class="gh-label">Periode</div>
+      <div class="gh-quarter" style="grid-column: 2 / 6">Stap 1 · m1–4</div>
+      <div class="gh-quarter" style="grid-column: 6 / 10">Stap 2 · m5–8</div>
+      <div class="gh-quarter" style="grid-column: 10 / 14">Stap 3 · m9–12</div>
+      <div class="gh-quarter" style="grid-column: 14 / 18">Stap 4 · m13–16</div>
+
+      <!-- Maand-headers -->
+      <div class="gh-label"></div>
+      <div class="gh-month">1</div><div class="gh-month">2</div><div class="gh-month">3</div><div class="gh-month">4</div>
+      <div class="gh-month">5</div><div class="gh-month">6</div><div class="gh-month">7</div><div class="gh-month">8</div>
+      <div class="gh-month">9</div><div class="gh-month">10</div><div class="gh-month">11</div><div class="gh-month">12</div>
+      <div class="gh-month">13</div><div class="gh-month">14</div><div class="gh-month">15</div><div class="gh-month">16</div>
+
+      <div class="gantt-section-head">Stappen</div>
+
+      <!-- Phase bars -->
+      <div class="row-label">1 · Bouw + bewijs<span class="sub">infrastructuur, eerste 12–15 posts, baseline-meting</span></div>
+      <div class="bar p1" style="grid-column: 2 / 6">Stap 1</div>
+
+      <div class="row-label">2 · Schaal + automatisering<span class="sub">distributie-automation, alle 5 scenario's productief</span></div>
+      <div class="bar p2" style="grid-column: 6 / 10">Stap 2</div>
+
+      <div class="row-label">3 · Optimalisatie + attributie<span class="sub">GA4-attributie, refresh-flow, ROI-bewijs</span></div>
+      <div class="bar p3" style="grid-column: 10 / 14">Stap 3</div>
+
+      <div class="row-label">4 · Productisering / replicatie<span class="sub">geanonimiseerd template, 2e klant pilot, business-model</span></div>
+      <div class="bar p4" style="grid-column: 14 / 18">Stap 4</div>
+
+      <div class="gantt-section-head">Tools per fase</div>
+
+      <div class="row-label">GitHub Enterprise<span class="sub">repo + Pages + actions</span></div>
+      <div class="tool" style="grid-column: 2 / 18"></div>
+
+      <div class="row-label">MAKE Pro<span class="sub">scenario-orchestratie</span></div>
+      <div class="tool" style="grid-column: 2 / 18"></div>
+
+      <div class="row-label">Claude Max 5× + Sheet<span class="sub">content-generatie, command center</span></div>
+      <div class="tool" style="grid-column: 2 / 18"></div>
+
+      <div class="row-label">WordPress + GSC + GA4<span class="sub">publicatie + meting</span></div>
+      <div class="tool" style="grid-column: 2 / 18"></div>
+
+      <div class="row-label">Image API (OpenAI/Pexels)<span class="sub">hero-images vanaf m3</span></div>
+      <div class="tool" style="grid-column: 4 / 18"></div>
+
+      <div class="row-label">2chat (WhatsApp)<span class="sub">distributie vanaf stap 2</span></div>
+      <div class="tool late" style="grid-column: 6 / 18"></div>
+
+      <div class="row-label">Mailchimp / nieuwsbrief<span class="sub">distributie vanaf stap 2</span></div>
+      <div class="tool late" style="grid-column: 6 / 18"></div>
+
+      <div class="row-label">Attribution + dashboard<span class="sub">UTM, conversies, ROI vanaf stap 3</span></div>
+      <div class="tool late" style="grid-column: 10 / 18"></div>
+
+      <div class="row-label">Demo-stack 2e klant<span class="sub">replicatie + sales tooling stap 4</span></div>
+      <div class="tool late" style="grid-column: 14 / 18"></div>
+
+      <div class="gantt-section-head">Meetings + documentatie · stap 1</div>
+
+      <div class="row-label">Agenda's M1–M9<span class="sub">2-wkly · ma 17:00</span></div>
+      <div class="meeting-track" style="grid-column: 2 / 6">
+        <a href="./" class="m-marker active" title="M1 · ma 29 apr · Beach House">M1</a>
+        <a href="#" class="m-marker future" title="M2 · ma 11 mei · online">M2</a>
+        <a href="#" class="m-marker future" title="M3 · ma 25 mei · Bram">M3</a>
+        <a href="#" class="m-marker future" title="M4 · ma 8 jun · online">M4</a>
+        <a href="#" class="m-marker future" title="M5 · ma 22 jun · Beach House">M5</a>
+        <a href="#" class="m-marker future" title="M6 · ma 6 jul · online">M6</a>
+        <a href="#" class="m-marker future" title="M7 · ma 20 jul · Bram">M7</a>
+        <a href="#" class="m-marker future" title="M8 · ma 3 aug · online">M8</a>
+        <a href="#" class="m-marker future eval" title="M9 · ma 17 aug · eind stap 1">M9★</a>
+      </div>
+
+      <div class="row-label">Notulen M1–M9<span class="sub">na elke meeting</span></div>
+      <div class="meeting-track notulen" style="grid-column: 2 / 6">
+        <a href="m1-notulen.html" class="m-marker doc" title="Notulen M1">N1</a>
+        <span class="m-marker doc future" title="Notulen M2">N2</span>
+        <span class="m-marker doc future" title="Notulen M3">N3</span>
+        <span class="m-marker doc future" title="Notulen M4">N4</span>
+        <span class="m-marker doc future" title="Notulen M5">N5</span>
+        <span class="m-marker doc future" title="Notulen M6">N6</span>
+        <span class="m-marker doc future" title="Notulen M7">N7</span>
+        <span class="m-marker doc future" title="Notulen M8">N8</span>
+        <span class="m-marker doc future eval" title="Notulen M9 · evaluatie">N9★</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid-2" style="margin-top: 22px;">
+    <div class="card">
+      <h3>🎯 Doel per stap</h3>
+      <p><strong>Stap 1:</strong> systeem werkt + eerste meetbare output<br>
+      <strong>Stap 2:</strong> volume opbouwen, distributie geautomatiseerd<br>
+      <strong>Stap 3:</strong> ROI aantoonbaar, KPI's gehaald<br>
+      <strong>Stap 4:</strong> replicatie bewijst business-model</p>
+    </div>
+    <div class="card accent">
+      <h3>🤝 Beslismomenten</h3>
+      <p><strong>Eind stap 1 (≈ m4):</strong> eigendomsstructuur + go/no-go stap 2<br>
+      <strong>Eind stap 2 (m8):</strong> KPI-review<br>
+      <strong>Eind stap 3 (m12):</strong> jaar 1 evaluatie + jaar 2 afspraak<br>
+      <strong>Eind stap 4 (m16):</strong> commerciële roll-out wel/niet</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RISICO ============ -->
+<section id="risico">
+  <h2 class="section-title"><span class="badge">09</span>Risico's en ontsnappingsroutes</h2>
+  <p class="section-sub">Geen verstopte risico's. Dit is wat er mis kan gaan en wat we dan doen.</p>
+
+  <div class="risk-list">
+    <div class="risk-item">
+      <h4>Geen meetbare resultaten in stap 1 (4 maanden)</h4>
+      <p>Geen verplichting om door te gaan. Geen factuur voor mijn tijd in jaar 1, dus jij verliest alleen tools-investering en coaching-uren.</p>
+      <div class="mitigation"><strong>Ontsnapping:</strong> alle bereikte info wordt gedeeld. Posts, sheet, blueprints — alles bij jou.</div>
+    </div>
+    <div class="risk-item">
+      <h4>Coaching valt weg (één van de 3 review-rollen haakt af)</h4>
+      <p>Drie review-rollen met verschillende expertise = ingebouwde redundantie. Een uitval verlaagt cadans iets, blokkeert het traject niet.</p>
+      <div class="mitigation"><strong>Ontsnapping:</strong> herafspraak met overige twee; bij definitief geen coaching uit minimaal twee hoeken schaalt mijn werk-inzet evenredig terug.</div>
+    </div>
+    <div class="risk-item">
+      <h4>Ik val uit / stop</h4>
+      <p>Alle documentatie in GitHub. MAKE-scenario's zijn standaard-bouwstenen. Elke ontwikkelaar kan overnemen.</p>
+      <div class="mitigation"><strong>Ontsnapping:</strong> jij bezit repo, sheet, WP- en bookings-toegang; MAKE-account staat op naam Bram maar BLOW-data is exporteerbaar. Bij stop: alle bereikte info gedeeld.</div>
+    </div>
+    <div class="risk-item">
+      <h4>Google verschuift naar LLM-zoekverkeer</h4>
+      <p>Dit systeem is gebouwd met GEO in gedachten — TL;DR, FAQ, structured data worden door AI-overviews opgepakt.</p>
+      <div class="mitigation"><strong>Ontsnapping:</strong> aanpak werkt in beide werelden; per kwartaal kijken we welke bronnen verkeer leveren.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ VRAAGTEKENS ============ -->
+<section id="vraagtekens">
+  <h2 class="section-title"><span class="badge">10</span>Vraagtekens — gesprekstof voor woensdag</h2>
+  <p class="section-sub">Punten die nog open zijn. Niet op te lossen vooraf — bedoeld om samen door te lopen. Geen verkeerde antwoorden, wel beter doordachte.</p>
+
+  <div class="kpi-grid" style="grid-template-columns: repeat(2, 1fr);">
+
+    <div class="kpi-cat" style="border-left-color: var(--accent);">
+      <div class="lbl" style="color: var(--accent);">? · Reviewers</div>
+      <h4>Wie reviewt content vanuit welke hoek?</h4>
+      <ul style="list-style: none; padding: 0;">
+        <li style="padding-left: 0;">Wie krijgt strategie-coaching-rol?</li>
+        <li style="padding-left: 0;">Wie ops/continuïteit?</li>
+        <li style="padding-left: 0;">Wie marketing-discipline?</li>
+        <li style="padding-left: 0;">Frequentie + kanaal van overleg</li>
+      </ul>
+    </div>
+
+    <div class="kpi-cat" style="border-left-color: var(--sea);">
+      <div class="lbl" style="color: var(--sea);">? · KPI's</div>
+      <h4>Welke 4–6 KPI's kiezen we?</h4>
+      <ul style="list-style: none; padding: 0;">
+        <li style="padding-left: 0;">Per categorie kiezen of mixen?</li>
+        <li style="padding-left: 0;">Streefcijfers wel of niet vooraf?</li>
+        <li style="padding-left: 0;">Hoe vaak meten — wekelijks / maandelijks?</li>
+        <li style="padding-left: 0;">Wat is "geslaagd" einde stap 1?</li>
+      </ul>
+    </div>
+
+    <div class="kpi-cat" style="border-left-color: var(--green);">
+      <div class="lbl" style="color: var(--green);">? · Eigendom</div>
+      <h4>Hoe verdelen we eigendom na stap 1?</h4>
+      <ul style="list-style: none; padding: 0;">
+        <li style="padding-left: 0;">Content + data = BLOW (akkoord)</li>
+        <li style="padding-left: 0;">Methodiek + blueprints = ?</li>
+        <li style="padding-left: 0;">Mag Bram template hergebruiken?</li>
+        <li style="padding-left: 0;">Royalty-structuur jaar 2+?</li>
+      </ul>
+    </div>
+
+    <div class="kpi-cat" style="border-left-color: var(--amber, #d97706);">
+      <div class="lbl" style="color: var(--amber, #d97706);">? · Data + toegang</div>
+      <h4>Welke toegang krijg ik (Bram) tot welke data?</h4>
+      <ul style="list-style: none; padding: 0;">
+        <li style="padding-left: 0;">Google Search Console</li>
+        <li style="padding-left: 0;">GA4 / Tag Manager</li>
+        <li style="padding-left: 0;">Viking Bookings (API of export)</li>
+        <li style="padding-left: 0;">WordPress admin / editor</li>
+        <li style="padding-left: 0;">Google Business Profile</li>
+      </ul>
+    </div>
+
+    <div class="kpi-cat" style="border-left-color: var(--red);">
+      <div class="lbl" style="color: var(--red);">? · Vendor-keuze</div>
+      <h4>Wat doen we met de vendor-pitch?</h4>
+      <ul style="list-style: none; padding: 0;">
+        <li style="padding-left: 0;">Niet tekenen + alleen pilot? (advies)</li>
+        <li style="padding-left: 0;">Wachten 4 maanden + dan kijken?</li>
+        <li style="padding-left: 0;">Wat is BLOW's deadline-druk vanuit hen?</li>
+        <li style="padding-left: 0;">Wie zegt 'nee' tegen vendor?</li>
+      </ul>
+    </div>
+
+    <div class="kpi-cat" style="border-left-color: var(--sea-light);">
+      <div class="lbl" style="color: var(--sea-light);">? · Publicatie-flow</div>
+      <h4>Wie heeft welk veto op publicatie?</h4>
+      <ul style="list-style: none; padding: 0;">
+        <li style="padding-left: 0;">Goedkeuring per post of per batch?</li>
+        <li style="padding-left: 0;">Reviewer per departement?</li>
+        <li style="padding-left: 0;">Wie publiceert uiteindelijk?</li>
+        <li style="padding-left: 0;">SLA voor review-reactie</li>
+      </ul>
+    </div>
+
+    <div class="kpi-cat" style="border-left-color: var(--deep);">
+      <div class="lbl" style="color: var(--deep);">? · Talen</div>
+      <h4>NL alleen of ook EN/DE?</h4>
+      <ul style="list-style: none; padding: 0;">
+        <li style="padding-left: 0;">Hoe groot is internationale doelgroep?</li>
+        <li style="padding-left: 0;">EN/DE handmatig of geautomatiseerd?</li>
+        <li style="padding-left: 0;">Stap 1 alleen NL of meertalig vanaf start?</li>
+        <li style="padding-left: 0;">Wie reviewt EN/DE content?</li>
+      </ul>
+    </div>
+
+    <div class="kpi-cat" style="border-left-color: var(--accent-soft); background: var(--sand-light);">
+      <div class="lbl" style="color: var(--accent);">? · Brand-positionering</div>
+      <h4>"BLOW Beach House" vs concurrent</h4>
+      <ul style="list-style: none; padding: 0;">
+        <li style="padding-left: 0;">Naamconflict met beachhousekijkduin.nl</li>
+        <li style="padding-left: 0;">Sterk inzetten op kort merk "BLOW"?</li>
+        <li style="padding-left: 0;">Of full-out "BLOW Beach House"?</li>
+        <li style="padding-left: 0;">SEO-implicaties van keuze</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="open-points" style="margin-top: 24px;">
+    <h4>Hoe gebruiken we deze vragen woensdag?</h4>
+    <ul>
+      <li>Niet op één avond opgelost — wel <strong>richting</strong> per vraag</li>
+      <li>Antwoorden mogen <strong>"weet ik nog niet"</strong> zijn — dan plannen we de juiste mensen erbij in week 1</li>
+      <li>Vragen die <strong>vóór stap 1 een antwoord nodig hebben</strong>: Vendor-keuze + Data-toegang + Reviewer-rollen</li>
+      <li>Vragen die <strong>tot eind stap 1 open mogen blijven</strong>: Eigendom + Brand-positionering + Talen</li>
+      <li>Bram noteert antwoorden in een gespreksverslag — dat wordt onderdeel van de schriftelijke afspraak later deze maand</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ BESLISSING ============ -->
+<section id="beslissing">
+  <h2 class="section-title"><span class="badge">11</span>Beslissing — wat zou ik graag vandaag horen</h2>
+
+  <div class="decision">
+    <h3>Drie gespreksvragen voor woensdag</h3>
+    <p>Geen definitief antwoord nodig — wel richting. Deze drie zaken vormen het fundament voor een schriftelijke afspraak later deze maand.</p>
+
+    <div class="decision-options">
+      <div class="decision-opt">
+        <div class="num">1</div>
+        <h5>Akkoord op de structuur?</h5>
+        <p>4–8u/week werk, geen factuur jaar 1, jij draagt tools (≈ €2.450/jr) + 2–3u coaching per 2 weken. Vendor wordt niet getekend.</p>
+      </div>
+      <div class="decision-opt">
+        <div class="num">2</div>
+        <h5>KPI-sessie inplannen?</h5>
+        <p>In week 1 plannen we 1u om samen 4–6 KPI's te formuleren uit de 5 categorieën (volume / SEO / business / operatie / strategisch).</p>
+      </div>
+      <div class="decision-opt">
+        <div class="num">3</div>
+        <h5>Stap 1 starten — coach erbij?</h5>
+        <p>Coaching jij zelf óf iemand uit jouw netwerk. Eigendomsstructuur besluiten we eind stap 1 (≈ maand 4). Tot dan: open en gedeeld.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p><strong>BLOW Pilot v2.0</strong> · opgesteld door Bram Overgaag · april 2026</p>
+  <p>Bestanden: <span class="mono">posts/</span>, <span class="mono">audit-2026-04-27.md</span>, <span class="mono">distributie/</span>, <span class="mono">content-queue-seed.csv</span></p>
+  <p style="margin-top: 8px; font-style: italic;">Dit document live te hosten via GitHub Pages / Cloudflare Pages.</p>
+</footer>
+
+</div><!-- /.container -->
+</div><!-- /.wrap -->
+
+<script>
+// ---------- Interactive pipeline ----------
+const pipeSteps = {
+  1: {
+    title: "Audit + signaal",
+    text: "GSC registreert queries waar blow.surf op positie 11–25 staat — bijna pagina 1. Die worden automatisch gesignaleerd als refresh-kandidaten. Daarnaast voegt Toine ideeën handmatig toe.",
+    inLabel: "Input",
+    inVal: "GSC: query 'kitesurfen zandmotor', pos 14, 210 imp/mnd\nToine: 'trouwen op strand — nieuwe content'",
+    outLabel: "Output naar sheet",
+    outVal: "ContentQueue.row: status=ready_for_brief, priority=high"
+  },
+  2: {
+    title: "Brief",
+    text: "Scenario 2 maakt een content-brief van elke nieuwe queue-regel: primary + secondary keywords, doelgroep, lengte, interne links, CTA's. Claude krijgt deze brief als context.",
+    inLabel: "Input uit sheet",
+    inVal: "keyword: kitesurfen zandmotor\naudience: beginners\ntype: spot-guide\ntarget: 950 woorden",
+    outLabel: "Brief naar Claude",
+    outVal: "Schrijf E-E-A-T spot-guide in NL,\nvolg BLOW stijlgids,\nincludeer FAQ + tabel,\ninterne links → /kitesurfles"
+  },
+  3: {
+    title: "Draft",
+    text: "Claude genereert de volledige post als markdown. Draft komt terug in de sheet met status 'draft_ready_for_review'. Toine krijgt een mail met preview-link. Review = 5–10 min per post.",
+    inLabel: "Input",
+    inVal: "brief + BLOW stijlgids + bestaande posts als voorbeeld",
+    outLabel: "Output in sheet",
+    outVal: "title, meta, body_markdown, faq_json\nstatus: draft_ready_for_review"
+  },
+  4: {
+    title: "Publicatie",
+    text: "Zodra Toine de draft goedkeurt (status=approved), pusht scenario 3 naar WordPress via REST API. Hero-image via DALL·E of gekozen uit Pexels. Yoast-meta automatisch ingevuld. Status: wp_draft_created.",
+    inLabel: "Input",
+    inVal: "approved draft uit sheet",
+    outLabel: "Output",
+    outVal: "WP draft met meta, hero, schema.org\npost_id + preview_url terug in sheet"
+  },
+  5: {
+    title: "Distributie",
+    text: "Na publicatie triggert scenario 6 distributie naar 6 kanalen: IG caption, FB post, WhatsApp broadcast via 2chat, nieuwsbrief-digest, Google Business post, email signature update.",
+    inLabel: "Input",
+    inVal: "gepubliceerde post-URL + meta-data",
+    outLabel: "Output",
+    outVal: "6 distributie-URLs terug in sheet\nvoor attributie-meting na 7/30/90 dagen"
+  }
+};
+
+const detailEl = document.getElementById('pipeDetail');
+const stepsEl = document.getElementById('pipeSteps');
+
+function renderStep(n) {
+  const s = pipeSteps[n];
+  detailEl.innerHTML = `
+    <h4>${s.title}</h4>
+    <p>${s.text}</p>
+    <div class="io">
+      <div class="io-block">
+        <div class="lbl">${s.inLabel}</div>
+        <div class="val">${s.inVal.replace(/\n/g, '<br>')}</div>
+      </div>
+      <div class="io-block">
+        <div class="lbl">${s.outLabel}</div>
+        <div class="val">${s.outVal.replace(/\n/g, '<br>')}</div>
+      </div>
+    </div>
+  `;
+  document.querySelectorAll('.pipe-step').forEach(el => el.classList.remove('active'));
+  document.querySelector(`.pipe-step[data-step="${n}"]`).classList.add('active');
+}
+
+stepsEl.addEventListener('click', (e) => {
+  const step = e.target.closest('.pipe-step');
+  if (step) renderStep(step.dataset.step);
+});
+
+renderStep(1);
+
+// ---------- Scroll-spy: highlight current section in TOC ----------
+const sections = document.querySelectorAll('section[id], header[id]');
+const tocLinks = document.querySelectorAll('.page-toc a');
+
+function updateActiveNav() {
+  let current = '';
+  sections.forEach(sec => {
+    const rect = sec.getBoundingClientRect();
+    if (rect.top < 130) current = sec.id;
+  });
+  tocLinks.forEach(link => {
+    link.classList.toggle('active', link.getAttribute('href') === '#' + current);
+  });
+}
+
+window.addEventListener('scroll', updateActiveNav, { passive: true });
+updateActiveNav();
+
+// ---------- Keyboard nav: arrow keys navigate cycle ----------
+const PREV_PAGE = null; // first page in cycle
+const NEXT_PAGE = 'm1-notulen.html';
+
+document.addEventListener('keydown', (e) => {
+  if (e.target.matches('input, textarea, select')) return;
+  if (e.metaKey || e.ctrlKey || e.altKey) return;
+  if (e.key === 'ArrowLeft' && PREV_PAGE) { e.preventDefault(); window.location.href = PREV_PAGE; }
+  if (e.key === 'ArrowRight' && NEXT_PAGE) { e.preventDefault(); window.location.href = NEXT_PAGE; }
+});
+</script>
+
+</body>
+</html>

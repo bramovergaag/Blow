@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Posts archief · BLOW SEO pilot</title>
+<style>
+  :root {
+    --sand: #f4ecd8; --sand-light: #faf5e6; --sea: #1e6091; --sea-light: #4a90b8;
+    --foam: #ffffff; --deep: #0b2e4a; --accent: #e85d04; --accent-soft: #f8ddc7;
+    --green: #2d8659; --green-soft: #d1e8d8; --red: #b63b3b; --red-soft: #f0d4d4;
+    --amber: #d97706; --amber-soft: #fde7c7;
+    --text: #1a2a3a; --muted: #5c6b7a; --border: rgba(30, 96, 145, 0.15);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: linear-gradient(180deg, var(--sand) 0%, #ffffff 30%);
+    color: var(--text); line-height: 1.55; min-height: 100vh; }
+  .brand-bar { background: #C66A1F; color: #F4EFE2; padding: 14px 24px;
+    display: flex; align-items: center; gap: 18px;
+    border-bottom: 4px solid #1A1A1A; font-family: "Oswald", sans-serif; }
+  .brand-bar .logo { width: 38px; height: 38px; border: 2px solid #F4EFE2;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 12px; letter-spacing: 1.5px; }
+  .brand-bar .brand-name { font-weight: 700; font-size: 18px; letter-spacing: 2px; text-transform: uppercase; }
+  .brand-tabs { margin-left: auto; display: flex; gap: 4px; }
+  .brand-tabs a { font-family: inherit; font-weight: 500; font-size: 13px; letter-spacing: 2px;
+    text-transform: uppercase; padding: 10px 18px; color: rgba(244, 239, 226, 0.7);
+    border-bottom: 3px solid transparent; text-decoration: none; margin-bottom: -14px; }
+  .brand-tabs a.active { color: #F4EFE2; border-bottom-color: #F4EFE2; }
+
+  nav.breadcrumb { background: var(--foam); border-bottom: 1px solid var(--border);
+    padding: 12px 24px; }
+  .breadcrumb .row { max-width: 1280px; margin: 0 auto; font-size: 0.85rem; color: var(--muted); }
+  .breadcrumb a { color: var(--accent); text-decoration: none; font-weight: 600; }
+  .breadcrumb .sep { padding: 0 6px; color: var(--border); }
+
+  .container { max-width: 1080px; margin: 0 auto; padding: 28px 24px 80px; }
+  header.hero { padding: 8px 0 18px; margin-bottom: 24px; border-bottom: 3px solid var(--sea); }
+  h1 { font-size: clamp(1.6rem, 3.2vw, 2.2rem); color: var(--deep); font-weight: 800; }
+  .lead { color: var(--muted); margin-top: 8px; }
+
+  .filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+  .filter {
+    background: var(--foam); border: 2px solid var(--border);
+    padding: 8px 14px; border-radius: 6px; cursor: pointer; font-family: inherit;
+    font-size: 0.84rem; font-weight: 600; color: var(--muted);
+    transition: all 0.15s;
+  }
+  .filter:hover { border-color: var(--sea); color: var(--sea); }
+  .filter.active { background: var(--sea); color: white; border-color: var(--sea); }
+  .filter.events.active { background: var(--green); border-color: var(--green); }
+  .filter.rest.active { background: var(--accent); border-color: var(--accent); }
+  .filter.kite.active { background: var(--sea); border-color: var(--sea); }
+
+  .post-list { display: flex; flex-direction: column; gap: 14px; }
+  .post-row {
+    background: var(--foam); border-radius: 12px; padding: 18px 22px;
+    box-shadow: 0 2px 10px rgba(11, 46, 74, 0.05);
+    border-left: 4px solid var(--sea);
+    display: grid; grid-template-columns: auto 1fr auto; gap: 16px;
+    align-items: center; transition: transform 0.15s;
+  }
+  .post-row:hover { transform: translateY(-1px); box-shadow: 0 4px 18px rgba(11, 46, 74, 0.08); }
+  .post-row.events { border-left-color: var(--green); }
+  .post-row.rest { border-left-color: var(--accent); }
+  .post-row.kite { border-left-color: var(--sea); }
+  .post-row .date {
+    text-align: center; min-width: 60px;
+    padding: 8px 12px; background: var(--sand-light); border-radius: 8px;
+  }
+  .post-row .date .day { font-size: 0.66rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--muted); font-weight: 700; }
+  .post-row .date .num { font-size: 1.4rem; font-weight: 800; color: var(--deep); line-height: 1; }
+  .post-row .date .month { font-size: 0.7rem; color: var(--muted); margin-top: 2px; }
+  .post-row .body h3 { font-size: 1.05rem; color: var(--deep); margin-bottom: 4px; }
+  .post-row .body .meta {
+    font-size: 0.78rem; color: var(--muted); display: flex; gap: 10px;
+    flex-wrap: wrap;
+  }
+  .post-row .body .meta .pill {
+    padding: 1px 8px; background: var(--sand-light); border-radius: 4px;
+    font-weight: 600;
+  }
+  .post-row .body .meta .pill.events { background: var(--green-soft); color: var(--green); }
+  .post-row .body .meta .pill.rest { background: var(--accent-soft); color: var(--accent); }
+  .post-row .body .meta .pill.kite { background: rgba(30, 96, 145, 0.15); color: var(--sea); }
+  .post-row .body .desc {
+    font-size: 0.84rem; color: var(--text); margin-top: 4px;
+    overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+  .post-row .actions {
+    display: flex; flex-direction: column; gap: 6px; align-items: flex-end;
+  }
+  .post-row .stages-mini { display: flex; gap: 3px; }
+  .post-row .stage-dot {
+    width: 14px; height: 14px; border-radius: 3px;
+    background: var(--sand-light); border: 1px solid var(--border);
+  }
+  .post-row .stage-dot.done { background: var(--green); border-color: var(--green); }
+  .post-row .stage-dot.pending { background: var(--amber); border-color: var(--amber); }
+  .post-row .open-link {
+    background: var(--sea); color: white; padding: 6px 12px; border-radius: 6px;
+    text-decoration: none; font-size: 0.78rem; font-weight: 700;
+  }
+  .post-row .open-link.gone { background: var(--muted); pointer-events: none; }
+  .post-row.published { border-left-width: 6px; }
+
+  @media (max-width: 700px) {
+    .post-row { grid-template-columns: auto 1fr; }
+    .post-row .actions { grid-column: 1 / -1; align-items: stretch; flex-direction: row; justify-content: space-between; }
+  }
+  .empty-state {
+    text-align: center; padding: 60px 20px; color: var(--muted);
+  }
+  .empty-state h3 { color: var(--deep); margin-bottom: 6px; }
+  footer { margin-top: 60px; padding-top: 24px; border-top: 1px solid var(--border);
+    text-align: center; color: var(--muted); font-size: 0.84rem; }
+  footer a { color: var(--sea); text-decoration: none; font-weight: 600; }
+</style>
+</head>
+<body>
+
+<header class="brand-bar">
+  <div class="logo">BLOW</div>
+  <div class="brand-name">Beach House</div>
+  <nav class="brand-tabs">
+    <a href="../">Bestelling</a>
+    <a href="./" class="active" aria-current="page">SEO</a>
+    <a href="https://bramovergaag.github.io/balistoel.nl/">Balistoel</a>
+  </nav>
+</header>
+
+<nav class="breadcrumb">
+  <div class="row">
+    <a href="./">← Dashboard</a>
+    <span class="sep">·</span>
+    <span>Posts archief · alle blog-posts</span>
+  </div>
+</nav>
+
+<div class="container">
+
+  <header class="hero">
+    <h1>📚 Posts archief</h1>
+    <p class="lead">Alle blog-posts gegenereerd door de pipeline — onder elkaar, gefilterd per cluster, met status-stages en links naar gepubliceerde versies.</p>
+  </header>
+
+  <div class="filters">
+    <button class="filter active" data-filter="all">Alle</button>
+    <button class="filter events" data-filter="events">📅 Events</button>
+    <button class="filter rest" data-filter="rest">🍕 Restaurant</button>
+    <button class="filter kite" data-filter="kite">🪁 Kiteschool</button>
+    <button class="filter" data-filter="published">✓ Gepubliceerd</button>
+    <button class="filter" data-filter="pending">⏳ In behandeling</button>
+  </div>
+
+  <div class="post-list" id="post-list">
+    <!-- gevuld door JS -->
+  </div>
+
+</div>
+
+<footer>
+  <p><strong>Posts archief</strong> · BLOW SEO pilot</p>
+  <p>
+    <a href="./">Dashboard</a> ·
+    <a href="planning.html">Planning</a> ·
+    <a href="m1-actielijst.html">Actielijst</a>
+  </p>
+</footer>
+
+<script>
+// ====== Posts archive ======
+const STORAGE_KEY = 'blow-pilot-dashboard';
+const SLOT_LABELS = { events: 'Events 09:00', rest: 'Restaurant 12:30', kite: 'Kiteschool 16:00' };
+const SLOT_ICONS = { events: '📅', rest: '🍕', kite: '🪁' };
+const MONTHS = ['jan','feb','mrt','apr','mei','jun','jul','aug','sep','okt','nov','dec'];
+
+// Existing real posts
+const REAL_POSTS = [
+  {
+    date: '2026-04-28', slot: 'kite', title: 'Kitesurfen op de Zandmotor — de veiligste kitespot van Nederland',
+    desc: '~1.050 woorden, publicatie-klaar. SEO + GEO geoptimaliseerd, met FAQ en interne links naar /kitesurfles en /beach-house.',
+    url: 'posts/01-zandmotor-veiligheid.html',
+    stages: { info: 'done', draft: 'done', review: 'done', wa: 'skip', pub: 'pending' }
+  },
+  {
+    date: '2026-04-29', slot: 'kite', title: 'Kitesurfen Kijkduin vs Scheveningen — waarom beginners beter bij ons starten',
+    desc: '~1.000 woorden, publicatie-klaar. Eerlijke vergelijking als trust-builder. Funnel naar proefles. SERP-snapshot toonde geen vergelijking-pagina in top-10.',
+    url: 'posts/02-kijkduin-vs-scheveningen.md',
+    stages: { info: 'done', draft: 'done', review: 'pending', wa: '', pub: '' }
+  }
+];
+
+let state = {};
+try { state = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch (e) {}
+
+// Combine real + state
+function getAllPosts() {
+  const posts = [...REAL_POSTS];
+  // From localStorage state — add posts that have any stage set
+  for (const [key, p] of Object.entries(state)) {
+    const m = key.match(/^(\d{4}-\d{2}-\d{2})-(events|rest|kite)$/);
+    if (!m) continue;
+    const hasAny = p && Object.values(p).some(v => v && v !== '');
+    if (!hasAny) continue;
+    if (REAL_POSTS.some(r => r.date === m[1] && r.slot === m[2])) continue; // skip duplicates
+    posts.push({
+      date: m[1], slot: m[2],
+      title: p.title || '(onbenoemd)',
+      desc: '',
+      url: '',
+      stages: { info: p.info || '', draft: p.draft || '', review: p.review || '', wa: p.wa || '', pub: p.pub || '' }
+    });
+  }
+  posts.sort((a, b) => b.date.localeCompare(a.date));
+  return posts;
+}
+
+function getStatusLabel(stages) {
+  if (stages.pub === 'done') return { label: '✓ Gepubliceerd', cls: 'published' };
+  if (stages.review === 'done') return { label: '👁 Gereviewd', cls: 'pending' };
+  if (stages.draft === 'done') return { label: '✍️ Draft klaar', cls: 'pending' };
+  if (stages.info === 'done') return { label: '📥 Info gereed', cls: 'pending' };
+  return { label: '⏳ Wachtend', cls: 'pending' };
+}
+
+function renderPosts(filter = 'all') {
+  const list = document.getElementById('post-list');
+  let posts = getAllPosts();
+  if (filter === 'events' || filter === 'rest' || filter === 'kite') {
+    posts = posts.filter(p => p.slot === filter);
+  } else if (filter === 'published') {
+    posts = posts.filter(p => p.stages && p.stages.pub === 'done');
+  } else if (filter === 'pending') {
+    posts = posts.filter(p => p.stages && p.stages.pub !== 'done');
+  }
+  if (!posts.length) {
+    list.innerHTML = '<div class="empty-state"><h3>Geen posts gevonden</h3><p>Voor dit filter zijn er nog geen posts. Probeer een ander filter of begin met "Alle".</p></div>';
+    return;
+  }
+  list.innerHTML = posts.map(p => {
+    const d = new Date(p.date);
+    const dayName = ['zo','ma','di','wo','do','vr','za'][d.getDay()];
+    const status = getStatusLabel(p.stages || {});
+    const stagesHtml = ['info','draft','review','wa','pub'].map(k => {
+      const v = (p.stages || {})[k] || '';
+      return `<span class="stage-dot ${v}" title="${k}"></span>`;
+    }).join('');
+    const slotIcon = SLOT_ICONS[p.slot] || '';
+    const slotLabel = SLOT_LABELS[p.slot] || p.slot;
+    const linkBtn = p.url ? `<a class="open-link" href="${p.url}" target="_blank">→ Bekijk</a>` : `<span class="open-link gone">geen URL</span>`;
+    return `<div class="post-row ${p.slot} ${status.cls === 'published' ? 'published' : ''}">
+      <div class="date">
+        <div class="day">${dayName}</div>
+        <div class="num">${d.getDate()}</div>
+        <div class="month">${MONTHS[d.getMonth()]}</div>
+      </div>
+      <div class="body">
+        <h3>${p.title}</h3>
+        <div class="meta">
+          <span class="pill ${p.slot}">${slotIcon} ${slotLabel}</span>
+          <span class="pill">${status.label}</span>
+        </div>
+        ${p.desc ? `<div class="desc">${p.desc}</div>` : ''}
+      </div>
+      <div class="actions">
+        <div class="stages-mini">${stagesHtml}</div>
+        ${linkBtn}
+      </div>
+    </div>`;
+  }).join('');
+}
+renderPosts('all');
+
+document.querySelectorAll('.filter').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderPosts(btn.dataset.filter);
+  });
+});
+
+window.addEventListener('storage', (e) => {
+  if (e.key === STORAGE_KEY) {
+    try { state = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); }
+    catch (e) { state = {}; }
+    const active = document.querySelector('.filter.active');
+    renderPosts(active ? active.dataset.filter : 'all');
+  }
+});
+</script>
+
+</body>
+</html>
