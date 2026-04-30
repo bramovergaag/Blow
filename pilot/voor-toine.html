@@ -3,351 +3,482 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Voor Toine — wat staat er klaar voor M2 · BLOW SEO pilot</title>
+<title>Voor Toine — M1 → M2 · BLOW pilot</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --sand: #E8DAB8; --sand-light: #F0E5C8; --sea: #1e6091; --sea-light: #4a90b8;
-    --foam: #FAF1DC; --deep: #0b2e4a; --accent: #C66A1F; --accent-soft: #f8ddc7;
-    --green: #2d8659; --green-soft: #d1e8d8; --red: #b63b3b;
-    --amber: #d97706; --amber-soft: #fde7c7; --purple: #7b77c7;
-    --text: #1a2a3a; --muted: #4B5563; --border: rgba(30, 96, 145, 0.22);
+    --bg: #F0EEE6;
+    --bg-card: #FAF9F5;
+    --ink: #181818;
+    --ink-soft: #4D4D4D;
+    --ink-mute: #6B6B6B;
+    --rule: #D9D6CB;
+    --coral: #D97757;
+    --coral-soft: #F2D9CB;
+    --coral-deep: #B65A3F;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
   body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    background: var(--sand);
-    color: var(--text); line-height: 1.6; min-height: 100vh;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.65;
+    font-size: 17px;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
-  .brand-bar {
-    background: #C66A1F; color: #F4EFE2; padding: 14px 24px;
-    display: flex; align-items: center; gap: 18px;
-    border-bottom: 4px solid #1A1A1A;
-    font-family: "Oswald", "Bebas Neue", sans-serif;
+  .serif { font-family: 'Source Serif 4', 'Charter', 'Iowan Old Style', Georgia, serif; }
+
+  .wrap { max-width: 720px; margin: 0 auto; padding: 64px 28px 96px; }
+
+  /* Top bar — minimal */
+  .topbar {
+    max-width: 720px; margin: 0 auto; padding: 24px 28px;
+    display: flex; align-items: center; justify-content: space-between;
+    font-size: 13px; color: var(--ink-mute);
   }
-  .brand-bar .logo { width: 38px; height: 38px; border: 2px solid #F4EFE2; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-weight: 700; font-size: 12px; letter-spacing: 1.5px; flex-shrink: 0; }
-  .brand-bar .brand-name { font-weight: 700; font-size: 18px; letter-spacing: 2px; text-transform: uppercase; }
-  .brand-tabs { margin-left: auto; display: flex; gap: 4px; }
-  .brand-tabs a { font-family: inherit; font-weight: 500; font-size: 13px; letter-spacing: 2px;
-    text-transform: uppercase; padding: 10px 18px;
-    color: rgba(244, 239, 226, 0.7); border-bottom: 3px solid transparent;
-    text-decoration: none; margin-bottom: -14px; }
-  .brand-tabs a:hover { color: #F4EFE2; }
+  .topbar .mark {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-weight: 600; color: var(--ink);
+  }
+  .topbar .mark-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--coral);
+  }
+  .topbar .meta { font-feature-settings: 'tnum'; }
 
-  .container { max-width: 820px; margin: 0 auto; padding: 32px 22px 80px; }
+  /* Hero */
+  .eyebrow {
+    font-size: 12px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--coral);
+    font-weight: 600; margin-bottom: 18px;
+  }
+  h1.title {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: clamp(34px, 5.5vw, 52px);
+    font-weight: 500; line-height: 1.08;
+    letter-spacing: -0.02em; color: var(--ink);
+    margin-bottom: 24px;
+  }
+  .lead {
+    font-size: 19px; line-height: 1.55; color: var(--ink-soft);
+    max-width: 620px;
+  }
 
-  .hero { padding: 6px 0 20px; margin-bottom: 28px; border-bottom: 3px solid var(--sea); }
-  .eyebrow { font-size: 0.78rem; letter-spacing: 0.2em; text-transform: uppercase;
-    color: var(--accent); font-weight: 700; margin-bottom: 8px; }
-  h1 { font-size: clamp(1.6rem, 3.4vw, 2.3rem); font-weight: 800; color: var(--deep); line-height: 1.2; }
-  .lead { color: var(--text); font-size: 1.04rem; margin-top: 12px; }
+  /* Section dividers */
+  hr.div {
+    border: 0; border-top: 1px solid var(--rule);
+    margin: 56px 0;
+  }
 
-  section { margin-bottom: 36px; }
-  h2 { font-size: 1.3rem; color: var(--deep); margin-bottom: 8px;
-    display: flex; align-items: center; gap: 12px; }
-  h2 .badge { background: var(--sea); color: white; font-size: 0.66rem;
-    padding: 3px 9px; border-radius: 8px; letter-spacing: 0.12em; font-weight: 700; }
-  .sec-sub { color: var(--muted); margin-bottom: 16px; font-size: 0.95rem; }
+  h2 {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 26px; font-weight: 500;
+    letter-spacing: -0.01em; line-height: 1.2;
+    margin-bottom: 18px; color: var(--ink);
+  }
+  h2 .num {
+    font-family: 'Inter', sans-serif;
+    color: var(--coral); font-size: 13px; font-weight: 600;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    display: block; margin-bottom: 8px;
+  }
+  h3 {
+    font-size: 16px; font-weight: 600;
+    color: var(--ink); margin-bottom: 4px;
+  }
+  p { margin-bottom: 16px; color: var(--ink-soft); }
+  p:last-child { margin-bottom: 0; }
+  p strong { color: var(--ink); font-weight: 600; }
+  em { font-style: italic; color: var(--ink-soft); }
 
-  .tools {
+  /* Mindset callout */
+  .mindset {
+    background: var(--bg-card);
+    border-left: 3px solid var(--coral);
+    padding: 32px 36px;
+    margin: 32px 0;
+    border-radius: 0 4px 4px 0;
+  }
+  .mindset .mindset-eyebrow {
+    font-size: 12px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--coral);
+    font-weight: 600; margin-bottom: 12px;
+  }
+  .mindset h2 { margin-bottom: 18px; font-size: 28px; }
+  .mindset .vision-list {
+    list-style: none; padding: 0; margin: 24px 0;
     display: grid; gap: 14px;
   }
+  .mindset .vision-list li {
+    padding-left: 26px; position: relative;
+    color: var(--ink-soft); line-height: 1.55;
+  }
+  .mindset .vision-list li::before {
+    content: '→'; position: absolute; left: 0;
+    color: var(--coral); font-weight: 600;
+  }
+  .mindset .vision-list li strong { color: var(--ink); }
+  .mindset blockquote {
+    margin: 24px 0 0; padding-top: 20px;
+    border-top: 1px solid var(--rule);
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-style: italic; font-size: 18px;
+    color: var(--ink); line-height: 1.5;
+  }
+  .mindset blockquote cite {
+    display: block; margin-top: 8px;
+    font-family: 'Inter', sans-serif; font-style: normal;
+    font-size: 13px; color: var(--ink-mute);
+  }
+
+  /* Tools list */
+  .tools { display: grid; gap: 4px; margin-top: 24px; }
   .tool {
-    background: var(--foam); border-radius: 12px; padding: 18px 20px;
-    box-shadow: 0 2px 10px rgba(11, 46, 74, 0.06);
-    border-left: 4px solid var(--sea);
+    padding: 22px 0;
+    border-bottom: 1px solid var(--rule);
   }
-  .tool.events { border-left-color: var(--green); }
-  .tool.action { border-left-color: var(--accent); }
-  .tool.notes { border-left-color: var(--purple); }
-  .tool.archive { border-left-color: var(--sea-light); }
-  .tool h3 { font-size: 1.05rem; color: var(--deep); margin-bottom: 6px; }
-  .tool .what { font-size: 0.9rem; color: var(--text); margin-bottom: 8px; }
-  .tool .for-toine {
-    background: var(--sand-light); border-radius: 6px;
-    padding: 8px 12px; font-size: 0.86rem;
-    border-left: 3px solid var(--accent);
-    margin-top: 8px;
+  .tool:last-child { border-bottom: none; }
+  .tool-head {
+    display: flex; align-items: baseline; gap: 12px;
+    margin-bottom: 6px;
   }
-  .tool .for-toine strong { color: var(--accent); }
+  .tool-head .tool-icon { font-size: 18px; }
+  .tool-head h3 { font-size: 17px; font-weight: 600; color: var(--ink); }
+  .tool-head .tool-tag {
+    font-size: 12px; color: var(--ink-mute);
+    margin-left: auto; font-weight: 500;
+  }
+  .tool .what { color: var(--ink-soft); margin-bottom: 12px; line-height: 1.55; }
+  .tool .for-you {
+    background: var(--coral-soft);
+    padding: 10px 14px; border-radius: 4px;
+    font-size: 14px; color: var(--coral-deep); line-height: 1.5;
+    margin-bottom: 12px;
+  }
+  .tool .for-you strong { color: var(--coral-deep); }
   .tool a.open {
-    display: inline-block; margin-top: 8px;
-    color: var(--sea); text-decoration: none; font-weight: 600; font-size: 0.86rem;
+    display: inline-flex; align-items: center; gap: 6px;
+    color: var(--coral); text-decoration: none;
+    font-weight: 500; font-size: 14px;
   }
-  .tool a.open:hover { text-decoration: underline; }
+  .tool a.open:hover { color: var(--coral-deep); }
+  .tool a.open::after { content: '↗'; font-size: 13px; }
 
-  blockquote {
-    background: var(--foam); border-left: 4px solid var(--accent);
-    padding: 14px 18px; margin: 0; border-radius: 0 8px 8px 0;
-    box-shadow: 0 2px 8px rgba(11, 46, 74, 0.05);
+  /* Actions list */
+  ol.actions {
+    list-style: none; counter-reset: act;
+    padding: 0; margin: 24px 0;
   }
-  blockquote p { font-style: italic; color: var(--deep); font-size: 0.94rem;
-    line-height: 1.5; margin-bottom: 6px; }
-  blockquote footer { font-size: 0.8rem; color: var(--muted); }
-  .quotes-grid { display: grid; gap: 12px; }
+  ol.actions li {
+    counter-increment: act;
+    padding: 16px 0 16px 44px;
+    border-bottom: 1px solid var(--rule);
+    position: relative;
+    color: var(--ink-soft); line-height: 1.5;
+  }
+  ol.actions li:last-child { border-bottom: none; }
+  ol.actions li::before {
+    content: counter(act);
+    position: absolute; left: 0; top: 16px;
+    width: 28px; height: 28px;
+    background: var(--bg-card); border: 1px solid var(--rule);
+    border-radius: 50%;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 600; color: var(--ink);
+  }
+  ol.actions li strong { color: var(--ink); display: block; margin-bottom: 4px; }
+  ol.actions li .deadline {
+    display: inline-block; font-size: 12px;
+    margin-top: 6px; padding: 2px 8px;
+    background: var(--coral-soft); color: var(--coral-deep);
+    border-radius: 3px; font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+  ol.actions li.urgent .deadline { background: var(--coral); color: white; }
 
-  .actions-toine {
-    background: var(--foam); border-radius: 12px; padding: 18px 22px;
-    box-shadow: 0 2px 10px rgba(11, 46, 74, 0.06);
-    border: 2px solid var(--accent);
+  /* Quotes */
+  .quotes { display: grid; gap: 24px; margin-top: 24px; }
+  blockquote.q {
+    border-left: 2px solid var(--coral);
+    padding: 4px 0 4px 22px;
+    margin: 0;
   }
-  .actions-toine h3 { color: var(--accent); margin-bottom: 10px; font-size: 1rem;
-    letter-spacing: 0.04em; }
-  .actions-toine ol { padding-left: 20px; }
-  .actions-toine li { padding: 6px 0; font-size: 0.94rem; }
-  .actions-toine li strong { color: var(--deep); }
-  .actions-toine li .deadline {
-    display: inline-block; margin-left: 6px;
-    font-size: 0.74rem; padding: 1px 7px; border-radius: 4px;
-    background: var(--accent-soft); color: var(--accent); font-weight: 700;
+  blockquote.q p {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 18px; line-height: 1.5;
+    color: var(--ink); font-style: italic;
+    margin-bottom: 8px;
+  }
+  blockquote.q cite {
+    font-style: normal; font-size: 13px;
+    color: var(--ink-mute);
   }
 
-  .next-meeting {
-    background: linear-gradient(135deg, var(--sea) 0%, var(--deep) 100%);
-    color: white; border-radius: 12px; padding: 22px 24px;
-    margin-top: 24px;
+  /* Strategy table */
+  table.tijd {
+    width: 100%; border-collapse: collapse;
+    margin-top: 24px; font-size: 14px;
   }
-  .next-meeting h3 { color: white; font-size: 1rem; margin-bottom: 6px;
-    letter-spacing: 0.04em; }
-  .next-meeting p { font-size: 0.94rem; opacity: 0.92; }
-  .next-meeting strong { font-weight: 700; }
+  table.tijd th {
+    text-align: left; padding: 10px 6px;
+    font-size: 12px; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--ink-mute);
+    font-weight: 600; border-bottom: 1px solid var(--rule);
+  }
+  table.tijd td {
+    padding: 12px 6px;
+    border-bottom: 1px solid var(--rule);
+    color: var(--ink-soft);
+  }
+  table.tijd tr.hi td { background: var(--coral-soft); color: var(--ink); font-weight: 500; }
+  table.tijd tr.hi td:last-child { color: var(--coral-deep); font-weight: 600; }
+  table.tijd .blue { color: #2D7C56; font-weight: 600; }
 
-  .wa-template {
-    background: #25D366; color: white;
-    border-radius: 12px; padding: 18px 22px;
-    margin-top: 28px;
+  /* CTA / next meeting */
+  .cta {
+    background: var(--ink); color: var(--bg);
+    border-radius: 6px; padding: 28px 32px;
+    margin-top: 32px;
   }
-  .wa-template h3 { color: white; margin-bottom: 8px; font-size: 1rem; }
-  .wa-template p { font-size: 0.86rem; opacity: 0.95; margin-bottom: 10px; }
-  .wa-template pre {
-    background: rgba(0,0,0,0.18); color: white;
-    padding: 14px 16px; border-radius: 8px;
-    font-family: ui-monospace, "SF Mono", Consolas, monospace;
-    font-size: 0.84rem; line-height: 1.5;
-    white-space: pre-wrap; word-wrap: break-word;
+  .cta .cta-eyebrow {
+    font-size: 12px; letter-spacing: 0.14em;
+    text-transform: uppercase; opacity: 0.6;
+    font-weight: 600; margin-bottom: 8px;
   }
-  .wa-template button {
-    background: white; color: #128C5E;
-    border: none; padding: 8px 16px; border-radius: 6px;
-    font-weight: 700; cursor: pointer; font-family: inherit;
-    margin-top: 10px; font-size: 0.86rem;
+  .cta h3 {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 22px; font-weight: 500;
+    color: var(--bg); margin-bottom: 6px;
   }
-  .wa-template button:hover { background: rgba(255,255,255,0.92); }
+  .cta p {
+    color: rgba(240, 238, 230, 0.85);
+    font-size: 15px; margin-bottom: 0;
+  }
 
-  footer { margin-top: 60px; padding-top: 22px; border-top: 1px solid var(--border);
-    text-align: center; color: var(--muted); font-size: 0.84rem; }
+  /* Footer */
+  footer {
+    margin-top: 64px; padding-top: 24px;
+    border-top: 1px solid var(--rule);
+    font-size: 13px; color: var(--ink-mute);
+    text-align: center;
+  }
+  footer a { color: var(--coral); text-decoration: none; }
+  footer a:hover { color: var(--coral-deep); }
 </style>
 </head>
 <body>
 
-<header class="brand-bar">
-  <div class="logo">BLOW</div>
-  <div class="brand-name">Beach House</div>
-  <nav class="brand-tabs">
-    <a href="../">Bestelling</a>
-    <a href="./" class="active">SEO</a>
-    <a href="https://bramovergaag.github.io/balistoel.nl/">Balistoel</a>
-  </nav>
-</header>
+<div class="topbar">
+  <span class="mark"><span class="mark-dot"></span>BLOW × Bram</span>
+  <span class="meta">M1 · 29 apr → M2 · 11 mei</span>
+</div>
 
-<div class="container">
+<main class="wrap">
 
-  <header class="hero">
-    <div class="eyebrow">Voor Toine · M1 → M2 handover</div>
-    <h1>Wat er nu klaarstaat — en wat ik van jou nodig heb voor M2</h1>
-    <p class="lead">In het weekend en de eerste dagen na M1 (29 apr) heb ik de hele pilot-omgeving opgezet. Hieronder kort wat er staat, hoe je het gebruikt, en welke 6 acties ik vóór ma 11 mei van jou nodig heb.</p>
+  <header>
+    <div class="eyebrow">Voor Toine</div>
+    <h1 class="title">Wat er nu klaarstaat — en wat ik vóór 11 mei van jou nodig heb.</h1>
+    <p class="lead">Dit weekend de hele pilot-omgeving opgezet: dashboard, actielijst, notulen, planning. Hieronder kort wat het is, hoe je het gebruikt, en de zes blockers waar de pijplijn op wacht.</p>
   </header>
 
+  <hr class="div">
+
+  <section class="mindset">
+    <div class="mindset-eyebrow">Hoe ik het zelf zie</div>
+    <h2 class="serif">Het is niet de sacrifice — het is de reis.</h2>
+    <p>Het kan groot lijken: 16 maanden, 27 meetings, vendor-keuzes, technische scenarios. Maar dat is niet hoe je dit moet bekijken. <strong>Kijk niet naar wat je nu zou "opgeven" of "investeren"</strong> — kijk naar de stappen één voor één. Elke actie is afgebakend. Elke meeting heeft een doel. Niets vraagt sprongen in het diepe.</p>
+    <p><strong>Stel jezelf voor waar je over 16 maanden bent.</strong></p>
+
+    <ul class="vision-list">
+      <li><strong>80+ blogposts</strong> gepubliceerd — een eigen content-archief, vendor-onafhankelijk.</li>
+      <li><strong>Zakelijke leads</strong> stromen automatisch binnen via vergaderlocatie / klantborrel / power-lunch posts.</li>
+      <li><strong>Yoga-zonsopgang #1</strong> in Google — een markt geclaimd waar nu nul concurrent zit.</li>
+      <li><strong>Een werkende AI-pijplijn</strong> die jouw tijd niet meer opslokt — alleen de eindredactie blijft mens-werk.</li>
+      <li><strong>16 maanden KPI-data</strong> waarop je rustig de stap-2-keuze kunt baseren.</li>
+    </ul>
+
+    <blockquote>
+      "We starten op punt A, we moeten naar B. Als we bij B komen, hebben we volgens mij een heel groot deel van de spaart te pakken."
+      <cite>— jouw eigen woorden, M1</cite>
+    </blockquote>
+  </section>
+
+  <hr class="div">
+
   <section>
-    <h2><span class="badge">01</span>Wat staat er klaar</h2>
-    <p class="sec-sub">Vier samenhangende deliverables, allemaal live op github pages — dus altijd actueel, geen Word- of PDF-versies die verouderen.</p>
+    <h2 class="serif"><span class="num">01 — Wat staat er klaar</span>Vier deliverables, één link.</h2>
+    <p>Allemaal live op github pages, dus altijd actueel. Geen Word- of PDF-versies die verouderen.</p>
 
     <div class="tools">
 
       <div class="tool">
-        <h3>📊 Pipeline-dashboard <span style="font-weight: 400; font-size: 0.84rem; color: var(--muted);">(landing pagina)</span></h3>
-        <p class="what">Live week-overzicht: 3 posts per dag (events 09:00 · restaurant 12:30 · kiteschool 16:00) × 7 dagen = 21 posts/week. Per cel zie je status door 5 stages: <em>info → draft → review → WhatsApp → publish</em>.</p>
-        <div class="for-toine">
-          <strong>Voor jou:</strong> overzicht van wat we in de week willen produceren. Vandaag staan er al 2 echte blogs in groen (Zandmotor + Kijkduin vs Scheveningen). De rest zijn topics uit de audit, geen lege placeholders meer.
+        <div class="tool-head">
+          <span class="tool-icon">📊</span>
+          <h3>Pipeline-dashboard</h3>
+          <span class="tool-tag">landing</span>
         </div>
-        <a class="open" href="./" target="_blank">→ open pipeline-dashboard</a>
+        <p class="what">Live week-overzicht: 3 posts per dag (events 09:00 · restaurant 12:30 · kiteschool 16:00) × 7 dagen = 21 posts/week. Per cel zie je de status door 5 stages: <em>info → draft → review → WhatsApp → publish</em>.</p>
+        <div class="for-you"><strong>Voor jou:</strong> overzicht van wat we in de week willen produceren. 2 echte blogs staan al in groen (Zandmotor + Kijkduin/Scheveningen). De rest zijn topics uit de audit, geen lege placeholders.</div>
+        <a class="open" href="./" target="_blank">open dashboard</a>
       </div>
 
-      <div class="tool action">
-        <h3>✅ Actielijst M1 <span style="font-weight: 400; font-size: 0.84rem; color: var(--muted);">(jouw 6 + Bram's 8 + samen 3)</span></h3>
-        <p class="what">17 concrete acties die vóór M2 (11 mei) afgerond moeten zijn. Elke actie heeft een "Hoe?"-uitvouwbare met stap-voor-stap. Klik op "klaar" om af te vinken — staat lokaal in jouw browser, geen account nodig.</p>
-        <div class="for-toine">
-          <strong>Voor jou:</strong> 6 acties hieronder kort. Open de actielijst, vink af, en gebruik de SEO-WhatsApp-groep om met Bram af te stemmen.
+      <div class="tool">
+        <div class="tool-head">
+          <span class="tool-icon">✅</span>
+          <h3>Actielijst M1</h3>
+          <span class="tool-tag">17 acties</span>
         </div>
-        <a class="open" href="m1-actielijst.html" target="_blank">→ open actielijst</a>
+        <p class="what">17 concrete acties die vóór M2 (11 mei) afgerond moeten zijn. Elke actie heeft een uitvouwbare "Hoe?" met stap-voor-stap. Klik op "klaar" om af te vinken — staat lokaal in jouw browser, geen account nodig.</p>
+        <div class="for-you"><strong>Voor jou:</strong> 6 acties hieronder kort beschreven. Open de actielijst, vink af, en gebruik de SEO-WhatsApp-groep om af te stemmen.</div>
+        <a class="open" href="m1-actielijst.html" target="_blank">open actielijst</a>
       </div>
 
-      <div class="tool notes">
-        <h3>📝 Notulen M1 <span style="font-weight: 400; font-size: 0.84rem; color: var(--muted);">(uit transcript 29 apr)</span></h3>
-        <p class="what">98-minuten audio is lokaal verwerkt met faster-whisper (gratis, geen cloud, geen privacy-risico). Notulen zijn ingevuld met: agenda-recap · besproken · 8 beslissingen · 5 letterlijke quotes uit het gesprek.</p>
-        <div class="for-toine">
-          <strong>Voor jou:</strong> check of beslissingen kloppen. Beslissing-7 (zakelijke markt = prio-1) heb ik na het gesprek toegevoegd op basis van jouw uitspraken — wil je daar bevestiging op geven via WA?
+      <div class="tool">
+        <div class="tool-head">
+          <span class="tool-icon">📝</span>
+          <h3>Notulen M1</h3>
+          <span class="tool-tag">uit transcript</span>
         </div>
-        <a class="open" href="m1-notulen.html" target="_blank">→ open notulen</a>
+        <p class="what">98-minuten audio is lokaal verwerkt met faster-whisper (gratis, geen cloud, geen privacy-risico). Ingevuld met agenda-recap, besproken punten, 8 beslissingen, 5 letterlijke quotes.</p>
+        <div class="for-you"><strong>Voor jou:</strong> check of beslissingen kloppen. De zakelijke-markt-prio heb ik na het gesprek toegevoegd — wil je daar bevestiging op geven via WA?</div>
+        <a class="open" href="m1-notulen.html" target="_blank">open notulen</a>
       </div>
 
-      <div class="tool archive">
-        <h3>📅 Planning + 📚 Posts archief</h3>
-        <p class="what"><strong>Planning</strong>: 27 meetings over ~14 maanden (4 fases) met Google Calendar 1-klik export. Per meeting een dropdown met de voorbereidings-acties. <strong>Posts archief</strong>: alle gepubliceerde + in-behandeling blog-posts gefilterd per cluster.</p>
-        <div class="for-toine">
-          <strong>Voor jou:</strong> klik <em>"📅 Add to GCal"</em> bij M2 (ma 11 mei 17:00 online) en alle volgende meetings — dan staat het direct in je agenda. Voor M3 (ma 25 mei) staan we bij mij in Dordrecht.
+      <div class="tool">
+        <div class="tool-head">
+          <span class="tool-icon">📅</span>
+          <h3>Planning + Posts archief</h3>
+          <span class="tool-tag">M1 → M9</span>
         </div>
-        <a class="open" href="planning.html" target="_blank">→ planning</a> &nbsp;
-        <a class="open" href="posts-archive.html" target="_blank">→ posts archief</a>
+        <p class="what">27 meetings over ~14 maanden in 4 fases, met Google Calendar 1-klik export per meeting en een dropdown met voorbereidings-acties. Plus alle posts gefilterd per cluster.</p>
+        <div class="for-you"><strong>Voor jou:</strong> klik <em>"Add to GCal"</em> bij M2 (ma 11 mei 17:00 online) en de rest — staat dan direct in je agenda. M3 (25 mei) is bij mij in Dordrecht.</div>
+        <a class="open" href="planning.html" target="_blank">open planning</a> &nbsp; <a class="open" href="posts-archive.html" target="_blank">open archief</a>
       </div>
 
     </div>
   </section>
 
+  <hr class="div">
+
   <section>
-    <h2><span class="badge">02</span>Specifieke toelichting — wat doet de pijplijn?</h2>
-    <p class="sec-sub">In het kort: 5 MAKE-scenarios + 1 Google Sheet als commandocentrum. Voor M2 zetten we alleen scenarios 1+2 op. Scenario 3 (publishing) komt in M3 (25 mei).</p>
+    <h2 class="serif"><span class="num">02 — De pijplijn in vijf zinnen</span>Hoe het werkt.</h2>
+    <p>Vijf MAKE-scenarios + één Google Sheet als commandocentrum. Voor M2 zetten we alleen scenarios 1+2 op. Scenario 3 (publishing) komt in M3.</p>
 
-    <div class="tool">
-      <h3>Hoe het werkt — in 5 zinnen</h3>
-      <ol style="padding-left: 20px; margin-top: 6px;">
-        <li><strong>Scenario 1 (GSC):</strong> elke ochtend 07:00 worden onze Search-Console-cijfers (clicks, impressions, posities) opgehaald in een Google Sheet.</li>
-        <li><strong>ContentQueue:</strong> dezelfde Sheet bevat 35 audit-derived topics — vergaderlocatie, power-lunch, yoga-zonsopgang, etc. Status-veld bepaalt wat er met de rij gebeurt.</li>
-        <li><strong>Scenario 2 (Content Generator):</strong> wanneer een rij op <code>ready_for_brief</code> wordt gezet, schrijft Claude (≥800 woorden) automatisch een draft inclusief title, meta-description, FAQ en tags.</li>
-        <li><strong>Review-loop:</strong> jij + ik zien de draft in een aparte WhatsApp-groep — 2 uur om te reageren. Stilte = goedkeuring.</li>
-        <li><strong>Scenario 3 (Archive Publisher) · M3+:</strong> approved drafts worden automatisch omgezet naar HTML en gecommit in onze archive-repo (<code>github.io/Blow/pilot/posts</code>). Geen WordPress-plug-in nodig.</li>
-      </ol>
-    </div>
-
-    <div class="tool" style="margin-top: 14px; border-left-color: var(--green);">
-      <h3>Waarom we publicatie naar archive-repo doen ipv blow.surf</h3>
-      <p style="font-size: 0.92rem;">Versiebeheer (alle wijzigingen traceerbaar), instant deploy, geen WordPress-onderhoud, en het stapelt zich op tot een eigen content-archief dat je nooit kwijt kan raken aan een vendor. Posts kunnen later via een simpele iframe of redirect ook op blow.surf zelf vindbaar gemaakt worden — geen blocker.</p>
-    </div>
+    <ol style="padding-left: 22px; color: var(--ink-soft); margin-top: 16px;">
+      <li style="margin-bottom: 10px;"><strong style="color: var(--ink);">Scenario 1 (GSC).</strong> Elke ochtend 07:00 worden onze Search-Console-cijfers (clicks, impressions, posities) opgehaald in een Google Sheet.</li>
+      <li style="margin-bottom: 10px;"><strong style="color: var(--ink);">ContentQueue.</strong> Diezelfde Sheet bevat 35 audit-derived topics — vergaderlocatie, power-lunch, yoga-zonsopgang, etc. Het status-veld bepaalt wat er met de rij gebeurt.</li>
+      <li style="margin-bottom: 10px;"><strong style="color: var(--ink);">Scenario 2 (Content).</strong> Wanneer een rij op <em>ready_for_brief</em> staat, schrijft Claude (≥800 woorden) automatisch een draft incl. title, meta, FAQ, tags.</li>
+      <li style="margin-bottom: 10px;"><strong style="color: var(--ink);">Review-loop.</strong> Jij + ik zien de draft in een aparte WA-groep — 2 uur om te reageren. Stilte = goedkeuring.</li>
+      <li><strong style="color: var(--ink);">Scenario 3 (Archive Publisher) · vanaf M3.</strong> Approved drafts worden automatisch HTML, gecommit in onze archive-repo (github.io/Blow/pilot/posts). Geen WordPress nodig, alles versiebeheerd.</li>
+    </ol>
   </section>
 
-  <section>
-    <h2><span class="badge">03</span>Strategie — zakelijke markt eerst</h2>
-    <p class="sec-sub">Beslissing uit M1 (verfijnd na gesprek): tijd-doelgroep matrix met focus op 12-19h zakelijk publiek.</p>
+  <hr class="div">
 
-    <div class="tool" style="border-left-color: var(--accent);">
-      <table style="width: 100%; border-collapse: collapse; font-size: 0.88rem;">
-        <thead>
-          <tr style="border-bottom: 2px solid var(--border);">
-            <th style="text-align: left; padding: 8px 4px;">Tijdslot</th>
-            <th style="text-align: left; padding: 8px 4px;">Doelgroep</th>
-            <th style="text-align: left; padding: 8px 4px;">Markt-status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr style="border-bottom: 1px dashed var(--border);"><td style="padding: 6px 4px;">06-08h</td><td style="padding: 6px 4px;">Yoga / wellness</td><td style="padding: 6px 4px; color: var(--green); font-weight: 600;">🌅 Blue ocean — claim now</td></tr>
-          <tr style="border-bottom: 1px dashed var(--border);"><td style="padding: 6px 4px;">12-14h</td><td style="padding: 6px 4px;">Lunch (chill + zakelijk)</td><td style="padding: 6px 4px;">Bestaand, redelijk</td></tr>
-          <tr style="border-bottom: 1px dashed var(--border); background: var(--accent-soft);"><td style="padding: 6px 4px;">14-17h</td><td style="padding: 6px 4px;">Productieve middag (zakelijk)</td><td style="padding: 6px 4px; color: var(--accent); font-weight: 700;">🎯 Hoogste potentie</td></tr>
-          <tr style="border-bottom: 1px dashed var(--border); background: var(--accent-soft);"><td style="padding: 6px 4px;">17-19h</td><td style="padding: 6px 4px;">Zakelijke eindsprint</td><td style="padding: 6px 4px; color: var(--accent); font-weight: 700;">🎯 Klantborrel · vrijmibo</td></tr>
-          <tr><td style="padding: 6px 4px;">19h+</td><td style="padding: 6px 4px;">Avond-programma</td><td style="padding: 6px 4px; color: var(--muted);">Lagere prio fase 1</td></tr>
-        </tbody>
-      </table>
-      <p style="font-size: 0.86rem; color: var(--muted); margin-top: 12px; font-style: italic;">→ Content-volgorde: vergaderlocatie → power-lunch → klantborrel → yoga-zonsopgang → consument-events → kitesurf (al lopend).</p>
-    </div>
+  <section>
+    <h2 class="serif"><span class="num">03 — Strategie</span>Zakelijke markt eerst.</h2>
+    <p>Beslissing uit M1, verfijnd na het gesprek: tijd-doelgroep matrix met focus op 12-19h zakelijk publiek. Yoga-zonsopgang als <em>blue ocean</em> — geen concurrent in de SERP.</p>
+
+    <table class="tijd">
+      <thead>
+        <tr><th>Tijdslot</th><th>Doelgroep</th><th>Markt</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>06–08h</td><td>Yoga / wellness</td><td><span class="blue">🌅 Blue ocean — claim now</span></td></tr>
+        <tr><td>12–14h</td><td>Lunch (chill + zakelijk)</td><td>Bestaand, redelijk</td></tr>
+        <tr class="hi"><td>14–17h</td><td>Productieve middag (zakelijk)</td><td>Hoogste potentie</td></tr>
+        <tr class="hi"><td>17–19h</td><td>Zakelijke eindsprint</td><td>Klantborrel · vrijmibo</td></tr>
+        <tr><td>19h+</td><td>Avond-programma</td><td>Lagere prio fase 1</td></tr>
+      </tbody>
+    </table>
+
+    <p style="margin-top: 18px; font-style: italic; color: var(--ink-mute);">Content-volgorde: vergaderlocatie → power-lunch → klantborrel → yoga-zonsopgang → consument-events → kitesurf (al lopend).</p>
   </section>
 
-  <section>
-    <h2><span class="badge">04</span>Sleutel-citaten uit M1</h2>
-    <p class="sec-sub">Ter herinnering — 5 quotes die de toon van het gesprek vatten. Deze leggen vast waarom we dit zo aanpakken.</p>
+  <hr class="div">
 
-    <div class="quotes-grid">
-      <blockquote>
+  <section>
+    <h2 class="serif"><span class="num">04 — Sleutel-citaten</span>Vijf quotes die de toon vatten.</h2>
+
+    <div class="quotes">
+      <blockquote class="q">
         <p>"Het is gewoon een mooi puzzel toch — die hele techniek. Het is uitvogelen en ook durven doorvragen."</p>
-        <footer>— Bram · over de aanpak</footer>
+        <cite>— Bram, over de aanpak</cite>
       </blockquote>
-      <blockquote style="border-left-color: var(--accent);">
+      <blockquote class="q">
         <p>"Mijn ChatGPT kan het nu oplossen wat ik wil — ja, maar wij willen dat niet, want we moeten eerst in een veiligheidsbusies zien."</p>
-        <footer>— Bram · over Boskalis · waarom dit pilot-spoor</footer>
+        <cite>— Bram, over Boskalis · waarom dit pilot-spoor</cite>
       </blockquote>
-      <blockquote style="border-left-color: var(--green);">
+      <blockquote class="q">
         <p>"Op het moment dat je als een boomer gaat reageren en zegt dat het niet voor mij besteed is, dan ben je gewoon uitgespeeld."</p>
-        <footer>— over waarom AI-meebewegen geen optie meer is</footer>
+        <cite>— over waarom AI-meebewegen geen optie meer is</cite>
       </blockquote>
-      <blockquote style="border-left-color: var(--purple);">
+      <blockquote class="q">
         <p>"Wat ik ervoor terug zou willen vragen, is ook een stukje coaching — je bent van de business-line, maar ook als ondernemer."</p>
-        <footer>— Bram · over de uitruil-deal</footer>
+        <cite>— Bram, over de uitruil-deal</cite>
       </blockquote>
-      <blockquote>
-        <p>"Voor mij hoeft het niet zo technisch complex te zijn. We starten nu op punt A en we moeten naar B. Als we bij B komen, hebben we een heel groot deel van de spaart te pakken."</p>
-        <footer>— Toine · simpel-werkbaar boven complex</footer>
+      <blockquote class="q">
+        <p>"Voor mij hoeft het niet zo technisch complex te zijn. We starten op punt A en we moeten naar B."</p>
+        <cite>— Toine, simpel-werkbaar boven complex</cite>
       </blockquote>
     </div>
   </section>
+
+  <hr class="div">
 
   <section>
-    <h2><span class="badge">05</span>Wat ik vóór 11 mei van jou nodig heb</h2>
-    <p class="sec-sub">6 acties — geen vaag huiswerk, gewoon de blockers waar de pipeline op wacht.</p>
+    <h2 class="serif"><span class="num">05 — Wat ik vóór 11 mei nodig heb</span>Zes blockers.</h2>
+    <p>Geen vaag huiswerk — gewoon de zaken waar de pijplijn op wacht. Volledige "Hoe?"-uitleg per actie staat in de actielijst.</p>
 
-    <div class="actions-toine">
-      <h3>📋 Toine-acties M2-prep</h3>
-      <ol>
-        <li><strong>GSC + GA4 + Viking-toegang regelen voor Bram</strong> — <code>bramovergaag@gmail.com</code> als beperkte gebruiker. <span class="deadline">deze week · blokkeert audit</span></li>
-        <li><strong>2 namen voor coaching-rollen aanleveren</strong> — wie kan administratie/marketing oppakken? <span class="deadline">vóór M2</span></li>
-        <li><strong>Vendor-keuze definitief maken</strong> — hybride aanpak Bram + bestaande vendor? Of alleen Bram? <span class="deadline">vóór M2</span></li>
-        <li><strong>Cijfer-claims valideren in Post A (Zandmotor)</strong> — "15 jaar lesgegeven", "lagune 1-1,5m diep", "07:30 wind-check". <span class="deadline">deze week</span></li>
-        <li><strong>Whiteboard-clusters digitaliseren</strong> — 3 onleesbare items uit M1: <em>csp · beach r</em> en <em>VEIS · beants</em> — wat stond er? <span class="deadline">vóór M2</span></li>
-        <li><strong>GitHub-account email aanleveren</strong> — voor read-toegang tot de SEO-branch (planning + posts + blueprints). <span class="deadline">vóór M2</span></li>
-      </ol>
-    </div>
+    <ol class="actions">
+      <li class="urgent">
+        <strong>GSC + GA4 + Viking-toegang regelen voor Bram</strong>
+        bramovergaag@gmail.com toevoegen als beperkte gebruiker. Voorwaarde voor de audit.
+        <span class="deadline">deze week · blokkeert audit</span>
+      </li>
+      <li>
+        <strong>Twee namen voor coaching-rollen</strong>
+        Wie kan administratie / marketing oppakken in het kleine teampje?
+        <span class="deadline">vóór M2</span>
+      </li>
+      <li>
+        <strong>Vendor-keuze definitief maken</strong>
+        Hybride aanpak Bram + bestaande vendor, of alleen Bram?
+        <span class="deadline">vóór M2</span>
+      </li>
+      <li>
+        <strong>Cijfer-claims valideren in Post A (Zandmotor)</strong>
+        "15 jaar lesgegeven" · "lagune 1–1,5m diep" · "07:30 wind-check" — kloppen die?
+        <span class="deadline">deze week</span>
+      </li>
+      <li>
+        <strong>Whiteboard-clusters digitaliseren</strong>
+        Drie onleesbare items uit M1: <em>csp · beach r</em> en <em>VEIS · beants</em>. Wat stond er?
+        <span class="deadline">vóór M2</span>
+      </li>
+      <li>
+        <strong>GitHub-account email aanleveren</strong>
+        Voor read-toegang tot de SEO-branch (planning, posts, blueprints).
+        <span class="deadline">vóór M2</span>
+      </li>
+    </ol>
 
-    <div class="next-meeting">
-      <h3>📅 Volgende meeting — M2</h3>
-      <p><strong>Maandag 11 mei · 17:00 · online (Google Meet)</strong> — kick-off review, GSC-toegang check, scenarios 1+2 setup live.</p>
-    </div>
-  </section>
-
-  <section>
-    <h2><span class="badge">06</span>WhatsApp-bericht klaar om te sturen</h2>
-    <p class="sec-sub">Copy-paste deze tekst in de SEO-WA-groep — Toine heeft dan alle context + de directe link.</p>
-
-    <div class="wa-template">
-      <h3>📱 Template-bericht</h3>
-      <p>Klik op de knop om de tekst te kopiëren — plak in WhatsApp.</p>
-      <pre id="wa-text">Hey Toine —
-
-Heb dit weekend de pilot-omgeving opgezet. Eén link en je hebt alles bij de hand:
-
-→ https://bramovergaag.github.io/Blow/pilot/voor-toine.html
-
-Wat erin staat:
-• Pipeline-dashboard met week-rooster
-• Actielijst M1 (jouw 6 acties + Bram's 8 + samen 3)
-• Notulen M1 incl. 8 beslissingen + 5 letterlijke quotes uit ons gesprek
-• Planning t/m M9 met Google Calendar 1-klik export
-• Posts archief (Zandmotor + Kijkduin/Scheveningen al klaar)
-• Strategie-toelichting: zakelijke markt = prio-1
-
-Voor M2 (ma 11 mei 17:00 online) heb ik 6 dingen van je nodig — staan in de actielijst, vink af terwijl je gaat. Belangrijkste deze week: GSC-toegang, anders kan ik geen audit afmaken.
-
-Laat horen wat je vindt!
-— Bram</pre>
-      <button onclick="copyWA()">📋 Kopieer naar klembord</button>
-      <span id="wa-confirm" style="margin-left: 10px; opacity: 0; transition: opacity 0.2s; font-size: 0.84rem;">✓ gekopieerd</span>
+    <div class="cta">
+      <div class="cta-eyebrow">Volgende meeting</div>
+      <h3>M2 — maandag 11 mei · 17:00 · online</h3>
+      <p>Kick-off review · GSC-toegang check · scenarios 1+2 setup live.</p>
     </div>
   </section>
 
-</div>
+</main>
 
 <footer>
-  <p>BLOW × Bram · M1 → M2 handover · <a href="./" style="color: var(--accent); text-decoration: none; font-weight: 600;">terug naar pilot-overzicht</a></p>
+  <p>BLOW × Bram · M1 → M2 handover · <a href="./">terug naar pilot-overzicht</a></p>
 </footer>
-
-<script>
-function copyWA() {
-  const text = document.getElementById('wa-text').textContent;
-  navigator.clipboard.writeText(text).then(() => {
-    const c = document.getElementById('wa-confirm');
-    c.style.opacity = '1';
-    setTimeout(() => c.style.opacity = '0', 2000);
-  });
-}
-</script>
 
 </body>
 </html>
