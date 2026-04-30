@@ -132,11 +132,14 @@
   .action {
     display: grid;
     grid-template-columns: auto 1fr auto;
-    gap: 14px; align-items: center;
+    gap: 14px 14px; align-items: start;
     padding: 14px 18px;
     border-bottom: 1px solid var(--border);
     transition: background 0.2s;
   }
+  /* HOW-details + afronding-tag spannen volle breedte onder de hoofdrij */
+  .action > details.how,
+  .action > .afronding-tag { grid-column: 1 / -1; }
   @media (max-width: 700px) { .action { grid-template-columns: 1fr; gap: 10px; } }
   .action:last-child { border-bottom: none; }
   .action.done { background: var(--green-soft); }
