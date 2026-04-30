@@ -744,7 +744,7 @@ const MEETINGS = [
   // Fysiek: 17:00-20:00 (3 uur) · Online: 17:00-18:30 (90 min)
   { id: 'M1', date: '2026-04-29', dateLabel: 'wo 29 apr', start: '18:00', end: '21:00', modus: 'fysiek', locatie: 'Beach House Kijkduin (Toine)', address: ADDR_TOINE, doel: 'Kennismaking + voorstel + commitment fase 1', past: true },
   { id: 'M2', date: '2026-05-11', dateLabel: 'ma 11 mei', start: '17:00', end: '18:30', modus: 'online', locatie: 'Google Meet', address: '', doel: 'Kick-off review · GSC-toegang · Scenarios 1+2 setup', past: false },
-  { id: 'M3', date: '2026-05-25', dateLabel: 'ma 25 mei', start: '17:00', end: '20:00', modus: 'fysiek', locatie: 'Bram thuis (Dordrecht)', address: ADDR_BRAM, doel: 'Scenario 3 (WordPress) inrichten · content review · KPI-conceptlijst', past: false },
+  { id: 'M3', date: '2026-05-25', dateLabel: 'ma 25 mei', start: '17:00', end: '20:00', modus: 'fysiek', locatie: 'Bram thuis (Dordrecht)', address: ADDR_BRAM, doel: 'Scenario 3 (Archive Publisher) inrichten · content review · KPI-conceptlijst', past: false },
   { id: 'M4', date: '2026-06-08', dateLabel: 'ma 8 jun', start: '17:00', end: '18:30', modus: 'online', locatie: 'Google Meet', address: '', doel: 'Tussenstand · eerste GSC-data over pilot-posts', past: false },
   { id: 'M5', date: '2026-06-22', dateLabel: 'ma 22 jun', start: '17:00', end: '20:00', modus: 'fysiek', locatie: 'Beach House Kijkduin (Toine)', address: ADDR_TOINE, doel: 'Maand-2 review · KPI-baseline · scenarios 4+5 productief', past: false },
   { id: 'M6', date: '2026-07-06', dateLabel: 'ma 6 jul', start: '17:00', end: '18:30', modus: 'online', locatie: 'Google Meet', address: '', doel: 'Tussenstand · 8-12 nieuwe posts · distributie-pipeline', past: false },
@@ -774,7 +774,7 @@ function gcalUrl(m) {
 // Provisional acties per meeting — illustratief, wordt scherpgesteld na M_(n-1)
 const PREP_ACTIONS = {
   M3: [
-    'Scenario 3 (WordPress Publisher) inrichten + DALL·E-key',
+    'Scenario 3 (Archive Publisher) inrichten — md→HTML + commit naar pilot/posts',
     'Eerste 3-5 posts via volledige pipeline doorlopen',
     'KPI-conceptlijst: 4-6 KPI\'s uit 5 categorieën (volume / SEO / business / operatie / strategisch)',
     'Eerste GSC-data review (voor zover beschikbaar na 2 wk)',
@@ -877,10 +877,10 @@ const M1_ACTIONS = [
   { id: 't-5', who: 'toine', title: 'Whiteboard-clusters digitaliseren' },
   { id: 't-6', who: 'toine', title: 'GitHub-account email aanleveren (voor repo-toegang)' },
   // Bram (7)
-  { id: 'b-1', who: 'bram', title: 'MAKE-account + scenarios 1+2+3 inrichten' },
+  { id: 'b-1', who: 'bram', title: 'MAKE-account + scenarios 1+2 inrichten' },
   { id: 'b-2', who: 'bram', title: 'Audit-deel-1 (GSC) afronden zodra toegang er is' },
   { id: 'b-3', who: 'bram', title: "Title-tags + meta repareren op 5 sleutel-pagina's" },
-  { id: 'b-4', who: 'bram', title: 'Post A (Zandmotor) publiceren naar blow.surf' },
+  { id: 'b-4', who: 'bram', title: 'Post A (Zandmotor) publiceren naar archive-repo' },
   { id: 'b-5', who: 'bram', title: 'Post B (Kijkduin vs Scheveningen) afmaken + publiceren' },
   { id: 'b-6', who: 'bram', title: 'Eerste restaurant-post + eerste events-post draften' },
   { id: 'b-7', who: 'bram', title: 'ContentQueue uitbreiden met whiteboard-clusters' },
