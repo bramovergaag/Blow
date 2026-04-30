@@ -697,6 +697,8 @@
 
     <p class="flow-purpose" style="background: var(--accent-soft); padding: 12px 14px; border-radius: 8px; border-left: 3px solid var(--accent); margin: 10px 0;"><strong>🔒 Reply-only rule:</strong> alleen reacties die expliciet <em>reply</em> zijn op het draft-bericht worden door de bot verwerkt. Zonder reply-context wordt het bericht genegeerd (zie het als losse chat). Voorkomt valse positives in een actieve groep en zorgt dat <code>edit: ...</code> altijd ondubbelzinnig aan één draft hangt. Implementatie: 2chat geeft <code>quoted_message.id</code> mee; resolver matched dit met de <code>review_message_id</code> van de draft.</p>
 
+    <p class="flow-purpose" style="background: var(--green-soft); padding: 12px 14px; border-radius: 8px; border-left: 3px solid var(--green); margin: 10px 0; font-family: ui-monospace, monospace; font-size: 0.86rem;"><strong>📲 Live group-id (BLOW · post-review):</strong> <code>WAGc63a02d1-85fa-4e7c-9c01-2d31123e3e13</code> · 2chat-channel: BLOW WhatsApp Business · gebruik deze ID in scenario 5 (poster) + scenario 6 (resolver) als <code>conversation_id</code>.</p>
+
     <div class="flow" aria-label="Flow 06b">
       <div class="step trigger">
         <div class="step-icon">Trigger</div>
