@@ -452,6 +452,16 @@
   .m-acties-bar .fill { height: 100%; background: var(--green); transition: width 0.3s; }
   .m-acties-meta { font-size: 0.84rem; color: var(--muted); }
   .m-acties-meta a { color: var(--accent); text-decoration: none; font-weight: 600; }
+  .prep-list { list-style: none; padding: 0; margin: 0; }
+  .prep-list li {
+    padding: 8px 0 8px 22px; font-size: 0.88rem; line-height: 1.4;
+    color: var(--deep); position: relative;
+  }
+  .prep-list li + li { border-top: 1px dashed var(--border); }
+  .prep-list li::before {
+    content: '○'; position: absolute; left: 0; top: 8px;
+    color: var(--muted); font-weight: 700;
+  }
 </style>
 </head>
 <body>
@@ -733,8 +743,8 @@ const ADDR_BRAM = 'Generaal van der Heijdenstraat 17, 3311 WH Dordrecht'; // Bra
 const MEETINGS = [
   // Fysiek: 17:00-20:00 (3 uur) · Online: 17:00-18:30 (90 min)
   { id: 'M1', date: '2026-04-29', dateLabel: 'wo 29 apr', start: '18:00', end: '21:00', modus: 'fysiek', locatie: 'Beach House Kijkduin (Toine)', address: ADDR_TOINE, doel: 'Kennismaking + voorstel + commitment fase 1', past: true },
-  { id: 'M2', date: '2026-05-11', dateLabel: 'ma 11 mei', start: '17:00', end: '18:30', modus: 'online', locatie: 'Google Meet', address: '', doel: 'Kick-off review · GSC-toegang · Scenarios 1+2+3 setup', past: false },
-  { id: 'M3', date: '2026-05-25', dateLabel: 'ma 25 mei', start: '17:00', end: '20:00', modus: 'fysiek', locatie: 'Bram thuis (Dordrecht)', address: ADDR_BRAM, doel: 'Status techniek + content review + KPI-conceptlijst', past: false },
+  { id: 'M2', date: '2026-05-11', dateLabel: 'ma 11 mei', start: '17:00', end: '18:30', modus: 'online', locatie: 'Google Meet', address: '', doel: 'Kick-off review · GSC-toegang · Scenarios 1+2 setup', past: false },
+  { id: 'M3', date: '2026-05-25', dateLabel: 'ma 25 mei', start: '17:00', end: '20:00', modus: 'fysiek', locatie: 'Bram thuis (Dordrecht)', address: ADDR_BRAM, doel: 'Scenario 3 (WordPress) inrichten · content review · KPI-conceptlijst', past: false },
   { id: 'M4', date: '2026-06-08', dateLabel: 'ma 8 jun', start: '17:00', end: '18:30', modus: 'online', locatie: 'Google Meet', address: '', doel: 'Tussenstand · eerste GSC-data over pilot-posts', past: false },
   { id: 'M5', date: '2026-06-22', dateLabel: 'ma 22 jun', start: '17:00', end: '20:00', modus: 'fysiek', locatie: 'Beach House Kijkduin (Toine)', address: ADDR_TOINE, doel: 'Maand-2 review · KPI-baseline · scenarios 4+5 productief', past: false },
   { id: 'M6', date: '2026-07-06', dateLabel: 'ma 6 jul', start: '17:00', end: '18:30', modus: 'online', locatie: 'Google Meet', address: '', doel: 'Tussenstand · 8-12 nieuwe posts · distributie-pipeline', past: false },
@@ -761,6 +771,59 @@ function gcalUrl(m) {
   return 'https://calendar.google.com/calendar/render?' + params.toString();
 }
 
+// Provisional acties per meeting — illustratief, wordt scherpgesteld na M_(n-1)
+const PREP_ACTIONS = {
+  M3: [
+    'Scenario 3 (WordPress Publisher) inrichten + DALL·E-key',
+    'Eerste 3-5 posts via volledige pipeline doorlopen',
+    'KPI-conceptlijst: 4-6 KPI\'s uit 5 categorieën (volume / SEO / business / operatie / strategisch)',
+    'Eerste GSC-data review (voor zover beschikbaar na 2 wk)',
+    'Technisch frictie-rapport — wat brak, wat moet anders'
+  ],
+  M4: [
+    '8-10 posts gepubliceerd via volledige pipeline',
+    'GSC-tracking 3 wk data — eerste echte performance-signalen',
+    'Distributie-pipeline ontwerp (LinkedIn / IG / mail)',
+    'Refresh-flag mechanisme testen op underperformers',
+    'KPI-baseline conceptueel klaar voor M5'
+  ],
+  M5: [
+    'Scenarios 4 (Competitor Monitor) + 5 (Review Aggregator) ontwerpen',
+    'KPI-baseline vastleggen — 2 mnd data als nulmeting',
+    'Maand-2 retro: wat werkt / niet werkt',
+    'Vendor-vergelijking definitief afsluiten (cost+output beide vendors)',
+    'Eerste refreshes uitgevoerd op underperformers uit M4'
+  ],
+  M6: [
+    'Scenarios 4+5 productief — auto-feed in ContentQueue',
+    '12-16 posts live · ranking-overzicht per cluster',
+    'Distributie-pipeline live (cross-post automated)',
+    'Tussenstand-deck voorbereiden voor M7',
+    'Open issues uit M5 oplossen'
+  ],
+  M7: [
+    'Voorbereiding eind-stap-1 evaluatie',
+    'KPI-tussenmeting (3 mnd data) vergelijken met baseline',
+    'Probleem-log + oplossingen samenvatten',
+    'Eigendomsstructuur-opties uitwerken (jij/Toine/coaches)',
+    'Concept stap-2 scope schrijven'
+  ],
+  M8: [
+    '18-22 posts gepubliceerd · finaal performance-rapport',
+    'KPI-rapport finaliseren voor M9',
+    'Open-punten check: wat moet beslist in M9',
+    'Stap-2 scope concept rondsturen',
+    'Vendor-keuze definitief vastleggen'
+  ],
+  M9: [
+    '⭐ Go/no-go beslissing voor stap 2',
+    'Eigendomsstructuur tekenen (BV / VOF / freelance)',
+    'Stap-2 scope definitief',
+    'Maand-4 retro: wat in stap 1 werkte/niet-werkte',
+    'Hand-over of doorzetten — wie doet wat in stap 2'
+  ]
+};
+
 function renderMeetingTable() {
   const tbody = document.getElementById('meeting-tbody');
   if (!tbody) return;
@@ -778,12 +841,24 @@ function renderMeetingTable() {
       <td>${m.doel}</td>
       <td>${btn}</td>
     </tr>`;
-    // Voeg M1-acties als collapsible toe onder M2 (voorwaarde voor de meeting)
+    // Collapsible per meeting — M2 = live uit M1-actielijst, M3+ = provisional
     if (m.id === 'M2') {
       row += `<tr class="m-acties-row"><td colspan="7" style="padding: 0; border: 0;">
         <details class="m-acties">
-          <summary>📋 <strong>Voorwaarde-acties M1</strong> — <span id="m2-actcount">0</span>/17 afgerond <span class="m-acties-hint">(klik om te zien)</span></summary>
+          <summary>📋 <strong>Voorwaarde-acties M1</strong> — <span id="m2-actcount">0</span>/17 afgerond <span class="m-acties-hint">(live · klik om te zien)</span></summary>
           <div class="m-acties-body" id="m2-actbody"><!-- gevuld door renderActionsStatus --></div>
+        </details>
+      </td></tr>`;
+    } else if (PREP_ACTIONS[m.id]) {
+      const items = PREP_ACTIONS[m.id].map(t => `<li>${t}</li>`).join('');
+      const prevId = 'M' + (parseInt(m.id.slice(1)) - 1);
+      row += `<tr class="m-acties-row"><td colspan="7" style="padding: 0; border: 0;">
+        <details class="m-acties">
+          <summary>🗓 <strong>Provisional voorbereiding ${m.id}</strong> <span class="m-acties-hint">(illustratief · wordt scherpgesteld na ${prevId})</span></summary>
+          <div class="m-acties-body">
+            <p style="font-size: 0.84rem; color: var(--muted); margin-bottom: 10px; font-style: italic;">Verwacht in de 2 weken tussen ${prevId} en ${m.id} — concrete invulling volgt uit ${prevId}-uitkomsten.</p>
+            <ul class="prep-list">${items}</ul>
+          </div>
         </details>
       </td></tr>`;
     }
