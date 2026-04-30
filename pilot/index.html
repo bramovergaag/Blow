@@ -472,26 +472,26 @@ const STAGES = [
   { key: 'wa', name: 'WhatsApp verzonden', desc: 'Bericht naar groep · 2u feedback' },
   { key: 'pub', name: 'Gepubliceerd', desc: 'Live op archive-repo (github pages)' }
 ];
-// Audit-derived topics uit content-queue-seed.csv (M1 audit · 27 apr 2026)
-// Volgorde = priority high → medium → low binnen elk cluster
+// Audit-derived topics — strategische volgorde M1: zakelijke markt prio-1
+// Tijd-doelgroep: 06-08h yoga (blue-ocean) · 12-14h lunch · 14-17h zakelijk · 17-19h borrel
 const SAMPLE_TITLES = {
   events: [
-    'Bedrijfsuitje strand Kijkduin',       // high · b2b
-    'Teambuilding kitesurfen',             // high · unieke prop
-    'Zomerfeest organiseren strand',       // high · plannen mrt-apr
-    'Verjaardag vieren aan zee',           // medium · weekend bookings
-    'Kinderfeestje strand Kijkduin',       // medium · families
-    'Oud en nieuw aan zee',                // medium · seizoensspike
-    'Bruiloft strand Kijkduin'             // low · hoge-waarde
+    'Vergaderlocatie strand Kijkduin',     // 🎯 NEW · zakelijk prio-1 · 14-17h
+    'Bedrijfsuitje strand Kijkduin',       // high · zakelijk b2b
+    'Klantborrel locatie Kijkduin',        // 🎯 NEW · zakelijk · 17-19h
+    'Teambuilding kitesurfen',             // high · zakelijk unieke prop
+    'Zomerfeest organiseren strand',       // high · zakelijk plannen mrt-apr
+    'Verjaardag vieren aan zee',           // medium · consument
+    'Kinderfeestje strand Kijkduin'        // medium · families
   ],
   rest: [
+    'Borrelen aan zee — zakelijk vrijmibo',// 🎯 BUMP · zakelijk · 17-19h
+    'Power-lunch zakelijk Kijkduin',       // 🎯 NEW · zakelijk · 12-14h
+    'Yoga zonsopgang Kijkduin',            // 🎯 NEW · blue-ocean wellness · 06-08h
     'Strandrestaurant Kijkduin',           // high · refresh bestaande pagina
     'Dagje strand Kijkduin',               // medium · weekend-intent
     'Ontbijt aan zee Den Haag',            // medium · ochtend-publiek
-    'Borrelen aan zee — vrijmibo',         // medium · after-work
-    'Winter aan zee Kijkduin',             // medium · dal-periode
-    'Beach House interieur',               // low · imago-content
-    'Trouwen op het strand'                // low · lange voorlooptijd
+    'Yoga retreat strand Den Haag'         // 🎯 NEW · wellness · hoge marge
   ],
   kite: [
     'Kitesurfen Zandmotor — veiligste spot', // high · Post A (live)
