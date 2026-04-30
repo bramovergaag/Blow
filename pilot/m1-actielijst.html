@@ -615,18 +615,18 @@
           <button type="button" class="done-toggle" data-id="b-1" aria-label="Markeer als klaar"><span class="dt-icon">○</span><span class="dt-lbl">klaar</span></button>
           
           <div class="text-block">
-            <div class="text">MAKE-account + scenarios 1+2+3 inrichten</div>
-            <div class="desc">GSC-pull, Content Generator, WordPress Publisher op Bram's MAKE-account.</div>
+            <div class="text">MAKE-account + scenarios 1+2 inrichten</div>
+            <div class="desc">GSC-pull + Content Generator op Bram's MAKE-account. Scenario 3 (Archive-publisher, voorheen WP) volgt in M3.</div>
             <div class="deadline">deadline: week 1 stap 1</div>
           </div>
           <div class="priority high">hoog</div>
           <details class="how"><summary>Hoe? · stap-voor-stap</summary><div class="how-body">
 <ol>
 <li><strong>Account:</strong> ga naar <code>make.com</code> · sign-up met BLOW-email · upgrade naar Pro (€10/mnd, voor 10k operations)</li>
-<li><strong>Connecties:</strong> Settings → Connections → add Google (OAuth voor Sheets + GSC), WordPress (REST + app-password), Anthropic API (key vanuit claude.com/settings)</li>
-<li><strong>Scenario 1 (GSC):</strong> import blueprint <code>blow-make-blueprints/01-gsc-to-sheets.blueprint.json</code> · vervang IDs · schedule: weekly maandag 07:00</li>
-<li><strong>Scenario 2 (Content):</strong> import <code>02-content-generator.blueprint.json</code> · trigger: sheet-watcher op status=ready_for_brief</li>
-<li><strong>Scenario 3 (WP):</strong> import <code>03-wordpress-publisher.blueprint.json</code> · trigger: status=approved</li>
+<li><strong>Connecties:</strong> Settings → Connections → add Google (OAuth voor Sheets + GSC), GitHub (token voor archive-repo commits), Anthropic API (key vanuit claude.com/settings)</li>
+<li><strong>Scenario 1 (GSC):</strong> import blueprint <code>blow-make-blueprints/01-gsc-to-sheets.blueprint.json</code> · vervang IDs · schedule: daily 07:00 (niet wekelijks — 21 posts/wk vraagt snelle feedback)</li>
+<li><strong>Scenario 2 (Content):</strong> import <code>02-content-generator.blueprint.json</code> · trigger: sheet-watcher op status=ready_for_brief · output naar status=draft_ready_for_review</li>
+<li><strong>Scenario 3 (Archive-publisher):</strong> uitgesteld naar M3 — markdown→HTML + commit naar pilot/posts in plaats van WordPress-API</li>
 <li><strong>Test</strong> met 1 dummy-row in sheet voor scenario 2 → checken of draft terugkomt</li>
 </ol></div></details>
           <div class="afronding-tag">💬 SEO-groep: <strong>Bram deelt</strong> Make-overzicht-screenshot + uitnodiging beheerder</div>
@@ -678,22 +678,24 @@
           <button type="button" class="done-toggle" data-id="b-4" aria-label="Markeer als klaar"><span class="dt-icon">○</span><span class="dt-lbl">klaar</span></button>
           
           <div class="text-block">
-            <div class="text">Post A (Zandmotor) publiceren naar blow.surf</div>
-            <div class="desc">Na cijfer-validatie door Toine. Eerste blogpost in 9 maanden = freshness-signaal.</div>
+            <div class="text">Post A (Zandmotor) publiceren naar archive-repo</div>
+            <div class="desc">Na cijfer-validatie door Toine. Markdown → HTML → commit naar archive-repo (github pages).</div>
             <div class="deadline">deadline: week 2 stap 1</div>
           </div>
           <div class="priority med">medium</div>
           <details class="how"><summary>Hoe? · stap-voor-stap</summary><div class="how-body">
 <ol>
 <li><strong>Wacht</strong> op cijfer-validatie van Toine (T-4)</li>
-<li><strong>Pas aan:</strong> "15 jaar" → werkelijke aantal · evt lagune-diepte aanpassen</li>
-<li><strong>Open WordPress</strong> · Posts → Add New · plak markdown via een MD-to-HTML converter (Pandoc lokaal, of online <code>markdowntohtml.com</code>)</li>
-<li><strong>Hero-image:</strong> drone-shot Zandmotor uit Toine's bibliotheek of Pexels/Unsplash gratis-stock</li>
-<li><strong>Yoast/RankMath:</strong> primary keyword <code>kitesurfen zandmotor</code> · meta-desc uit frontmatter · slug <code>kitesurfen-zandmotor-kijkduin</code></li>
-<li><strong>Internal-links:</strong> /kitesurfles-zandmotor/ + /restaurant + /over-blow toevoegen via Gutenberg-link-tool</li>
-<li><strong>Publiceren</strong> en delen via WA + IG (template uit <code>distributie/templates.md</code>)</li>
+<li><strong>Pas aan:</strong> "15 jaar" → werkelijke aantal · evt lagune-diepte aanpassen in <code>posts/01-zandmotor-veiligheid.md</code></li>
+<li><strong>Render naar HTML:</strong> Pandoc lokaal of MAKE-scenario 3 (na M3) — output in <code>pilot/posts/01-zandmotor-veiligheid.html</code></li>
+<li><strong>Hero-image:</strong> drone-shot Zandmotor uit Toine's bibliotheek of Pexels/Unsplash · plaats in <code>posts/img/</code></li>
+<li><strong>Frontmatter check:</strong> primary keyword <code>kitesurfen zandmotor</code> · meta-desc · slug · publication date</li>
+<li><strong>Internal-links</strong> in body: /pilot/posts/02-kijkduin-vs-scheveningen.html + verwijzing naar blow.surf voor /kitesurfles + /restaurant</li>
+<li><strong>Commit + push</strong> naar SEO-branch · PR mergen naar main · GitHub Pages auto-deploy</li>
+<li><strong>Posts-archive update:</strong> stages info/draft/review/wa/pub op done · controleer Bekijk-link werkt</li>
+<li><strong>Distributie:</strong> delen via WA + IG (template uit <code>distributie/templates.md</code>)</li>
 </ol></div></details>
-          <div class="afronding-tag">💬 SEO-groep: <strong>Bram deelt</strong> URL gepubliceerde Zandmotor-post (na cijfer-validatie T-4)</div>
+          <div class="afronding-tag">💬 SEO-groep: <strong>Bram deelt</strong> URL gepubliceerde Zandmotor-post op github.io/Blow/pilot/posts (na cijfer-validatie T-4)</div>
         </div>
 
         <div class="action" data-id="b-5" data-who="bram">
