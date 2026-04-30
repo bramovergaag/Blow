@@ -695,6 +695,8 @@
     </div>
     <p class="flow-purpose">Volgorde van precedence: <strong>skip &gt; edit &gt; positive &gt; silent</strong>. Edge case: bij gemengde reacties ("ok maar één edit") wint <em>edit</em> — veiliger default dan onbedoeld publiceren.</p>
 
+    <p class="flow-purpose" style="background: var(--accent-soft); padding: 12px 14px; border-radius: 8px; border-left: 3px solid var(--accent); margin: 10px 0;"><strong>🔒 Reply-only rule:</strong> alleen reacties die expliciet <em>reply</em> zijn op het draft-bericht worden door de bot verwerkt. Zonder reply-context wordt het bericht genegeerd (zie het als losse chat). Voorkomt valse positives in een actieve groep en zorgt dat <code>edit: ...</code> altijd ondubbelzinnig aan één draft hangt. Implementatie: 2chat geeft <code>quoted_message.id</code> mee; resolver matched dit met de <code>review_message_id</code> van de draft.</p>
+
     <div class="flow" aria-label="Flow 06b">
       <div class="step trigger">
         <div class="step-icon">Trigger</div>
