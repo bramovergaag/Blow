@@ -106,6 +106,19 @@
   }
   .post-row .open-link.gone { background: var(--muted); pointer-events: none; }
   .post-row.published { border-left-width: 6px; }
+  .post-row .next-row { margin-top: 6px; }
+  .post-row .next-link {
+    font-size: 0.78rem; color: var(--accent); text-decoration: none;
+    font-weight: 700;
+  }
+  .post-row .next-link:hover { text-decoration: underline; }
+  .back-to-dash {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--deep); color: white;
+    padding: 9px 16px; border-radius: 8px; text-decoration: none;
+    font-weight: 700; font-size: 0.86rem; margin-bottom: 16px;
+  }
+  .back-to-dash:hover { background: var(--sea); }
 
   @media (max-width: 700px) {
     .post-row { grid-template-columns: auto 1fr; }
@@ -183,11 +196,11 @@
 
 <nav class="tile-bar" aria-label="Hoofdvieuws">
   <div class="tiles">
-    <a href="./" class="tile pipeline active">
+    <a href="./" class="tile pipeline">
       <span class="tile-icon">📊</span>
       <div class="tile-content">
         <div class="tile-name">Pipeline-dashboard</div>
-        <div class="tile-sub">21 posts/week · status per stage</div>
+        <div class="tile-sub">7 posts/week · status per stage</div>
       </div>
     </a>
     <a href="planning.html" class="tile planning">
@@ -226,6 +239,8 @@
 
 <div class="container">
 
+  <a href="./" class="back-to-dash">↩ Terug naar pilot dashboard</a>
+
   <header class="hero">
     <h1>📚 Posts archief</h1>
     <p class="lead">Alle blog-posts gegenereerd door de pipeline — onder elkaar, gefilterd per cluster, met status-stages en links naar gepubliceerde versies.</p>
@@ -241,9 +256,10 @@
 
   <div class="filters">
     <button class="filter active" data-filter="all">Alle</button>
-    <button class="filter events" data-filter="events">📅 Events</button>
-    <button class="filter rest" data-filter="rest">🍕 Restaurant</button>
-    <button class="filter kite" data-filter="kite">🪁 Kiteschool</button>
+    <button class="filter kite" data-filter="kitesurfschool">🪁 Kitesurfschool</button>
+    <button class="filter rest" data-filter="beach-house">🏖 Beach House</button>
+    <button class="filter events" data-filter="events">🎉 Events</button>
+    <button class="filter" data-filter="wellness">🧘 Wellness</button>
     <button class="filter" data-filter="published">✓ Gepubliceerd</button>
     <button class="filter" data-filter="pending">⏳ In behandeling</button>
   </div>
@@ -265,21 +281,33 @@
 
 <script>
 // ====== Posts archive ======
+// Primair: fetch pilot/posts/index.json (geschreven door scenario 7).
+// Fallback: REAL_POSTS hardcoded array (gebruikt als index.json 404't).
+// Volgorde wordt automatisch gesorteerd op date (descending).
+const INDEX_URL = 'https://raw.githubusercontent.com/bramovergaag/Blow/main/pilot/posts/index.json';
 const STORAGE_KEY = 'blow-pilot-dashboard';
 const SLOT_LABELS = { events: 'Events 09:00', rest: 'Restaurant 12:30', kite: 'Kiteschool 16:00' };
 const SLOT_ICONS = { events: '📅', rest: '🍕', kite: '🪁' };
+const CLUSTER_LABELS = {
+  kitesurfschool: '🪁 Kitesurfschool',
+  'beach-house': '🏖 Beach House',
+  events: '🎉 Events',
+  wellness: '🧘 Wellness'
+};
 const MONTHS = ['jan','feb','mrt','apr','mei','jun','jul','aug','sep','okt','nov','dec'];
 
-// Existing real posts
+// Existing real posts — files live in pilot/posts/{slug}.html
 const REAL_POSTS = [
   {
-    date: '2026-04-28', slot: 'kite', title: 'Kitesurfen op de Zandmotor — de veiligste kitespot van Nederland',
+    date: '2026-04-28', slot: 'kite', cluster: 'kitesurfschool',
+    title: 'Kitesurfen op de Zandmotor — de veiligste kitespot van Nederland',
     desc: '~1.050 woorden, publicatie-klaar. SEO + GEO geoptimaliseerd, met FAQ en interne links naar /kitesurfles en /beach-house.',
     url: 'posts/01-zandmotor-veiligheid.html',
     stages: { info: 'done', draft: 'done', review: 'done', wa: 'skip', pub: 'pending' }
   },
   {
-    date: '2026-04-29', slot: 'kite', title: 'Kitesurfen Kijkduin vs Scheveningen — waarom beginners beter bij ons starten',
+    date: '2026-04-29', slot: 'kite', cluster: 'kitesurfschool',
+    title: 'Kitesurfen Kijkduin vs Scheveningen — waarom beginners beter bij ons starten',
     desc: '~1.000 woorden, publicatie-klaar. Eerlijke vergelijking als trust-builder. Funnel naar proefles. SERP-snapshot toonde geen vergelijking-pagina in top-10.',
     url: 'posts/02-kijkduin-vs-scheveningen.html',
     stages: { info: 'done', draft: 'done', review: 'pending', wa: '', pub: '' }
@@ -289,9 +317,32 @@ const REAL_POSTS = [
 let state = {};
 try { state = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch (e) {}
 
-// Combine real + state
+// Default cluster per slot voor legacy state-entries zonder cluster-veld
+const SLOT_TO_CLUSTER = { events: 'events', rest: 'beach-house', kite: 'kitesurfschool' };
+const CLUSTER_TO_SLOT = { kitesurfschool: 'kite', 'beach-house': 'rest', events: 'events', wellness: 'rest' };
+
+// Posts uit scenario 7 index.json (gevuld bij page-load)
+let INDEX_POSTS = null;
+
+// Map een index.json entry → dashboard post-shape
+function mapIndexEntry(e) {
+  const cluster = (e.cluster || '').toLowerCase();
+  const slot = CLUSTER_TO_SLOT[cluster] || 'kite';
+  return {
+    date: e.date || '',
+    slot,
+    cluster: cluster || 'kitesurfschool',
+    title: e.title || '(onbenoemd)',
+    desc: e.meta || '',
+    url: e.url || '',
+    stages: { info: 'done', draft: 'done', review: 'done', wa: 'done', pub: 'done' }
+  };
+}
+
+// Combine real + state (of index.json indien beschikbaar)
 function getAllPosts() {
-  const posts = [...REAL_POSTS];
+  const base = (INDEX_POSTS && INDEX_POSTS.length) ? INDEX_POSTS.map(mapIndexEntry) : [...REAL_POSTS];
+  const posts = [...base];
   // From localStorage state — add posts that have any stage set
   for (const [key, p] of Object.entries(state)) {
     const m = key.match(/^(\d{4}-\d{2}-\d{2})-(events|rest|kite)$/);
@@ -301,6 +352,7 @@ function getAllPosts() {
     if (REAL_POSTS.some(r => r.date === m[1] && r.slot === m[2])) continue; // skip duplicates
     posts.push({
       date: m[1], slot: m[2],
+      cluster: p.cluster || SLOT_TO_CLUSTER[m[2]] || m[2],
       title: p.title || '(onbenoemd)',
       desc: '',
       url: '',
@@ -322,8 +374,9 @@ function getStatusLabel(stages) {
 function renderPosts(filter = 'all') {
   const list = document.getElementById('post-list');
   let posts = getAllPosts();
-  if (filter === 'events' || filter === 'rest' || filter === 'kite') {
-    posts = posts.filter(p => p.slot === filter);
+  const clusterFilters = ['kitesurfschool','beach-house','events','wellness'];
+  if (clusterFilters.includes(filter)) {
+    posts = posts.filter(p => (p.cluster || SLOT_TO_CLUSTER[p.slot]) === filter);
   } else if (filter === 'published') {
     posts = posts.filter(p => p.stages && p.stages.pub === 'done');
   } else if (filter === 'pending') {
@@ -333,7 +386,7 @@ function renderPosts(filter = 'all') {
     list.innerHTML = '<div class="empty-state"><h3>Geen posts gevonden</h3><p>Voor dit filter zijn er nog geen posts. Probeer een ander filter of begin met "Alle".</p></div>';
     return;
   }
-  list.innerHTML = posts.map(p => {
+  list.innerHTML = posts.map((p, i) => {
     const d = new Date(p.date);
     const dayName = ['zo','ma','di','wo','do','vr','za'][d.getDay()];
     const status = getStatusLabel(p.stages || {});
@@ -343,7 +396,16 @@ function renderPosts(filter = 'all') {
     }).join('');
     const slotIcon = SLOT_ICONS[p.slot] || '';
     const slotLabel = SLOT_LABELS[p.slot] || p.slot;
-    const linkBtn = p.url ? `<a class="open-link" href="${p.url}" target="_blank">→ Bekijk</a>` : `<span class="open-link gone">geen URL</span>`;
+    const cluster = p.cluster || SLOT_TO_CLUSTER[p.slot] || p.slot;
+    const clusterLabel = CLUSTER_LABELS[cluster] || cluster;
+    const linkBtn = p.url
+      ? `<a class="open-link" href="${p.url}">→ Bekijk</a>`
+      : `<span class="open-link gone">geen URL</span>`;
+    // Volgende-post link (chronologisch oudere → nieuwere binnen huidig filter)
+    const next = posts[i - 1]; // posts zijn descending op datum, dus i-1 = nieuwere
+    const nextLink = next && next.url
+      ? `<a class="next-link" href="${next.url}" title="${next.title.replace(/"/g,'&quot;')}">Volgende post →</a>`
+      : '';
     return `<div class="post-row ${p.slot} ${status.cls === 'published' ? 'published' : ''}">
       <div class="date">
         <div class="day">${dayName}</div>
@@ -353,10 +415,12 @@ function renderPosts(filter = 'all') {
       <div class="body">
         <h3>${p.title}</h3>
         <div class="meta">
-          <span class="pill ${p.slot}">${slotIcon} ${slotLabel}</span>
+          <span class="pill ${p.slot}">${clusterLabel}</span>
+          <span class="pill">${slotIcon} ${slotLabel}</span>
           <span class="pill">${status.label}</span>
         </div>
         ${p.desc ? `<div class="desc">${p.desc}</div>` : ''}
+        ${nextLink ? `<div class="next-row">${nextLink}</div>` : ''}
       </div>
       <div class="actions">
         <div class="stages-mini">${stagesHtml}</div>
@@ -365,7 +429,25 @@ function renderPosts(filter = 'all') {
     </div>`;
   }).join('');
 }
+// Initial render (mogelijk nog met fallback REAL_POSTS); index.json volgt async
 renderPosts('all');
+
+// Fetch index.json (gegenereerd door scenario 7) — overschrijf bij succes
+fetch(INDEX_URL, { cache: 'no-store' })
+  .then(r => {
+    if (!r.ok) throw new Error('index.json ' + r.status);
+    return r.json();
+  })
+  .then(data => {
+    if (Array.isArray(data) && data.length) {
+      INDEX_POSTS = data;
+      const active = document.querySelector('.filter.active');
+      renderPosts(active ? active.dataset.filter : 'all');
+    }
+  })
+  .catch(err => {
+    console.info('[archive] index.json niet beschikbaar — fallback REAL_POSTS', err.message);
+  });
 
 document.querySelectorAll('.filter').forEach(btn => {
   btn.addEventListener('click', () => {

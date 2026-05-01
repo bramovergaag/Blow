@@ -124,24 +124,24 @@
   .wt-slot-head .icon { font-size: 1.1rem; }
 
   .post-cell {
-    background: var(--sand-light); border-radius: 8px; padding: 8px;
-    min-height: 92px; cursor: pointer; transition: all 0.15s;
-    display: flex; flex-direction: column; gap: 4px;
+    background: var(--sand-light); border-radius: 10px; padding: 14px 12px;
+    min-height: 170px; cursor: pointer; transition: all 0.15s;
+    display: flex; flex-direction: column; gap: 8px;
     border: 2px solid transparent;
   }
-  .post-cell:hover { border-color: var(--sea); }
-  .post-cell.weekend { opacity: 0.4; cursor: default; }
-  .post-cell.weekend:hover { border-color: transparent; }
+  .post-cell:hover { border-color: var(--sea); transform: translateY(-2px); box-shadow: 0 4px 14px rgba(11, 46, 74, 0.08); }
+  .post-cell.weekend { opacity: 0.5; cursor: default; }
+  .post-cell.weekend:hover { border-color: transparent; transform: none; box-shadow: none; }
   .post-cell .title-mini {
-    font-size: 0.72rem; color: var(--deep); font-weight: 600; line-height: 1.25;
-    overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2;
+    font-size: 0.92rem; color: var(--deep); font-weight: 700; line-height: 1.3;
+    overflow: hidden; display: -webkit-box; -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
   }
-  .post-cell .stages { display: flex; gap: 3px; flex-wrap: wrap; margin-top: auto; }
+  .post-cell .stages { display: flex; gap: 4px; flex-wrap: wrap; margin-top: auto; }
   .stage-dot {
-    width: 18px; height: 18px; border-radius: 4px;
+    width: 22px; height: 22px; border-radius: 5px;
     display: inline-flex; align-items: center; justify-content: center;
-    font-size: 0.7rem; font-weight: 700;
+    font-size: 0.78rem; font-weight: 700;
     background: var(--foam); border: 1px solid var(--border);
     color: var(--muted);
   }
@@ -299,7 +299,7 @@
       <span class="tile-icon">📊</span>
       <div class="tile-content">
         <div class="tile-name">Pipeline-dashboard</div>
-        <div class="tile-sub">21 posts/week · status per stage</div>
+        <div class="tile-sub">7 posts/week · status per stage</div>
       </div>
     </a>
     <a href="planning.html" class="tile planning">
@@ -338,7 +338,7 @@
 
   <header class="hero">
     <h1>Content-pipeline · week-overzicht</h1>
-    <p class="lead">Drie posts per dag — events 09:00 · restaurant 12:30 · kiteschool 16:00. Per post 5 stages: info → draft → review → WhatsApp → publish. Klik op een cel om status te zien of bij te werken.</p>
+    <p class="lead">Eén post per dag (09:00) — 7 posts per week. Per post 5 stages: info → draft → review → WhatsApp → publish. Klik op een cel om status te zien of bij te werken.</p>
     <div class="week-meta">
       <span class="today" id="today-pill">Vandaag</span>
       <span id="week-num">Week –</span>
@@ -351,27 +351,27 @@
     <div class="kpi-strip">
       <div class="kpi-card totaal">
         <div class="lbl">Posts deze week</div>
-        <div class="val" id="kpi-total">0 / 21</div>
+        <div class="val" id="kpi-total">0 / 7</div>
         <div class="sub" id="kpi-total-sub">0% volledig (alle 5 stages)</div>
         <div class="bar"><div class="fill" id="kpi-total-bar" style="width: 0%"></div></div>
       </div>
       <div class="kpi-card events">
-        <div class="lbl">📅 Events · 09:00</div>
-        <div class="val" id="kpi-events">0 / 7</div>
-        <div class="sub">Bruiloft / familie / zakelijk</div>
-        <div class="bar"><div class="fill" id="kpi-events-bar" style="width: 0%; background: var(--green);"></div></div>
+        <div class="lbl">📥 Info gereed</div>
+        <div class="val" id="kpi-info">0 / 7</div>
+        <div class="sub">GSC + audit data verzameld</div>
+        <div class="bar"><div class="fill" id="kpi-info-bar" style="width: 0%; background: var(--green);"></div></div>
       </div>
       <div class="kpi-card rest">
-        <div class="lbl">🍕 Restaurant · 12:30</div>
-        <div class="val" id="kpi-rest">0 / 7</div>
-        <div class="sub">Hidden gem · Italiaanse pizza</div>
-        <div class="bar"><div class="fill" id="kpi-rest-bar" style="width: 0%; background: var(--accent);"></div></div>
+        <div class="lbl">✍️ Draft klaar</div>
+        <div class="val" id="kpi-draft">0 / 7</div>
+        <div class="sub">Claude draft afgerond</div>
+        <div class="bar"><div class="fill" id="kpi-draft-bar" style="width: 0%; background: var(--accent);"></div></div>
       </div>
       <div class="kpi-card kite">
-        <div class="lbl">🪁 Kiteschool · 16:00</div>
-        <div class="val" id="kpi-kite">0 / 7</div>
-        <div class="sub">#1 SEO + 1 lead/dag</div>
-        <div class="bar"><div class="fill" id="kpi-kite-bar" style="width: 0%; background: var(--sea);"></div></div>
+        <div class="lbl">✓ Gepubliceerd</div>
+        <div class="val" id="kpi-pub">0 / 7</div>
+        <div class="sub">Live op archive-repo</div>
+        <div class="bar"><div class="fill" id="kpi-pub-bar" style="width: 0%; background: var(--sea);"></div></div>
       </div>
     </div>
   </section>
@@ -397,8 +397,8 @@
         <div class="wt-day-head" data-dow="6"><div>za</div><span class="num"></span></div>
         <div class="wt-day-head" data-dow="0"><div>zo</div><span class="num"></span></div>
 
-        <!-- Events row -->
-        <div class="wt-slot-head"><span class="icon">📅</span><br>Events<span class="time">09:00</span></div>
+        <!-- Events row — enige zichtbare slot. Restaurant/Kite slots zijn uit het rooster gehaald. -->
+        <div class="wt-slot-head"><span class="icon">📅</span><br>Post<span class="time">09:00</span></div>
         <div class="post-cell" data-slot="events" data-dow="1"></div>
         <div class="post-cell" data-slot="events" data-dow="2"></div>
         <div class="post-cell" data-slot="events" data-dow="3"></div>
@@ -406,26 +406,6 @@
         <div class="post-cell" data-slot="events" data-dow="5"></div>
         <div class="post-cell" data-slot="events" data-dow="6"></div>
         <div class="post-cell" data-slot="events" data-dow="0"></div>
-
-        <!-- Restaurant row -->
-        <div class="wt-slot-head"><span class="icon">🍕</span><br>Restaurant<span class="time">12:30</span></div>
-        <div class="post-cell" data-slot="rest" data-dow="1"></div>
-        <div class="post-cell" data-slot="rest" data-dow="2"></div>
-        <div class="post-cell" data-slot="rest" data-dow="3"></div>
-        <div class="post-cell" data-slot="rest" data-dow="4"></div>
-        <div class="post-cell" data-slot="rest" data-dow="5"></div>
-        <div class="post-cell" data-slot="rest" data-dow="6"></div>
-        <div class="post-cell" data-slot="rest" data-dow="0"></div>
-
-        <!-- Kiteschool row -->
-        <div class="wt-slot-head"><span class="icon">🪁</span><br>Kiteschool<span class="time">16:00</span></div>
-        <div class="post-cell" data-slot="kite" data-dow="1"></div>
-        <div class="post-cell" data-slot="kite" data-dow="2"></div>
-        <div class="post-cell" data-slot="kite" data-dow="3"></div>
-        <div class="post-cell" data-slot="kite" data-dow="4"></div>
-        <div class="post-cell" data-slot="kite" data-dow="5"></div>
-        <div class="post-cell" data-slot="kite" data-dow="6"></div>
-        <div class="post-cell" data-slot="kite" data-dow="0"></div>
       </div>
     </div>
 
@@ -625,9 +605,9 @@ function renderWeek() {
     if (fmtDate(d) === todayStr) h.classList.add('today');
   });
 
-  // Cells
+  // Cells — alleen events-slot (1 post per dag, 7 per week)
   let totalDone = 0, totalPosts = 0;
-  let slotDone = { events: 0, rest: 0, kite: 0 };
+  let stageCount = { info: 0, draft: 0, review: 0, wa: 0, pub: 0 };
 
   document.querySelectorAll('.post-cell').forEach(cell => {
     const slot = cell.dataset.slot;
@@ -643,10 +623,12 @@ function renderWeek() {
     const title = post.title || getSampleTitle(d, slot);
     const stages = STAGES.map(s => post[s.key] || '').filter(Boolean);
     const allDone = stages.length === 5 && stages.every(s => s === 'done' || s === 'skip');
-    if (allDone) {
-      totalDone++;
-      slotDone[slot]++;
-    }
+    if (allDone) totalDone++;
+    // Count per-stage progress (done OR skip telt als afgerond)
+    STAGES.forEach(s => {
+      const v = post[s.key] || '';
+      if (v === 'done' || v === 'skip') stageCount[s.key]++;
+    });
 
     cell.dataset.date = fmtDate(d);
     cell.innerHTML = `
@@ -663,16 +645,21 @@ function renderWeek() {
     cell.onclick = () => openModal(d, slot);
   });
 
-  // KPIs
+  // KPIs — 7 posts/week (events-slot only)
   const totalPct = totalPosts ? Math.round((totalDone / totalPosts) * 100) : 0;
   document.getElementById('kpi-total').textContent = `${totalDone} / ${totalPosts}`;
   document.getElementById('kpi-total-sub').textContent = `${totalPct}% volledig (alle 5 stages)`;
   document.getElementById('kpi-total-bar').style.width = totalPct + '%';
 
-  for (const slot of SLOTS) {
-    document.getElementById(`kpi-${slot}`).textContent = `${slotDone[slot]} / 5`;
-    document.getElementById(`kpi-${slot}-bar`).style.width = ((slotDone[slot] / 5) * 100) + '%';
-  }
+  const setStageKpi = (id, count, color) => {
+    const el = document.getElementById('kpi-' + id);
+    const bar = document.getElementById('kpi-' + id + '-bar');
+    if (el) el.textContent = `${count} / ${totalPosts}`;
+    if (bar) bar.style.width = (totalPosts ? (count / totalPosts) * 100 : 0) + '%';
+  };
+  setStageKpi('info', stageCount.info);
+  setStageKpi('draft', stageCount.draft);
+  setStageKpi('pub', stageCount.pub);
 
   // Today pill
   const todayInWeek = dates.findIndex(d => fmtDate(d) === todayStr);
