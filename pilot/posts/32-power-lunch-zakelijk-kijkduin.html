@@ -15,77 +15,76 @@
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   line-height: 1.6;
-  color: #1a1a1a;
-  background: #fafafa;
+  color: #333;
+  background: #fff;
 }
 
 .brand-bar {
   background: #C66A1F;
-  color: white;
-  padding: 12px 24px;
+  padding: 12px 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 16px;
-}
-
-.brand-bar-left {
-  display: flex;
-  align-items: center;
   gap: 20px;
 }
 
-.logo {
+.brand-bar__left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.brand-bar__logo {
   font-size: 28px;
   font-weight: 800;
-  letter-spacing: 2px;
-  color: white;
+  color: #fff;
   text-decoration: none;
+  letter-spacing: 2px;
 }
 
-.brand-divider {
-  color: rgba(255,255,255,0.4);
-  font-size: 20px;
+.brand-bar__divider {
+  width: 1px;
+  height: 24px;
+  background: rgba(255,255,255,0.3);
 }
 
-.beach-house-label {
+.brand-bar__location {
+  color: #fff;
   font-size: 15px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
+  font-weight: 500;
 }
 
-.brand-tabs {
+.brand-bar__tabs {
   display: flex;
   gap: 8px;
 }
 
-.brand-tab {
-  padding: 6px 14px;
-  border-radius: 6px;
-  font-size: 13px;
-  font-weight: 600;
-  text-decoration: none;
-  color: white;
+.brand-bar__tab {
+  padding: 6px 16px;
   background: rgba(255,255,255,0.15);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
   transition: background 0.2s;
 }
 
-.brand-tab:hover {
+.brand-bar__tab:hover {
   background: rgba(255,255,255,0.25);
 }
 
-main.container {
+.container {
   max-width: 760px;
   margin: 0 auto;
-  padding: 40px 20px;
-  background: white;
+  padding: 0 20px;
 }
 
-header.doc-head {
-  margin-bottom: 48px;
-  padding-bottom: 32px;
+.doc-head {
+  padding: 48px 0 32px;
   border-bottom: 2px solid #f0f0f0;
+  margin-bottom: 40px;
 }
 
 .eyebrow {
@@ -94,15 +93,15 @@ header.doc-head {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1.2px;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 
 h1 {
   font-size: 42px;
   font-weight: 800;
   line-height: 1.2;
-  margin-bottom: 24px;
-  color: #0a0a0a;
+  margin-bottom: 20px;
+  color: #1a1a1a;
 }
 
 .meta-row {
@@ -120,16 +119,15 @@ h1 {
   background: #f5f5f5;
   border-radius: 20px;
   font-size: 13px;
-  color: #555;
-  font-weight: 500;
+  color: #666;
 }
 
-.pill-icon {
-  font-size: 14px;
+.pill strong {
+  color: #333;
 }
 
 .tldr {
-  background: #fffbf5;
+  background: #fef9f5;
   border-left: 4px solid #C66A1F;
   padding: 24px;
   margin: 32px 0;
@@ -139,15 +137,14 @@ h1 {
 .tldr strong {
   display: block;
   color: #C66A1F;
-  font-size: 13px;
-  font-weight: 700;
+  font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 1px;
   margin-bottom: 12px;
 }
 
 .tldr p {
-  color: #333;
+  color: #555;
   font-size: 15px;
   line-height: 1.7;
 }
@@ -155,98 +152,74 @@ h1 {
 h2 {
   font-size: 32px;
   font-weight: 700;
-  margin: 48px 0 24px 0;
-  color: #0a0a0a;
-  position: relative;
+  margin: 48px 0 20px;
+  color: #1a1a1a;
   padding-bottom: 12px;
-}
-
-h2::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 60px;
-  height: 4px;
-  background: #3B82F6;
-  border-radius: 2px;
+  border-bottom: 3px solid #4A90E2;
 }
 
 h3 {
   font-size: 22px;
   font-weight: 700;
-  margin: 32px 0 16px 0;
-  color: #1a1a1a;
+  margin: 32px 0 16px;
+  color: #2c2c2c;
 }
 
 p {
   margin-bottom: 16px;
   font-size: 16px;
   line-height: 1.8;
-  color: #2a2a2a;
+  color: #444;
 }
 
-ul, ol {
+ul {
   margin: 20px 0 20px 24px;
 }
 
-li {
+ul li {
   margin-bottom: 10px;
   font-size: 16px;
   line-height: 1.7;
-  color: #2a2a2a;
+  color: #444;
 }
 
 strong {
-  font-weight: 700;
-  color: #0a0a0a;
+  font-weight: 600;
+  color: #1a1a1a;
 }
 
 blockquote {
-  margin: 32px 0;
-  padding: 20px 24px;
-  background: #f8f9fa;
-  border-left: 4px solid #3B82F6;
+  border-left: 4px solid #4A90E2;
+  padding-left: 20px;
+  margin: 24px 0;
   font-style: italic;
-  color: #444;
-  border-radius: 0 8px 8px 0;
+  color: #555;
 }
 
 table {
   width: 100%;
-  margin: 32px 0;
   border-collapse: collapse;
-  font-size: 15px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  border-radius: 8px;
-  overflow: hidden;
+  margin: 24px 0;
 }
 
 thead {
-  background: #2a2a2a;
-  color: white;
+  background: #2c2c2c;
+  color: #fff;
 }
 
 th {
-  padding: 14px;
+  padding: 12px;
   text-align: left;
-  font-weight: 700;
-  font-size: 14px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  font-weight: 600;
 }
 
 td {
-  padding: 14px;
-  border-bottom: 1px solid #e5e5e5;
-}
-
-tr:last-child td {
-  border-bottom: none;
+  padding: 12px;
+  border-bottom: 1px solid #e0e0e0;
 }
 
 tbody tr:hover {
-  background: #fafafa;
+  background: #f9f9f9;
 }
 
 .faq-section {
@@ -254,26 +227,29 @@ tbody tr:hover {
 }
 
 .faq-q {
-  background: #f8f9fa;
-  padding: 18px 20px;
-  font-weight: 700;
-  color: #0a0a0a;
-  margin-top: 20px;
-  border-radius: 8px;
+  background: #f8f8f8;
+  padding: 16px 20px;
+  margin: 20px 0 0 0;
+  border-radius: 8px 8px 0 0;
+  font-weight: 600;
+  color: #1a1a1a;
   font-size: 16px;
-  border-left: 4px solid #C66A1F;
 }
 
 .faq-a {
-  padding: 16px 20px 16px 24px;
-  color: #2a2a2a;
-  line-height: 1.8;
-  font-size: 15px;
+  background: #fff;
+  padding: 16px 20px 20px 20px;
+  border: 1px solid #f0f0f0;
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  margin-bottom: 16px;
+  color: #444;
+  line-height: 1.7;
 }
 
-footer {
-  margin-top: 64px;
-  padding-top: 32px;
+.footer-section {
+  margin: 64px 0 48px;
+  padding: 32px 0;
   border-top: 2px solid #f0f0f0;
 }
 
@@ -284,25 +260,24 @@ footer {
   margin-top: 24px;
 }
 
-.related-link {
+.related-links a {
   padding: 16px;
-  background: #f8f9fa;
+  background: #f8f8f8;
   border-radius: 8px;
   text-decoration: none;
   color: #C66A1F;
   font-weight: 600;
-  font-size: 14px;
   transition: all 0.2s;
   border: 2px solid transparent;
 }
 
-.related-link:hover {
-  background: #fff;
+.related-links a:hover {
+  background: #fef9f5;
   border-color: #C66A1F;
   transform: translateY(-2px);
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   h1 {
     font-size: 32px;
   }
@@ -311,18 +286,18 @@ footer {
     font-size: 26px;
   }
   
+  h3 {
+    font-size: 20px;
+  }
+  
   .brand-bar {
     flex-direction: column;
     align-items: flex-start;
   }
   
-  .brand-tabs {
+  .brand-bar__tabs {
     width: 100%;
-  }
-  
-  .brand-tab {
-    flex: 1;
-    text-align: center;
+    justify-content: flex-start;
   }
 }
 </style>
@@ -330,26 +305,26 @@ footer {
 <body>
 
 <nav class="brand-bar">
-  <div class="brand-bar-left">
-    <a href="/" class="logo">BLOW</a>
-    <span class="brand-divider">|</span>
-    <span class="beach-house-label">Beach House Kijkduin</span>
+  <div class="brand-bar__left">
+    <a href="/" class="brand-bar__logo">BLOW</a>
+    <div class="brand-bar__divider"></div>
+    <span class="brand-bar__location">Beach House</span>
   </div>
-  <div class="brand-tabs">
-    <a href="/bestelling" class="brand-tab">Bestelling</a>
-    <a href="/seo-advies" class="brand-tab">SEO</a>
+  <div class="brand-bar__tabs">
+    <a href="/bestelling" class="brand-bar__tab">Bestelling</a>
+    <a href="/seo" class="brand-bar__tab">SEO</a>
   </div>
 </nav>
 
 <main class="container">
   <header class="doc-head">
-    <div class="eyebrow">BLOW Beach House • Zakelijk Lunch</div>
+    <div class="eyebrow">Beach House Kijkduin</div>
     <h1>Power Lunch Zakelijk Kijkduin | BLOW Beach House</h1>
     <div class="meta-row">
-      <span class="pill"><span class="pill-icon">📍</span> Kijkduin</span>
-      <span class="pill"><span class="pill-icon">✍️</span> BLOW Redactie</span>
-      <span class="pill"><span class="pill-icon">📅</span> 1 mei 2026</span>
-      <span class="pill"><span class="pill-icon">⏱️</span> 8 min leestijd</span>
+      <span class="pill"><strong>📍</strong> Kijkduin, Den Haag</span>
+      <span class="pill"><strong>✍️</strong> BLOW Team</span>
+      <span class="pill"><strong>📅</strong> 1 mei 2026</span>
+      <span class="pill"><strong>⏱</strong> 9 min leestijd</span>
     </div>
   </header>
 
@@ -430,7 +405,7 @@ footer {
 
   <h3>Maak er een Hele Dag Van</h3>
 
-  <p>Een paar uurtjes is leuk, maar een hele dag is beter. Kom 's ochtends, blijf lunchen, geniet van de middag, en sluit af met een diner bij zonsondergang. Trust us, je zult niet meer weg willen.</p>
+  <p>Een paar uurtjes is leuk, maar een hele dag is beter. Kom 's ochtends, blijf lunchen, geniet van de middag, en sluit af met een dinner bij zonsondergang. Trust us, je zult niet meer weg willen.</p>
 
   <h3>Combineer met Activiteiten</h3>
 
@@ -454,7 +429,7 @@ footer {
 
   <h3>Yoga en Wellness</h3>
 
-  <p>Start je weekend goed met een van onze beach yoga-sessies (wanneer deze worden aangeboden). Er is niets beter dan yoga op het strand, gevolgd door een gezond ontbijt bij BLOW.</p>
+  <p>Start je weekend goed met een van onze beach yoga-sessies (wanneer deze worden aangeboden). Er is niets beters dan yoga op het strand, gevolgd door een gezond ontbijt bij BLOW.</p>
 
   <h2>Wat Onze Gasten Zeggen</h2>
 
@@ -472,9 +447,9 @@ footer {
 
   <p><strong>Openingstijden:</strong> Check onze website voor actuele openingstijden, die variëren per seizoen.</p>
 
-  <p><strong>Reserveren:</strong> Sterk aanbevolen, vooral in het weekend en tijdens mooi weer.</p>
+  <p><strong>Reserveren:</strong> Sterk aanbevolen, vooral in het weekend en tijdens mooie weekenden.</p>
 
-  <p><strong>Parkeren:</strong> Betaald parkeren in de omgeving, in de zomer is het druk dus kom op tijd of overweeg de fiets of OV.</p>
+  <p><strong>Parking:</strong> Betaald parkeren in de omgeving, in de zomer is het druk dus kom op tijd of overweeg de fiets of OV.</p>
 
   <p><strong>Huisdieren:</strong> Honden zijn welkom op het terras (buiten het hoogseizoen).</p>
 
@@ -488,7 +463,7 @@ footer {
 
   <p><strong>See you at the beach!</strong> 🌊☀️</p>
 
-  <hr style="margin: 48px 0; border: none; border-top: 1px solid #e5e5e5;">
+  <hr style="margin: 40px 0; border: none; border-top: 1px solid #e0e0e0;">
 
   <p><em>BLOW Beach House Kijkduin – Where the beach meets the good life.</em></p>
 
@@ -508,21 +483,21 @@ footer {
     <div class="faq-a">A4: Absoluut. Wij hebben diverse zithoeken en semi-afgezonderde plekken die geschikt zijn voor discrete business gesprekken. Bij reservering kunt u aangeven dat privacy belangrijk is, dan zorgen wij voor een optimaal gelegen tafel. Buiten het hoogseizoen is het restaurant tijdens lunchuren rustiger, wat extra privacy biedt.</div>
 
     <div class="faq-q">Q5: Kunnen dieetwensen en allergieën worden geaccommodeerd?</div>
-    <div class="faq-a">A5: Zeker. Onze keuken kan vegetarische, vegan, glutenvrije en andere dieetspecifieke gerechten bereiden. Communiceer allergieën en dieetwensen bij uw reservering, dan zorgen wij dat alles perfect is afgestemd. Ons team is getraind in het omgaan met voedsellallergieën en dieetrestricties.</div>
+    <div class="faq-a">A5: Zeker. Onze keuken kan vegetarische, vegan, glutenvrije en andere dieetspecifieke gerechten bereiden. Communiceer allergieën en dieetwensen bij uw reservering, dan zorgen wij dat alles perfect is afgestemd. Ons team is getraind in het omgaan met voedselallergieen en dieetrestricties.</div>
 
     <div class="faq-q">Q6: Is BLOW Beach House goed bereikbaar voor relaties van buiten Den Haag?</div>
     <div class="faq-a">A6: Ja, de locatie is uitstekend bereikbaar. Vanaf Den Haag Centraal Station is het 15 minuten rijden, vanuit Rotterdam ongeveer 30 minuten. Er is ruime (gratis) parkeergelegenheid direct bij het restaurant. Voor gasten met het openbaar vervoer zijn er busverbindingen vanaf het station, en wij kunnen desgewenst helpen met taxi-arrangementen.</div>
   </div>
 
-  <footer>
+  <div class="footer-section">
     <h3>Gerelateerde Artikelen</h3>
     <div class="related-links">
-      <a href="/blog/strandpaviljoen-den-haag" class="related-link">→ Beste Strandpaviljoens Den Haag</a>
-      <a href="/blog/lunch-aan-zee" class="related-link">→ Lunch aan Zee Tips</a>
-      <a href="/blog/kijkduin-activiteiten" class="related-link">→ Activiteiten Kijkduin</a>
-      <a href="/blog/zomer-menu" class="related-link">→ Zomer Menu 2026</a>
+      <a href="/beach-house-kijkduin">Beach House Kijkduin</a>
+      <a href="/strandtent-den-haag">Strandtent Den Haag</a>
+      <a href="/zakelijk-vergaderen-strand">Zakelijk Vergaderen aan Strand</a>
+      <a href="/lunch-aan-zee">Lunch aan Zee</a>
     </div>
-  </footer>
+  </div>
 
 </main>
 
