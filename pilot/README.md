@@ -89,6 +89,18 @@ Als Toine instemt (welk model dan ook):
 4. **Maand 2:** Distributie-automation (scenario 6) + GA4-attributie
 5. **Maand 3:** Review + go/no-go
 
+## Daily publisher
+
+GitHub Actions runt elke dag 19:00 Amsterdam:
+1. Fetcht sheet CSV
+2. Genereert HTML voor nieuwe published posts via Claude API
+3. Bouwt posts/index.json
+4. Commit naar main → live op GitHub Pages binnen 2 min
+
+Setup eenmalig via repo Settings → Secrets and variables → Actions:
+- `ANTHROPIC_API_KEY` — claude-sonnet-4-5 access
+- `SHEET_CSV_URL` — Sheet → Bestand → Delen → Publish to web → CSV link
+
 ## Contactpunten
 
 - **Repo-owner:** Bram Overgaag — bramovergaag@gmail.com
