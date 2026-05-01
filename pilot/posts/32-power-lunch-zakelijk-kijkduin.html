@@ -13,10 +13,10 @@
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   line-height: 1.6;
   color: #333;
-  background: #fff;
+  background: #f8f8f8;
 }
 
 .brand-bar {
@@ -35,60 +35,65 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: 0 20px;
-  height: 64px;
+  flex-wrap: wrap;
 }
 
-.brand-logo {
+.logo-section {
   display: flex;
   align-items: center;
   gap: 16px;
+  padding: 12px 0;
+}
+
+.logo {
+  font-size: 28px;
+  font-weight: bold;
   color: white;
   text-decoration: none;
+  letter-spacing: 2px;
 }
 
-.logo-img {
-  height: 40px;
-  width: auto;
-}
-
-.brand-divider {
-  color: rgba(255,255,255,0.4);
-  font-size: 24px;
-}
-
-.brand-location {
+.beach-house-label {
   color: white;
-  font-size: 18px;
-  font-weight: 600;
+  font-size: 14px;
+  padding: 4px 12px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 12px;
+  white-space: nowrap;
 }
 
-.brand-tabs {
+.nav-tabs {
   display: flex;
   gap: 8px;
+  padding: 12px 0;
 }
 
-.brand-tab {
+.nav-tab {
   color: white;
   text-decoration: none;
   padding: 8px 16px;
-  border-radius: 6px;
+  border-radius: 4px;
   font-size: 14px;
-  font-weight: 500;
-  transition: background 0.2s;
+  transition: background 0.3s;
+  white-space: nowrap;
 }
 
-.brand-tab:hover {
+.nav-tab:hover {
   background: rgba(255,255,255,0.1);
 }
 
-main.container {
+.container {
   max-width: 760px;
-  margin: 40px auto;
-  padding: 0 20px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
-header.doc-head {
-  margin-bottom: 40px;
+.doc-head {
+  background: white;
+  padding: 40px;
+  margin: 40px 0;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 .eyebrow {
@@ -96,16 +101,15 @@ header.doc-head {
   font-size: 14px;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 1px;
   margin-bottom: 12px;
 }
 
 h1 {
-  font-size: 42px;
-  font-weight: 700;
-  line-height: 1.2;
+  font-size: 36px;
   color: #1a1a1a;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
+  line-height: 1.2;
 }
 
 .meta-row {
@@ -118,40 +122,46 @@ h1 {
 .pill {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  background: #f5f5f5;
+  background: #f0f0f0;
   padding: 6px 14px;
   border-radius: 20px;
-  font-size: 14px;
+  font-size: 13px;
   color: #666;
 }
 
+.pill svg {
+  width: 14px;
+  height: 14px;
+  margin-right: 6px;
+}
+
+.content {
+  background: white;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  margin-bottom: 40px;
+}
+
 .tldr {
-  background: #fef7f3;
+  background: #fff8f0;
   border-left: 4px solid #C66A1F;
   padding: 24px;
   margin: 32px 0;
-  border-radius: 0 8px 8px 0;
+  border-radius: 0 4px 4px 0;
 }
 
-.tldr h4 {
+.tldr strong {
   color: #C66A1F;
+  display: block;
+  margin-bottom: 8px;
   font-size: 14px;
-  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  margin-bottom: 12px;
-}
-
-.tldr p {
-  color: #444;
-  font-size: 16px;
-  line-height: 1.6;
 }
 
 h2 {
-  font-size: 32px;
-  font-weight: 700;
+  font-size: 28px;
   color: #1a1a1a;
   margin: 48px 0 24px 0;
   padding-bottom: 12px;
@@ -159,70 +169,63 @@ h2 {
 }
 
 h3 {
-  font-size: 24px;
-  font-weight: 600;
-  color: #1a1a1a;
+  font-size: 22px;
+  color: #2c2c2c;
   margin: 32px 0 16px 0;
 }
 
 p {
-  margin-bottom: 16px;
-  font-size: 17px;
-  line-height: 1.7;
-  color: #333;
+  margin: 16px 0;
+  color: #444;
+  font-size: 16px;
 }
 
-strong {
-  font-weight: 600;
-  color: #1a1a1a;
-}
-
-ul {
-  margin: 20px 0;
-  padding-left: 24px;
+ul, ol {
+  margin: 16px 0;
+  padding-left: 28px;
 }
 
 li {
-  margin-bottom: 12px;
-  font-size: 17px;
-  line-height: 1.7;
-  color: #333;
+  margin: 8px 0;
+  color: #444;
+  font-size: 16px;
+}
+
+strong {
+  color: #1a1a1a;
+  font-weight: 600;
 }
 
 blockquote {
-  border-left: 4px solid #4A90E2;
-  padding: 16px 24px;
+  border-left: 4px solid #e0e0e0;
+  padding-left: 20px;
   margin: 24px 0;
-  background: #f8fbff;
   font-style: italic;
-  color: #555;
+  color: #666;
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
   margin: 24px 0;
-  font-size: 16px;
 }
 
 thead {
-  background: #2c3e50;
+  background: #2c2c2c;
   color: white;
 }
 
-th {
-  padding: 14px;
+th, td {
+  padding: 12px;
   text-align: left;
-  font-weight: 600;
-}
-
-td {
-  padding: 12px 14px;
   border-bottom: 1px solid #e0e0e0;
 }
 
-tbody tr:hover {
-  background: #f9f9f9;
+th {
+  font-weight: 600;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .faq-section {
@@ -230,47 +233,36 @@ tbody tr:hover {
 }
 
 .faq-q {
-  background: #f8f9fa;
+  background: #f8f8f8;
   padding: 16px 20px;
   margin: 16px 0 0 0;
-  border-radius: 8px 8px 0 0;
+  border-radius: 4px;
   font-weight: 600;
-  font-size: 18px;
   color: #1a1a1a;
-  border-left: 4px solid #C66A1F;
+  border-left: 3px solid #C66A1F;
 }
 
 .faq-a {
-  background: white;
-  padding: 16px 20px;
-  margin: 0 0 16px 0;
-  border-radius: 0 0 8px 8px;
-  border: 1px solid #e9ecef;
-  border-top: none;
-  font-size: 16px;
-  line-height: 1.7;
+  padding: 16px 20px 16px 23px;
   color: #444;
+  line-height: 1.6;
 }
 
-footer {
-  margin-top: 64px;
-  padding-top: 32px;
-  border-top: 2px solid #e9ecef;
+.footer {
+  background: white;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  margin-bottom: 40px;
 }
 
-.related-links h3 {
-  font-size: 20px;
-  margin-bottom: 16px;
-  color: #1a1a1a;
-}
-
-.related-links ul {
+.related-links {
   list-style: none;
   padding: 0;
 }
 
 .related-links li {
-  margin-bottom: 10px;
+  margin: 12px 0;
 }
 
 .related-links a {
@@ -286,31 +278,24 @@ footer {
 @media (max-width: 768px) {
   .brand-bar-content {
     flex-direction: column;
-    height: auto;
-    padding: 12px 20px;
-    gap: 12px;
+    align-items: flex-start;
   }
-
-  .brand-tabs {
+  
+  .logo-section {
     width: 100%;
-    justify-content: center;
   }
-
+  
+  .nav-tabs {
+    width: 100%;
+    overflow-x: auto;
+  }
+  
   h1 {
-    font-size: 32px;
+    font-size: 28px;
   }
-
-  h2 {
-    font-size: 26px;
-  }
-
-  h3 {
-    font-size: 20px;
-  }
-
-  .meta-row {
-    flex-direction: column;
-    gap: 8px;
+  
+  .doc-head, .content, .footer {
+    padding: 24px;
   }
 }
 </style>
@@ -319,132 +304,217 @@ footer {
 
 <nav class="brand-bar">
   <div class="brand-bar-content">
-    <a href="/" class="brand-logo">
-      <img src="/assets/blow-logo-white.svg" alt="BLOW" class="logo-img">
-      <span class="brand-divider">|</span>
-      <span class="brand-location">Beach House</span>
-    </a>
-    <div class="brand-tabs">
-      <a href="/reservering" class="brand-tab">Bestelling</a>
-      <a href="/contact" class="brand-tab">Contact</a>
+    <div class="logo-section">
+      <a href="/" class="logo">BLOW</a>
+      <span class="beach-house-label">Beach House</span>
+    </div>
+    <div class="nav-tabs">
+      <a href="/bestelling" class="nav-tab">Bestelling</a>
+      <a href="/seo" class="nav-tab">SEO</a>
     </div>
   </div>
 </nav>
 
 <main class="container">
+  
   <header class="doc-head">
     <div class="eyebrow">Beach House Kijkduin</div>
     <h1>Power Lunch Zakelijk Kijkduin | BLOW Beach House</h1>
     <div class="meta-row">
-      <span class="pill">📍 Kijkduin, Den Haag</span>
-      <span class="pill">✍️ BLOW Redactie</span>
-      <span class="pill">📅 1 mei 2026</span>
-      <span class="pill">⏱ 8 min leestijd</span>
+      <span class="pill">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        Kijkduin
+      </span>
+      <span class="pill">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+        BLOW Redactie
+      </span>
+      <span class="pill">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+        1 mei 2026
+      </span>
+      <span class="pill">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        8 min leestijd
+      </span>
     </div>
   </header>
 
-  <div class="tldr">
-    <h4>TL;DR</h4>
-    <p>Ontdek de ultieme zakenlunch aan het strand van Kijkduin. Combineer business met ontspanning tijdens een power lunch bij BLOW Beach House Den Haag.</p>
-  </div>
-
-  <h2>Waarom Een Power Lunch Bij Het Strand Het Verschil Maakt</h2>
-
-  <p>De traditionele vergaderruimte met kunstlicht en koffieautomaat heeft afgedaan. Moderne professionals weten dat de beste zakelijke beslissingen ontstaan in een omgeving die inspireert en energie geeft. Een <strong>power lunch zakelijk Kijkduin</strong> bij BLOW Beach House combineert het beste van twee werelden: productief netwerken en ontspannen lunchen met de Noordzee als decor.</p>
-
-  <p>Voor HR-professionals, salesteams en management is de setting van uw zakenlunch even belangrijk als de agenda. Onderzoek toont aan dat natuurlijke omgevingen creativiteit stimuleren en stress verminderen – precies wat u nodig heeft voor die belangrijke deal of strategische sessie. Tussen 12:00 en 14:00 uur biedt BLOW Beach House de perfecte balans tussen zakelijke focus en informele sfeer.</p>
-
-  <h2>De M1-Strategie: Chill Ontmoeten Meets Zakelijk Succes</h2>
-
-  <p>Onze M1-strategie is specifiek ontwikkeld voor de moderne zakelijke professional. Het concept is simpel maar effectief: combineer een ontspannen strandsfeer met alle faciliteiten die u nodig heeft voor productieve zakelijke bijeenkomsten.</p>
-
-  <p>Tijdens de lunchuren transformeert BLOW Beach House tot een informele maar professionele ontmoetingsruimte waar deals worden gesloten en relaties worden versterkt. De <strong>zakenlunch Den Haag</strong> ervaring krijgt hier een unieke twist – uw gasten worden verwelkomd met zeebries en het geluid van de golven, terwijl u alle comfort en service van een hoogwaardig restaurant geniet.</p>
-
-  <p>De locatie biedt het beste van beide werelden: voldoende rust voor vertrouwelijke gesprekken, maar ook de dynamische energie die hoort bij een ambitieuze business meeting. Perfect voor die cruciale gesprekken met potentiële klanten, teambuilding met uw sales squad, of strategische sessies met de directie.</p>
-
-  <h2>Het Power Lunch Menu: Brandstof Voor Zakelijk Succes</h2>
-
-  <p>Bij een succesvolle <strong>business lunch strand</strong> draait alles om kwaliteit zonder tijdverlies. Ons culinaire team begrijpt dat zakelijke lunches een strak tijdschema hebben. Daarom bieden wij een gestroomlijnde menukaart met hoogwaardige gerechten die snel geserveerd worden zonder concessies aan smaak of presentatie.</p>
-
-  <p>Van verse salades met gegrilde zeebaars tot signature burgers en bowls – elk gerecht is samengesteld met oog voor balans en energie. Want niemand wil na de lunch in een foodcoma het kantoor in. Onze gerechten zijn licht maar voedzaam, zodat u en uw gasten alert en gefocust blijven voor de rest van de werkdag.</p>
-
-  <p>Vegetarische en vegan opties zijn vanzelfsprekend aanwezig, evenals glutenvrije alternatieven. Wij stemmen het menu graag af op dieetwensen en allergieën – communiceer dit van tevoren en alles wordt tot in detail verzorgd.</p>
-
-  <h2>Faciliteiten Die Uw Zakenlunch Naar Een Hoger Niveau Tillen</h2>
-
-  <p>BLOW Beach House is meer dan een restaurant – het is een complete zakelijke locatie aan zee. Onze faciliteiten zijn specifiek ingericht om zakelijke gasten optimaal te bedienen:</p>
-
-  <p><strong>Privacy en comfort</strong>: Diverse zithoeken bieden de mogelijkheid voor discrete gesprekken. Of kies voor ons terras met gedeeltelijke afscheiding voor semi-private meetings met zeezicht.</p>
-
-  <p><strong>Connectiviteit</strong>: Stabiele WiFi door het hele pand, stopcontacten bij diverse tafels, en de mogelijkheid om een laptop of tablet te gebruiken zonder rompslomp.</p>
-
-  <p><strong>Flexibiliteit</strong>: Reserveer een specifieke tafel of gebied voor uw gezelschap. Wij zorgen dat alles klaarstaat wanneer u arriveert, zodat u direct ter zake kunt.</p>
-
-  <p><strong>Professionele service</strong>: Ons team is getraind in discrete maar attente service. Wij begrijpen wanneer u ongestoord wilt blijven en wanneer u iets nodig heeft.</p>
-
-  <h2>Van Power Lunch Naar Vergaderlocatie: De Natuurlijke Volgende Stap</h2>
-
-  <p>Is uw zakenlunch succesvol verlopen en zoekt u een inspirerende locatie voor een groter event? BLOW Beach House biedt uitgebreide vergaderfaciliteiten voor teambuilding, workshops, presentaties en bedrijfsevents. De power lunch fungeert vaak als perfect startpunt – laat uw relaties eerst kennismaken met onze locatie tijdens een ontspannen lunch, voordat u overstapt naar grotere bijeenkomsten.</p>
-
-  <p>Onze eventcoördinatoren denken graag met u mee over de volledige customer journey: van die eerste kennismaking tijdens een <strong>zakenlunch Den Haag</strong> tot een meerdaags bedrijfsevent met teambuilding activiteiten, workshops en dinnerprogramma's.</p>
-
-  <h2>Waarom Kijkduin De Slimme Keuze Is Voor Zakelijke Lunches</h2>
-
-  <p>Kijkduin ligt strategisch tussen Den Haag centrum en de kust – binnen 15 minuten rijden vanaf het Centraal Station of de belangrijkste zakelijke districten. Voldoende parkeergelegenheid direct bij de locatie maakt aankomen stress-free.</p>
-
-  <p>Maar het is vooral de unieke combinatie die Kijkduin onderscheidt: de professionele zakelijke infrastructuur van Den Haag gecombineerd met de inspirerende kracht van het strand. Uw business partners uit binnen- en buitenland zullen onder de indruk zijn van deze verfrissende aanpak.</p>
-
-  <p>Bovendien biedt de strandlocatie een natuurlijke ijsbreker. Gesprekken verlopen soepeler, relaties worden sneller opgebouwd, en die strakke corporate-spanning verdwijnt als sneeuw voor de zon. Een <strong>power lunch zakelijk Kijkduin</strong> is een investering in duurzame zakelijke relaties.</p>
-
-  <h2>Praktische Informatie Voor Uw Zakenlunch</h2>
-
-  <p>Reserveren is essentieel, vooral voor specifieke tafels of afgezonderde plekken. Vermeld bij uw reservering dat het een zakelijke lunch betreft, dan zorgen wij voor een optimale setting.</p>
-
-  <p>Groepsgroottes van 2 tot 20 personen kunnen wij comfortabel accommoderen tijdens reguliere lunchuren. Voor grotere groepen of exclusieve arrangementen nemen wij graag apart contact met u op.</p>
-
-  <p>De gemiddelde power lunch duurt 60 tot 90 minuten – perfect om binnen uw werkdag te passen zonder gehaast aan te voelen. Natuurlijk bent u welkom om langer te blijven als het gesprek goed loopt en de agenda het toelaat.</p>
-
-  <h2>Boek Nu Uw Power Lunch Ervaring</h2>
-
-  <p>Klaar om uw volgende zakenlunch naar een hoger niveau te tillen? Kies voor de inspirerende omgeving van BLOW Beach House en ervaar hoe de combinatie van professionele service, excellent eten en strandsfeer uw business meetings transformeert.</p>
-
-  <p>Neem contact met ons op voor reserveringen, vragen over menuopties, of om de mogelijkheden voor grotere events te bespreken. Ons team staat klaar om uw <strong>business lunch strand</strong> tot een succes te maken – zodat u zich kunt focussen op wat echt belangrijk is: uw zakelijke relaties en doelstellingen.</p>
-
-  <p>De beste deals worden niet gesloten in saaie vergaderkamers, maar op plekken die inspireren. Welkom bij BLOW Beach House Kijkduin – waar zakelijk succes en strandgevoel samenkomen.</p>
-
-  <div class="faq-section">
-    <h2>Veelgestelde Vragen</h2>
+  <article class="content">
     
-    <div class="faq-q">Q1: Hoe ver van tevoren moet ik reserveren voor een zakenlunch bij BLOW Beach House?</div>
-    <div class="faq-a">A1: Voor reguliere zakenlunches (2-6 personen) adviseren wij minimaal 24 uur van tevoren te reserveren. Voor grotere groepen of specifieke arrangementen zoals afgezonderde ruimtes of aangepaste menu's, is 3-5 dagen vooruitboeken ideaal. Tijdens drukke periodes (zomermaanden, feestdagen) raden we aan nog eerder te reserveren.</div>
-
-    <div class="faq-q">Q2: Zijn er faciliteiten voor presentaties of het tonen van materiaal tijdens de lunch?</div>
-    <div class="faq-a">A2: Ja, wij kunnen op verzoek een scherm of display regelen voor kleine presentaties. Voor uitgebreidere AV-faciliteiten verwijzen wij graag naar onze vergaderruimte-opties. Vermeld bij uw reservering dat u presentatiemateriaal wilt tonen, dan zorgen wij voor een geschikte opstelling. WiFi is uiteraard overal beschikbaar.</div>
-
-    <div class="faq-q">Q3: Wat is de gemiddelde prijs voor een zakenlunch per persoon?</div>
-    <div class="faq-a">A3: Een zakenlunch bij BLOW Beach House varieert gemiddeld tussen €18 en €35 per persoon, afhankelijk van uw menukeuze. Wij bieden zowel à la carte opties als set menu's specifiek voor zakelijke lunches. Voor exacte prijzen en arrangementen kunt u contact opnemen met ons reserveringsteam.</div>
-
-    <div class="faq-q">Q4: Is er voldoende privacy voor vertrouwelijke zakelijke gesprekken?</div>
-    <div class="faq-a">A4: Absoluut. Wij hebben diverse zithoeken en semi-afgezonderde plekken die geschikt zijn voor discrete business gesprekken. Bij reservering kunt u aangeven dat privacy belangrijk is, dan zorgen wij voor een optimaal gelegen tafel. Buiten het hoogseizoen is het restaurant tijdens lunchuren rustiger, wat extra privacy biedt.</div>
-
-    <div class="faq-q">Q5: Kunnen dieetwensen en allergieën worden geaccommodeerd?</div>
-    <div class="faq-a">A5: Zeker. Onze keuken kan vegetarische, vegan, glutenvrije en andere dieetspecifieke gerechten bereiden. Communiceer allergieën en dieetwensen bij uw reservering, dan zorgen wij dat alles perfect is afgestemd. Ons team is getraind in het omgaan met voedselallergieen en dieetrestricties.</div>
-
-    <div class="faq-q">Q6: Is BLOW Beach House goed bereikbaar voor relaties van buiten Den Haag?</div>
-    <div class="faq-a">A6: Ja, de locatie is uitstekend bereikbaar. Vanaf Den Haag Centraal Station is het 15 minuten rijden, vanuit Rotterdam ongeveer 30 minuten. Er is ruime (gratis) parkeergelegenheid direct bij het restaurant. Voor gasten met het openbaar vervoer zijn er busverbindingen vanaf het station, en wij kunnen desgewenst helpen met taxi-arrangementen.</div>
-  </div>
-
-  <footer>
-    <div class="related-links">
-      <h3>Gerelateerde artikelen</h3>
-      <ul>
-        <li><a href="/beach-house/teamuitje-strand-den-haag">Teamuitje Strand Den Haag: Het Ultieme Bedrijfsuitje</a></li>
-        <li><a href="/beach-house/vergaderen-aan-zee">Vergaderen aan Zee: Inspirerende Locaties</a></li>
-        <li><a href="/beach-house/bedrijfsfeest-kijkduin">Bedrijfsfeest Kijkduin Organiseren</a></li>
-        <li><a href="/beach-house/zakelijk-arrangement">Zakelijke Arrangementen BLOW Beach House</a></li>
-      </ul>
+    <div class="tldr">
+      <strong>TL;DR</strong>
+      Ontdek de ultieme zakenlunch aan het strand van Kijkduin. Combineer business met ontspanning tijdens een power lunch bij BLOW Beach House Den Haag.
     </div>
+
+    <h2>De Perfecte Stranddag bij BLOW Beach House</h2>
+
+    <p>Er gaat niets boven een dag aan zee. De geur van zout water, het geluid van de golven, en het gevoel van zand tussen je tenen – het is pure ontspanning. Maar laten we eerlijk zijn: een stranddag kan nog zoveel beter zijn wanneer je toegang hebt tot comfort, lekkere hapjes en een plek om even te ontsnappen aan de zon.</p>
+
+    <p>Bij BLOW Beach House in Kijkduin hebben we de perfecte formule gevonden voor een onvergetelijke dag aan het strand. Of je nu komt met vrienden, familie of je partner, wij zorgen ervoor dat jouw stranddag nét dat beetje extra krijgt.</p>
+
+    <h2>Waarom BLOW Beach House Jouw Go-To Strandbestinatie Is</h2>
+
+    <h3>Locatie, Locatie, Locatie</h3>
+
+    <p>BLOW Beach House ligt direct aan het strand van Kijkduin, met een adembenemend uitzicht over de Noordzee. Je kunt letterlijk vanuit je stoel naar de branding kijken terwijl je geniet van een verfrissend drankje. Geen gedoe met ver lopen of spullen sjouwen – parkeer je auto, loop een paar minuten, en je bent er.</p>
+
+    <h3>Comfort Meets Beach Life</h3>
+
+    <p>Vergeet oncomfortabele strandlakens en verschoven parasols. Bij ons kun je heerlijk relaxen in onze comfortabele lounge-stoelen en bedden. Wil je even uit de zon? Ons overdekte terras biedt de perfecte schaduwplek waar je kunt genieten van de zeebries zonder direct in de zon te zitten.</p>
+
+    <h3>Culinaire Verwennerij</h3>
+
+    <p>Een stranddag zonder lekkere hapjes en drankjes? Ondenkbaar! Ons menu biedt een heerlijke selectie van verse gerechten, van lichte salades en verfrissende pokébowls tot sappige burgers en crispy bites.</p>
+
+    <p><strong>Onze signature items:</strong></p>
+    <ul>
+      <li>Verse vis van de dag</li>
+      <li>Uitgebreide lunch-menu's</li>
+      <li>Cocktails en mocktails aan het strand</li>
+      <li>Perfecte koffie voor de ochtendmensen</li>
+      <li>Heerlijke wijnen voor de zonsondergang</li>
+    </ul>
+
+    <h2>Plan Je Perfecte Stranddag</h2>
+
+    <h3>Ochtend: Start Fris en Uitgerust</h3>
+
+    <p>Kom vroeg en pak de beste plek. Begin je dag met een gezond ontbijt of brunch op ons terras. Een verse smoothie bowl of een stevig ontbijt – wij hebben het allemaal. Het strand is 's ochtends op zijn mooist: rustig, fris en perfect voor een eerste duik in zee.</p>
+
+    <p><strong>Ochtend-tip:</strong> Boek van tevoren een strandbed voor de hele dag. Zo weet je zeker dat je jouw favoriete plekje hebt.</p>
+
+    <h3>Middag: Zon, Zee en Ontspanning</h3>
+
+    <p>De middag is perfect voor ultieme ontspanning. Wissel af tussen zonnen op het strand, een verkoelende duik in zee, en chillen bij BLOW met een ijskoud drankje. Geen zin om zelf lunch te maken? Bestel gewoon bij ons en geniet van vers bereide gerechten zonder dat je je handdoek hoeft te verlaten.</p>
+
+    <p><strong>Middag-activiteiten:</strong></p>
+    <ul>
+      <li>Beachvolleybal</li>
+      <li>Paddleboarden (verhuur in de buurt)</li>
+      <li>Gewoon heerlijk nietsdoen</li>
+      <li>Lezen met je voeten in het zand</li>
+    </ul>
+
+    <h3>Avond: Sunset Vibes</h3>
+
+    <p>De avonden bij BLOW zijn magisch. Wanneer de zon langzaam zakt boven de Noordzee, transformeert ons beach house tot de perfecte sunset spot. Dit is het moment voor:</p>
+
+    <ul>
+      <li>Een verfrissende cocktail terwijl je naar de zonsondergang kijkt</li>
+      <li>Gezellig dineren met je voeten nog in het zand</li>
+      <li>Live muziek op bepaalde avonden</li>
+      <li>Die perfecte Instagram-foto (we oordelen niet!)</li>
+    </ul>
+
+    <h2>Tips voor de Ultieme BLOW Ervaring</h2>
+
+    <h3>Reserveer Vooruit</h3>
+
+    <p>Vooral in de zomermaanden en tijdens mooie weekenden kan het druk zijn. Reserveer van tevoren via onze website of bel ons op. Zo weet je zeker dat je niet voor een dichte deur staat en dat we jouw favoriete plek hebben vrijgehouden.</p>
+
+    <h3>Check het Weer (Maar Kom Toch)</h3>
+
+    <p>Natuurlijk is mooi weer ideaal, maar ook op bewolkte dagen heeft het strand zijn charme. En wij zijn er ook! Ons overdekte terras en gezellige interieur maken dat je ook op mindere dagen heerlijk kunt genieten van de strandsfeer.</p>
+
+    <h3>Maak er een Hele Dag Van</h3>
+
+    <p>Een paar uurtjes is leuk, maar een hele dag is beter. Kom 's ochtends, blijf lunchen, geniet van de middag, en sluit af met een diner bij zonsondergang. Trust us, je zult niet meer weg willen.</p>
+
+    <h3>Combineer met Activiteiten</h3>
+
+    <p>Kijkduin en omgeving bieden meer dan alleen strand. Combineer je bezoek aan BLOW met:</p>
+    <ul>
+      <li>Een fietstocht door de duinen</li>
+      <li>Een bezoek aan de boulevard</li>
+      <li>Kitesurfen (Kijkduin is er perfect voor!)</li>
+      <li>Een wandeling langs de vloedlijn</li>
+    </ul>
+
+    <h2>Speciale Momenten bij BLOW</h2>
+
+    <h3>Privé Events</h3>
+
+    <p>Viering van een verjaardag, vrijgezellenfeest of bedrijfsuitje? BLOW Beach House is de perfecte locatie voor jouw speciale moment. We kunnen een deel van ons terras exclusief voor jou reserveren en een op maat gemaakt menu samenstellen.</p>
+
+    <h3>Live Muziek en Events</h3>
+
+    <p>Tijdens het seizoen organiseren we regelmatig live muziek sessies, DJ-sets en andere events. Check onze social media en website voor het actuele programma. Deze avonden zijn altijd snel volgeboekt, dus wees er snel bij!</p>
+
+    <h3>Yoga en Wellness</h3>
+
+    <p>Start je weekend goed met een van onze beach yoga-sessies (wanneer deze worden aangeboden). Er is niets beter dan yoga op het strand, gevolgd door een gezond ontbijt bij BLOW.</p>
+
+    <h2>Wat Onze Gasten Zeggen</h2>
+
+    <p>Onze gasten komen terug voor de unieke combinatie van ontspannen strandvibes en uitstekende service. Veel bezoekers noemen ons 'hun tweede huiskamer aan zee' – en dat is precies het gevoel dat we willen creëren.</p>
+
+    <p>De mix van jong en oud, locals en toeristen, zorgt voor een gezellige, relaxte sfeer waar iedereen zich welkom voelt. Of je nu alleen komt om even bij te komen van een drukke week, of met een grote groep vrienden voor een feestje – bij BLOW voel je je thuis.</p>
+
+    <h2>Duurzaamheid en Respect voor de Zee</h2>
+
+    <p>Als beach house aan de Noordzee voelen we een speciale verantwoordelijkheid voor het beschermen van onze prachtige omgeving. We werken waar mogelijk met lokale leveranciers, minimaliseren plastic gebruik, en moedigen onze gasten aan om het strand schoon te houden.</p>
+
+    <p>Neem je afval mee, respecteer de natuur, en laten we samen zorgen dat Kijkduin zo mooi blijft als het is.</p>
+
+    <h2>Plan Je Bezoek</h2>
+
+    <p><strong>Openingstijden:</strong> Check onze website voor actuele openingstijden, die variëren per seizoen.</p>
+
+    <p><strong>Reserveren:</strong> Sterk aanbevolen, vooral in het weekeinde en tijdens mooi weer.</p>
+
+    <p><strong>Parking:</strong> Betaald parkeren in de omgeving, in de zomer is het druk dus kom op tijd of overweeg de fiets of OV.</p>
+
+    <p><strong>Huisdieren:</strong> Honden zijn welkom op het terras (buiten het hoogseizoen).</p>
+
+    <h2>Klaar voor Jouw Perfecte Stranddag?</h2>
+
+    <p>De zee roept, het strand wacht, en wij hebben de cocktails koud staan. Of je nu komt voor een uitgebreid diner, een middag loungen, of gewoon een snelle koffie met uitzicht – bij BLOW Beach House draait het om genieten van het goede leven aan zee.</p>
+
+    <p>Geen gedoe, geen poespas, gewoon pure strandgeluk met een vleugje luxe. Dat is wat we doen, en we doen het goed.</p>
+
+    <p>Dus, wanneer komen we je verwachten? Het strand wacht op niemand, en de beste stranddag van je zomer begint bij BLOW Beach House in Kijkduin.</p>
+
+    <p><strong>See you at the beach!</strong> 🌊☀️</p>
+
+    <hr style="margin: 40px 0; border: none; border-top: 1px solid #e0e0e0;">
+
+    <p><em>BLOW Beach House Kijkduin – Where the beach meets the good life.</em></p>
+
+    <div class="faq-section">
+      <h2>Veelgestelde Vragen</h2>
+      
+      <div class="faq-q">Q1: Hoe ver van tevoren moet ik reserveren voor een zakenlunch bij BLOW Beach House?</div>
+      <div class="faq-a">A1: Voor reguliere zakenlunches (2-6 personen) adviseren wij minimaal 24 uur van tevoren te reserveren. Voor grotere groepen of specifieke arrangementen zoals afgezonderde ruimtes of aangepaste menu's, is 3-5 dagen vooruitboeken ideaal. Tijdens drukke periodes (zomermaanden, feestdagen) raden we aan nog eerder te reserveren.</div>
+
+      <div class="faq-q">Q2: Zijn er faciliteiten voor presentaties of het tonen van materiaal tijdens de lunch?</div>
+      <div class="faq-a">A2: Ja, wij kunnen op verzoek een scherm of display regelen voor kleine presentaties. Voor uitgebreidere AV-faciliteiten verwijzen wij graag naar onze vergaderruimte-opties. Vermeld bij uw reservering dat u presentatiemateriaal wilt tonen, dan zorgen wij voor een geschikte opstelling. WiFi is uiteraard overal beschikbaar.</div>
+
+      <div class="faq-q">Q3: Wat is de gemiddelde prijs voor een zakenlunch per persoon?</div>
+      <div class="faq-a">A3: Een zakenlunch bij BLOW Beach House varieert gemiddeld tussen €18 en €35 per persoon, afhankelijk van uw menukeuze. Wij bieden zowel à la carte opties als set menu's specifiek voor zakelijke lunches. Voor exacte prijzen en arrangementen kunt u contact opnemen met ons reserveringsteam.</div>
+
+      <div class="faq-q">Q4: Is er voldoende privacy voor vertrouwelijke zakelijke gesprekken?</div>
+      <div class="faq-a">A4: Absoluut. Wij hebben diverse zithoeken en semi-afgezonderde plekken die geschikt zijn voor discrete business gesprekken. Bij reservering kunt u aangeven dat privacy belangrijk is, dan zorgen wij voor een optimaal gelegen tafel. Buiten het hoogseizoen is het restaurant tijdens lunchuren rustiger, wat extra privacy biedt.</div>
+
+      <div class="faq-q">Q5: Kunnen dieetwensen en allergieën worden geaccommodeerd?</div>
+      <div class="faq-a">A5: Zeker. Onze keuken kan vegetarische, vegan, glutenvrije en andere dieetspecifieke gerechten bereiden. Communiceer allergieën en dieetwensen bij uw reservering, dan zorgen wij dat alles perfect is afgestemd. Ons team is getraind in het omgaan met voedsalallergieën en dieetrestricties.</div>
+
+      <div class="faq-q">Q6: Is BLOW Beach House goed bereikbaar voor relaties van buiten Den Haag?</div>
+      <div class="faq-a">A6: Ja, de locatie is uitstekend bereikbaar. Vanaf Den Haag Centraal Station is het 15 minuten rijden, vanuit Rotterdam ongeveer 30 minuten. Er is ruime (gratis) parkeergelegenheid direct bij het restaurant. Voor gasten met het openbaar vervoer zijn er busverbindingen vanaf het station, en wij kunnen desgewenst helpen met taxi-arrangementen.</div>
+    </div>
+
+  </article>
+
+  <footer class="footer">
+    <h3>Gerelateerde Artikelen</h3>
+    <ul class="related-links">
+      <li><a href="/beach-house/strandpaviljoen-den-haag">De Beste Strandpaviljoens in Den Haag</a></li>
+      <li><a href="/beach-house/beachclub-kijkduin">Beachclub Ervaring in Kijkduin</a></li>
+      <li><a href="/beach-house/lunch-aan-zee">Lunchen aan Zee: Complete Gids</a></li>
+      <li><a href="/beach-house/sunset-diner">Sunset Diner aan het Strand</a></li>
+    </ul>
   </footer>
+
 </main>
 
 </body>
