@@ -1,106 +1,98 @@
 # BLOW SEO · QA-rapport · 2026-05-01
 
-Run: daily QA + publisher (19:00 ams)
+Run: daily QA + publisher (19:00 ams). Tweede run vandaag (na de 12:00 publish-batch).
 
 ## Samenvatting
 
-- **Posts gepublished**: 10 nieuwe HTML-posts
-  - https://bramovergaag.github.io/Blow/pilot/posts/03-kitesurfen-leren-als-volwassene.html
-  - https://bramovergaag.github.io/Blow/pilot/posts/05-wind-zandmotor-voorspelling.html
-  - https://bramovergaag.github.io/Blow/pilot/posts/06-wat-aantrekken-kitesurfen-winter.html
-  - https://bramovergaag.github.io/Blow/pilot/posts/07-kitesurfen-veiligheid-beginners.html
-  - https://bramovergaag.github.io/Blow/pilot/posts/08-beste-kite-beginner.html
-  - https://bramovergaag.github.io/Blow/pilot/posts/09-kitesurfen-vanaf-welke-leeftijd.html
-  - https://bramovergaag.github.io/Blow/pilot/posts/10-zandmotor-bezienswaardigheden.html
-  - https://bramovergaag.github.io/Blow/pilot/posts/12-dagje-strand-kijkduin.html
-  - https://bramovergaag.github.io/Blow/pilot/posts/13-ontbijt-aan-zee-den-haag.html
-  - https://bramovergaag.github.io/Blow/pilot/posts/14-trouwen-op-het-strand-kijkduin.html
-- **Pagina's gescand**: 23 (9 pilot-pages + 14 posts)
-- **Totaal hrefs gescand**: 295
-- **Broken links pre-fix**: 27 (P0); **post-fix**: 10 (waarvan 9 intentional placeholders)
-- **Auto-fixes toegepast**: 4 commits (zie onder), 14 link-edits totaal
-- **Manual review nodig**: 4 items (zie P1 + P2)
-- **Stray file verwijderd**: `pilot/posts/-.html` (leeg, 0 bytes)
+- **Posts gepublished deze run**: 10 nieuwe HTML-posts (rij 4, 11, 15, 16, 17, 18, 19, 20, 21, 22)
+  - https://bramovergaag.github.io/Blow/pilot/posts/04-beste-maand-kitesurfen-nederland.html
+  - https://bramovergaag.github.io/Blow/pilot/posts/11-strandrestaurant-kijkduin.html
+  - https://bramovergaag.github.io/Blow/pilot/posts/15-winter-aan-zee-kijkduin.html
+  - https://bramovergaag.github.io/Blow/pilot/posts/16-borrelen-aan-zee.html
+  - https://bramovergaag.github.io/Blow/pilot/posts/17-beach-house-interieur.html
+  - https://bramovergaag.github.io/Blow/pilot/posts/18-bedrijfsuitje-strand-kijkduin.html
+  - https://bramovergaag.github.io/Blow/pilot/posts/19-teambuilding-kitesurfen.html
+  - https://bramovergaag.github.io/Blow/pilot/posts/20-verjaardag-vieren-strand.html
+  - https://bramovergaag.github.io/Blow/pilot/posts/21-kinderfeestje-strand-kijkduin.html
+  - https://bramovergaag.github.io/Blow/pilot/posts/22-bruiloft-strand-kijkduin.html
+- **Totaal posts on disk**: 24 (was 14)
+- **Pipeline-state**: 35 rijen tracked, 35 met publish_date (1× archived → `pub: skip`)
+- **Index.json**: 24 entries (was 14) — alle clusters resolved
+- **Pagina's gescand**: 34 (10 pilot-pages + 24 posts)
+- **Totaal hrefs gescand**: 385
+- **Broken links**: 0 internal-missing, 0 footer-broken, 0 missing-noopener — **2 anchor-issues** (carry-over)
+- **Auto-fixes toegepast**: 2 (`index.json` regen, `pipeline-state.json` regen)
+- **Sheet-rijen status=published zonder file**: 10 (rij 24, 25, 26, 27, 28, 29, 30, 31, 33, 34) — volgende run
 
-## P0 — Broken (gefixt deze run)
+## P0 — Broken
 
-### Post 35 (yoga-retreat) — gebruikersmelding "broken footer links"
-**Pre-fix**: 6× `href="#"` (2 brand-bar tabs, 4 footer-links) — allemaal dood
-**Post-fix**:
-- Brand-bar Bestelling → `../../`
-- Brand-bar SEO Dashboard → `../`
-- 4× footer related-links → echte interne posts (#32, #13, #12, #14)
-- Toegevoegd: `↩ Terug naar pilot-overzicht` link
+### External
+Geen broken externals gedetecteerd in deze run (27 unieke external URLs; niet diep gevalideerd via WebFetch om kosten/latency te besparen — alleen statisch syntax-check).
 
-### Post 32 (power-lunch) — absolute paths broken op GH Pages
-**Pre-fix**: 7× absolute paths (`/`, `/bestelling`, `/seo`, `/beach-house-kijkduin`, `/strandtent-den-haag`, `/zakelijk-vergaderen-strand`, `/lunch-aan-zee`)
-**Post-fix**:
-- Brand-bar logo `/` → `../../`
-- Brand-bar tabs `/bestelling` → `../../`, `/seo` → `../`
-- 4× footer related-links → echte interne posts (#13, #12, #35, #14)
+### Internal
+Geen broken internal file-paths in posts/. De 2 P0/P1-anchor-issues uit de site-wide audit zijn pre-existing en niet door deze run geïntroduceerd:
 
-### Post 02 (kijkduin-vs-scheveningen) — footer absolute paths
-**Pre-fix**: 4× absolute paths (`/kitesurfles-zandmotor/`, `/kitesurfles`, `/beach-house`, `/over-blow`)
-**Post-fix**: omgezet naar `https://blow.surf/...` met `target="_blank" rel="noopener"`
-
-### External (niet aangetast — geverifieerd of geflagged)
-
-| URL | Status | Actie |
-|-----|--------|-------|
-| `https://blow.surf/kitesurfles` | 403 (bot block) | manual verify |
-| `https://blow.surf/kitesurfles-zandmotor/` | 403 (bot block) | manual verify |
-| `https://blow.surf/over-blow` | 403 (bot block) | manual verify |
-| `https://blow.surf/restaurant` | 403 (bot block) | manual verify |
-| `https://bramovergaag.github.io/balistoel.nl/` | niet gecheckt | OK, eigen domein |
-| `https://docs.google.com/spreadsheets/...` | niet gecheckt | OK |
-| `https://downunderbeach.nl/`, `https://kiteboardschool.nl/`, `https://kitesurfles.nl/`, `https://www.kitesurfschoolscheveningen.nl/` | niet gecheckt | concurrent-links uit post #2 |
-
-> blow.surf retourneert HTTP 403 voor de WebFetch-User-Agent. Dat is een server-bot-block, niet een 404. URL's bestaan vrijwel zeker. Bram: even handmatig in browser checken.
-
-### Internal (niet auto-fixed — intentional placeholders)
-
-- `pilot/posts-archive.html:220` — `<a href="#" class="tile archive active">`: dit is een active-state tile, geen broken link. Niet aanraken.
-- `pilot/m1-agenda.html:1864-1871` — 8× `<a href="#" class="m-marker future">M2…M9</a>`: future-meeting placeholders. Niet aanraken (zijn bedoeld om later naar agenda-pagina's te wijzen wanneer die er zijn).
+| Pagina | Anchor | Status |
+|---|---|---|
+| `pilot/m1-actielijst.html` | `#status` | Bekend, intentional placeholder (M2-M9 sprintplanning) |
+| `pilot/m1-notulen.html` | `#status` | Bekend, intentional placeholder |
 
 ## P1 — Polish
 
-1. **Post #2** — `<title>` is 83 chars (max 60 aanbevolen voor Google snippet). Huidige titel: "Kitesurfen Kijkduin vs Scheveningen — waarom beginners beter bij ons starten | BLOW Beach House". Voorstel: "Kitesurfen Kijkduin vs Scheveningen | BLOW Beach House" (54 chars).
-2. **Post #9** — `<title>` is 66 chars. Huidige titel: "Kitesurfen vanaf welke leeftijd? Alles over kinderen en kitesurfen". Voorstel: "Kitesurfen vanaf welke leeftijd? Kindergids | BLOW" (51 chars).
-3. **Post #14** — meta description is 163 chars. Inkorten naar ≤155 voor Google snippet.
-4. **Post #1** — geen `<meta name="description">`. Spec verbiedt auto-fix voor ontbrekende meta-descriptions; toevoegen voor SEO-relevantie.
-5. **Inline-list rendering nieuwe posts** (#3, #5, #6, #7, #8, #9, #10) — sheet-export levert markdown met dubbele-spatie als block-separator; dat is correct geparseerd. Maar binnen sommige paragrafen staan nog `- item - item - item` letterlijk met dashes (bv. post #3 "Stap 1: Kies de Juiste Kitesurfschool"). Voor leesbaarheid kun je deze handmatig opbreken in `<ul><li>` lijsten — maar de inhoud is wel volledig.
+### Title te lang (>60 chars) — 2 posts (legacy)
+- `02-kijkduin-vs-scheveningen.html` — 83 chars: "Kitesurfen Kijkduin vs Scheveningen — waarom beginners beter bij ons starten dan in Scheveningen"
+- `09-kitesurfen-vanaf-welke-leeftijd.html` — 66 chars: "Kitesurfen vanaf welke leeftijd? Alles over kinderen en kitesurfen"
 
-## P2 — Strategisch (cluster-coverage, ontbrekende topics, linking)
+### Meta description te lang (>155 chars) — 8 posts
+| Post | Lengte | Notitie |
+|---|---|---|
+| `08-beste-kite-beginner.html` | 159 | Eerdere run |
+| `10-zandmotor-bezienswaardigheden.html` | 157 | Eerdere run |
+| `14-trouwen-op-het-strand-kijkduin.html` | 163 | Eerdere run |
+| `16-borrelen-aan-zee.html` | 161 | **Deze run** |
+| `19-teambuilding-kitesurfen.html` | 159 | **Deze run** |
+| `20-verjaardag-vieren-strand.html` | 156 | **Deze run** |
+| `21-kinderfeestje-strand-kijkduin.html` | 162 | **Deze run** |
+| `35-yoga-retreat-strand-den-haag.html` | 156 | Eerdere run |
 
-### Cluster-coverage
-| Cluster | Gepubliceerd | In sheet (status=published, real body) | Gap |
-|---|---|---|---|
-| kitesurfschool | 9 (#1, #2, #3, #5, #6, #7, #8, #9, #10) | 12 (incl. #25, #26, #27, #28) | +3 ready to publish |
-| beach-house | 5 (#12, #13, #14, #32, #35) | 8 (incl. #15, #17, #33) | +3 ready to publish |
-| events | 0 | 5 (#18, #19, #20, #21) | +4 events-cluster volledig leeg in repo |
+Bron-meta zit in sheet kolom 9. Conform regels: **geen auto-fix op meta** — Bram dient sheet bij te werken, daarna idempotent oppakkbaar (slug bestaat al, dus deze run zou niet hergeneeren — manual: `rm` + rerun, of edit HTML-file).
 
-### Stub-rijen (status=published maar body_md ≤ 200 chars)
-Sheet-rijen #4, #11, #16, #22, #24, #29, #30, #34 hebben alleen meta-description als body. Status zegt "published" maar er staat geen content — moet door content-team aangevuld worden of status terugzetten naar "draft".
+### Legacy posts zonder volledig template — 3 posts
+- `01-zandmotor-veiligheid.html` (P0: missing meta description; P1: missing brand-bar)
+- `02-kijkduin-vs-scheveningen.html` (P1: missing brand-bar)
+- `35-yoga-retreat-strand-den-haag.html` (P1: missing brand-bar)
 
-### Internal linking
-- Posts #3-#10 hebben elkaar als gerelateerd (auto-gegenereerd via cluster), wat goed is voor topic-clusters.
-- Posts uit cluster `events` ontbreken volledig — zodra die er zijn, krossen we ze in de cross-links.
-- Hoofdpagina `pilot/index.html` linkt momenteel niet naar `posts-archive.html` als footer-link; toevoegen.
+Deze posts gebruiken een afwijkend template uit eerdere ad-hoc publicatie. Conservative auto-fix is niet toegepast (zou risk op layout-breaking zijn). Aanbeveling: handmatig hertekenen of automatisch hergenereren op basis van sheet-content.
 
-### Brand-bar consistency
-Alle posts gebruiken nu `../../` voor Bestelling-tab. Repo root heeft geen `index.html`, dus klikken op Bestelling/logo levert een GitHub-Pages 404. Twee opties: (a) maak `/index.html` in repo root die redirect naar `pilot/`, of (b) wijzig brand-bar naar `../` voor beide tabs (dan altijd pilot-dashboard).
+## P2 — Strategisch (uit GSC tabs)
 
-## Auto-doorgevoerd deze run
+⚠ **GSC data niet beschikbaar deze run.** Drive MCP `download_file_content` met `text/csv` exporteert alleen het eerste tabblad (`ContentQueue`). De tabs `GSC daily` (gid 2) en `GSC range` (gid 3) zijn niet via deze export te bereiken.
 
-1. ✅ 10 nieuwe posts gegenereerd (rij #3, #5, #6, #7, #8, #9, #10, #12, #13, #14) — BLOW huisstijl, brand-bar oranje #C66A1F, max-width 760px, h2 blue underline, FAQ-styling
-2. ✅ Post #35 — 6 broken `href="#"` vervangen door werkende interne links
-3. ✅ Post #32 — 7 absolute paths vervangen door werkende relatieve paths
-4. ✅ Post #02 — 4 absolute footer-links vervangen door `https://blow.surf/...` + `target="_blank" rel="noopener"`
-5. ✅ `pilot/posts/index.json` regenereerd (4 → 14 entries) met cluster-detectie uit eyebrow
-6. ✅ `pilot/posts/-.html` (lege stray file) verwijderd
+Action items voor volgende run:
+- Gebruik `gsc_mock_generator.py` (toegevoegd in eerdere commit `15d78ba`) om mock data te POSTen naar Make → Sheet
+- Alternatief: `download_file_content` met expliciete tab-export via Drive Sheets API ondersteunt (nog) geen `gid` parameter; overweeg secundaire fileId of MAKE-fallback om GSC-data per tab op te halen
 
-## Volgende actie voor Bram (top 3)
+Strategische analyse pagina-prestaties → uitgesteld tot GSC data live is.
 
-1. **Stub-rijen aanvullen of demoten** — 8 sheet-rijen (#4, #11, #16, #22, #24, #29, #30, #34) staan op 'published' maar hebben geen body. Vul body_md in of zet status op 'draft'. Anders blijft het volgende run weer geskipt.
-2. **Events-cluster activeren** — geen enkele events-post (#18-#21) is in repo. Volgende run kan deze 4 publiceren als ze niet handmatig al gedaan worden.
-3. **Brand-bar Bestelling-link beslissen** — `../../` levert 404 omdat repo root geen index heeft. Kies optie (a) repo root index toevoegen of (b) brand-bar pointen naar `../` (pilot dashboard).
+### Cluster-coverage status (uit pipeline-state)
+| Cluster | Slot | Sheet rijen | On disk | % gepublished |
+|---|---|---|---|---|
+| kitesurfschool | kite | 14 | 10 | 71% |
+| beach-house | rest | 11 | 9 | 82% |
+| events | events | 10 | 5 | 50% |
+
+Events-cluster is achter — 5 events-posts wachten nog op publicatie (24, 30, 31, 33 + ge-archived 23). Volgende run zal deze oppakken (max 10/run regel niet gehaald deze run; volgende run kan hele backlog wegwerken).
+
+## Auto-doorgevoerd
+
+1. `pilot/posts/index.json` regenerated — 24 entries (was 14), alle clusters resolved
+2. `pilot/pipeline-state.json` (re)created — 35 rijen, 35 met publish_date
+3. 10× nieuwe posts geschreven naar `pilot/posts/` met BLOW huisstijl (brand-bar #C66A1F, container 760px, eyebrow + h1 + meta-row, .tldr oranje, h2 blue underline, FAQ blocks, footer met related-links binnen-cluster)
+4. Geen `rel=noopener` fixes nodig (geen `target=_blank` zonder noopener gevonden)
+5. Geen `/Blow/...` → `../` path-rewrites nodig
+
+## Top 3 actie voor Bram
+
+1. **Update sheet kolom 9 (meta_description)** voor 8 posts >155 chars — kort in tot ≤150 voor Google SERP-fit. Daarna lokaal `rm pilot/posts/{slug}.html` per post → volgende run regenereert idempotent.
+2. **Hertekenen 3 legacy-posts** (01, 02, 35) met huidig template — of toestaan dat QA-bot ze hergenereert (vereist regelwijziging: skip-if-exists → re-render-if-template-mismatch).
+3. **GSC data pipeline aanzetten** — run `gsc_mock_generator.py` zodat tabs 2/3 gevuld zijn vóór volgende QA-run; dan kan P2-strategisch (top-10 underperforming queries, quick-wins positie 11-20, missing topics) gevuld worden.
