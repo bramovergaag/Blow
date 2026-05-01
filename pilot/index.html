@@ -533,13 +533,13 @@ const CLUSTER_TO_SLOT = {
   'wellness': 'rest' // fallback
 };
 
-// Pipeline-state cache: per slot een array van rijen (sheet-rows) in volgorde.
-// Wordt gevuld door fetchPipelineState() en gebruikt door getPipelinePost() om
-// elke rij op een (date, slot) plek in de huidige week te plakken.
-let PIPELINE_BY_SLOT = { events: [], rest: [], kite: [] };
+// Pipeline-state cache: keyed by 'YYYY-MM-DD-slot' voor exacte date+slot match.
+// Rijen zonder publish_date vallen in een fallback-bucket per slot voor "geen-datum" placement.
+let PIPELINE_BY_KEY = {};
+let PIPELINE_FALLBACK = { events: [], rest: [], kite: [] };
 let PIPELINE_LOADED = false;
 
-// Fetcht pipeline-state.json (cloud-routine output) en vult PIPELINE_BY_SLOT.
+// Fetcht pipeline-state.json (cloud-routine output) en indexeert per date+slot.
 // Failsafe: 404 of parse-error → stil falen, dashboard valt terug op huidige gedrag.
 async function fetchPipelineState() {
   const url = 'https://raw.githubusercontent.com/bramovergaag/Blow/main/pilot/pipeline-state.json';
@@ -548,20 +548,30 @@ async function fetchPipelineState() {
     if (!res.ok) return false;
     const data = await res.json();
     if (!data || !Array.isArray(data.rows)) return false;
-    const buckets = { events: [], rest: [], kite: [] };
+    const byKey = {};
+    const fallback = { events: [], rest: [], kite: [] };
     data.rows.forEach(row => {
       if (!row || !row.department) return;
-      const slot = CLUSTER_TO_SLOT[row.department];
-      if (!slot || !buckets[slot]) return;
-      buckets[slot].push({
+      const slot = row.slot || CLUSTER_TO_SLOT[row.department];
+      if (!slot || !fallback[slot]) return;
+      const entry = {
         row_id: row.row_id,
         title: row.title || row.primary_keyword || '(geen titel)',
         status: row.status || '',
         stages: row.stages || {},
-        archive_url: row.archive_url || ''
-      });
+        archive_url: row.archive_url || '',
+        publish_date: row.publish_date || ''
+      };
+      if (entry.publish_date) {
+        // Direct keyed op exacte date+slot
+        byKey[`${entry.publish_date}-${slot}`] = entry;
+      } else {
+        // Geen datum → fallback bucket (vult lege cellen in huidige week)
+        fallback[slot].push(entry);
+      }
     });
-    PIPELINE_BY_SLOT = buckets;
+    PIPELINE_BY_KEY = byKey;
+    PIPELINE_FALLBACK = fallback;
     PIPELINE_LOADED = true;
     return true;
   } catch (e) {
@@ -570,11 +580,14 @@ async function fetchPipelineState() {
   }
 }
 
-// Geeft de pipeline-rij voor een (date, slot) terug, gebaseerd op dow-index.
-// Strategie: eerste 7 rijen per slot worden ma-zo van de huidige week gevuld.
+// Geeft de pipeline-rij voor een (date, slot) terug.
+// Eerst exacte date+slot match (publish_date), daarna fallback op rijen zonder datum (dow-index).
 function pipelinePostFor(date, slot) {
   if (!PIPELINE_LOADED) return null;
-  const rows = PIPELINE_BY_SLOT[slot];
+  const dateStr = fmtDate(date);
+  const keyed = PIPELINE_BY_KEY[`${dateStr}-${slot}`];
+  if (keyed) return keyed;
+  const rows = PIPELINE_FALLBACK[slot];
   if (!rows || !rows.length) return null;
   const dow = date.getDay();
   const idx = dow === 0 ? 6 : dow - 1; // ma=0 ... zo=6
