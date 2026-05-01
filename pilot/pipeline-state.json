@@ -1,0 +1,600 @@
+{
+  "generated_at": "2026-05-01T17:17:32Z",
+  "rows": [
+    {
+      "row_id": 1,
+      "department": "kitesurfschool",
+      "slot": "kite",
+      "primary_keyword": "kitesurfen zandmotor",
+      "title": "Kitesurfen Zandmotor: Ultieme Gids voor Topspot",
+      "status": "published",
+      "stages": {
+        "info": "done",
+        "draft": "done",
+        "review": "done",
+        "wa": "done",
+        "pub": "pending"
+      },
+      "archive_url": "",
+      "publish_date": "2026-05-01"
+    },
+    {
+      "row_id": 2,
+      "department": "kitesurfschool",
+      "slot": "kite",
+      "primary_keyword": "kitesurfen kijkduin vs scheveningen",
+      "title": "Kitesurfen Kijkduin vs Scheveningen: Welke Locatie Past Bij Jou?",
+      "status": "published",
+      "stages": {
+        "info": "done",
+        "draft": "done",
+        "review": "done",
+        "wa": "done",
+        "pub": "pending"
+      },
+      "archive_url": "",
+      "publish_date": "2026-05-01"
+    },
+    {
+      "row_id": 3,
+      "department": "kitesurfschool",
+      "slot": "kite",
+      "primary_keyword": "kitesurfen leren als volwassene",
+      "title": "Kitesurfen Leren als Volwassene: Jouw Complete 40+ Gids",
+      "status": "published",
+      "stages": {
+        "info": "done",
+        "draft": "done",
+        "review": "done",
+        "wa": "done",
+        "pub": "pending"
+      },
+      "archive_url": "",
+      "publish_date": "2026-05-01"
+    },
+    {
+      "row_id": 4,
+      "department": "kitesurfschool",
+      "slot": "kite",
+      "primary_keyword": "beste maand kitesurfen nederland",
+      "title": "Beste Maand voor Kitesurfen in Nederland | BLOW Kijkduin",
+      "status": "published",
+      "stages": {
+        "info": "done",
+        "draft": "done",
+        "review": "done",
+        "wa": "done",
+        "pub": "pending"
+      },
+      "archive_url": "",
+      "publish_date": "2026-05-01"
+    },
+    {
+      "row_id": 5,
+      "department": "kitesurfschool",
+      "slot": "kite",
+      "primary_keyword": "wind zandmotor voorspelling",
+      "title": "Wind Zandmotor Voorspelling: Actuele Windcondities & Tips",
+      "status": "published",
+      "stages": {
+        "info": "done",
+        "draft": "done",
+        "review": "done",
+        "wa": "done",
+        "pub": "pending"
+      },
+      "archive_url": "",
+      "publish_date": "2026-05-01"
+    },
+    {
+      "row_id": 6,
+      "department": "kitesurfschool",
+      "slot": "kite",
+      "primary_keyword": "wat aantrekken kitesurfen winter",
+      "title": "Wat Aantrekken Kitesurfen Winter? Complete Kledingguide",
+      "status": "published",
+      "stages": {
+        "info": "done",
+        "draft": "done",
+        "review": "done",
+        "wa": "done",
+        "pub": "pending"
+      },
+      "archive_url": "",
+      "publish_date": "2026-05-01"
+    },
+    {
+      "row_id": 7,
+      "department": "kitesurfschool",
+      "slot": "kite",
+      "primary_keyword": "kitesurfen veiligheid beginners",
+      "title": "Kitesurfen Veiligheid voor Beginners: Zo Start Je Veilig",
+      "status": "published",
+      "stages": {
+        "info": "done",
+        "draft": "done",
+        "review": "done",
+        "wa": "done",
+        "pub": "pending"
+      },
+      "archive_url": "",
+      "publish_date": "2026-05-01"
+    },
+    {
+      "row_id": 8,
+      "department": "kitesurfschool",
+      "slot": "kite",
+      "primary_keyword": "beste kite beginner",
+      "title": "Beste Kite voor Beginners: Jouw Eerste Kite Kopen",
+      "status": "published",
+      "stages": {
+        "info": "done",
+        "draft": "done",
+        "review": "done",
+        "wa": "done",
+        "pub": "pending"
+      },
+      "archive_url": "",
+      "publish_date": "2026-05-01"
+    },
+    {
+      "row_id": 9,
+      "department": "kitesurfschool",
+      "slot": "kite",
+      "primary_keyword": "kitesurfen vanaf welke leeftijd",
+      "title": "Kitesurfen vanaf welke leeftijd? Alles over kinderen en kitesurfen",
+      "status": "published",
+      "stages": {
+        "info": "done",
+        "draft": "done",
+        "review": "done",
+        "wa": "done",
+        "pub": "pending"
+      },
+      "archive_url": "",
+      "publish_date": "2026-05-01"
+    },
+    {
+      "row_id": 10,
+      "department": "kitesurfschool",
+      "slot": "kite",
+      "primary_keyword": "zandmotor bezienswaardigheden",
+      "title": "Zandmotor Bezienswaardigheden: Ultieme Gids voor Bezoekers",
+      "status": "published",
+      "stages": {
+        "info": "done",
+        "draft": "done",
+        "review": "done",
+        "wa": "done",
+        "pub": "pending"
+      },
+      "archive_url": "",
+      "publish_date": "2026-05-01"
+    },
+    {
+      "row_id": 11,
+      "department": "beach-house",
+      "slot": "rest",
+      "primary_keyword": "strandrestaurant kijkduin",
+      "title": "Strandrestaurant Kijkduin | Genieten bij BLOW Beach House",
+      "status": "published",
+      "stages": {
+        "info": "done",
+        "draft": "done",
+        "review": "done",
+        "wa": "done",
+        "pub": "pending"
+      },
+      "archive_url": "",
+      "publish_date": "2026-05-01"
+    },
+    {
+      "row_id": 12,
+      "department": "beach-house",
+      "slot": "rest",
+      "primary_keyword": "dagje strand kijkduin",
+      "title": "Dagje Strand Kijkduin: Ultieme Gids voor Zon, Zee & Strand",
+      "status": "published",
+      "stages": {
+        "info": "done",
+        "draft": "done",
+        "review": "done",
+        "wa": "done",
+        "pub": "pending"
+      },
+      "archive_url": "",
+      "publish_date": "2026-05-01"
+    },
+    {
+      "row_id": 13,
+      "department": "beach-house",
+      "slot": "rest",
+      "primary_keyword": "ontbijt aan zee den haag",
+      "title": "Ontbijt aan Zee Den Haag: Begin Je Dag bij het Strand",
+      "status": "published",
+      "stages": {
+        "info": "done",
+        "draft": "done",
+        "review": "done",
+        "wa": "done",
+        "pub": "pending"
+      },
+      "archive_url": "",
+      "publish_date": "2026-05-01"
+    },
+    {
+      "row_id": 14,
+      "department": "beach-house",
+      "slot": "rest",
+      "primary_keyword": "trouwen op het strand kijkduin",
+      "title": "Trouwen op het Strand van Kijkduin - Jouw Droomhuwelijk",
+      "status": "published",
+      "stages": {
+        "info": "done",
+        "draft": "done",
+        "review": "done",
+        "wa": "done",
+        "pub": "pending"
+      },
+      "archive_url": "",
+      "publish_date": "2026-05-01"
+    },
+    {
+      "row_id": 15,
+      "department": "beach-house",
+      "slot": "rest",
+      "primary_keyword": "winter aan zee kijkduin",
+      "title": "Winter aan Zee Kijkduin: Magische Momenten bij het Strand",
+      "status": "published",
+      "stages": {
+        "info": "done",
+        "draft": "done",
+        "review": "done",
+        "wa": "done",
+        "pub": "pending"
+      },
+      "archive_url": "",
+      "publish_date": "2026-05-01"
+    },
+    {
+      "row_id": 16,
+      "department": "beach-house",
+      "slot": "rest",
+      "primary_keyword": "borrelen aan zee",
+      "title": "Borrelen aan Zee | Zakelijk & After-Work | BLOW Beach House",
+      "status": "published",
+      "stages": {
+        "info": "done",
+        "draft": "done",
+        "review": "done",
+        "wa": "done",
+        "pub": "pending"
+      },
+      "archive_url": "",
+      "publish_date": "2026-05-01"
+    },
+    {
+      "row_id": 17,
+      "department": "beach-house",
+      "slot": "rest",
+      "primary_keyword": "beach house interieur",
+      "title": "Beach House Interieur: Zo Creëer je de Ultieme Strandsfeer",
+      "status": "published",
+      "stages": {
+        "info": "done",
+        "draft": "done",
+        "review": "done",
+        "wa": "done",
+        "pub": "pending"
+      },
+      "archive_url": "",
+      "publish_date": "2026-05-01"
+    },
+    {
+      "row_id": 18,
+      "department": "events",
+      "slot": "events",
+      "primary_keyword": "bedrijfsuitje strand kijkduin",
+      "title": "Bedrijfsuitje Strand Kijkduin: Onvergetelijk Teambuilding",
+      "status": "published",
+      "stages": {
+        "info": "done",
+        "draft": "done",
+        "review": "done",
+        "wa": "done",
+        "pub": "pending"
+      },
+      "archive_url": "",
+      "publish_date": "2026-05-01"
+    },
+    {
+      "row_id": 19,
+      "department": "events",
+      "slot": "events",
+      "primary_keyword": "teambuilding kitesurfen",
+      "title": "Teambuilding Kitesurfen: De Ultieme Sportieve Bedrijfsuitje",
+      "status": "published",
+      "stages": {
+        "info": "done",
+        "draft": "done",
+        "review": "done",
+        "wa": "done",
+        "pub": "pending"
+      },
+      "archive_url": "",
+      "publish_date": "2026-05-01"
+    },
+    {
+      "row_id": 20,
+      "department": "events",
+      "slot": "events",
+      "primary_keyword": "verjaardag vieren strand",
+      "title": "Verjaardag Vieren op het Strand: Uniek Feest bij de Zee",
+      "status": "published",
+      "stages": {
+        "info": "done",
+        "draft": "done",
+        "review": "done",
+        "wa": "done",
+        "pub": "pending"
+      },
+      "archive_url": "",
+      "publish_date": "2026-05-01"
+    },
+    {
+      "row_id": 21,
+      "department": "events",
+      "slot": "events",
+      "primary_keyword": "kinderfeestje strand kijkduin",
+      "title": "Kinderfeestje aan het Strand van Kijkduin - BLOW Beach House",
+      "status": "published",
+      "stages": {
+        "info": "done",
+        "draft": "done",
+        "review": "done",
+        "wa": "done",
+        "pub": "pending"
+      },
+      "archive_url": "",
+      "publish_date": "2026-05-01"
+    },
+    {
+      "row_id": 22,
+      "department": "events",
+      "slot": "events",
+      "primary_keyword": "bruiloft strand kijkduin",
+      "title": "Bruiloft Strand Kijkduin: Trouwen aan Zee | BLOW Beach House",
+      "status": "published",
+      "stages": {
+        "info": "done",
+        "draft": "done",
+        "review": "done",
+        "wa": "done",
+        "pub": "pending"
+      },
+      "archive_url": "",
+      "publish_date": "2026-05-01"
+    },
+    {
+      "row_id": 23,
+      "department": "events",
+      "slot": "events",
+      "primary_keyword": "oud en nieuw aan zee",
+      "title": "Oud en Nieuw aan Zee Vieren in Kijkduin | BLOW Beach House",
+      "status": "archived",
+      "stages": {
+        "info": "done",
+        "draft": "done",
+        "review": "done",
+        "wa": "done",
+        "pub": "skip"
+      },
+      "archive_url": "",
+      "publish_date": "2026-05-01"
+    },
+    {
+      "row_id": 24,
+      "department": "events",
+      "slot": "events",
+      "primary_keyword": "zomerfeest organiseren",
+      "title": "Zomerfeest Organiseren aan Zee | BLOW Beach House Kijkduin",
+      "status": "published",
+      "stages": {
+        "info": "done",
+        "draft": "done",
+        "review": "done",
+        "wa": "done",
+        "pub": "pending"
+      },
+      "archive_url": "",
+      "publish_date": "2026-05-01"
+    },
+    {
+      "row_id": 25,
+      "department": "kitesurfschool",
+      "slot": "kite",
+      "primary_keyword": "kitesurfen den haag",
+      "title": "Kitesurfen Den Haag: Jouw Ultieme Gids voor 2024",
+      "status": "published",
+      "stages": {
+        "info": "done",
+        "draft": "done",
+        "review": "done",
+        "wa": "done",
+        "pub": "pending"
+      },
+      "archive_url": "",
+      "publish_date": "2026-05-01"
+    },
+    {
+      "row_id": 26,
+      "department": "kitesurfschool",
+      "slot": "kite",
+      "primary_keyword": "kitesurfen nederland vs buitenland",
+      "title": "Kitesurfen Nederland vs Buitenland: Waar Kies Jij Voor?",
+      "status": "published",
+      "stages": {
+        "info": "done",
+        "draft": "done",
+        "review": "done",
+        "wa": "done",
+        "pub": "pending"
+      },
+      "archive_url": "",
+      "publish_date": "2026-05-01"
+    },
+    {
+      "row_id": 27,
+      "department": "kitesurfschool",
+      "slot": "kite",
+      "primary_keyword": "kite kopen tweede hands",
+      "title": "Kite Kopen Tweede Hands: Complete Gids voor 2024",
+      "status": "published",
+      "stages": {
+        "info": "done",
+        "draft": "done",
+        "review": "done",
+        "wa": "done",
+        "pub": "pending"
+      },
+      "archive_url": "",
+      "publish_date": "2026-05-01"
+    },
+    {
+      "row_id": 28,
+      "department": "kitesurfschool",
+      "slot": "kite",
+      "primary_keyword": "hoe werkt de zandmotor",
+      "title": "Hoe Werkt de Zandmotor? Het Ingenieurskunstwerk bij Kijkduin",
+      "status": "published",
+      "stages": {
+        "info": "done",
+        "draft": "done",
+        "review": "done",
+        "wa": "done",
+        "pub": "pending"
+      },
+      "archive_url": "",
+      "publish_date": "2026-05-01"
+    },
+    {
+      "row_id": 29,
+      "department": "beach-house",
+      "slot": "rest",
+      "primary_keyword": "vegan restaurant den haag strand",
+      "title": "Vegan Restaurant Den Haag Strand | BLOW Beach House",
+      "status": "published",
+      "stages": {
+        "info": "done",
+        "draft": "done",
+        "review": "done",
+        "wa": "done",
+        "pub": "pending"
+      },
+      "archive_url": "",
+      "publish_date": "2026-05-01"
+    },
+    {
+      "row_id": 30,
+      "department": "events",
+      "slot": "events",
+      "primary_keyword": "pensioenfeest strand",
+      "title": "Pensioenfeest aan Strand | BLOW Beach House Kijkduin",
+      "status": "published",
+      "stages": {
+        "info": "done",
+        "draft": "done",
+        "review": "done",
+        "wa": "done",
+        "pub": "pending"
+      },
+      "archive_url": "",
+      "publish_date": "2026-05-01"
+    },
+    {
+      "row_id": 31,
+      "department": "events",
+      "slot": "events",
+      "primary_keyword": "vergaderlocatie strand kijkduin",
+      "title": "Vergaderlocatie Strand Kijkduin: Productief Vergaderen aan Zee",
+      "status": "published",
+      "stages": {
+        "info": "done",
+        "draft": "done",
+        "review": "done",
+        "wa": "done",
+        "pub": "pending"
+      },
+      "archive_url": "",
+      "publish_date": "2026-05-01"
+    },
+    {
+      "row_id": 32,
+      "department": "beach-house",
+      "slot": "rest",
+      "primary_keyword": "power-lunch zakelijk kijkduin",
+      "title": "Power Lunch Zakelijk Kijkduin | BLOW Beach House",
+      "status": "published",
+      "stages": {
+        "info": "done",
+        "draft": "done",
+        "review": "done",
+        "wa": "done",
+        "pub": "done"
+      },
+      "archive_url": "https://bramovergaag.github.io/Blow/pilot/posts/32-power-lunch-zakelijk-kijkduin.html",
+      "publish_date": "2026-05-01"
+    },
+    {
+      "row_id": 33,
+      "department": "events",
+      "slot": "events",
+      "primary_keyword": "klantborrel locatie kijkduin",
+      "title": "Klantborrel Locatie Kijkduin - BLOW Beach House",
+      "status": "published",
+      "stages": {
+        "info": "done",
+        "draft": "done",
+        "review": "done",
+        "wa": "done",
+        "pub": "pending"
+      },
+      "archive_url": "",
+      "publish_date": "2026-05-01"
+    },
+    {
+      "row_id": 34,
+      "department": "beach-house",
+      "slot": "rest",
+      "primary_keyword": "yoga zonsopgang kijkduin",
+      "title": "Yoga bij Zonsopgang Kijkduin | Sunrise Yoga op het Strand",
+      "status": "published",
+      "stages": {
+        "info": "done",
+        "draft": "done",
+        "review": "done",
+        "wa": "done",
+        "pub": "pending"
+      },
+      "archive_url": "",
+      "publish_date": "2026-05-01"
+    },
+    {
+      "row_id": 35,
+      "department": "beach-house",
+      "slot": "rest",
+      "primary_keyword": "yoga retreat strand den haag",
+      "title": "Yoga Retreat aan het Strand van Den Haag | BLOW Beach House",
+      "status": "published",
+      "stages": {
+        "info": "done",
+        "draft": "done",
+        "review": "done",
+        "wa": "done",
+        "pub": "done"
+      },
+      "archive_url": "https://bramovergaag.github.io/Blow/pilot/posts/35-yoga-retreat-strand-den-haag.html",
+      "publish_date": "2026-05-01"
+    }
+  ]
+}
