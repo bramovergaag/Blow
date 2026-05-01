@@ -525,13 +525,61 @@ function realPostFor(date, slot) {
   return REAL_POSTS.find(p => p.date === ds && p.slot === slot);
 }
 
-// Map cluster (uit index.json) → slot in week-grid
+// Map cluster (uit index.json / pipeline-state.json) → slot in week-grid
 const CLUSTER_TO_SLOT = {
   'kitesurfschool': 'kite',
   'beach-house': 'rest',
   'events': 'events',
   'wellness': 'rest' // fallback
 };
+
+// Pipeline-state cache: per slot een array van rijen (sheet-rows) in volgorde.
+// Wordt gevuld door fetchPipelineState() en gebruikt door getPipelinePost() om
+// elke rij op een (date, slot) plek in de huidige week te plakken.
+let PIPELINE_BY_SLOT = { events: [], rest: [], kite: [] };
+let PIPELINE_LOADED = false;
+
+// Fetcht pipeline-state.json (cloud-routine output) en vult PIPELINE_BY_SLOT.
+// Failsafe: 404 of parse-error → stil falen, dashboard valt terug op huidige gedrag.
+async function fetchPipelineState() {
+  const url = 'https://raw.githubusercontent.com/bramovergaag/Blow/main/pilot/pipeline-state.json';
+  try {
+    const res = await fetch(url, { cache: 'no-store' });
+    if (!res.ok) return false;
+    const data = await res.json();
+    if (!data || !Array.isArray(data.rows)) return false;
+    const buckets = { events: [], rest: [], kite: [] };
+    data.rows.forEach(row => {
+      if (!row || !row.department) return;
+      const slot = CLUSTER_TO_SLOT[row.department];
+      if (!slot || !buckets[slot]) return;
+      buckets[slot].push({
+        row_id: row.row_id,
+        title: row.title || row.primary_keyword || '(geen titel)',
+        status: row.status || '',
+        stages: row.stages || {},
+        archive_url: row.archive_url || ''
+      });
+    });
+    PIPELINE_BY_SLOT = buckets;
+    PIPELINE_LOADED = true;
+    return true;
+  } catch (e) {
+    console.warn('pipeline-state fetch failed', e);
+    return false;
+  }
+}
+
+// Geeft de pipeline-rij voor een (date, slot) terug, gebaseerd op dow-index.
+// Strategie: eerste 7 rijen per slot worden ma-zo van de huidige week gevuld.
+function pipelinePostFor(date, slot) {
+  if (!PIPELINE_LOADED) return null;
+  const rows = PIPELINE_BY_SLOT[slot];
+  if (!rows || !rows.length) return null;
+  const dow = date.getDay();
+  const idx = dow === 0 ? 6 : dow - 1; // ma=0 ... zo=6
+  return rows[idx] || null;
+}
 
 // Fetcht live posts/index.json, mergt entries als REAL_POSTS met alle 5 stages = 'done'.
 // Als fetch faalt: stil falen, fallback op localStorage-gedrag.
@@ -624,11 +672,21 @@ function getPost(date, slot) {
   if (!state[key]) {
     state[key] = { info: '', draft: '', review: '', wa: '', pub: '', title: '' };
   }
-  // Overlay van REAL_POSTS — bestaande blogs hebben voorrang op localStorage-state
+  // Overlay-volgorde (laag → hoog): localStorage → pipeline-state → REAL_POSTS (live)
+  // REAL_POSTS (live posts uit index.json) winnen altijd; pipeline-state wint van localStorage.
   const real = realPostFor(date, slot);
   if (real) {
     return Object.assign({}, state[key], real.stages, {
       title: real.title, url: real.url, isReal: true
+    });
+  }
+  const pipe = pipelinePostFor(date, slot);
+  if (pipe) {
+    return Object.assign({}, state[key], pipe.stages, {
+      title: pipe.title,
+      url: pipe.archive_url || '',
+      isPipeline: true,
+      pipelineStatus: pipe.status
     });
   }
   return state[key];
@@ -772,9 +830,13 @@ function cycleStage(stage) {
   renderWeek();
 }
 
-// Init — render eerst met localStorage, refetch live posts en re-render bij success
+// Init — order:
+//   1. render met sample-titles + localStorage state
+//   2. fetch pipeline-state.json → override met sheet-data, re-render
+//   3. fetch live posts/index.json → mark als fully done (wint van pipeline-state), re-render
 loadState();
 renderWeek();
+fetchPipelineState().then(ok => { if (ok) renderWeek(); });
 fetchLivePosts().then(ok => { if (ok) renderWeek(); });
 
 // ====== Scroll-spy ======
