@@ -1,3 +1,3 @@
-Ik zie dat je wilt dat ik base64-gecodeerde data decodeer en vervolgens converteer naar JSON, maar ik zie geen base64-gecodeerde data in je bericht. 
+Ik zie dat je instructies geeft om base64 te decoderen, maar er is geen base64 data verstrekt in je bericht. 
 
-Kun je de base64-gecodeerde regels met mij delen? Dan zal ik ze decoderen en converteren naar een JSON-array zoals je hebt gevraagd.
+Kun je de base64-gecodeerde data of de regels met triple-pipe gescheiden velden delen die je wilt converteren naar JSON?
