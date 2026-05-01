@@ -338,7 +338,7 @@
 
   <header class="hero">
     <h1>Content-pipeline · week-overzicht</h1>
-    <p class="lead">Drie posts per dag (09:00 events · 12:30 restaurant · 16:00 kiteschool) — 21 posts per week. Per post 5 stages: info → draft → review → WhatsApp → publish. Posts die live staan op GitHub Pages tonen automatisch alle 5 vinkjes; rest is handmatig (klik cel).</p>
+    <p class="lead">Planning-tool: cellen zijn leeg tot er een post wordt ingepland. Drie slots per dag (09:00 events · 12:30 restaurant · 16:00 kiteschool). Een post verschijnt zodra <code>pipeline-state.json</code> een rij heeft met <code>publish_date</code> matching de cel. Live posts (GitHub Pages) tonen alle 5 stages als done; geplande/concept-posts tonen partial stages.</p>
     <div class="week-meta">
       <span class="today" id="today-pill">Vandaag</span>
       <span id="week-num">Week –</span>
@@ -351,25 +351,25 @@
     <div class="kpi-strip">
       <div class="kpi-card events">
         <div class="lbl">📅 Events 09:00</div>
-        <div class="val" id="kpi-events">0 / 7</div>
+        <div class="val" id="kpi-events">0 / 0</div>
         <div class="sub">Volledig (alle 5 stages)</div>
         <div class="bar"><div class="fill" id="kpi-events-bar" style="width: 0%; background: var(--green);"></div></div>
       </div>
       <div class="kpi-card rest">
         <div class="lbl">🍕 Restaurant 12:30</div>
-        <div class="val" id="kpi-rest">0 / 7</div>
+        <div class="val" id="kpi-rest">0 / 0</div>
         <div class="sub">Volledig (alle 5 stages)</div>
         <div class="bar"><div class="fill" id="kpi-rest-bar" style="width: 0%; background: var(--accent);"></div></div>
       </div>
       <div class="kpi-card kite">
         <div class="lbl">🪁 Kiteschool 16:00</div>
-        <div class="val" id="kpi-kite">0 / 7</div>
+        <div class="val" id="kpi-kite">0 / 0</div>
         <div class="sub">Volledig (alle 5 stages)</div>
         <div class="bar"><div class="fill" id="kpi-kite-bar" style="width: 0%; background: var(--sea);"></div></div>
       </div>
       <div class="kpi-card totaal">
         <div class="lbl">Totaal deze week</div>
-        <div class="val" id="kpi-total">0 / 21</div>
+        <div class="val" id="kpi-total">0 / 0</div>
         <div class="sub" id="kpi-total-sub">0% volledig (alle 5 stages)</div>
         <div class="bar"><div class="fill" id="kpi-total-bar" style="width: 0%"></div></div>
       </div>
@@ -472,37 +472,9 @@ const STAGES = [
   { key: 'wa', name: 'WhatsApp verzonden', desc: 'Bericht naar groep · 2u feedback' },
   { key: 'pub', name: 'Gepubliceerd', desc: 'Live op archive-repo (github pages)' }
 ];
-// Audit-derived topics — strategische volgorde M1: zakelijke markt prio-1
-// Tijd-doelgroep: 06-08h yoga (blue-ocean) · 12-14h lunch · 14-17h zakelijk · 17-19h borrel
-const SAMPLE_TITLES = {
-  events: [
-    'Vergaderlocatie strand Kijkduin',     // 🎯 NEW · zakelijk prio-1 · 14-17h
-    'Bedrijfsuitje strand Kijkduin',       // high · zakelijk b2b
-    'Klantborrel locatie Kijkduin',        // 🎯 NEW · zakelijk · 17-19h
-    'Teambuilding kitesurfen',             // high · zakelijk unieke prop
-    'Zomerfeest organiseren strand',       // high · zakelijk plannen mrt-apr
-    'Verjaardag vieren aan zee',           // medium · consument
-    'Kinderfeestje strand Kijkduin'        // medium · families
-  ],
-  rest: [
-    'Borrelen aan zee — zakelijk vrijmibo',// 🎯 BUMP · zakelijk · 17-19h
-    'Power-lunch zakelijk Kijkduin',       // 🎯 NEW · zakelijk · 12-14h
-    'Yoga zonsopgang Kijkduin',            // 🎯 NEW · blue-ocean wellness · 06-08h
-    'Strandrestaurant Kijkduin',           // high · refresh bestaande pagina
-    'Dagje strand Kijkduin',               // medium · weekend-intent
-    'Ontbijt aan zee Den Haag',            // medium · ochtend-publiek
-    'Yoga retreat strand Den Haag'         // 🎯 NEW · wellness · hoge marge
-  ],
-  kite: [
-    'Kitesurfen Zandmotor — veiligste spot', // high · Post A (live)
-    'Kijkduin vs Scheveningen — beginners',  // high · Post B (live)
-    'Kitesurfen leren als volwassene 40+',   // high · gap in markt
-    'Kitesurfen veiligheid beginners',       // high · E-E-A-T anker
-    'Beste maand kitesurfen Nederland',      // medium · evergreen
-    'Wind Zandmotor — live voorspelling',    // medium · utility
-    'Kitesurfen vanaf welke leeftijd'        // medium · families
-  ]
-};
+// SAMPLE_TITLES verwijderd — week-grid toont alleen geplande/live posts uit
+// pipeline-state.json (publish_date match) of REAL_POSTS / posts/index.json.
+// Cellen zonder match → empty-state ("—", dashed border, niet klikbaar).
 
 // Real posts (already done/in-progress) — overlay op week-grid
 // Wordt aangevuld vanuit live posts/index.json bij page-load (zie fetchLivePosts).
@@ -534,9 +506,9 @@ const CLUSTER_TO_SLOT = {
 };
 
 // Pipeline-state cache: keyed by 'YYYY-MM-DD-slot' voor exacte date+slot match.
-// Rijen zonder publish_date vallen in een fallback-bucket per slot voor "geen-datum" placement.
+// Rijen zonder publish_date verschijnen NIET in de week-grid (planning-tool):
+// gebruiker moet zelf publish_date toekennen voordat een post in het rooster komt.
 let PIPELINE_BY_KEY = {};
-let PIPELINE_FALLBACK = { events: [], rest: [], kite: [] };
 let PIPELINE_LOADED = false;
 
 // Fetcht pipeline-state.json (cloud-routine output) en indexeert per date+slot.
@@ -549,29 +521,24 @@ async function fetchPipelineState() {
     const data = await res.json();
     if (!data || !Array.isArray(data.rows)) return false;
     const byKey = {};
-    const fallback = { events: [], rest: [], kite: [] };
+    const validSlots = { events: 1, rest: 1, kite: 1 };
     data.rows.forEach(row => {
       if (!row || !row.department) return;
       const slot = row.slot || CLUSTER_TO_SLOT[row.department];
-      if (!slot || !fallback[slot]) return;
+      if (!slot || !validSlots[slot]) return;
+      // Skip rijen zonder publish_date: planning-tool toont alleen ingeplande posts.
+      if (!row.publish_date) return;
       const entry = {
         row_id: row.row_id,
         title: row.title || row.primary_keyword || '(geen titel)',
         status: row.status || '',
         stages: row.stages || {},
         archive_url: row.archive_url || '',
-        publish_date: row.publish_date || ''
+        publish_date: row.publish_date
       };
-      if (entry.publish_date) {
-        // Direct keyed op exacte date+slot
-        byKey[`${entry.publish_date}-${slot}`] = entry;
-      } else {
-        // Geen datum → fallback bucket (vult lege cellen in huidige week)
-        fallback[slot].push(entry);
-      }
+      byKey[`${entry.publish_date}-${slot}`] = entry;
     });
     PIPELINE_BY_KEY = byKey;
-    PIPELINE_FALLBACK = fallback;
     PIPELINE_LOADED = true;
     return true;
   } catch (e) {
@@ -580,18 +547,12 @@ async function fetchPipelineState() {
   }
 }
 
-// Geeft de pipeline-rij voor een (date, slot) terug.
-// Eerst exacte date+slot match (publish_date), daarna fallback op rijen zonder datum (dow-index).
+// Geeft de pipeline-rij voor een (date, slot) terug — alleen exacte publish_date match.
+// Geen fallback meer: rijen zonder publish_date verschijnen NIET in het week-rooster.
 function pipelinePostFor(date, slot) {
   if (!PIPELINE_LOADED) return null;
   const dateStr = fmtDate(date);
-  const keyed = PIPELINE_BY_KEY[`${dateStr}-${slot}`];
-  if (keyed) return keyed;
-  const rows = PIPELINE_FALLBACK[slot];
-  if (!rows || !rows.length) return null;
-  const dow = date.getDay();
-  const idx = dow === 0 ? 6 : dow - 1; // ma=0 ... zo=6
-  return rows[idx] || null;
+  return PIPELINE_BY_KEY[`${dateStr}-${slot}`] || null;
 }
 
 // Fetcht live posts/index.json, mergt entries als REAL_POSTS met alle 5 stages = 'done'.
@@ -680,35 +641,30 @@ function getPostKey(date, slot) {
   return fmtDate(date) + '-' + slot;
 }
 
+// Returnt een post-object uitsluitend als er een live (REAL_POSTS) of geplande
+// (pipeline-state met publish_date) match is. Geen match → null → empty cel.
+// LocalStorage-state wordt gemerged op een match, maar genereert NOOIT een eigen post:
+// de planning leeft in pipeline-state.json, niet in browserlocal.
 function getPost(date, slot) {
   const key = getPostKey(date, slot);
-  if (!state[key]) {
-    state[key] = { info: '', draft: '', review: '', wa: '', pub: '', title: '' };
-  }
-  // Overlay-volgorde (laag → hoog): localStorage → pipeline-state → REAL_POSTS (live)
-  // REAL_POSTS (live posts uit index.json) winnen altijd; pipeline-state wint van localStorage.
+  const local = state[key] || {};
   const real = realPostFor(date, slot);
   if (real) {
-    return Object.assign({}, state[key], real.stages, {
+    return Object.assign({}, local, real.stages, {
       title: real.title, url: real.url, isReal: true
     });
   }
   const pipe = pipelinePostFor(date, slot);
   if (pipe) {
-    return Object.assign({}, state[key], pipe.stages, {
+    return Object.assign({}, local, pipe.stages, {
       title: pipe.title,
       url: pipe.archive_url || '',
       isPipeline: true,
-      pipelineStatus: pipe.status
+      pipelineStatus: pipe.status,
+      publishDate: pipe.publish_date
     });
   }
-  return state[key];
-}
-
-function getSampleTitle(date, slot) {
-  const dow = date.getDay();
-  const idx = (dow + Math.floor(date.getDate() / 7)) % SAMPLE_TITLES[slot].length;
-  return SAMPLE_TITLES[slot][idx];
+  return null;
 }
 
 function renderWeek() {
@@ -735,7 +691,8 @@ function renderWeek() {
     if (fmtDate(d) === todayStr) h.classList.add('today');
   });
 
-  // Cells — 3 slots × 7 dagen = 21 posts/week
+  // Cells — alleen geplande/live posts vullen cellen; rest = empty.
+  // Counts gebaseerd op werkelijk aantal posts in zicht (niet op 21-default).
   let totalDone = 0, totalPosts = 0;
   let slotDone = { events: 0, rest: 0, kite: 0 };
   let slotTotal = { events: 0, rest: 0, kite: 0 };
@@ -746,13 +703,24 @@ function renderWeek() {
     const idx = dow === 0 ? 6 : dow - 1;
     const d = dates[idx];
     cell.innerHTML = '';
-    cell.classList.remove('weekend');
-    totalPosts++;
-    if (slotTotal[slot] !== undefined) slotTotal[slot]++;
+    cell.classList.remove('weekend', 'real-post', 'empty');
+    cell.dataset.date = fmtDate(d);
 
     const post = getPost(d, slot);
+
+    // Empty-state: geen live post, geen pipeline-rij met deze publish_date+slot.
+    if (!post || !post.title) {
+      cell.classList.add('empty');
+      cell.innerHTML = '<span style="color: var(--muted); font-size: 0.78rem;">—</span>';
+      cell.onclick = null;
+      return;
+    }
+
+    // Filled-state: telt mee in KPI-totalen.
+    totalPosts++;
+    if (slotTotal[slot] !== undefined) slotTotal[slot]++;
     cell.classList.toggle('real-post', !!post.isReal);
-    const title = post.title || getSampleTitle(d, slot);
+
     const stages = STAGES.map(s => post[s.key] || '').filter(Boolean);
     const allDone = stages.length === 5 && stages.every(s => s === 'done' || s === 'skip');
     if (allDone) {
@@ -760,9 +728,8 @@ function renderWeek() {
       if (slotDone[slot] !== undefined) slotDone[slot]++;
     }
 
-    cell.dataset.date = fmtDate(d);
     cell.innerHTML = `
-      <div class="title-mini">${title}</div>
+      <div class="title-mini">${post.title}</div>
       <div class="stages">
         ${STAGES.map(s => {
           const v = post[s.key] || '';
@@ -775,10 +742,13 @@ function renderWeek() {
     cell.onclick = () => openModal(d, slot);
   });
 
-  // KPIs — per slot + totaal
+  // KPIs — per slot + totaal, gebaseerd op werkelijk aantal posts in zicht.
+  // Geen 21-default meer: lege weken tonen 0 / 0.
   const totalPct = totalPosts ? Math.round((totalDone / totalPosts) * 100) : 0;
   document.getElementById('kpi-total').textContent = `${totalDone} / ${totalPosts}`;
-  document.getElementById('kpi-total-sub').textContent = `${totalPct}% volledig (alle 5 stages)`;
+  document.getElementById('kpi-total-sub').textContent = totalPosts
+    ? `${totalPct}% volledig (alle 5 stages)`
+    : 'geen geplande posts deze week';
   document.getElementById('kpi-total-bar').style.width = totalPct + '%';
 
   const setSlotKpi = (slot) => {
@@ -808,9 +778,9 @@ function changeWeek(offset) {
 let modalContext = null;
 function openModal(date, slot) {
   const post = getPost(date, slot);
-  const title = post.title || getSampleTitle(date, slot);
+  if (!post || !post.title) return; // empty cellen openen geen modal
   modalContext = { date: fmtDate(date), slot };
-  document.getElementById('modal-title').textContent = title;
+  document.getElementById('modal-title').textContent = post.title;
   document.getElementById('modal-meta').textContent = `${SLOT_LABELS[slot]} · ${dayName(date)} ${date.getDate()}`;
   const stagesHtml = STAGES.map(s => {
     const v = post[s.key] || '';
@@ -844,8 +814,8 @@ function cycleStage(stage) {
 }
 
 // Init — order:
-//   1. render met sample-titles + localStorage state
-//   2. fetch pipeline-state.json → override met sheet-data, re-render
+//   1. render lege grid + REAL_POSTS overlay (alleen 2 hardcoded entries)
+//   2. fetch pipeline-state.json → vult cellen waar publish_date+slot matcht, re-render
 //   3. fetch live posts/index.json → mark als fully done (wint van pipeline-state), re-render
 loadState();
 renderWeek();
