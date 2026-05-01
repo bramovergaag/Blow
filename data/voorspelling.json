@@ -1,101 +1,20 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-04-27T10:12:36+02:00",
-  "task": "blow-bestel-maandag",
-  "levering_vanaf": "2026-04-30",
+  "generated_at": "2026-05-01T10:05:53+02:00",
+  "task": "blow-bestel-vrijdag",
+  "levering_vanaf": "2026-05-04",
   "bestelperiode": {
-    "from": "2026-04-30",
-    "to": "2026-05-03",
-    "days": 4
+    "from": "2026-05-04",
+    "to": "2026-05-06",
+    "days": 3
   },
   "dagen": [
     {
-      "ds": "2026-04-30",
-      "dag": "Donderdag",
-      "datum_nl": "30 april",
+      "ds": "2026-05-04",
+      "dag": "Maandag",
+      "datum_nl": "4 mei",
       "weer": {
-        "temp": 14.2,
-        "zon": "zonnig",
-        "neerslag": "geen"
-      },
-      "flags": {
-        "nl_holiday": false,
-        "nrw_holiday": false,
-        "nl_school": true,
-        "nrw_school": false
-      },
-      "multipliers": {
-        "base": 42,
-        "sm": 0.55,
-        "dm": 0.85,
-        "nm": 1,
-        "zm": 1.15,
-        "hm": 1,
-        "schm": 1.25
-      },
-      "pred": 28,
-      "pred_buffer": 31
-    },
-    {
-      "ds": "2026-05-01",
-      "dag": "Vrijdag",
-      "datum_nl": "1 mei",
-      "weer": {
-        "temp": 17.1,
-        "zon": "zonnig",
-        "neerslag": "geen"
-      },
-      "flags": {
-        "nl_holiday": false,
-        "nrw_holiday": true,
-        "nl_school": true,
-        "nrw_school": false
-      },
-      "multipliers": {
-        "base": 56,
-        "sm": 0.75,
-        "dm": 1.05,
-        "nm": 1,
-        "zm": 1.15,
-        "hm": 1.3,
-        "schm": 1.25
-      },
-      "pred": 82,
-      "pred_buffer": 90
-    },
-    {
-      "ds": "2026-05-02",
-      "dag": "Zaterdag",
-      "datum_nl": "2 mei",
-      "weer": {
-        "temp": 13.5,
-        "zon": "zonnig",
-        "neerslag": "geen"
-      },
-      "flags": {
-        "nl_holiday": false,
-        "nrw_holiday": false,
-        "nl_school": true,
-        "nrw_school": false
-      },
-      "multipliers": {
-        "base": 42,
-        "sm": 0.75,
-        "dm": 1.55,
-        "nm": 1,
-        "zm": 1.15,
-        "hm": 1,
-        "schm": 1.25
-      },
-      "pred": 70,
-      "pred_buffer": 77
-    },
-    {
-      "ds": "2026-05-03",
-      "dag": "Zondag",
-      "datum_nl": "3 mei",
-      "weer": {
-        "temp": 12.7,
+        "temp": 13.2,
         "zon": "zonnig",
         "neerslag": "geen"
       },
@@ -108,17 +27,71 @@
       "multipliers": {
         "base": 35,
         "sm": 0.75,
-        "dm": 1.35,
+        "dm": 0.6,
         "nm": 1,
         "zm": 1.15,
         "hm": 1,
         "schm": 1.25
       },
-      "pred": 51,
-      "pred_buffer": 56
+      "pred": 23,
+      "pred_buffer": 25
+    },
+    {
+      "ds": "2026-05-05",
+      "dag": "Dinsdag",
+      "datum_nl": "5 mei",
+      "weer": {
+        "temp": 11.4,
+        "zon": "zonnig",
+        "neerslag": "geen"
+      },
+      "flags": {
+        "nl_holiday": true,
+        "nrw_holiday": false,
+        "nl_school": true,
+        "nrw_school": false
+      },
+      "multipliers": {
+        "base": 40,
+        "sm": 0.75,
+        "dm": 0.55,
+        "nm": 1,
+        "zm": 1.15,
+        "hm": 1.45,
+        "schm": 1.25
+      },
+      "pred": 34,
+      "pred_buffer": 37
+    },
+    {
+      "ds": "2026-05-06",
+      "dag": "Woensdag",
+      "datum_nl": "6 mei",
+      "weer": {
+        "temp": 10.2,
+        "zon": "zonnig",
+        "neerslag": "licht"
+      },
+      "flags": {
+        "nl_holiday": false,
+        "nrw_holiday": false,
+        "nl_school": true,
+        "nrw_school": false
+      },
+      "multipliers": {
+        "base": 43,
+        "sm": 0.75,
+        "dm": 0.65,
+        "nm": 0.82,
+        "zm": 1.15,
+        "hm": 1,
+        "schm": 1.25
+      },
+      "pred": 25,
+      "pred_buffer": 28
     }
   ],
-  "totaal": 231,
-  "totaal_buffer": 254,
+  "totaal": 82,
+  "totaal_buffer": 90,
   "waarschuwingen": []
 }
