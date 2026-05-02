@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Klantborrel Locatie Kijkduin - BLOW Beach House | BLOW</title>
+<meta name="description" content="Organiseer je klantborrel op het strand van Kijkduin. BLOW Beach House: unieke B2B borrel locatie in Den Haag met zicht op zee. Ideaal voor klantenevenementen.">
+<style>
+  :root {
+    --sand: #f4ecd8;
+    --sand-light: #faf5e6;
+    --sea: #1e6091;
+    --foam: #ffffff;
+    --deep: #0b2e4a;
+    --accent: #e85d04;
+    --green: #2d8659;
+    --red: #b63b3b;
+    --text: #1a2a3a;
+    --muted: #5c6b7a;
+    --border: rgba(30, 96, 145, 0.15);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: linear-gradient(180deg, var(--sand) 0%, #ffffff 30%);
+    color: var(--text);
+    line-height: 1.65;
+    min-height: 100vh;
+  }
+  .brand-bar {
+    background: #C66A1F; color: #F4EFE2;
+    padding: 14px 24px;
+    display: flex; align-items: center; gap: 18px;
+    border-bottom: 4px solid #1A1A1A;
+    font-family: "Oswald", "Bebas Neue", sans-serif;
+  }
+  .brand-bar .logo {
+    width: 38px; height: 38px;
+    border: 2px solid #F4EFE2; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 12px; letter-spacing: 1.5px;
+    flex-shrink: 0;
+  }
+  .brand-bar .brand-name {
+    font-weight: 700; font-size: 18px; letter-spacing: 2px; text-transform: uppercase;
+  }
+  .brand-tabs { margin-left: auto; display: flex; gap: 4px; }
+  .brand-tabs a {
+    font-family: inherit; font-weight: 500; font-size: 13px;
+    letter-spacing: 2px; text-transform: uppercase;
+    padding: 10px 18px; color: rgba(244, 239, 226, 0.7);
+    border-bottom: 3px solid transparent; text-decoration: none;
+    margin-bottom: -14px; transition: color 0.15s, border-color 0.15s;
+  }
+  .brand-tabs a:hover { color: #F4EFE2; }
+  .brand-tabs a.active { color: #F4EFE2; border-bottom-color: #F4EFE2; }
+  @media (max-width: 600px) {
+    .brand-bar { padding: 12px 16px; gap: 12px; }
+    .brand-bar .brand-name { font-size: 15px; }
+    .brand-tabs a { padding: 10px 12px; font-size: 12px; letter-spacing: 1.5px; }
+  }
+  .container { max-width: 760px; margin: 0 auto; padding: 36px 24px 80px; }
+  header.doc-head {
+    text-align: center; padding: 16px 0 28px;
+    border-bottom: 3px solid var(--sea); margin-bottom: 32px;
+  }
+  .eyebrow {
+    font-size: 0.75rem; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--sea);
+    font-weight: 700; margin-bottom: 10px;
+  }
+  h1 {
+    font-size: clamp(1.6rem, 3.5vw, 2.3rem);
+    font-weight: 800; color: var(--deep);
+    line-height: 1.2; margin-bottom: 14px;
+  }
+  .meta-row {
+    display: inline-flex; gap: 10px; flex-wrap: wrap;
+    justify-content: center; font-size: 0.78rem;
+    color: var(--muted); margin-top: 6px;
+  }
+  .meta-row span {
+    padding: 3px 10px; background: var(--foam);
+    border: 1px solid var(--border); border-radius: 999px;
+  }
+  h2 {
+    font-size: 1.3rem; color: var(--deep);
+    margin: 36px 0 10px; padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+  h3 { font-size: 1.05rem; color: var(--deep); margin: 22px 0 6px; }
+  p { margin-bottom: 14px; }
+  .tldr {
+    background: var(--foam);
+    border-left: 4px solid var(--accent);
+    border-radius: 10px;
+    padding: 18px 22px;
+    box-shadow: 0 2px 10px rgba(11, 46, 74, 0.05);
+    margin: 18px 0 24px;
+  }
+  .tldr strong { color: var(--accent); }
+  blockquote {
+    background: var(--sand-light);
+    border-left: 4px solid var(--sea);
+    padding: 12px 18px;
+    border-radius: 8px;
+    margin: 16px 0;
+    font-size: 0.94rem;
+    color: var(--deep);
+  }
+  blockquote a { color: var(--accent); }
+  ul, ol { margin: 8px 0 14px 22px; padding-left: 10px; }
+  ul li, ol li { margin-bottom: 4px; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 14px 0 20px;
+    background: var(--foam);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(11, 46, 74, 0.05);
+    font-size: 0.86rem;
+  }
+  th {
+    background: var(--deep); color: white;
+    text-align: left; padding: 10px 12px;
+    font-size: 0.76rem; letter-spacing: 0.05em;
+    text-transform: uppercase; font-weight: 700;
+  }
+  td { padding: 9px 12px; border-bottom: 1px solid var(--border); }
+  tr:last-child td { border-bottom: none; }
+  a { color: var(--sea); text-decoration: none; font-weight: 600; }
+  a:hover { color: var(--deep); text-decoration: underline; }
+  .faq-q { font-weight: 700; color: var(--deep); margin-top: 14px; }
+  .faq-a { margin-bottom: 8px; }
+  hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+  strong { color: var(--deep); }
+  footer {
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+  footer h3 { color: var(--deep); margin-bottom: 10px; }
+  footer ul { list-style: none; padding: 0; margin: 0; }
+  footer ul li {
+    padding: 6px 0;
+    border-bottom: 1px dashed var(--border);
+  }
+  footer ul li:last-child { border-bottom: none; }
+  footer .back-pilot {
+    text-align: center;
+    margin-top: 24px;
+    font-style: italic;
+  }
+  @media print {
+    .brand-bar { display: none; }
+    body { background: white; }
+    table { box-shadow: none; border: 1px solid #ccc; }
+  }
+</style>
+</head>
+<body>
+
+<header class="brand-bar">
+  <div class="logo">BLOW</div>
+  <div class="brand-name">Beach House</div>
+  <nav class="brand-tabs" aria-label="Hoofdmenu">
+    <a href="../../">Bestelling</a>
+    <a href="../">SEO</a>
+  </nav>
+</header>
+
+<main class="container">
+
+<header class="doc-head">
+  <div class="eyebrow">BLOW · Events</div>
+  <h1>Klantborrel Locatie Kijkduin - BLOW Beach House</h1>
+  <div class="meta-row">
+    <span>📍 Kijkduin</span>
+    <span>👤 Team BLOW</span>
+    <span>📅 2 mei 2026</span>
+    <span>📖 ≈ 5 min leestijd</span>
+  </div>
+</header>
+
+<div class="tldr">
+  <strong>Korte versie:</strong> Organiseer je klantborrel op het strand van Kijkduin. BLOW Beach House: unieke B2B borrel locatie in Den Haag met zicht op zee. Ideaal voor klantenevenementen.
+</div>
+
+<h2>Waarom Kijkduin de Perfecte Klantborrel Locatie is</h2>
+<p>Ben je op zoek naar een verfrissende locatie voor je volgende klantborrel? Een plek die blijft hangen bij je relaties en écht indruk maakt? Dan is BLOW Beach House in Kijkduin de ideale keus. Terwijl de meeste zakelijke borrels plaatsvinden in standaard hotelruimtes of conferentiezalen, bieden wij iets unieks: een klantenevenement strand ervaring die zakelijk professionalisme combineert met de relaxte sfeer van de Noordzeekust.</p>
+<p>Voor sales- en marketingprofessionals die hun klantrelaties willen versterken, is de locatie van je evenement cruciaal. Bij BLOW Beach House krijg je niet alleen een ruimte, maar een complete belevenis die je merk versterkt en je klanten een onvergetelijke middag of avond bezorgt.</p>
+<h2>De M1-Strategie: Zakelijke Eindsprint aan Zee</h2>
+<p>Onze M1-strategie is specifiek ontwikkeld voor B2B borrels in Den Haag en omgeving. Tussen 17:00 en 19:00 uur creëren we de perfecte zakelijke eindsprint voor jouw klantborrel. Dit tijdstip is niet willekeurig gekozen: het is het ideale moment waarop je klanten de werkdag kunnen afsluiten met een positieve noot, zonder dat het te laat in de avond wordt.</p>
+<p>De M1-strategie betekent bij ons: - <strong>Dedicated serveerteam</strong> vanaf het eerste uur - <strong>Premium borrelplank arrangement</strong> met lokale delicatessen - <strong>Exclusief strandterras</strong> met zicht op de branding - <strong>Flexibele ruimte-indeling</strong> voor groepen van 20 tot 150 personen - <strong>Professionele audiovisuele ondersteuning</strong> voor eventuele presentaties</p>
+<p>Het mooie van een klantborrel locatie Kijkduin is dat je klanten letterlijk kunnen uitwaaien. De frisse zeelucht, het geluid van de golven, en de ondergaande zon creëren een ontspannen sfeer waarin zakelijke gesprekken moeiteloos vloeien. Geen stijve networkingevenementen meer, maar authentieke connecties in een unieke setting.</p>
+<h2>Cross-sell Mogelijkheid: Van Borrel naar Diner</h2>
+<p>Een van de grootste voordelen van BLOW Beach House als klantenevenement strand locatie is onze naadloze overgang van borrel naar diner. Veel van onze zakelijke klanten starten met de M1-strategie en besluiten ter plekke om het evenement te verlengen met een culinair strandavond.</p>
+<p>Onze chef-kok bereidt gerechten met verse, seizoensgebonden ingrediënten, en ons diner-arrangement sluit perfect aan bij de borrel. Je hoeft niet van locatie te wisselen, je gasten blijven in dezelfde prettige sfeer, en jij als organisator hebt geen gedoe met vervoer of timing. Bovendien kun je vooraf al een optie reserveren voor het diner, zodat je flexibiliteit behoudt op basis van de stemming tijdens de borrel.</p>
+<p>Dit maakt ons een ideale B2B borrel Den Haag locatie voor: - <strong>Accountmanagers</strong> die hun key accounts willen verwennen - <strong>Marketingteams</strong> die een productlancering vieren - <strong>Directies</strong> die jaarcijfers willen presenteren in informele setting - <strong>HR-afdelingen</strong> die waardering willen tonen aan belangrijke partners</p>
+<h2>Wat Maakt BLOW Beach House Uniek als B2B Borrel Locatie?</h2>
+<p>Als klantborrel locatie Kijkduin onderscheiden we ons op meerdere vlakken van traditionele zakelijke locaties. Ten eerste is daar de locatie zelf: direct aan het strand, met vrij zicht op de Noordzee. Dit creëert automatisch een meer ontspannen, open sfeer waarin klanten zich sneller op hun gemak voelen.</p>
+<p>Ten tweede begrijpen we het zakelijke aspect. We hebben ruime ervaring met corporate events en weten wat sales- en marketingprofessionals nodig hebben: betrouwbaarheid, flexibiliteit en aandacht voor detail. Ons team denkt proactief mee over de flow van je evenement, van ontvangst tot afsluiting.</p>
+<p>Daarnaast bieden we verschillende ruimte-opties: - <strong>Het hoofdterras</strong> voor grotere groepen tot 150 personen - <strong>De lounge area</strong> voor intieme groepen van 20-40 gasten - <strong>Privé-strandgedeelte</strong> voor exclusieve borrels (op aanvraag) - <strong>Overdekte gedeeltes</strong> als back-up bij wisselvallig weer</p>
+<h2>Praktische Informatie voor Event Organizers</h2>
+<p>Bereikbaarheid is cruciaal voor een succesvol klantenevenement strand, en Kijkduin scoort hier uitstekend. We liggen op slechts 15 minuten van het centrum van Den Haag, met ruime parkeergelegenheid direct bij de locatie. Voor klanten die met het openbaar vervoer komen, stopt de tram praktisch voor de deur.</p>
+<p>Ons borrel-arrangement omvat standaard: - Welkomstdrankje bij aankomst - Twee uur open bar (bier, wijn, fris, koffie/thee) - Uitgebreide borrelplank met warme en koude hapjes - Dedicated serveerteam - Gebruik van audiovisuele faciliteiten - Styling en decoratie in overleg</p>
+<p>Wil je meer impact maken? We kunnen je helpen met: - <strong>Branded cocktails</strong> in jouw huisstijl - <strong>Actieve elementen</strong> zoals een kitesurfdemonstration - <strong>Fotograaf</strong> voor event coverage - <strong>DJ of live muziek</strong> voor de juiste sfeer - <strong>Goodiebags</strong> met lokale strandproducten</p>
+<h2>Seizoensgebonden Mogelijkheden</h2>
+<p>Een klantborrel locatie Kijkduin biedt het hele jaar door unieke mogelijkheden. In de zomer geniet je natuurlijk van lange avonden op het terras, met de zon die langzaam in zee zakt. Maar ook in de herfst en winter heeft een B2B borrel Den Haag aan zee zijn charme.</p>
+<p>Denk aan een winterborrel met vuurkorven op het strand, warme chocolademelk met een shot, en dekens voor je gasten. Of een lente-evenement waarbij je klanten kunnen genieten van de eerste zonnestralen na een lange winter. Elk seizoen heeft zijn eigen karakter, en wij passen onze arrangementen daarop aan.</p>
+<h2>Plan je Klantenevenement bij BLOW Beach House</h2>
+<p>Ben je overtuigd dat een klantenevenement strand de perfecte keuze is voor jouw volgende zakelijke borrel? Ons team staat klaar om met je mee te denken. Of je nu een intieme borrel voor je top-20 klanten organiseert of een groot netwerkmoment voor 150 relaties, bij BLOW Beach House krijg je een op maat gemaakt arrangement.</p>
+<p>We adviseren om minimaal zes weken van tevoren te reserveren, vooral voor de populaire tijdslots tussen april en september. Voor last-minute aanvragen doen we uiteraard ons best om je te accommoderen.</p>
+<p>Contacteer ons voor een vrijblijvende offerte of plan een locatiebezoek. Kom zelf ervaren waarom steeds meer sales- en marketingprofessionals kiezen voor Kijkduin als hun go-to locatie voor klantenevenementen. Je klanten verdienen meer dan een standaard borrel – geef ze een ervaring om nooit te vergeten, met de Noordzee als decor en BLOW Beach House als jouw professionele partner.</p>
+
+<h2>Veelgestelde vragen</h2>
+<div class="faq-q">Hoeveel personen kunnen er bij een klantborrel in BLOW Beach House?</div>
+<div class="faq-a">We kunnen groepen van 20 tot 150 personen accommoderen. Voor kleinere, intieme borrels hebben we onze lounge area (20-40 personen), en voor grotere events gebruiken we ons hoofdterras. We kunnen de ruimte flexibel indelen op basis van jouw wensen en groepsgrootte.</div>
+<div class="faq-q">Wat is inbegrepen in het standaard borrel-arrangement?</div>
+<div class="faq-a">Ons M1-arrangement (17:00-19:00 uur) omvat een welkomstdrankje, twee uur open bar met bier, wijn, frisdrank, koffie en thee, uitgebreide borrelhapjes (warm en koud), dedicated serveerteam en gebruik van onze audiovisuele faciliteiten. Styling en decoratie stemmen we in overleg af op jouw huisstijl.</div>
+<div class="faq-q">Wat gebeurt er bij slecht weer?</div>
+<div class="faq-a">BLOW Beach House beschikt over ruime overdekte gedeeltes met volledige strandsfeer, inclusief zicht op zee. We hebben voldoende binnenruimte om je hele evenement binnen te organiseren zonder concessies te doen aan de sfeer. Bij twijfelachtig weer maken we altijd een back-up plan, zodat jij als organisator geen zorgen hoeft te hebben.</div>
+<div class="faq-q">Kunnen we het borrel-arrangement uitbreiden met een diner?</div>
+<div class="faq-a">Absoluut, en dat is zelfs een van onze sterkste aanbevelingen. Je kunt vooraf een optie reserveren voor een vervolgdiner, en tijdens de borrel beslissen of je deze optie definitief wilt maken. Onze chef-kok bereidt seizoensgebonden menu's die naadloos aansluiten bij de borrel, zonder dat je gasten van locatie hoeven te wisselen.</div>
+<div class="faq-q">Hoe zit het met parkeren en bereikbaarheid?</div>
+<div class="faq-a">We hebben ruime parkeergelegenheid direct bij BLOW Beach House. Vanaf het centrum van Den Haag ben je binnen 15 minuten bij ons. Voor gasten met openbaar vervoer stopt de tram praktisch voor de deur. We kunnen op verzoek ook helpen met groepsvervoer of shuttle-service vanuit een centraal punt in Den Haag.</div>
+<div class="faq-q">Kunnen we branding en maatwerk toevoegen aan ons evenement?</div>
+<div class="faq-a">Jazeker! We denken graag mee over branded cocktails in jouw huisstijl, decoratie met jouw logo, goodiebags met strandproducten, en zelfs actieve elementen zoals een kitesurfdemonstration. Ons team heeft ruime ervaring met corporate branding en zorgt dat jouw merk op subtiele maar effectieve wijze aanwezig is tijdens het event.</div>
+
+<hr>
+
+<footer>
+  <h3>Meer lezen</h3>
+  <ul>
+    <li><a href="18-bedrijfsuitje-strand-kijkduin.html">Bedrijfsuitje strand Kijkduin</a></li>
+    <li><a href="19-teambuilding-kitesurfen.html">Teambuilding kitesurfen</a></li>
+    <li><a href="20-verjaardag-vieren-strand.html">Verjaardag vieren op het strand</a></li>
+    <li><strong>Kitesurflessen:</strong> <a href="https://blow.surf/kitesurfles" target="_blank" rel="noopener">Boek een proefles bij BLOW</a></li>
+    <li><strong>Beach House:</strong> <a href="https://blow.surf/restaurant" target="_blank" rel="noopener">Bezoek ons restaurant aan het strand</a></li>
+  </ul>
+  <div class="back-pilot">↩ Terug naar <a href="../">pilot-overzicht</a></div>
+</footer>
+
+</main>
+
+</body>
+</html>
