@@ -199,7 +199,13 @@ def post_to_webhook(payload: Dict[str, Any]) -> bool:
             json=payload,
             timeout=30,
         )
-        return response.status_code in [200, 204, 202]
+        if response.status_code in [200, 204, 202]:
+            log_event("WEBHOOK", f"✓ POST successful (status {response.status_code})")
+            return True
+        else:
+            log_event("WEBHOOK", f"POST failed with status {response.status_code}")
+            log_event("WEBHOOK", f"Response: {response.text[:100]}")
+            return False
     except Exception as e:
         log_event("ERROR", f"Webhook POST failed: {e}")
         return False

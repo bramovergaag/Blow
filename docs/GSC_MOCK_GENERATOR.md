@@ -6,7 +6,24 @@ Automatische mock Google Search Console data generator voor BLOW pilot project.
 
 **Doel:** Genereer realistische mock GSC data vanuit ContentQueue en POST naar Make webhook  
 **Schedule:** Dagelijks 09:00 uur  
-**Output:** JSON payload (raw + daily rows)
+**Output:** JSON payload (raw + daily rows)  
+**Status:** ✅ Generator werkt | ⚠️ Webhook blokt (403 - Host not in allowlist)
+
+## Status Report (2026-05-02)
+
+**Laatste run:**
+- ✅ 10 published posts geladen
+- ✅ 41 queries gegenereerd
+- ✅ 164 raw rows (4 per query: NL/BE × mobile/desktop)
+- ✅ 41 daily rows (28-dag aggregates)
+- ✅ Payload opgeslagen: `data/gsc_payload.json` (52KB)
+- ❌ Webhook POST failed: 403 Host not in allowlist
+
+**Oplossing voor webhook:** 
+1. Ga naar Make.com scenario
+2. Open webhook settings voor `eky0pd2bubz3n1ibv1mrweace3b1bq56`
+3. Add IP allowlist entry of disable restrictions
+4. Test: `./scripts/test_gsc_webhook.sh`
 
 ## Setup
 
@@ -120,17 +137,28 @@ crontab -e
 
 ## Troubleshooting
 
-### Webhook Returns 403
-- Make allowlist mungkin tidak termasuk host Anda
-- Test dengan: `curl -X POST -H 'Content-Type: application/json' -d '{"test":"data"}' <WEBHOOK_URL>`
+### Webhook Returns 403 (Host not in allowlist)
+**Dit is de huidige situatie.** De Make webhook blokkeert verzoeken van dit IP/host.
 
-### Script tidak membaca sheet
+**Oplossingen:**
+1. **In Make.com:** Webhook settings → allowlist → add IP of disable restrictions
+2. **Test lokaal:** `./scripts/test_gsc_webhook.sh` (toont payload summary + POST response)
+3. **Curl test:** 
+```bash
+curl -X POST https://hook.eu1.make.com/eky0pd2bubz3n1ibv1mrweace3b1bq56 \
+  -H 'Content-Type: application/json' \
+  -d @data/gsc_payload.json -w "\\nStatus: %{http_code}\\n"
+```
+
+### Script niet lezen sheet
 - Check path: `data/content_queue.md` exists?
 - Verify column names match (case-sensitive, escaped underscores)
+- Regenerate met: `python3 scripts/update_content_queue.py` (als beschikbaar)
 
 ### No posts processed
 - Ensure posts punya non-empty `archive_url` value
 - Check ContentQueue status = "published"
+- Verify `data/content_queue.md` has data rows
 
 ## Future Enhancements
 
