@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-02T07:52:36Z",
+  "generated_at": "2026-05-02T17:18:42Z",
   "rows": [
     {
       "row_id": 1,
@@ -13,10 +13,10 @@
         "draft": "done",
         "review": "done",
         "wa": "done",
-        "pub": "pending"
+        "pub": "done"
       },
       "archive_url": "",
-      "publish_date": "2026-05-01"
+      "publish_date": "2026-05-04"
     },
     {
       "row_id": 2,
@@ -30,10 +30,10 @@
         "draft": "done",
         "review": "done",
         "wa": "done",
-        "pub": "pending"
+        "pub": "done"
       },
       "archive_url": "",
-      "publish_date": "2026-05-01"
+      "publish_date": "2026-05-05"
     },
     {
       "row_id": 3,
@@ -47,10 +47,10 @@
         "draft": "done",
         "review": "done",
         "wa": "done",
-        "pub": "pending"
+        "pub": "done"
       },
       "archive_url": "",
-      "publish_date": "2026-05-01"
+      "publish_date": "2026-05-06"
     },
     {
       "row_id": 4,
@@ -64,10 +64,10 @@
         "draft": "done",
         "review": "done",
         "wa": "done",
-        "pub": "pending"
+        "pub": "done"
       },
       "archive_url": "",
-      "publish_date": "2026-05-01"
+      "publish_date": "2026-05-07"
     },
     {
       "row_id": 5,
@@ -81,10 +81,10 @@
         "draft": "done",
         "review": "done",
         "wa": "done",
-        "pub": "pending"
+        "pub": "done"
       },
       "archive_url": "",
-      "publish_date": "2026-05-01"
+      "publish_date": "2026-05-08"
     },
     {
       "row_id": 6,
@@ -98,10 +98,10 @@
         "draft": "done",
         "review": "done",
         "wa": "done",
-        "pub": "pending"
+        "pub": "done"
       },
       "archive_url": "",
-      "publish_date": "2026-05-01"
+      "publish_date": "2026-05-11"
     },
     {
       "row_id": 7,
@@ -115,10 +115,10 @@
         "draft": "done",
         "review": "done",
         "wa": "done",
-        "pub": "pending"
+        "pub": "done"
       },
       "archive_url": "",
-      "publish_date": "2026-05-01"
+      "publish_date": "2026-05-12"
     },
     {
       "row_id": 8,
@@ -132,10 +132,10 @@
         "draft": "done",
         "review": "done",
         "wa": "done",
-        "pub": "pending"
+        "pub": "done"
       },
       "archive_url": "",
-      "publish_date": "2026-05-01"
+      "publish_date": "2026-05-13"
     },
     {
       "row_id": 9,
@@ -149,10 +149,10 @@
         "draft": "done",
         "review": "done",
         "wa": "done",
-        "pub": "pending"
+        "pub": "done"
       },
       "archive_url": "",
-      "publish_date": "2026-05-01"
+      "publish_date": "2026-05-14"
     },
     {
       "row_id": 10,
@@ -166,10 +166,10 @@
         "draft": "done",
         "review": "done",
         "wa": "done",
-        "pub": "pending"
+        "pub": "done"
       },
       "archive_url": "",
-      "publish_date": "2026-05-01"
+      "publish_date": "2026-05-15"
     },
     {
       "row_id": 11,
@@ -183,10 +183,10 @@
         "draft": "done",
         "review": "done",
         "wa": "done",
-        "pub": "pending"
+        "pub": "done"
       },
       "archive_url": "",
-      "publish_date": "2026-05-01"
+      "publish_date": "2026-05-18"
     },
     {
       "row_id": 12,
@@ -200,10 +200,10 @@
         "draft": "done",
         "review": "done",
         "wa": "done",
-        "pub": "pending"
+        "pub": "done"
       },
       "archive_url": "",
-      "publish_date": "2026-05-01"
+      "publish_date": "2026-05-19"
     },
     {
       "row_id": 13,
@@ -217,10 +217,10 @@
         "draft": "done",
         "review": "done",
         "wa": "done",
-        "pub": "pending"
+        "pub": "done"
       },
       "archive_url": "",
-      "publish_date": "2026-05-01"
+      "publish_date": "2026-05-20"
     },
     {
       "row_id": 14,
@@ -234,10 +234,10 @@
         "draft": "done",
         "review": "done",
         "wa": "done",
-        "pub": "pending"
+        "pub": "done"
       },
       "archive_url": "",
-      "publish_date": "2026-05-01"
+      "publish_date": "2026-05-21"
     },
     {
       "row_id": 15,
@@ -251,10 +251,10 @@
         "draft": "done",
         "review": "done",
         "wa": "done",
-        "pub": "pending"
+        "pub": "done"
       },
       "archive_url": "",
-      "publish_date": "2026-05-01"
+      "publish_date": "2026-05-22"
     },
     {
       "row_id": 16,
@@ -268,10 +268,10 @@
         "draft": "done",
         "review": "done",
         "wa": "done",
-        "pub": "pending"
+        "pub": "done"
       },
       "archive_url": "",
-      "publish_date": "2026-05-01"
+      "publish_date": "2026-05-25"
     },
     {
       "row_id": 17,
@@ -285,10 +285,10 @@
         "draft": "done",
         "review": "done",
         "wa": "done",
-        "pub": "pending"
+        "pub": "done"
       },
       "archive_url": "",
-      "publish_date": "2026-05-01"
+      "publish_date": "2026-05-26"
     },
     {
       "row_id": 18,
@@ -302,10 +302,10 @@
         "draft": "done",
         "review": "done",
         "wa": "done",
-        "pub": "pending"
+        "pub": "done"
       },
       "archive_url": "",
-      "publish_date": "2026-05-01"
+      "publish_date": "2026-05-27"
     },
     {
       "row_id": 19,
@@ -319,10 +319,10 @@
         "draft": "done",
         "review": "done",
         "wa": "done",
-        "pub": "pending"
+        "pub": "done"
       },
       "archive_url": "",
-      "publish_date": "2026-05-01"
+      "publish_date": "2026-05-28"
     },
     {
       "row_id": 20,
@@ -336,10 +336,10 @@
         "draft": "done",
         "review": "done",
         "wa": "done",
-        "pub": "pending"
+        "pub": "done"
       },
       "archive_url": "",
-      "publish_date": "2026-05-01"
+      "publish_date": "2026-05-29"
     },
     {
       "row_id": 21,
@@ -353,10 +353,10 @@
         "draft": "done",
         "review": "done",
         "wa": "done",
-        "pub": "pending"
+        "pub": "done"
       },
       "archive_url": "",
-      "publish_date": "2026-05-01"
+      "publish_date": "2026-06-01"
     },
     {
       "row_id": 22,
@@ -370,10 +370,10 @@
         "draft": "done",
         "review": "done",
         "wa": "done",
-        "pub": "pending"
+        "pub": "done"
       },
       "archive_url": "",
-      "publish_date": "2026-05-01"
+      "publish_date": "2026-06-02"
     },
     {
       "row_id": 23,
@@ -387,7 +387,7 @@
         "draft": "done",
         "review": "done",
         "wa": "done",
-        "pub": "skip"
+        "pub": "skipped"
       },
       "archive_url": "",
       "publish_date": "2026-05-01"
@@ -404,10 +404,10 @@
         "draft": "done",
         "review": "done",
         "wa": "done",
-        "pub": "pending"
+        "pub": "done"
       },
       "archive_url": "",
-      "publish_date": "2026-05-01"
+      "publish_date": "2026-06-03"
     },
     {
       "row_id": 25,
@@ -421,10 +421,10 @@
         "draft": "done",
         "review": "done",
         "wa": "done",
-        "pub": "pending"
+        "pub": "done"
       },
       "archive_url": "",
-      "publish_date": "2026-05-01"
+      "publish_date": "2026-06-04"
     },
     {
       "row_id": 26,
@@ -438,10 +438,10 @@
         "draft": "done",
         "review": "done",
         "wa": "done",
-        "pub": "pending"
+        "pub": "done"
       },
       "archive_url": "",
-      "publish_date": "2026-05-01"
+      "publish_date": "2026-06-05"
     },
     {
       "row_id": 27,
@@ -455,10 +455,10 @@
         "draft": "done",
         "review": "done",
         "wa": "done",
-        "pub": "pending"
+        "pub": "done"
       },
       "archive_url": "",
-      "publish_date": "2026-05-01"
+      "publish_date": "2026-06-08"
     },
     {
       "row_id": 28,
@@ -472,10 +472,10 @@
         "draft": "done",
         "review": "done",
         "wa": "done",
-        "pub": "pending"
+        "pub": "done"
       },
       "archive_url": "",
-      "publish_date": "2026-05-01"
+      "publish_date": "2026-06-09"
     },
     {
       "row_id": 29,
@@ -489,10 +489,10 @@
         "draft": "done",
         "review": "done",
         "wa": "done",
-        "pub": "pending"
+        "pub": "done"
       },
       "archive_url": "",
-      "publish_date": "2026-05-01"
+      "publish_date": "2026-06-10"
     },
     {
       "row_id": 30,
@@ -506,10 +506,10 @@
         "draft": "done",
         "review": "done",
         "wa": "done",
-        "pub": "pending"
+        "pub": "done"
       },
       "archive_url": "",
-      "publish_date": "2026-05-01"
+      "publish_date": "2026-06-11"
     },
     {
       "row_id": 31,
@@ -523,10 +523,10 @@
         "draft": "done",
         "review": "done",
         "wa": "done",
-        "pub": "pending"
+        "pub": "done"
       },
       "archive_url": "",
-      "publish_date": "2026-05-01"
+      "publish_date": "2026-06-12"
     },
     {
       "row_id": 32,
@@ -543,7 +543,7 @@
         "pub": "done"
       },
       "archive_url": "https://bramovergaag.github.io/Blow/pilot/posts/32-power-lunch-zakelijk-kijkduin.html",
-      "publish_date": "2026-05-01"
+      "publish_date": "2026-03-14"
     },
     {
       "row_id": 33,
@@ -557,10 +557,10 @@
         "draft": "done",
         "review": "done",
         "wa": "done",
-        "pub": "pending"
+        "pub": "done"
       },
       "archive_url": "",
-      "publish_date": "2026-05-01"
+      "publish_date": "2026-06-15"
     },
     {
       "row_id": 34,
@@ -574,10 +574,10 @@
         "draft": "done",
         "review": "done",
         "wa": "done",
-        "pub": "pending"
+        "pub": "done"
       },
       "archive_url": "",
-      "publish_date": "2026-05-01"
+      "publish_date": "2026-06-16"
     },
     {
       "row_id": 35,
@@ -594,7 +594,39 @@
         "pub": "done"
       },
       "archive_url": "https://bramovergaag.github.io/Blow/pilot/posts/35-yoga-retreat-strand-den-haag.html",
-      "publish_date": "2026-05-01"
+      "publish_date": "2026-03-21"
+    },
+    {
+      "row_id": "gsc-2026-05-02",
+      "department": "blow",
+      "slot": "rest",
+      "primary_keyword": "",
+      "title": "",
+      "status": "archived",
+      "stages": {
+        "info": "pending",
+        "draft": "pending",
+        "review": "done",
+        "wa": "skipped",
+        "pub": "skipped"
+      },
+      "archive_url": ""
+    },
+    {
+      "row_id": "gsc-2026-05-02",
+      "department": "blow",
+      "slot": "rest",
+      "primary_keyword": "",
+      "title": "",
+      "status": "archived",
+      "stages": {
+        "info": "pending",
+        "draft": "pending",
+        "review": "done",
+        "wa": "skipped",
+        "pub": "skipped"
+      },
+      "archive_url": ""
     }
   ]
 }
