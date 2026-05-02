@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BLOW Beach House Kijkduin - Kitesurfen, Dining &amp; Events | BLOW</title>
+<meta name="description" content="Ontdek BLOW Beach House Kijkduin: dé hotspot voor kitesurfles, heerlijk eten en unieke strandevents. Jouw ultieme strandbelevenis aan de Hollandse kust!">
+<style>
+  :root {
+    --sand: #f4ecd8;
+    --sand-light: #faf5e6;
+    --sea: #1e6091;
+    --foam: #ffffff;
+    --deep: #0b2e4a;
+    --accent: #e85d04;
+    --green: #2d8659;
+    --red: #b63b3b;
+    --text: #1a2a3a;
+    --muted: #5c6b7a;
+    --border: rgba(30, 96, 145, 0.15);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: linear-gradient(180deg, var(--sand) 0%, #ffffff 30%);
+    color: var(--text);
+    line-height: 1.65;
+    min-height: 100vh;
+  }
+
+  /* Brand bar */
+  .brand-bar {
+    background: #C66A1F; color: #F4EFE2;
+    padding: 14px 24px;
+    display: flex; align-items: center; gap: 18px;
+    border-bottom: 4px solid #1A1A1A;
+    font-family: "Oswald", "Bebas Neue", sans-serif;
+  }
+  .brand-bar .logo {
+    width: 38px; height: 38px;
+    border: 2px solid #F4EFE2; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 12px; letter-spacing: 1.5px;
+    flex-shrink: 0;
+  }
+  .brand-bar .brand-name {
+    font-weight: 700; font-size: 18px; letter-spacing: 2px; text-transform: uppercase;
+  }
+  .brand-tabs { margin-left: auto; display: flex; gap: 4px; }
+  .brand-tabs a {
+    font-family: inherit; font-weight: 500; font-size: 13px;
+    letter-spacing: 2px; text-transform: uppercase;
+    padding: 10px 18px; color: rgba(244, 239, 226, 0.7);
+    border-bottom: 3px solid transparent; text-decoration: none;
+    margin-bottom: -14px; transition: color 0.15s, border-color 0.15s;
+  }
+  .brand-tabs a:hover { color: #F4EFE2; }
+  .brand-tabs a.active { color: #F4EFE2; border-bottom-color: #F4EFE2; }
+  @media (max-width: 600px) {
+    .brand-bar { padding: 12px 16px; gap: 12px; }
+    .brand-bar .brand-name { font-size: 15px; }
+    .brand-tabs a { padding: 10px 12px; font-size: 12px; letter-spacing: 1.5px; }
+  }
+
+  .container { max-width: 760px; margin: 0 auto; padding: 36px 24px 80px; }
+
+  header.doc-head {
+    text-align: center; padding: 16px 0 28px;
+    border-bottom: 3px solid var(--sea); margin-bottom: 32px;
+  }
+  .eyebrow {
+    font-size: 0.75rem; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--sea);
+    font-weight: 700; margin-bottom: 10px;
+  }
+  h1 {
+    font-size: clamp(1.6rem, 3.5vw, 2.3rem);
+    font-weight: 800; color: var(--deep);
+    line-height: 1.2; margin-bottom: 14px;
+  }
+  .meta-row {
+    display: inline-flex; gap: 10px; flex-wrap: wrap;
+    justify-content: center; font-size: 0.78rem;
+    color: var(--muted); margin-top: 6px;
+  }
+  .meta-row span {
+    padding: 3px 10px; background: var(--foam);
+    border: 1px solid var(--border); border-radius: 999px;
+  }
+
+  h2 {
+    font-size: 1.3rem; color: var(--deep);
+    margin: 36px 0 10px; padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+  h3 { font-size: 1.05rem; color: var(--deep); margin: 22px 0 6px; }
+  p { margin-bottom: 14px; }
+
+  .tldr {
+    background: var(--foam);
+    border-left: 4px solid var(--accent);
+    border-radius: 10px;
+    padding: 18px 22px;
+    box-shadow: 0 2px 10px rgba(11, 46, 74, 0.05);
+    margin: 18px 0 24px;
+  }
+  .tldr strong { color: var(--accent); }
+
+  blockquote {
+    background: var(--sand-light);
+    border-left: 4px solid var(--sea);
+    padding: 12px 18px;
+    border-radius: 8px;
+    margin: 16px 0;
+    font-size: 0.94rem;
+    color: var(--deep);
+  }
+  blockquote a { color: var(--accent); }
+
+  ul, ol { margin: 8px 0 14px 22px; padding-left: 10px; }
+  ul li, ol li { margin-bottom: 4px; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 14px 0 20px;
+    background: var(--foam);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(11, 46, 74, 0.05);
+    font-size: 0.86rem;
+  }
+  th {
+    background: var(--deep); color: white;
+    text-align: left; padding: 10px 12px;
+    font-size: 0.76rem; letter-spacing: 0.05em;
+    text-transform: uppercase; font-weight: 700;
+  }
+  td { padding: 9px 12px; border-bottom: 1px solid var(--border); }
+  tr:last-child td { border-bottom: none; }
+
+  a { color: var(--sea); text-decoration: none; font-weight: 600; }
+  a:hover { color: var(--deep); text-decoration: underline; }
+
+  .faq-q { font-weight: 700; color: var(--deep); margin-top: 14px; }
+  .faq-a { margin-bottom: 8px; }
+
+  hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+  strong { color: var(--deep); }
+
+  footer {
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+  footer h3 { color: var(--deep); margin-bottom: 10px; }
+  footer ul { list-style: none; padding: 0; margin: 0; }
+  footer ul li {
+    padding: 6px 0;
+    border-bottom: 1px dashed var(--border);
+  }
+  footer ul li:last-child { border-bottom: none; }
+  footer .back-pilot {
+    text-align: center;
+    margin-top: 24px;
+    font-style: italic;
+  }
+
+  @media print {
+    .brand-bar { display: none; }
+    body { background: white; }
+    table { box-shadow: none; border: 1px solid #ccc; }
+  }
+</style>
+</head>
+<body>
+
+<header class="brand-bar">
+  <div class="logo">BLOW</div>
+  <div class="brand-name">Beach House</div>
+  <nav class="brand-tabs" aria-label="Hoofdmenu">
+    <a href="../../">Bestelling</a>
+    <a href="../">SEO</a>
+  </nav>
+</header>
+
+<main class="container">
+
+<header class="doc-head">
+  <div class="eyebrow">BLOW &middot; Beach House</div>
+  <h1>BLOW Beach House Kijkduin - Kitesurfen, Dining &amp; Events</h1>
+  <div class="meta-row">
+    <span>&#128205; Kijkduin, Den Haag</span>
+    <span>&#128100; Team BLOW</span>
+    <span>&#128197; 2 mei 2026</span>
+    <span>&#128214; ≈ 7 min leestijd</span>
+  </div>
+</header>
+
+<div class="tldr">
+  <strong>Korte versie:</strong> Ontdek BLOW Beach House Kijkduin: dé hotspot voor kitesurfles, heerlijk eten en unieke strandevents. Jouw ultieme strandbelevenis aan de Hollandse kust!
+</div>
+
+<h2>Welkom bij BLOW Beach House Kijkduin</h2>
+<p>Aan het prachtige strand van Kijkduin vind je BLOW Beach House - een unieke bestemming waar avontuur, culinair genieten en onvergetelijke evenementen samenkomen. Of je nu op zoek bent naar een adrenaline kick op het water, een heerlijke lunch met zeezicht of de perfecte locatie voor je strandfeest, bij BLOW zit je altijd goed.</p>
+<p>Onze strandtent combineert het beste van drie werelden: een professionele kitesurfschool voor watersportliefhebbers, een sfeervol restaurant met vers bereide gerechten, en een inspirerende eventlocatie voor elk moment dat je wilt vieren. Welkom op jouw nieuwe favoriete plek aan zee!</p>
+<h2>Kitesurfen Leren bij BLOW Kijkduin</h2>
+<p>Heb je altijd al willen kitesurfen? Bij BLOW Beach House maken we die droom werkelijkheid. Onze gecertificeerde instructeurs begeleiden je stap voor stap in deze spectaculaire watersport. Of je nu complete beginner bent of je skills wilt verbeteren, we hebben de perfecte les voor jou.</p>
+<p>Onze kitesurfschool biedt verschillende lespakketten aan. Beginners starten vaak met een kennismakingsles waar je de basisprincipes leert: hoe je de kite bestuurt, veiligheidsaspecten en je eerste meters op het water. Gevorderden kunnen terecht voor specifieke technieken zoals springen, tricks of wave-riding.</p>
+<p>Het strand van Kijkduin is een ideale locatie om te kitesurfen. De combinatie van zandstrand, ruimte en goede windcondities maakt het perfect voor zowel beginners als ervaren kitesurfers. Onze school beschikt over moderne materialen en alle benodigde uitrusting, zodat je veilig en comfortabel kunt leren.</p>
+<p>Bij BLOW draait het om meer dan alleen techniek. We bouwen aan een community van watersportliefhebbers die hun passie delen. Na je les kun je heerlijk napraten op ons terras, ervaringen uitwisselen met andere kitesurfers en alvast uitkijken naar je volgende sessie op het water.</p>
+<h2>Culinair Genieten aan Zee</h2>
+<p>Na een actieve dag op het water of tijdens een ontspannen strandwandeling is er niets fijner dan genieten van heerlijk eten met uitzicht op de Noordzee. Ons restaurant biedt een gevarieerd menu met verse, seizoensgebonden ingrediënten.</p>
+<p>Van uitgebreide ontbijtjes en lichte lunches tot verrassende diners - bij BLOW proef je de liefde voor goed eten. Onze keuken werkt waar mogelijk met lokale leveranciers en kiest voor duurzame producten. Denk aan verse vis, biologische groenten en huisgemaakte specialiteiten.</p>
+<p>Op ons terras geniet je van de zon, de zee en de unieke sfeer die BLOW kenmerkt. Met een kop koffie in de ochtend, een versgeperst sapje na het sporten of een goed glas wijn tijdens zonsondergang - elk moment wordt hier speciaal. Onze menukaart biedt voor ieder wat wils, van gezonde powerbowls tot comfort food classics.</p>
+<p>Vegetarisch, vegan of specifieke wensen? Geen probleem. Ons team denkt graag met je mee om ervoor te zorgen dat iedereen kan genieten. De combinatie van goede service, smaakvol eten en onze relaxte strandvibe maakt elk bezoek tot een ervaring om te onthouden.</p>
+<h2>Events &amp; Feesten bij BLOW Beach House</h2>
+<p>Op zoek naar een bijzondere locatie voor je evenement? BLOW Beach House is de perfecte setting voor allerlei gelegenheden. Of het nu gaat om een bedrijfsuitje, vrijgezellenfeest, verjaardag of teambuilding - wij zorgen voor een onvergetelijk programma.</p>
+<p>Onze eventmogelijkheden zijn veelzijdig. Combineer bijvoorbeeld een kitesurfclinic met een BBQ op het strand. Of organiseer een netwerkborrel tijdens zonsondergang met live muziek. We denken graag met je mee om jouw event precies zo te maken als jij het voor ogen hebt.</p>
+<p>Voor bedrijven bieden we interessante teambuilding activiteiten waarbij medewerkers samen uitdagingen aangaan op het water. Kitesurfen stimuleert samenwerking, doorzettingsvermogen en levert fantastische teamervaringen op. Na afloop geniet je samen na in ons restaurant.</p>
+<p>Kleinschalige privé-evenementen kunnen ook bij ons terecht. Een intiem stranddiner, een romantisch voorstel bij zonsondergang, of een gezellig samenzijn met vrienden - BLOW biedt de ruimte en de sfeer om elk moment speciaal te maken. Ons ervaren team helpt je graag met de organisatie van begin tot eind.</p>
+<h2>Waarom Kiezen voor BLOW Beach House?</h2>
+<p>Wat maakt BLOW nu echt bijzonder? Het is de combinatie van elementen die je nergens anders vindt. Waar kun je anders in één dag kitesurfen leren, heerlijk eten en de zonsondergang vieren op het strand?</p>
+<p>Onze locatie aan het strand van Kijkduin is een van de mooiste plekken van de Nederlandse kust. Ruim, schoon en met goede faciliteiten. Je parkeert gemakkelijk in de buurt en binnen een paar minuten sta je met je voeten in het zand.</p>
+<p>Het team van BLOW bestaat uit gepassioneerde mensen die hun liefde voor de zee, watersport en gastvrijheid willen delen. Die persoonlijke benadering voel je in alles: van de aandacht tijdens je kitesurfles tot de service in het restaurant. We kennen onze gasten en zorgen ervoor dat iedereen zich welkom voelt.</p>
+<p>Daarnaast zijn we het hele jaar door open. Ook buiten het hoogseizoen is BLOW een fijne plek om even bij te komen, te sporten of te genieten. Onze overdekte gedeelten en verwarming zorgen ervoor dat je ook op koelere dagen comfortabel kunt vertoeven.</p>
+<h2>Plan Je Bezoek aan BLOW Kijkduin</h2>
+<p>Ben je enthousiast geworden en wil je kennismaken met BLOW Beach House? We verwelkomen je graag! Voor kitesurflessen raden we aan om vooraf te reserveren, zodat we voldoende instructeurs en materiaal beschikbaar hebben.</p>
+<p>Ons restaurant is toegankelijk voor iedereen, zonder reservering. Wil je zeker zijn van een plekje, vooral tijdens drukke momenten of voor grotere groepen? Dan kun je altijd even contact met ons opnemen.</p>
+<p>Voor events en privé-arrangementen werken we graag een offerte voor je uit. Neem contact op via onze website of kom gewoon langs voor een vrijblijvend gesprek. We vertellen je graag meer over de mogelijkheden en helpen je om jouw event tot een succes te maken.</p>
+<p>Volg ons ook op social media om op de hoogte te blijven van speciale acties, leuke events en natuurlijk de mooiste foto's van kitesurfers, zonsondergangen en heerlijke gerechten. We delen graag onze passie voor het strandleven met jou.</p>
+<p>Kom langs bij BLOW Beach House Kijkduin en ervaar zelf waarom zoveel mensen verliefd zijn geworden op deze bijzondere plek. Of je nu komt voor de sport, het eten of gewoon de sfeer - we maken er samen een geweldige dag van. Tot snel aan het strand!</p>
+
+<h2>Veelgestelde vragen</h2>
+
+<div class="faq-q">Q1: Kan ik bij BLOW Beach House kitesurfen leren als complete beginner?</div>
+<div class="faq-a">Absoluut! Onze kitesurfschool is perfect ingericht voor beginners. We bieden kennismakingslessen waarbij je stap voor stap de basis leert. Onze gecertificeerde instructeurs zorgen voor persoonlijke begeleiding en alle benodigde materialen worden verstrekt. Het strand van Kijkduin is ideaal voor beginners dankzij de ruimte en goede condities. Je hoeft geen voorkennis of eigen uitrusting mee te nemen.</div>
+<div class="faq-q">Q2: Is het restaurant van BLOW toegankelijk zonder kitesurfles te volgen?</div>
+<div class="faq-a">Jazeker! Ons restaurant is voor iedereen toegankelijk, ook als je niet komt kitesurfen. Je bent van harte welkom voor een ontbijt, lunch, diner of gewoon een drankje op ons terras. Reserveren is niet verplicht, maar voor grotere groepen of drukke momenten raden we het wel aan. Kom gerust langs en geniet van ons uitzicht en onze sfeer.</div>
+<div class="faq-q">Q3: Welke eventmogelijkheden biedt BLOW Beach House?</div>
+<div class="faq-a">We organiseren diverse soorten events: bedrijfsuitjes, teambuilding activiteiten, vrijgezellenfeesten, verjaardagen en privé-diners. Je kunt kiezen voor combinaties zoals kitesurfclinics met BBQ, netwerkborrels bij zonsondergang of volledig verzorgde arrangementen. Ons team denkt graag met je mee om jouw event precies naar wens te maken. Neem contact op voor een persoonlijk advies en offerte.</div>
+<div class="faq-q">Q4: Is BLOW Beach House het hele jaar geopend?</div>
+<div class="faq-a">Ja, we zijn jaarrond geopend! Ook buiten het zomerseizoen kun je bij ons terecht voor kitesurflessen (weersafhankelijk), heerlijk eten en events. Onze overdekte gedeelten en verwarming zorgen ervoor dat je ook op koelere dagen comfortabel kunt genieten. De openingstijden kunnen per seizoen verschillen, check onze website of social media voor actuele informatie.</div>
+<div class="faq-q">Q5: Moet ik eigen kitesurfuitrusting meenemen?</div>
+<div class="faq-a">Nee, dat hoeft niet. Onze kitesurfschool beschikt over moderne, goed onderhouden materialen die je tijdens de les gebruikt. Voor beginners is dit juist ideaal, omdat je kennismaakt met professionele uitrusting zonder zelf te hoeven investeren. Gevorderde surfers die liever hun eigen materiaal gebruiken kunnen dat natuurlijk wel. We hebben ook opslagmogelijkheden voor vaste gasten.</div>
+<div class="faq-q">Q6: Zijn er vegetarische en veganistische opties in het restaurant?</div>
+<div class="faq-a">Zeker! Ons menu bevat diverse vegetarische en veganistische gerechten. We werken met verse, seizoensgebonden ingrediënten en onze keuken denkt graag mee bij specifieke wensen of allergieën. Van powerbowls tot hartige salads en lekkere plantaardige alternatieven - er is voor elk wat wils. Vraag gerust naar de mogelijkheden bij ons team.</div>
+
+<hr>
+
+<footer>
+  <h3>Meer lezen over BLOW?</h3>
+  <ul>
+    <li><strong>Kitesurfen:</strong> <a href="3-kitesurfen-leren-als-volwassene.html">Kitesurfen leren als volwassene — alles wat je moet weten</a></li>
+    <li><strong>Eten &amp; drinken:</strong> <a href="11-strandrestaurant-kijkduin.html">Strandrestaurant Kijkduin — ons menu en sfeer</a></li>
+    <li><strong>Events:</strong> <a href="18-bedrijfsuitje-strand-kijkduin.html">Bedrijfsuitje strand Kijkduin — mogelijkheden voor groepen</a></li>
+  </ul>
+  <div class="back-pilot">&#8617; Terug naar <a href="../">pilot-overzicht</a></div>
+</footer>
+
+</main>
+
+</body>
+</html>
