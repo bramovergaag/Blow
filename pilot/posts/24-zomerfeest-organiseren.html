@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zomerfeest Organiseren aan Zee | BLOW Beach House Kijkduin</title>
+<meta name="description" content="Organiseer een onvergetelijk bedrijfszomerfeest aan zee.Compleet verzorgd op het strand van Kijkduin met catering, activiteiten en unieke beleving.">
+<style>
+  :root {
+    --sand: #f4ecd8; --sand-light: #faf5e6; --sea: #1e6091;
+    --foam: #ffffff; --deep: #0b2e4a; --accent: #e85d04;
+    --green: #2d8659; --red: #b63b3b; --text: #1a2a3a;
+    --muted: #5c6b7a; --border: rgba(30, 96, 145, 0.15);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: linear-gradient(180deg, var(--sand) 0%, #ffffff 30%);
+    color: var(--text); line-height: 1.65; min-height: 100vh;
+  }
+  .brand-bar {
+    background: #C66A1F; color: #F4EFE2;
+    padding: 14px 24px; display: flex; align-items: center; gap: 18px;
+    border-bottom: 4px solid #1A1A1A;
+    font-family: "Oswald", "Bebas Neue", sans-serif;
+  }
+  .brand-bar .logo {
+    width: 38px; height: 38px; border: 2px solid #F4EFE2; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 12px; letter-spacing: 1.5px; flex-shrink: 0;
+  }
+  .brand-bar .brand-name { font-weight: 700; font-size: 18px; letter-spacing: 2px; text-transform: uppercase; }
+  .brand-tabs { margin-left: auto; display: flex; gap: 4px; }
+  .brand-tabs a {
+    font-family: inherit; font-weight: 500; font-size: 13px;
+    letter-spacing: 2px; text-transform: uppercase; padding: 10px 18px;
+    color: rgba(244, 239, 226, 0.7); border-bottom: 3px solid transparent;
+    text-decoration: none; margin-bottom: -14px; transition: color 0.15s, border-color 0.15s;
+  }
+  .brand-tabs a:hover { color: #F4EFE2; }
+  .brand-tabs a.active { color: #F4EFE2; border-bottom-color: #F4EFE2; }
+  @media (max-width: 600px) {
+    .brand-bar { padding: 12px 16px; gap: 12px; }
+    .brand-bar .brand-name { font-size: 15px; }
+    .brand-tabs a { padding: 10px 12px; font-size: 12px; letter-spacing: 1.5px; }
+  }
+  .container { max-width: 760px; margin: 0 auto; padding: 36px 24px 80px; }
+  header.doc-head {
+    text-align: center; padding: 16px 0 28px;
+    border-bottom: 3px solid var(--sea); margin-bottom: 32px;
+  }
+  .eyebrow {
+    font-size: 0.75rem; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--sea);
+    font-weight: 700; margin-bottom: 10px;
+  }
+  h1 {
+    font-size: clamp(1.6rem, 3.5vw, 2.3rem);
+    font-weight: 800; color: var(--deep); line-height: 1.2; margin-bottom: 14px;
+  }
+  .meta-row {
+    display: inline-flex; gap: 10px; flex-wrap: wrap;
+    justify-content: center; font-size: 0.78rem; color: var(--muted); margin-top: 6px;
+  }
+  .meta-row span {
+    padding: 3px 10px; background: var(--foam);
+    border: 1px solid var(--border); border-radius: 999px;
+  }
+  h2 {
+    font-size: 1.3rem; color: var(--deep);
+    margin: 36px 0 10px; padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+  h3 { font-size: 1.05rem; color: var(--deep); margin: 22px 0 6px; }
+  p { margin-bottom: 14px; }
+  .tldr {
+    background: var(--foam); border-left: 4px solid var(--accent);
+    border-radius: 10px; padding: 18px 22px;
+    box-shadow: 0 2px 10px rgba(11, 46, 74, 0.05); margin: 18px 0 24px;
+  }
+  .tldr strong { color: var(--accent); }
+  blockquote {
+    background: var(--sand-light); border-left: 4px solid var(--sea);
+    padding: 12px 18px; border-radius: 8px; margin: 16px 0;
+    font-size: 0.94rem; color: var(--deep);
+  }
+  ul, ol { margin: 8px 0 14px 22px; padding-left: 10px; }
+  ul li, ol li { margin-bottom: 4px; }
+  table {
+    width: 100%; border-collapse: collapse; margin: 14px 0 20px;
+    background: var(--foam); border-radius: 8px; overflow: hidden;
+    box-shadow: 0 2px 8px rgba(11, 46, 74, 0.05); font-size: 0.86rem;
+  }
+  th {
+    background: var(--deep); color: white; text-align: left; padding: 10px 12px;
+    font-size: 0.76rem; letter-spacing: 0.05em; text-transform: uppercase; font-weight: 700;
+  }
+  td { padding: 9px 12px; border-bottom: 1px solid var(--border); }
+  tr:last-child td { border-bottom: none; }
+  a { color: var(--sea); text-decoration: none; font-weight: 600; }
+  a:hover { color: var(--deep); text-decoration: underline; }
+  .faq-q { font-weight: 700; color: var(--deep); margin-top: 14px; }
+  .faq-a { margin-bottom: 8px; }
+  hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+  strong { color: var(--deep); }
+  footer {
+    margin-top: 48px; padding-top: 24px;
+    border-top: 1px solid var(--border); color: var(--muted); font-size: 0.85rem;
+  }
+  footer h3 { color: var(--deep); margin-bottom: 10px; }
+  footer ul { list-style: none; padding: 0; margin: 0; }
+  footer ul li { padding: 6px 0; border-bottom: 1px dashed var(--border); }
+  footer ul li:last-child { border-bottom: none; }
+  footer .back-pilot { text-align: center; margin-top: 24px; font-style: italic; }
+  @media print {
+    .brand-bar { display: none; }
+    body { background: white; }
+    table { box-shadow: none; border: 1px solid #ccc; }
+  }
+</style>
+</head>
+<body>
+
+<header class="brand-bar">
+  <div class="logo">BLOW</div>
+  <div class="brand-name">Beach House</div>
+  <nav class="brand-tabs" aria-label="Hoofdmenu">
+    <a href="../../">Bestelling</a>
+    <a href="../">SEO</a>
+  </nav>
+</header>
+
+<main class="container">
+
+<header class="doc-head">
+  <div class="eyebrow">BLOW · Events</div>
+  <h1>Zomerfeest Organiseren aan Zee</h1>
+  <div class="meta-row">
+    <span>📍 Kijkduin, Den Haag</span>
+    <span>👤 Team BLOW</span>
+    <span>📅 2 mei 2026</span>
+    <span>📖 ≈ 6 min leestijd</span>
+  </div>
+</header>
+
+<div class="tldr">
+  <strong>Korte versie:</strong> Organiseer een onvergetelijk bedrijfszomerfeest aan zee.Compleet verzorgd op het strand van Kijkduin met catering, activiteiten en unieke beleving.
+</div>
+
+<h2>Waarom een zomerfeest organiseren aan het strand?</h2>
+<p>Als HR-professional of office manager weet je dat een geslaagd bedrijfsevenement meer is dan alleen een gezellig samenzijn. Het versterkt teamverbanden, waardeert medewerkers en geeft iedereen energie voor de tweede helft van het jaar. En waar kun je dat beter doen dan aan zee? Bij BLOW Beach House Kijkduin organiseren we zomerfeesten die je collega's nóg lang zullen herinneren.</p>
+<p>Een zomerfeest aan het strand biedt die unieke combinatie van ontspanning en avontuur die een doorsnee borrel of diner simpelweg niet kan evenaren. De frisse zeelucht, het geluid van de golven, en de eindeloze horizon creëren vanzelf een vakantiegevoel. Precies wat jouw team verdient na maanden hard werken.</p>
+<h2>Start op tijd: planning vanaf maart-april</h2>
+<p>Wil je in juli of augustus het perfecte bedrijfszomerfeest organiseren? Begin dan met plannen in maart of april. De beste strandlocaties en data zijn gewild, en vroeg boeken geeft je niet alleen zekerheid maar vaak ook betere tarieven en meer flexibiliteit in het programma.</p>
+<p>Bij BLOW Beach House helpen we je graag met de complete planning. Van de eerste kennismaking tot de evaluatie achteraf – wij denken met je mee over capaciteit, budget, activiteiten en die kleine details die het verschil maken tussen 'leuk' en 'onvergetelijk'.</p>
+<h2>De voordelen van een zomerfeest bij BLOW Beach House</h2>
+<p>Onze locatie aan de Deltaplein in Kijkduin biedt alles wat je nodig hebt voor een succesvol bedrijfszomerfeest. Met directe toegang tot het strand, een sfeervol restaurant en uitgebreide faciliteiten voor groepen tot 150 personen, is BLOW Beach House de ideale uitvalsbasis.</p>
+<p><strong>Onze kernvoordelen:</strong></p>
+<ul>
+<li><strong>All-in arrangementen</strong>: Geen gedoe met verschillende leveranciers. Wij regelen catering, activiteiten, techniek en personeel vanuit één hand</li>
+<li><strong>Flexibele opzet</strong>: Van informeel BBQ-feest tot stijlvol walking dinner – we passen ons aan jouw wensen aan</li>
+<li><strong>Unieke strandactiviteiten</strong>: Kitesurfen, beachvolleybal, SUP'en of gewoon relaxen bij een strandbar</li>
+<li><strong>Indoor én outdoor</strong>: Bij elk weer een back-up, zonder dat de sfeer verdwijnt</li>
+<li><strong>Duurzaamheid</strong>: Lokale leveranciers, seizoensgebonden producten en aandacht voor ons milieu</li>
+</ul>
+<h2>Activiteiten die je zomerfeest onvergetelijk maken</h2>
+<p>Een zomerfeest aan zee draait om beleving. Natuurlijk is het eten belangrijk (daar komen we zo op), maar de activiteiten maken het verschil tussen een standaard bedrijfsuitje en een event waar je collega's maandenlang over napraten.</p>
+<p><strong>Populaire activiteiten bij BLOW:</strong></p>
+<p><strong>Kitesurfclinic</strong>: Onze instructeurs geven een veilige en toegankelijke introductie tot kitesurfen. Teamwork, communicatie en het overwinnen van grenzen – alles komt samen in deze energieke activiteit. Geen ervaring nodig, wel een garantie voor lachsalvo's en trotse gezichten.</p>
+<p><strong>Stand-up paddleboarden</strong>: Voor teams die het rustiger aan willen doen, is SUP'en perfect. In groepjes het water op, eventueel met een speelse wedstrijdcomponent. Geweldig voor teambuilding en geschikt voor alle fitnessniveaus.</p>
+<p><strong>Beachgames</strong>: Van beachvolleybal tot frisbee, van kubb tot een heuse beach-olympiade. Wij regelen de materialen en kunnen desgewenst een enthousiaste begeleider inhuren die alles in goede banen leidt.</p>
+<p><strong>Loungen en netwerken</strong>: Soms is het fijnste feest gewoon relaxen in de strandstoel met een cocktail in de hand. Onze loungegebieden bieden die perfecte setting voor informele gesprekken tussen collega's die elkaar op kantoor misschien minder vaak spreken.</p>
+<h2>Culinair genieten aan zee</h2>
+<p>Een zomerfeest organiseren zonder geweldig eten? Dat kan natuurlijk niet. Bij BLOW Beach House werken we met verse, seizoensgebonden ingrediënten en een passie voor smaak die je proeft in elk gerecht.</p>
+<p><strong>Onze culinaire concepten voor bedrijfsfeesten:</strong></p>
+<p><strong>BBQ Deluxe</strong>: Een klassieke zomerse BBQ, maar dan next level. Denk aan gemarineerde spiesjes, verse vis van de grill, creatieve salades en verrassende sauzen. Vegetarische en vegan opties zijn vanzelfsprekend.</p>
+<p><strong>Beach Bites & Drinks</strong>: Perfect voor een informele setting. Walking dinner met kleine gerechtjes die je moeiteloos kunt eten terwijl je staat te netwerken. Van mini fish & chips tot ceviche, van Vietnamese summer rolls tot gamba pil pil.</p>
+<p><strong>Sunset Dinner</strong>: Als je kiest voor een avondevenement, is ons sunset dinner een aanrader. Meergangendiner met zicht op de ondergaande zon – romantisch, indrukwekkend en het ultieme bedankje voor je team.</p>
+<p>Al onze arrangementen kunnen worden aangepast aan dieetwensen, allergieën of specifieke voorkeuren. Vertel ons wat jouw team nodig heeft, en wij zorgen dat iedereen geniet.</p>
+<h2>Praktische tips voor het organiseren van je bedrijfszomerfeest</h2>
+<p><strong>Budget bepalen</strong>: Wees realistisch over wat je kunt besteden. Bij BLOW werken we graag binnen jouw kader en adviseren we over de beste besteding. Soms levert een kleinere groep met luxere opties meer impact dan een groot feest met standaardpakket.</p>
+<p><strong>Communicatie</strong>: Informeer je collega's tijdig over datum, dresscode (casual beach is meestal prima) en programma. Een save-the-date in maart, officiële uitnodiging in mei – zo voorkom je dat mensen al andere plannen hebben gemaakt.</p>
+<p><strong>Vervoer</strong>: Kijkduin is goed bereikbaar met eigen vervoer én openbaar vervoer, maar overweeg bij grotere groepen een gezamenlijke busreis. Dat begint het feest al in de bus en niemand hoeft zich zorgen te maken over alcohol en rijden.</p>
+<p><strong>Weersback-up</strong>: Het is Nederland, dus regen kan altijd. Bij BLOW hebben we binnen voldoende ruimte, maar met heaters en overkappingen kunnen we ook buiten lang genieten bij mindere weersomstandigheden.</p>
+<h2>Van klantenevent tot teamfeest: veelzijdige mogelijkheden</h2>
+<p>Hoewel we het hier vooral hebben over bedrijfszomerfeesten, is BLOW Beach House ook uitstekend geschikt voor klanteneventen. Wil je je belangrijkste relaties trakteren op een bijzondere ervaring? Een zomerfeest aan zee positioneert jouw bedrijf als innovatief, gastvrij en net even anders.</p>
+<p>De informele sfeer van het strand maakt gesprekken gemakkelijker, en de gedeelde beleving van bijvoorbeeld een kitesurfclinic of strandwandeling versterkt de band tussen jou en je klanten. Precies die menselijke connectie waar je in zakelijke relaties naar zoekt.</p>
+<h2>Maak het verschil met BLOW Beach House</h2>
+<p>Een zomerfeest organiseren klinkt misschien als veel werk, maar met de juiste partner wordt het een plezierige ervaring – voor jou én je collega's. Bij BLOW Beach House Kijkduin begrijpen we wat er komt kijken bij bedrijfsevenementen. We denken proactief mee, anticiperen op wensen die je misschien zelf nog niet hebt bedacht, en zorgen dat jij op de dag zelf kunt genieten in plaats van brandjes blussen.</p>
+<p>Onze ervaring met groepen van 20 tot 150 personen, de unieke combinatie van kitesurfschool en restaurant, en de prachtige strandlocatie maken ons de ideale keuze voor jouw bedrijfszomerfeest. Of je nu kiest voor een ontspannen middag met BBQ en beachgames, of een heel dagprogramma met actieve clinics en een afsluitend diner – wij maken het mogelijk.</p>
+<p>Start vandaag nog met plannen. Neem contact met ons op voor een vrijblijvend gesprek over de mogelijkheden, beschikbare data en een offerte op maat. Samen maken we van jouw zomerfeest hét hoogtepunt van het jaar waar iedereen naar uitkijkt.</p>
+<p>Laat je team genieten van zon, zee, strand en die onvergetelijke BLOW-beleving. Want een goed bedrijfszomerfeest organiseren begint met de juiste locatie – en die vind je bij ons aan de Deltaplein in Kijkduin.</p>
+
+<h2>Veelgestelde vragen</h2>
+<div class="faq-q">Wanneer moet ik beginnen met het plannen van ons bedrijfszomerfeest?</div>
+<div class="faq-a">Idealiter start je in maart of april met de planning voor een zomerfeest in juli of augustus. Dit geeft je voldoende tijd om de beste datum en locatie te reserveren, activiteiten te organiseren en collega's tijdig te informeren. Bij BLOW Beach House adviseren we om zo vroeg mogelijk contact op te nemen, vooral voor grotere groepen of populaire data in het hoogseizoen.</div>
+<div class="faq-q">Hoeveel personen kunnen er bij BLOW Beach House terecht voor een bedrijfsevenement?</div>
+<div class="faq-a">We kunnen groepen van 20 tot 150 personen faciliteren, afhankelijk van het type evenement en de gewenste opzet. Voor kleinere, intieme groepen creëren we een gezellige sfeer in een afgebakend gedeelte, terwijl grotere groepen gebruik kunnen maken van ons volledige terrein inclusief strand en restaurant. Neem contact op voor specifieke wensen en mogelijkheden.</div>
+<div class="faq-q">Wat gebeurt er als het slecht weer is op de dag van ons zomerfeest?</div>
+<div class="faq-a">Nederland blijft Nederland, dus daar houden we rekening mee. BLOW Beach House beschikt over ruime overdekte faciliteiten waar we het volledige programma binnen kunnen voortzetten. Daarnaast hebben we heaters, parasols en gedeeltelijke overkappingen waardoor we ook bij licht wisselvallig weer buiten kunnen blijven genieten. Je zomerfeest gaat hoe dan ook door in de geweldige BLOW-sfeer.</div>
+<div class="faq-q">Kunnen jullie ook inspelen op dieetwensen en allergieën?</div>
+<div class="faq-a">Absoluut. We vinden het belangrijk dat iedereen van het culinaire deel van het feest kan genieten. Vegetarisch, veganistisch, glutenvrij, lactose-intolerant of specifieke allergieën – geef dit van tevoren aan en onze koks zorgen voor passende alternatieven die net zo lekker zijn als het standaardmenu. We adviseren om deze informatie bij de aanmelding op te vragen bij je collega's.</div>
+<div class="faq-q">Is vervoer naar Kijkduin eenvoudig te regelen voor onze groep?</div>
+<div class="faq-a">Kijkduin is goed bereikbaar, zowel met de auto (voldoende parkeergelegenheid in de buurt) als met het openbaar vervoer vanuit Den Haag centrum. Voor grotere groepen adviseren we vaak om een gezamenlijke bus te regelen – dit is gezellig, duurzaam en niemand hoeft zich zorgen te maken over alcohol en terugrijden. We helpen je graag met tips over vervoersmogelijkheden.</div>
+<div class="faq-q">Wat maakt een zomerfeest aan het strand nou echt bijzonder vergeleken met een reguliere locatie?</div>
+<div class="faq-a">Het strand creëert automatisch een ontspannen, vakantieachtige sfeer die collega's uit hun dagelijkse werkroutine haalt. De combinatie van zeelucht, ruimte, licht en de mogelijkheid voor unieke activiteiten zoals kitesurfen of SUP'en zorgt voor een beleving die veel intensiever en gedenkwaardiger is dan een standaard borrel of diner. Bij BLOW voeg je daar onze gastvrijheid, geweldige catering en professionele organisatie aan toe – dat maakt het verschil.</div>
+
+<hr>
+
+<footer>
+  <h3>Meer lezen?</h3>
+  <ul>
+    <li><a href="18-bedrijfsuitje-strand-kijkduin.html">Bedrijfsuitje strand Kijkduin</a></li>
+    <li><a href="19-teambuilding-kitesurfen.html">Teambuilding kitesurfen</a></li>
+    <li><a href="20-verjaardag-vieren-strand.html">Verjaardag vieren aan het strand</a></li>
+  </ul>
+  <div class="back-pilot">↩ Terug naar <a href="../">pilot-overzicht</a></div>
+</footer>
+
+</main>
+</body>
+</html>
