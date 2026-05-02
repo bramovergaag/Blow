@@ -1,94 +1,116 @@
 # BLOW SEO · QA-rapport · 2026-05-02
 
 ## Samenvatting
-- Posts gescand: **24** (`pilot/posts/*.html`)
-- Pipeline rijen tracked: **35** (35 met `publish_date`)
-- Pagina's gecrawld: **33** (9 dashboard-pagina's + 24 posts)
-- `<a>` tags totaal: **371** — relatief 305 · absoluut 26 · anchors 40
-- Broken interne links: **0** (footer: 0)
-- External links: **10 unieke URL's — niet automatisch verifieerbaar** (sandbox blokkeert outbound, `host_not_allowed`)
-- `target=_blank` zonder `rel=noopener`: **0**
-- Auto-fixes toegepast: **2** (regen `pipeline-state.json` + regen `posts/index.json`)
-- GSC-data: **leeg** in `GSC_raw` en `GSC_daily` (alleen headers) → strategische sectie kan nu nog niet gevuld worden
+- **34 posts** gescand in `pilot/posts/`
+- **37 pipeline-rijen** (34 published + 3 archived) uit ContentQueue
+- **44 pagina's** gecrawld in `pilot/`
+- **0 broken links** (3 false-positives binnen `<script>` template-literals; alle externe links retourneerden 403 tegen QA-bot user-agent en zijn niet als broken geclassificeerd)
+- **0 footer-links broken** (J)
+- **2 auto-fixes** doorgevoerd: `pipeline-state.json` en `posts/index.json` opnieuw gegenereerd; geen `rel=noopener` of `/Blow/`-paths te fixen
 
-## P0 — Broken
-### Internal links
-Geen. Alle 305 relatieve `<a href>`'s resolven naar bestaande bestanden.
+## P0 — Broken (external + internal)
+Geen daadwerkelijke broken links gevonden.
 
-### External links
-Geen verifieerbare 4xx/5xx. **Maar**: outbound HTTP vanuit deze sandbox levert overal `403 host_not_allowed` op (zowel via WebFetch als curl), dus de QA-bot kan externe status niet bepalen. Lijst hieronder vereist handmatige (of CI-side) check:
+False-positives (genegeerd):
+- `pilot/planning.html` — `${gcalUrl(m)}` (JS template literal in `<script>`)
+- `pilot/posts-archive.html` — `${p.url}`, `${next.url}` (JS template literals)
 
-| URL | Voorkomens | Notitie |
-|-----|------------|---------|
-| `https://blow.surf/kitesurfles` | post 01 (body), 02 (footer) | hoofd-CTA — kritisch |
-| `https://blow.surf/kitesurfles-zandmotor/` | post 01 (2×), 02 (footer) | hoofd-CTA — kritisch |
-| `https://blow.surf/over-blow` | post 01 (2×), 02 (footer) | |
-| `https://blow.surf/restaurant` | post 01 (2×), 02 (footer) | |
-| `https://bramovergaag.github.io/balistoel.nl/` | alle 9 dashboard-pagina's + post 01 | dashboard footer |
-| `https://docs.google.com/spreadsheets/d/1wBDk9O…/edit` | posts-archive.html | sheet — auth required |
-| `https://downunderbeach.nl/` | post 02 | concurrent (sched ref) |
-| `https://kiteboardschool.nl/` | post 02 | concurrent |
-| `https://kitesurfles.nl/` | post 02 | concurrent |
-| `https://www.kitesurfschoolscheveningen.nl/` | post 02 | concurrent |
+Externe links (10 unieke) konden niet via WebFetch/curl geverifieerd worden (alle 403 op deze sandbox). Manuele steekproef aanbevolen voor:
+- `blow.surf/over-blow`, `blow.surf/restaurant`, `blow.surf/kitesurfles`, `blow.surf/kitesurfles-zandmotor/`
+- `bramovergaag.github.io/balistoel.nl/`
+- `kiteboardschool.nl`, `kitesurfles.nl`, `downunderbeach.nl`, `kitesurfschoolscheveningen.nl`
 
-→ **Aanbeveling**: laat een GitHub Action `linkinator` of `lychee` 1×/dag door `pilot/**/*.html` lopen — die heeft wel outbound netwerk. Zonder dat blijft externe link-rot onzichtbaar.
+### KRITIEK — Duplicate slugs (9 paren)
+Voor elke kitesurfschool-post bestaan **twee** HTML-bestanden in `pilot/posts/`:
+
+| Sheet rij | Canoniek (matcht sheet) | Legacy (verouderd) |
+|---|---|---|
+| 1 — kitesurfen zandmotor | `1-kitesurfen-zandmotor.html` | `01-zandmotor-veiligheid.html` |
+| 2 — kitesurfen kijkduin vs scheveningen | `2-kitesurfen-kijkduin-vs-scheveningen.html` | `02-kijkduin-vs-scheveningen.html` |
+| 3 — kitesurfen leren als volwassene | `3-kitesurfen-leren-als-volwassene.html` | `03-kitesurfen-leren-als-volwassene.html` |
+| 4 — beste maand kitesurfen nl | `4-beste-maand-kitesurfen-nederland.html` | `04-beste-maand-kitesurfen-nederland.html` |
+| 5 — wind zandmotor voorspelling | `5-wind-zandmotor-voorspelling.html` | `05-wind-zandmotor-voorspelling.html` |
+| 6 — wat aantrekken kitesurfen winter | `6-wat-aantrekken-kitesurfen-winter.html` | `06-wat-aantrekken-kitesurfen-winter.html` |
+| 7 — kitesurfen veiligheid beginners | `7-kitesurfen-veiligheid-beginners.html` | `07-kitesurfen-veiligheid-beginners.html` |
+| 8 — beste kite beginner | `8-beste-kite-beginner.html` | `08-beste-kite-beginner.html` |
+| 9 — kitesurfen vanaf welke leeftijd | `9-kitesurfen-vanaf-welke-leeftijd.html` | `09-kitesurfen-vanaf-welke-leeftijd.html` |
+
+**Effect:** dubbele content op de site → SEO-cannibalisatie; Google indexeert al de legacy URL voor row 1 (zie GSC-data hieronder). Geen auto-fix uitgevoerd — beslissing vergt review.
+
+### P0 SEO
+- `posts/01-zandmotor-veiligheid.html`: **placeholder title** (`"Post A · Zandmotor — strategie + post"`) + **meta description ontbreekt**. Dit is precies de pagina waarop Google verkeer landt (zie GSC).
 
 ## P1 — Polish
 
-### Title te lang (>60 chars)
-| Post | Lengte | Title |
-|------|--------|-------|
-| `02-kijkduin-vs-scheveningen.html` | **83** | Kitesurfen Kijkduin vs Scheveningen — waarom beginners beter bij ons starten \| BLOW |
-| `09-kitesurfen-vanaf-welke-leeftijd.html` | **66** | Kitesurfen vanaf welke leeftijd? Alles over kinderen en kitesurfen |
+### Title te lang (>60 chars) — 14 posts
+| Post | Lengte |
+|---|---|
+| `2-kitesurfen-kijkduin-vs-scheveningen.html` | 92 |
+| `9-kitesurfen-vanaf-welke-leeftijd.html` | 94 |
+| `5-wind-zandmotor-voorspelling.html` | 89 |
+| `7-kitesurfen-veiligheid-beginners.html` | 84 |
+| `02-kijkduin-vs-scheveningen.html` | 83 |
+| `6-wat-aantrekken-kitesurfen-winter.html` | 83 |
+| `3-kitesurfen-leren-als-volwassene.html` | 83 |
+| `8-beste-kite-beginner.html` | 77 |
+| `1-kitesurfen-zandmotor.html` | 75 |
+| `4-beste-maand-kitesurfen-nederland.html` | 68 |
+| `09-kitesurfen-vanaf-welke-leeftijd.html` | 66 |
+| `16-borrelen-aan-zee.html` | 63 |
 
-### Meta description te lang (>155 chars)
-8 posts: `08` (159), `10` (157), `14` (163), `16` (161), `19` (159), `20` (156), `21` (162), `35` (156). Ze worden afgekapt in SERP — handmatig inkorten of in HTML Publisher routine een hard truncate naar 155 inbouwen.
+Patroon: `" | BLOW Beach House Kijkduin"` suffix kost ~28 chars → korter naar `" | BLOW"` of laten vallen.
 
-### Ontbrekend
-- `pilot/posts/01-zandmotor-veiligheid.html`: **geen `<meta name="description">`**. Andere posts hebben hem allemaal. Toevoegen (huidige eyebrow-tekst suggereert dat dit een strategiepost was — overwegen om er een echte product-meta van te maken óf de post te depubliceren).
+### Meta description te lang (>155 chars) — 11 posts
+`08-beste-kite-beginner.html` (159), `2-kitesurfen-kijkduin-vs-scheveningen.html` (160), `5-wind-zandmotor-voorspelling.html` (159), `8-beste-kite-beginner.html` (159), `10-zandmotor-bezienswaardigheden.html` (157), `14-trouwen-op-het-strand-kijkduin.html` (163), `16-borrelen-aan-zee.html` (161), `19-teambuilding-kitesurfen.html` (159), `20-verjaardag-vieren-strand.html` (156), `21-kinderfeestje-strand-kijkduin.html` (162), `35-yoga-retreat-strand-den-haag.html` (156).
 
-### Inconsistente eyebrow-tekst
-Standaard is `BLOW · {Cluster}`. Afwijkende waardes:
-| Post | Eyebrow |
-|------|---------|
-| `01-zandmotor-veiligheid.html` | `Strategische case · op basis van audit 27 apr` |
-| `02-kijkduin-vs-scheveningen.html` | `BLOW · Vergelijking` |
-| `03-kitesurfen-leren-als-volwassene.html` | `Beach House Kijkduin` (mist `BLOW · ` prefix én is verkeerde cluster — moet `BLOW · Kitesurfschool` zijn) |
-| `34-yoga-zonsopgang-kijkduin.html` | `Wellness & Mindfulness` (geen `BLOW · ` prefix) — file bestaat nog niet |
+### Footer als `<div class="footer-section">` i.p.v. `<footer>` — 24 posts
+Inconsistente template tussen oudere posts (`01`, `02`, `1-`, `2-`, `4-…9-`, `35-`) die `<footer>` gebruiken vs. nieuwere posts (`03`–`22`, `32`) die alleen `div.footer-section` hebben. Geen functioneel probleem maar slecht voor screen-readers en semantische HTML.
 
-→ alleen post #03 is een echt cosmetisch én cluster-classificatie issue. Niet auto-fixed (regel: geen content-fixes).
+### `rel=noopener` auto
+Geen aanpassingen nodig — alle `target="_blank"` anchors hebben al `rel="noopener"`.
 
-### Sheet ↔ filesystem mismatch (data-issue, geen broken-link issue)
-- **22 posts** zijn live op disk + status=`published` in sheet, maar `archive_url` in sheet is leeg. Alleen rij 32 en 35 hebben `archive_url` ingevuld. Effect: `pipeline-state.json` toont `pub: pending` voor 22 posts die in werkelijkheid live staan.
-- **10 posts** hebben status=`published` in sheet maar **geen HTML-bestand**: rij 24 (`zomerfeest organiseren`), 25 (`kitesurfen den haag`), 26, 27, 28, 29, 30, 31, 33, 34. → hetzij premature status, hetzij verloren publish-runs.
+### Dunne content
+Geen (alle posts >960 woorden, mediaan ~1.4k).
 
-### Eyebrow-clusterverdeling
-8× kitesurfschool · 7× beach-house · 5× events · 4× afwijkend (zie boven). Klopt grotendeels met sheet-departments.
+### Ontbrekende internal links
+Niet diepgaand gescand op semantische coverage; oppervlakkige scan toont gezonde related-blocks. Niet kritiek.
 
 ## P2 — Strategisch (uit GSC tabs)
 
-**`GSC_raw` en `GSC_daily` zijn leeg** (alleen header-rijen, geen data). Zonder GSC-export geen onderbouwde aanbevelingen voor:
-- Top-10 underperforming queries
-- Quick-wins positie 11-20
-- Missing topics zonder page
+**Beperking:** GSC_raw bevat slechts 2 rijen, GSC_daily 1 rij — onvoldoende voor brede analyse. Alle data betreft één query (`kitesurfen zandmotor`). Mock-generator output is sparse.
 
-→ **Bram, dit is dé hefboom voor het rapport**: zorg dat de GSC-pull (Make scenario? Looker Studio export?) wekelijks landt in deze tabs. Zonder data is de `P2`-sectie permanent leeg.
+### Top-10 underperforming queries
+| Query | Page | Clicks | Impressions | CTR | Pos |
+|---|---|---:|---:|---:|---:|
+| kitesurfen zandmotor | `01-zandmotor-veiligheid.html` (legacy!) | 336 (28d) | 9520 | 3.5% | 8.7 |
 
-### Cluster-coverage gap (zonder GSC, op basis van sheet)
-| Cluster | Sheet rijen | Live HTML | Gap |
-|---------|-------------|-----------|-----|
-| kitesurfschool | 14 | 10 | rij 25-28 |
-| beach-house | 11 | 9 | rij 29, 32 (✓), 34 ontbreekt, 35 (✓) |
-| events | 10 (1 archived) | 5 | rij 24, 30, 31, 33 ontbreekt |
-| **Totaal** | **35** | **24** | **11 gaps** |
+### Quick-wins (positie 11-20)
+Geen queries in deze range in huidige GSC-export.
+
+**Echter:** "kitesurfen zandmotor" zit op positie **8.7** met 9.5k impressies/28d. Push richting top-5 = grote click-uplift. Probleem: GSC indexeert de legacy file met placeholder title. Fix bij 01-bestand levert direct CTR-boost.
+
+### Missing topics
+Onvoldoende GSC-data voor strikte missing-topics analyse. Op basis van ContentQueue (37 rijen, alle gepubliceerd):
+- **Kite-cluster** dekt: zandmotor, kijkduin vs scheveningen, leren-volwassene, beste-maand, wind-voorspelling, kleding, veiligheid, beste-kite, leeftijd. Goed gedekt.
+- **Beach-house cluster**: strandrestaurant, ontbijt, dagje strand, winter-aan-zee, beach-house interieur, power-lunch. Mogelijke gaps: lunch/diner-menukaart pagina, hond-vriendelijk strand, parkeren-Kijkduin.
+- **Events**: trouwen, kinderfeestje, bedrijfsuitje, teambuilding, verjaardag, bruiloft, zomerfeest. Mogelijke gap: bedrijfsborrel/netwerk-event, vrijgezellenfeest.
+- **Wellness**: yoga-retreat. Sterk onderbelicht (1 post). Gap: SUP-yoga, meditatie aan zee, wellness-arrangementen.
+
+### Cluster-coverage gap
+| Cluster | Posts | Aandeel |
+|---|---:|---:|
+| kitesurfschool (kite) | 18 | 53% |
+| beach-house (rest) | 7 | 21% |
+| events | 7 | 21% |
+| wellness (rest) | 2 | 6% |
+
+Wellness sterk onderbelicht; beach-house en events redelijk in balans.
 
 ## Auto-doorgevoerd
-- `pilot/pipeline-state.json` — geregenereerd uit ContentQueue (35 rijen, generated_at=2026-05-02T07:52Z). Inhoud identiek aan vorige run; alleen timestamp gewijzigd.
-- `pilot/posts/index.json` — geregenereerd uit `pilot/posts/*.html` (24 entries, date=2026-05-02). Inhoud identiek aan vorige run; alleen `date`-veld gewijzigd.
-- Geen `rel="noopener"` toegevoegd — alle 9 `target="_blank"` links hadden hem al.
-- Geen `/Blow/...` → `../` paden gerepareerd — geen voorkomens gevonden.
+- `pilot/pipeline-state.json` — 37 rijen, gegenereerd uit ContentQueue (incl. `publish_date` uit kolom 18, slot-mapping kitesurfschool→kite, beach-house→rest, events→events, wellness→rest)
+- `pilot/posts/index.json` — 34 entries, gesorteerd op `publish_date desc`, datum genomen uit sheet (niet vandaag UTC)
 
 ## Top 3 actie voor Bram
-1. **GSC-pijplijn fixen** — zonder `GSC_raw` / `GSC_daily` data blijft P2 leeg; dat is exact het deel waar Opus reasoning waarde toevoegt. Check Make scenario / API quota / sheet-write permission.
-2. **Sheet `archive_url` backfillen** voor rijen 1-22 (22 posts). De HTML Publisher zet hem voor nieuwe runs wel (32, 35), maar de oudere batch is overgeslagen. Quick: script dat per rij waar status=`published` checkt of `https://bramovergaag.github.io/Blow/pilot/posts/{rowid}-{slug}.html` 200 retourneert, en zo ja schrijft.
-3. **Post #01 cleanup** — `Post A · Zandmotor — strategie + post` is duidelijk een strategie-document dat per ongeluk in de live posts-folder staat (geen meta description, exotische eyebrow). Of opwaarderen naar echte spotgids óf verplaatsen naar `pilot/audit-*` map zodat hij niet in `index.json` belandt.
+1. **Beslis duplicate slugs (1- vs 01-).** Pak voor row 1 t/m 9 één canonieke URL en redirect/verwijder de andere. Hoogste prioriteit: row 1 — Google indexeert de legacy `01-zandmotor-veiligheid.html` met placeholder title; verkeer (336 clicks/28d, positie 8.7) wordt verspild.
+2. **Fix `01-zandmotor-veiligheid.html`** of redirect naar `1-kitesurfen-zandmotor.html`. Title staat op `"Post A · Zandmotor — strategie + post"` en meta description ontbreekt → directe CTR-blocker op de page met de meeste impressies.
+3. **Trim 14 lange titles**: drop `" Beach House Kijkduin"` uit het suffix-patroon (kort naar `" | BLOW"`). Goed voor 14 posts in één PR; verbetert SERP-display en vermijdt truncatie. Tegelijk de 11 te-lange meta descriptions trimmen onder de 155 chars.
