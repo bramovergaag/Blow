@@ -1,5 +1,77 @@
 [
   {
+    "slug": "34-yoga-zonsopgang-kijkduin",
+    "title": "Yoga bij Zonsopgang Kijkduin \\ | BLOW",
+    "meta": "Sunrise Yoga op het Strand",
+    "cluster": "beach-house",
+    "url": "https://bramovergaag.github.io/Blow/pilot/posts/34-yoga-zonsopgang-kijkduin.html",
+    "date": "2026-06-16"
+  },
+  {
+    "slug": "33-klantborrel-locatie-kijkduin",
+    "title": "Klantborrel Locatie Kijkduin - BLOW Beach House | BLOW",
+    "meta": "Organiseer je klantborrel op het strand van Kijkduin. BLOW Beach House: unieke B2B borrel locatie in Den Haag met zicht op zee. Ideaal voor klantenevenementen.",
+    "cluster": "events",
+    "url": "https://bramovergaag.github.io/Blow/pilot/posts/33-klantborrel-locatie-kijkduin.html",
+    "date": "2026-06-15"
+  },
+  {
+    "slug": "31-vergaderlocatie-strand-kijkduin",
+    "title": "Vergaderlocatie Strand Kijkduin: Productief Vergaderen aan Zee | BLOW",
+    "meta": "Zoekt u een unieke vergaderlocatie aan strand Kijkduin? BLOW Beach House combineert productiviteit met inspirerende zee-omgeving. Ideaal voor off-site meetings.",
+    "cluster": "events",
+    "url": "https://bramovergaag.github.io/Blow/pilot/posts/31-vergaderlocatie-strand-kijkduin.html",
+    "date": "2026-06-12"
+  },
+  {
+    "slug": "30-pensioenfeest-strand",
+    "title": "Pensioenfeest aan Strand \\ | BLOW",
+    "meta": "BLOW Beach House Kijkduin",
+    "cluster": "events",
+    "url": "https://bramovergaag.github.io/Blow/pilot/posts/30-pensioenfeest-strand.html",
+    "date": "2026-06-11"
+  },
+  {
+    "slug": "29-vegan-restaurant-den-haag-strand",
+    "title": "Vegan Restaurant Den Haag Strand \\ | BLOW",
+    "meta": "BLOW Beach House",
+    "cluster": "beach-house",
+    "url": "https://bramovergaag.github.io/Blow/pilot/posts/29-vegan-restaurant-den-haag-strand.html",
+    "date": "2026-06-10"
+  },
+  {
+    "slug": "28-hoe-werkt-de-zandmotor",
+    "title": "Hoe Werkt de Zandmotor? Het Ingenieurskunstwerk bij Kijkduin | BLOW",
+    "meta": "Ontdek hoe de Zandmotor werkt: het innovatieve zandeiland bij Kijkduin dat onze kust beschermt. Een uniek kustbeschermingsexperiment van Rijkswaterstaat.",
+    "cluster": "kitesurfschool",
+    "url": "https://bramovergaag.github.io/Blow/pilot/posts/28-hoe-werkt-de-zandmotor.html",
+    "date": "2026-06-09"
+  },
+  {
+    "slug": "27-kite-kopen-tweede-hands",
+    "title": "Kite Kopen Tweede Hands: Complete Gids voor 2024 | BLOW",
+    "meta": "Een gebruikte kite kopen? Ontdek waar je op moet letten bij tweedehands kites, van veiligheidscontroles tot prijzen. Expert advies voor slimme aankopen.",
+    "cluster": "kitesurfschool",
+    "url": "https://bramovergaag.github.io/Blow/pilot/posts/27-kite-kopen-tweede-hands.html",
+    "date": "2026-06-08"
+  },
+  {
+    "slug": "26-kitesurfen-nederland-vs-buitenland",
+    "title": "Kitesurfen Nederland vs Buitenland: Waar Kies Jij Voor? | BLOW",
+    "meta": "Kitesurfen in Nederland of toch naar het buitenland? Ontdek de voor- en nadelen van kitespots als Kijkduin, Tarifa en Cabarete. Praktische tips voor intermediate kiters.",
+    "cluster": "kitesurfschool",
+    "url": "https://bramovergaag.github.io/Blow/pilot/posts/26-kitesurfen-nederland-vs-buitenland.html",
+    "date": "2026-06-05"
+  },
+  {
+    "slug": "25-kitesurfen-den-haag",
+    "title": "Kitesurfen Den Haag: Jouw Ultieme Gids voor 2024 | BLOW",
+    "meta": "Kitesurfen Den Haag bij BLOW Beach House Kijkduin. Ontdek de beste kitesurfschool aan de kust, leer kitesurfen of huur materiaal. Start vandaag!",
+    "cluster": "kitesurfschool",
+    "url": "https://bramovergaag.github.io/Blow/pilot/posts/25-kitesurfen-den-haag.html",
+    "date": "2026-06-04"
+  },
+  {
     "slug": "24-zomerfeest-organiseren",
     "title": "Zomerfeest Organiseren aan Zee | BLOW Beach House Kijkduin",
     "meta": "Organiseer een onvergetelijk bedrijfszomerfeest aan zee.Compleet verzorgd op het strand van Kijkduin met catering, activiteiten en unieke beleving.",
@@ -57,7 +129,7 @@
   },
   {
     "slug": "16-borrelen-aan-zee",
-    "title": "Borrelen aan Zee | Zakelijk & After-Work | BLOW Beach House",
+    "title": "Borrelen aan Zee | Zakelijk &amp; After-Work | BLOW Beach House",
     "meta": "Vrijmibo aan zee bij BLOW Kijkduin. Perfect voor zakelijk borrelen, after-work drinks en teamuitjes. Direct aan het strand met culinaire hapjes en zonsondergang.",
     "cluster": "beach-house",
     "url": "https://bramovergaag.github.io/Blow/pilot/posts/16-borrelen-aan-zee.html",
@@ -154,7 +226,7 @@
   {
     "slug": "7-kitesurfen-veiligheid-beginners",
     "title": "Kitesurfen Veiligheid voor Beginners: Zo Start Je Veilig | BLOW Beach House Kijkduin",
-    "meta": "Ontdek essentiële veiligheidstips voor je eerste kitesurfles. Leer kitesurf risico's kennen en hoe je veilig begint met kitesurfen aan de kust.",
+    "meta": "Ontdek essentiële veiligheidstips voor je eerste kitesurfles. Leer kitesurf risico&#x27;s kennen en hoe je veilig begint met kitesurfen aan de kust.",
     "cluster": "kitesurfschool",
     "url": "https://bramovergaag.github.io/Blow/pilot/posts/7-kitesurfen-veiligheid-beginners.html",
     "date": "2026-05-12"
@@ -185,8 +257,8 @@
   },
   {
     "slug": "5-wind-zandmotor-voorspelling",
-    "title": "Wind Zandmotor Voorspelling: Actuele Windcondities & Tips | BLOW Beach House Kijkduin",
-    "meta": "Betrouwbare wind Zandmotor voorspelling voor kitesurfers. Leer Windguru lezen, beste tijden & actuele condities. Check windguru zandmotor voordat je gaat\\!",
+    "title": "Wind Zandmotor Voorspelling: Actuele Windcondities &amp; Tips | BLOW Beach House Kijkduin",
+    "meta": "Betrouwbare wind Zandmotor voorspelling voor kitesurfers. Leer Windguru lezen, beste tijden &amp; actuele condities. Check windguru zandmotor voordat je gaat\\!",
     "cluster": "kitesurfschool",
     "url": "https://bramovergaag.github.io/Blow/pilot/posts/5-wind-zandmotor-voorspelling.html",
     "date": "2026-05-08"
