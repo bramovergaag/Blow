@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-02T17:18:42Z",
+  "generated_at": "2026-05-03T17:17:19Z",
   "rows": [
     {
       "row_id": 1,
@@ -387,7 +387,7 @@
         "draft": "done",
         "review": "done",
         "wa": "done",
-        "pub": "skipped"
+        "pub": "skip"
       },
       "archive_url": "",
       "publish_date": "2026-05-01"
@@ -607,24 +607,104 @@
         "info": "pending",
         "draft": "pending",
         "review": "done",
-        "wa": "skipped",
-        "pub": "skipped"
+        "wa": "skip",
+        "pub": "skip"
       },
       "archive_url": ""
     },
     {
-      "row_id": "gsc-2026-05-02",
+      "row_id": "gsc-2026-05-02-2304",
       "department": "blow",
       "slot": "rest",
       "primary_keyword": "",
+      "title": "BLOW Beach House Kijkduin - Kitesurfen, Dining & Events",
+      "status": "published",
+      "stages": {
+        "info": "pending",
+        "draft": "done",
+        "review": "done",
+        "wa": "done",
+        "pub": "done"
+      },
+      "archive_url": ""
+    },
+    {
+      "row_id": "gsc-20260502-2357",
+      "department": "blow",
+      "slot": "rest",
+      "primary_keyword": "kitesurfen zandmotor",
+      "title": "Kitesurfen Zandmotor: Jouw Gids voor Veilig Sporten",
+      "status": "published",
+      "stages": {
+        "info": "done",
+        "draft": "done",
+        "review": "done",
+        "wa": "done",
+        "pub": "done"
+      },
+      "archive_url": ""
+    },
+    {
+      "row_id": "gsc-20260503-0014",
+      "department": "blow",
+      "slot": "rest",
+      "primary_keyword": "kitesurfen zandmotor",
+      "title": "Kitesurfen Zandmotor: Jouw Ultieme Spotguide (2024)",
+      "status": "published",
+      "stages": {
+        "info": "done",
+        "draft": "done",
+        "review": "done",
+        "wa": "done",
+        "pub": "done"
+      },
+      "archive_url": ""
+    },
+    {
+      "row_id": "gsc-20260503-0014",
+      "department": "blow",
+      "slot": "rest",
+      "primary_keyword": "beach club kijkduin",
+      "title": "Beach Club Kijkduin: Jouw Ultieme Strandbestemming",
+      "status": "published",
+      "stages": {
+        "info": "done",
+        "draft": "done",
+        "review": "done",
+        "wa": "done",
+        "pub": "done"
+      },
+      "archive_url": ""
+    },
+    {
+      "row_id": "gsc-20260503-0026-kiteschool",
+      "department": "kiteschool",
+      "slot": "kite",
+      "primary_keyword": "kitesurfles beginners zandmotor",
       "title": "",
       "status": "archived",
       "stages": {
-        "info": "pending",
+        "info": "done",
         "draft": "pending",
         "review": "done",
-        "wa": "skipped",
-        "pub": "skipped"
+        "wa": "skip",
+        "pub": "skip"
+      },
+      "archive_url": ""
+    },
+    {
+      "row_id": "gsc-20260503-0026-events",
+      "department": "events",
+      "slot": "events",
+      "primary_keyword": "paddleboard hoek van holland",
+      "title": "",
+      "status": "archived",
+      "stages": {
+        "info": "done",
+        "draft": "pending",
+        "review": "done",
+        "wa": "skip",
+        "pub": "skip"
       },
       "archive_url": ""
     }
